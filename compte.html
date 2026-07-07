@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <title>Mon compte — Nextendo Network</title>
+  <meta name="robots" content="noindex" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=6" />
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true">
+    <div class="field field--a"></div>
+    <div class="field field--b"></div>
+    <div class="grid-veil"></div>
+  </div>
+
+  <header class="nav" id="nav">
+    <div class="shell nav__inner">
+      <a class="brand" href="/" aria-label="Nextendo Network, accueil">
+        <img class="brand__mark" src="assets/favicon.svg" alt="" width="30" height="30" />
+        <span class="brand__word">Nextendo<span class="brand__dim"> Network</span></span>
+      </a>
+      <div class="nav__end">
+        <a class="ghost-link" href="/"><i class="ph ph-house" aria-hidden="true"></i> Accueil</a>
+        <button class="btn btn--soft btn--sm" id="logout"><i class="ph ph-sign-out" aria-hidden="true"></i> Déconnexion</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main"><div class="shell">
+    <section class="account">
+      <div class="account__head">
+        <div class="account__id">
+          <div class="account__avatar" id="avatar">…</div>
+          <div class="account__txt">
+            <span class="account__live"><span class="status__dot" aria-hidden="true"></span> connecté à Nextendo</span>
+            <div class="account__hi"><h1>Salut, <span id="uname" class="skeleton">chargement</span>.</h1></div>
+          </div>
+          <button class="btn btn--soft btn--sm account__edit" id="edit-profile"><i class="ph ph-pencil-simple" aria-hidden="true"></i> Éditer le profil</button>
+        </div>
+      </div>
+
+      <!-- Bannière : e-mail non vérifié (masquée par défaut, affichée au chargement si besoin) -->
+      <div class="banner banner--warn" id="verify-banner" hidden>
+        <span class="banner__i"><i class="ph ph-warning-circle" aria-hidden="true"></i></span>
+        <span class="banner__t"><b>Confirme ton adresse e-mail.</b> On t'a envoyé un lien de vérification à ta création de compte. Sans ça, tu ne pourras pas récupérer ton mot de passe en cas d'oubli.</span>
+        <span class="banner__a"><button class="btn btn--soft btn--sm" id="resend-verify"><i class="ph ph-paper-plane-tilt"></i> Renvoyer l'e-mail</button></span>
+      </div>
+
+      <div class="account__grid">
+        <div>
+          <div class="member-card">
+            <div class="member-card__top">
+              <span class="member-card__brand"><img src="assets/favicon.svg" alt="" /> NEXTENDO</span>
+              <span class="member-card__chip" id="card-chip">MEMBRE</span>
+            </div>
+            <div class="member-card__label">Friend code</div>
+            <div class="member-card__code" id="fc">SW-••••-••••-••••</div>
+            <div class="member-card__foot">
+              <div class="member-card__name"><span id="card-name">…</span><span>Pseudo</span></div>
+              <div class="member-card__pic" id="mc-pic"><div class="member-card__sig" aria-hidden="true"></div></div>
+            </div>
+          </div>
+
+          <div class="panel" style="margin-top:1.1rem">
+            <div class="callout">
+              <div class="callout__h"><i class="ph ph-plug" aria-hidden="true" style="color:var(--accent)"></i> Brancher ce compte</div>
+              <p class="hint" style="margin-bottom:0.7rem"><b>Sur Ryujinx&nbsp;:</b> ouvre <b>Actions → Connexion Nextendo Network</b>, entre tes identifiants, puis lance un jeu compatible et va dans son menu en ligne.</p>
+              <p class="hint"><b>Sur Switch (CFW)&nbsp;:</b> active le profil <b>Nextendo</b> (redirection DNS), connecte ce compte, et joue. Ta photo de profil et ton pseudo te suivent.</p>
+            </div>
+          </div>
+
+          <div class="panel" style="margin-top:1.1rem" id="security-panel">
+            <div class="panel__h"><h2>Sécurité</h2><i class="ph ph-lock-key" aria-hidden="true"></i></div>
+            <p class="hint" style="margin-bottom:0.85rem">Gère ton mot de passe, ton adresse e-mail et les appareils connectés à ton compte.</p>
+            <div class="sec-actions">
+              <button class="btn btn--soft btn--sm" id="reset-pw"><i class="ph ph-key" aria-hidden="true"></i> Réinitialiser le mot de passe</button>
+              <button class="btn btn--soft btn--sm" id="change-email"><i class="ph ph-at" aria-hidden="true"></i> Changer d'e-mail</button>
+              <a class="btn btn--soft btn--sm" href="/sessions"><i class="ph ph-devices" aria-hidden="true"></i> Mes sessions</a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="panel">
+            <div class="panel__h"><h2>Identité réseau</h2><i class="ph ph-identification-card" aria-hidden="true"></i></div>
+            <div class="kv">
+              <div class="kv__row"><span class="kv__k">Pseudo</span><span class="kv__v" id="kv-name">…</span></div>
+              <div class="kv__row"><span class="kv__k">Friend code</span>
+                <span class="kv__v inline-copy"><span class="mono" id="kv-fc">SW-…</span><button class="copy-btn" data-copy="fc">copier</button></span>
+              </div>
+              <div class="kv__row"><span class="kv__k">Identifiant réseau (PID)</span><span class="kv__v mono" id="kv-pid">…</span></div>
+              <div class="kv__row"><span class="kv__k">E-mail</span><span class="kv__v"><span id="kv-email">…</span> <span class="email-chip" id="email-chip" hidden></span></span></div>
+              <div class="kv__row"><span class="kv__k">Membre depuis</span><span class="kv__v" id="kv-since">…</span></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel__h"><h2>Amis</h2><i class="ph ph-users-three" aria-hidden="true"></i></div>
+            <div id="requests"></div>
+            <div class="friends" id="friends"><div class="empty">Chargement de tes amis…</div></div>
+            <form class="add-friend" id="add-friend">
+              <input class="input" id="fc-input" placeholder="SW-0000-0000-0000" autocomplete="off" />
+              <button class="btn btn--primary" type="submit">Ajouter</button>
+            </form>
+            <p class="hint" style="margin-top:0.7rem">Partage ton friend code pour que tes amis t'ajoutent — vous vous retrouverez en ligne dans vos parties.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:1.5rem">
+        <div class="panel__h"><h2>Historique de jeu</h2><i class="ph ph-clock-counter-clockwise" aria-hidden="true"></i></div>
+        <div class="history" id="history"><div class="empty">Chargement de l'historique…</div></div>
+      </div>
+    </section>
+  </div></main>
+
+  <!-- Modal : éditer le profil -->
+  <div class="modal" id="edit-modal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel modal__panel--editor" role="dialog" aria-modal="true" aria-labelledby="edit-title">
+      <div class="modal__head">
+        <h2 id="edit-title">Éditer le profil</h2>
+        <button class="modal__x" data-close aria-label="Fermer"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal__body">
+        <div id="edit-msg" class="msg"></div>
+
+        <div class="editor">
+          <div class="editor__preview">
+            <canvas id="avatar-canvas" width="256" height="256" aria-label="Aperçu de la photo de profil"></canvas>
+            <span>Aperçu</span>
+          </div>
+          <div class="editor__controls">
+            <div class="fld">
+              <label for="edit-pseudo">Pseudo</label>
+              <input class="input" id="edit-pseudo" maxlength="16" autocomplete="off" />
+              <span class="fld__hint">3 à 16 caractères — lettres, chiffres, _ ou -.</span>
+            </div>
+            <div class="fld">
+              <label>Couleur de fond</label>
+              <div class="swatches" id="swatches"></div>
+              <div class="cpick" id="cpick" hidden>
+                <div class="cpick__sv" id="cpick-sv"><div class="cpick__sv-thumb" id="cpick-sv-thumb"></div></div>
+                <div class="cpick__hue" id="cpick-hue"><div class="cpick__hue-thumb" id="cpick-hue-thumb"></div></div>
+                <div class="cpick__row"><span class="cpick__prev" id="cpick-prev"></span><input class="input cpick__hex" id="cpick-hex" maxlength="7" spellcheck="false" aria-label="Code couleur hexadécimal"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="icon-picker">
+          <div class="modal__sub">Photo de profil <span class="ip-hint">— superpose un personnage, un fond et un cadre</span></div>
+          <div class="ip-head">
+            <div class="ip-tabs" id="ip-tabs"></div>
+            <div class="ip-head__r">
+              <button class="ip-clear" id="ip-clear" type="button" hidden><i class="ph ph-x"></i> Retirer</button>
+              <select class="input ip-game" id="ip-game" aria-label="Filtrer par jeu"></select>
+            </div>
+          </div>
+          <div class="avatar-grid ip-grid" id="avatar-grid"></div>
+        </div>
+      </div>
+      <div class="modal__foot">
+        <button class="btn btn--soft" data-close>Annuler</button>
+        <button class="btn btn--primary" id="save-profile">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal : profil d'un ami -->
+  <div class="modal" id="friend-modal" hidden>
+    <div class="modal__backdrop" data-fclose></div>
+    <div class="modal__panel modal__panel--profile" role="dialog" aria-modal="true" aria-labelledby="fm-name">
+      <button class="modal__x fm-hero__x" data-fclose aria-label="Fermer"><i class="ph ph-x"></i></button>
+      <div class="fm-hero" id="fm-hero">
+        <div class="fm-pic" id="fm-pic" aria-hidden="true"></div>
+        <div class="fm-hero__id">
+          <h2 id="fm-name">Ami</h2>
+          <div class="fm-hero__meta">
+            <span class="fm-badge" id="fm-status"></span>
+            <span class="fm-code" id="fm-code">—</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal__body">
+        <div class="fm-stats">
+          <div class="fm-stat"><i class="ph ph-clock-user"></i><div><span class="fm-stat__v" id="fm-total">—</span><span class="fm-stat__k">Temps de jeu</span></div></div>
+          <div class="fm-stat"><i class="ph ph-game-controller"></i><div><span class="fm-stat__v" id="fm-games">—</span><span class="fm-stat__k">Jeux joués</span></div></div>
+          <div class="fm-stat"><i class="ph ph-star"></i><div><span class="fm-stat__v fm-stat__v--sm" id="fm-fav">—</span><span class="fm-stat__k">Jeu favori</span></div></div>
+          <div class="fm-stat"><i class="ph ph-calendar-blank"></i><div><span class="fm-stat__v fm-stat__v--sm" id="fm-since">—</span><span class="fm-stat__k">Membre depuis</span></div></div>
+        </div>
+        <div class="kv">
+          <div class="kv__row"><span class="kv__k">Identifiant réseau (PID)</span><span class="kv__v" id="fm-pid">—</span></div>
+          <div class="kv__row"><span class="kv__k">Dernière activité</span><span class="kv__v" id="fm-last">—</span></div>
+        </div>
+        <div>
+          <div class="modal__sub">Historique de jeu</div>
+          <div class="history" id="fm-history"><div class="empty">Chargement…</div></div>
+        </div>
+      </div>
+      <div class="modal__foot">
+        <button class="btn btn--danger" id="fm-block"><i class="ph ph-prohibit"></i> Bloquer</button>
+        <button class="btn btn--soft" id="fm-remove"><i class="ph ph-user-minus"></i> Supprimer</button>
+        <button class="btn btn--soft" data-fclose>Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal : fiche d'un jeu (façon Discord) -->
+  <div class="modal" id="game-modal" hidden>
+    <div class="modal__backdrop" data-gclose></div>
+    <div class="modal__panel modal__panel--game" role="dialog" aria-modal="true" aria-labelledby="gm-name">
+      <button class="modal__x gm-head__x" data-gclose aria-label="Fermer"><i class="ph ph-x"></i></button>
+      <!-- en-tête : art flou + jaquette + badge + titre + genres -->
+      <header class="gm-head" id="gm-head">
+        <div class="gm-head__bg" id="gm-headbg"></div>
+        <div class="gm-head__row">
+          <div class="gm-cover" id="gm-cover" aria-hidden="true"></div>
+          <div class="gm-head__id">
+            <span class="gm-badge" id="gm-badge" hidden></span>
+            <h2 id="gm-name">Jeu</h2>
+            <div class="gm-sub" id="gm-sub"></div>
+          </div>
+        </div>
+      </header>
+      <!-- corps 2 colonnes -->
+      <div class="gm-body">
+        <div class="gm-main">
+          <div class="gm-media" id="gm-media" hidden>
+            <div class="gm-stage" id="gm-stage"></div>
+            <div class="gm-thumbs" id="gm-thumbs"></div>
+          </div>
+          <p class="gm-desc" id="gm-desc"></p>
+        </div>
+        <aside class="gm-side">
+          <div class="gm-block gm-prog">
+            <div class="modal__sub">Ta progression</div>
+            <div class="gm-prog__row"><i class="ph ph-clock-user"></i><div><b id="gm-playtime">—</b><span>de jeu</span></div></div>
+            <div class="gm-prog__row"><i class="ph ph-calendar-blank"></i><div><b id="gm-lastplayed">—</b><span>dernière partie</span></div></div>
+          </div>
+          <div class="gm-block gm-details">
+            <div class="modal__sub">Détails</div>
+            <div class="gm-drow"><span class="gm-dk">Genres</span><span class="gm-dv" id="gm-genres">—</span></div>
+            <div class="gm-drow"><span class="gm-dk">Éditeur</span><span class="gm-dv" id="gm-publisher">—</span></div>
+            <div class="gm-drow"><span class="gm-dk">Développeur</span><span class="gm-dv" id="gm-developer">—</span></div>
+            <div class="gm-drow"><span class="gm-dk">Date de sortie</span><span class="gm-dv" id="gm-release">—</span></div>
+            <div class="gm-drow"><span class="gm-dk">Plateformes</span><span class="gm-dv gm-icons" id="gm-platforms">—</span></div>
+            <div class="gm-drow" id="gm-links-row" hidden><span class="gm-dk">Liens</span><span class="gm-dv gm-icons" id="gm-links"></span></div>
+            <div class="gm-drow" id="gm-meta-row" hidden><span class="gm-dk">Métacritique</span><span class="gm-dv" id="gm-metacritic"></span></div>
+          </div>
+        </aside>
+      </div>
+      <div class="modal__foot">
+        <button class="btn btn--soft" data-gclose>Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal : changer d'adresse e-mail -->
+  <div class="modal" id="email-modal" hidden>
+    <div class="modal__backdrop" data-eclose></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="em-title" style="max-width:27rem">
+      <div class="modal__head">
+        <h2 id="em-title">Changer d'adresse e-mail</h2>
+        <button class="modal__x" data-eclose aria-label="Fermer"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal__body">
+        <div id="em-msg" class="msg"></div>
+        <p class="hint" style="margin-bottom:0.9rem">Ta nouvelle adresse devra être confirmée par e-mail. En attendant, ton compte redevient « non vérifié ».</p>
+        <div class="fld">
+          <label for="em-new">Nouvelle adresse e-mail</label>
+          <input class="input" id="em-new" type="email" autocomplete="email" placeholder="nouvelle@exemple.com" />
+        </div>
+        <div class="fld">
+          <label for="em-pw">Ton mot de passe actuel</label>
+          <div class="pw">
+            <input class="input" id="em-pw" type="password" autocomplete="current-password" placeholder="pour confirmer que c'est bien toi" />
+            <button type="button" class="pw__eye" data-eye="em-pw" aria-label="Afficher le mot de passe"><i class="ph ph-eye"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="modal__foot">
+        <button class="btn btn--soft" data-eclose>Annuler</button>
+        <button class="btn btn--primary" id="em-save">Changer l'e-mail</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js?v=6"></script>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    $('logout').addEventListener('click', () => NX.logout());
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    function initial(name){ return (name||'?').trim().charAt(0).toUpperCase(); }
+    const ICONS = ['ph-game-controller','ph-ghost','ph-rocket','ph-star','ph-cat','ph-dog','ph-alien','ph-robot','ph-skull','ph-heart','ph-lightning','ph-fire','ph-crown','ph-diamond','ph-planet','ph-sword','ph-shield','ph-paw-print','ph-bird','ph-flower','ph-smiley','ph-soccer-ball','ph-trophy','ph-sparkle'];
+    const COLORS = ['#1ca9e0','#e4404a','#36ce73','#8b5cf6','#f59e0b','#ec4899','#14b8a6','#eab308','#6366f1','#ef7c3a','#22d3ee','#64748b'];
+    const DEF_ICON = 'ph-game-controller', DEF_COLOR = '#1ca9e0';
+    function normIcon(ic){ if(!ic) return DEF_ICON; if(ic.indexOf('img:')===0 || ic.indexOf('ph-')===0) return ic; return 'ph-'+ic; }
+
+    /* ---- avatar : composition canvas (256x256 JPEG, comme Ryujinx) ---- */
+    let phReady = null;
+    function ensurePhosphor(){ if(!phReady) phReady = (document.fonts && document.fonts.load) ? document.fonts.load('150px "Phosphor"').catch(()=>{}) : Promise.resolve(); return phReady; }
+    function iconChar(cls){
+      const p=document.createElement('i'); p.className='ph '+cls; p.style.cssText='position:absolute;left:-9999px;font-family:"Phosphor"';
+      document.body.appendChild(p); let c=getComputedStyle(p,'::before').content||''; document.body.removeChild(p);
+      c=c.replace(/^["']|["']$/g,''); return (c && c!=='none' && c!=='normal') ? c : '';
+    }
+    const _imgCache = {};
+    function loadImg(src){ if(_imgCache[src]) return Promise.resolve(_imgCache[src]); return new Promise(res=>{ const i=new Image(); i.onload=()=>{ _imgCache[src]=i; res(i); }; i.onerror=()=>res(null); i.src=src; }); }
+    // 'img:<payload>' — payload avec '/' => /assets/<payload> (icônes NSO), sinon => /assets/avatars/<payload> (firmware)
+    function avatarImgUrl(payload){ return payload.indexOf('/')>=0 ? '/assets/'+payload : '/assets/avatars/'+payload; }
+    // Compose en CALQUES : couleur de fond -> image de fond -> personnage -> cadre (chacun 256x256, transparence respectée)
+    async function composeAvatar(canvas, e){
+      const ctx=canvas.getContext('2d'); ctx.clearRect(0,0,256,256);
+      ctx.fillStyle=e.color||DEF_COLOR; ctx.fillRect(0,0,256,256);
+      for(const layer of [e.bg, e.char, e.frame]){
+        if(!layer) continue;
+        const img=await loadImg(avatarImgUrl(layer));
+        if(img) ctx.drawImage(img,0,0,256,256);
+      }
+    }
+    function canvasB64(canvas){ return (canvas.toDataURL('image/jpeg',0.9).split(',')[1])||''; }
+    async function drawB64(canvas, b64){
+      const ctx=canvas.getContext('2d'); ctx.clearRect(0,0,256,256);
+      if(!b64){ ctx.fillStyle=DEF_COLOR; ctx.fillRect(0,0,256,256); return; }
+      const img=await loadImg(imgSrc(b64));
+      if(img){ const s=Math.max(256/img.width,256/img.height),w=img.width*s,h=img.height*s; ctx.drawImage(img,(256-w)/2,(256-h)/2,w,h); }
+      else { ctx.fillStyle=DEF_COLOR; ctx.fillRect(0,0,256,256); }
+    }
+    function imgSrc(b64){ return b64 ? (b64.startsWith('data:')?b64:'data:image/jpeg;base64,'+b64) : ''; }
+
+    function setAvatar(image, name){
+      const src=imgSrc(image);
+      if(src){ $('avatar').innerHTML='<img src="'+src+'" alt="">'; $('mc-pic').innerHTML='<img src="'+src+'" alt="">'; }
+      else { $('avatar').textContent=initial(name); $('mc-pic').innerHTML='<div class="member-card__sig" aria-hidden="true"></div>'; }
+    }
+
+    /* ===================== color picker custom (HSV) ===================== */
+    const cp = { h:200, s:1, v:1 };
+    function hsvToRgb(h,s,v){ const c=v*s, x=c*(1-Math.abs((h/60)%2-1)), m=v-c; let a; if(h<60)a=[c,x,0];else if(h<120)a=[x,c,0];else if(h<180)a=[0,c,x];else if(h<240)a=[0,x,c];else if(h<300)a=[x,0,c];else a=[c,0,x]; return a.map(z=>Math.round((z+m)*255)); }
+    function rgbToHex(r,g,b){ return '#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join(''); }
+    function hexToRgb(h){ const m=/^#?([0-9a-fA-F]{6})$/.exec((h||'').trim()); if(!m) return null; const n=parseInt(m[1],16); return [(n>>16)&255,(n>>8)&255,n&255]; }
+    function rgbToHsv(r,g,b){ r/=255;g/=255;b/=255; const mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn; let h=0; if(d){ if(mx===r)h=((g-b)/d)%6; else if(mx===g)h=(b-r)/d+2; else h=(r-g)/d+4; h=(h*60+360)%360; } return [h, mx?d/mx:0, mx]; }
+    function cpHex(){ const a=hsvToRgb(cp.h,cp.s,cp.v); return rgbToHex(a[0],a[1],a[2]); }
+    function cpRender(){
+      $('cpick-sv').style.setProperty('--ch', cp.h);
+      $('cpick-sv-thumb').style.left=(cp.s*100)+'%'; $('cpick-sv-thumb').style.top=((1-cp.v)*100)+'%';
+      $('cpick-hue-thumb').style.left=(cp.h/360*100)+'%';
+      const hex=cpHex(); $('cpick-prev').style.background=hex;
+      if(document.activeElement!==$('cpick-hex')) $('cpick-hex').value=hex.toUpperCase();
+      ed.color=hex; ed.dirty=true; renderPreview(); markSel();
+    }
+    function cpSet(hex){ const rgb=hexToRgb(hex); if(!rgb) return; const v=rgbToHsv(rgb[0],rgb[1],rgb[2]); cp.h=v[0]; cp.s=v[1]; cp.v=v[2]; cpRender(); }
+    function cpBindDrag(el, fn){ let on=false; el.addEventListener('pointerdown', e=>{ on=true; try{el.setPointerCapture(e.pointerId);}catch(_){ } fn(e); e.preventDefault(); }); el.addEventListener('pointermove', e=>{ if(on) fn(e); }); el.addEventListener('pointerup', ()=>{ on=false; }); el.addEventListener('lostpointercapture', ()=>{ on=false; }); }
+    cpBindDrag($('cpick-sv'), e=>{ const r=$('cpick-sv').getBoundingClientRect(); cp.s=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width)); cp.v=1-Math.min(1,Math.max(0,(e.clientY-r.top)/r.height)); cpRender(); });
+    cpBindDrag($('cpick-hue'), e=>{ const r=$('cpick-hue').getBoundingClientRect(); cp.h=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width))*360; cpRender(); });
+    $('cpick-hex').addEventListener('input', e=>{ if(hexToRgb(e.target.value)) cpSet(e.target.value); });
+
+    /* ===================== état ===================== */
+    let ACC = null, PROFILE = {};
+    // Calques de l'avatar : bg (fond) / char (personnage) / frame (cadre) = payloads ('icons/..' ou 'avatar_..') ou null. dirty=true dès qu'on touche un calque/couleur.
+    const ed = { color:DEF_COLOR, bg:null, char:null, frame:null, currentImage:'', dirty:false };
+
+    function paintIdentity(a){
+      const isGuest=(a.email||'').toLowerCase().endsWith('@nextendo.local');
+      $('uname').textContent=a.username; $('uname').classList.remove('skeleton');
+      $('fc').textContent=a.friend_code; $('kv-fc').textContent=a.friend_code;
+      $('card-name').textContent=a.username; $('kv-name').textContent=a.username;
+      $('kv-pid').textContent=a.pid;
+      $('kv-email').textContent=isGuest?'Compte invité (aucun e-mail)':a.email;
+      $('card-chip').textContent=isGuest?'INVITÉ':'MEMBRE';
+      try { $('kv-since').textContent=new Date(a.created_at).toLocaleDateString('fr-FR',{year:'numeric',month:'long',day:'numeric'}); }
+      catch(_){ $('kv-since').textContent='—'; }
+    }
+
+    /* ---- amis ---- */
+    // Rendu de la pp d'un ami/demande : image composée > avatar galerie (firmware/icône) > initiale.
+    function friendAvatarHtml(f){
+      if(f.image) return '<img src="'+imgSrc(f.image)+'" alt="">';
+      const av=f.avatar||'';
+      if(av.indexOf('img:')===0) return '<img src="'+escapeHtml(avatarImgUrl(av.slice(4)))+'" alt="">';
+      if(av.indexOf('ph-')===0) return '<i class="ph '+escapeHtml(av)+'"></i>';
+      return escapeHtml(initial(f.name||f.username));
+    }
+    function friendAvStyle(f){ return (!f.image && f.avatar && f.avatar.indexOf('img:')!==0 && f.color) ? ' style="background:'+escapeHtml(f.color)+'"' : ''; }
+    function friendRow(f){
+      const online=f.presence && Number(f.presence.status)>0;
+      const row=document.createElement('div'); row.className='friend friend--click'; row.setAttribute('role','button'); row.tabIndex=0;
+      row.innerHTML='<div class="friend__av"'+friendAvStyle(f)+'>'+friendAvatarHtml(f)+'</div><div class="friend__main"><div class="friend__name">'+escapeHtml(f.name||f.username)+'</div><div class="friend__code">'+escapeHtml(f.friend_code||'')+'</div></div><div class="friend__status"><span class="friend__dot '+(online?'on':'')+'"></span>'+(online?'en ligne':'hors ligne')+'</div><i class="ph ph-caret-right friend__go" aria-hidden="true"></i>';
+      row.addEventListener('click', ()=>openFriendModal(f));
+      row.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openFriendModal(f); } });
+      return row;
+    }
+    function requestRow(f){
+      const row=document.createElement('div'); row.className='friend';
+      row.innerHTML='<div class="friend__av"'+friendAvStyle(f)+'>'+friendAvatarHtml(f)+'</div><div class="friend__main"><div class="friend__name">'+escapeHtml(f.name||f.username)+'</div><div class="friend__code">veut t\'ajouter</div></div><div style="display:flex;gap:0.4rem"><button class="btn btn--primary btn--sm" data-accept="'+f.pid+'">Accepter</button><button class="btn btn--soft btn--sm" data-decline="'+f.pid+'">Refuser</button></div>';
+      return row;
+    }
+
+    /* ---- modale profil d'un ami (détails + historique + supprimer/bloquer) ---- */
+    let FRIEND_MODAL_PID = null;
+    function openFriendModal(f){
+      FRIEND_MODAL_PID = f.pid;
+      const online=f.presence && Number(f.presence.status)>0;
+      $('fm-name').textContent=f.name||f.username;
+      $('fm-code').textContent=f.friend_code||'—';
+      $('fm-pid').textContent=f.pid;
+      $('fm-status').className='fm-badge '+(online?'fm-badge--on':'fm-badge--off');
+      $('fm-status').innerHTML='<span class="friend__dot '+(online?'on':'')+'"></span>'+(online?'en ligne':'hors ligne');
+      // photo + couleur d'accent de l'ami (teinte l'en-tête)
+      const accent=(f.color && /^#[0-9a-fA-F]{6}$/.test(f.color))?f.color:'#1ca9e0';
+      const pic=$('fm-pic'); pic.style.background=''; pic.innerHTML=friendAvatarHtml(f);
+      if(!f.image && f.avatar && f.avatar.indexOf('img:')!==0 && f.color) pic.style.background=f.color;
+      $('friend-modal').style.setProperty('--fm-accent', accent);
+      let since='—'; try{ if(f.created_at) since=new Date(f.created_at).toLocaleDateString('fr-FR',{month:'short',year:'numeric'}); }catch(_){}
+      $('fm-since').textContent=since;
+      ['fm-total','fm-games','fm-fav','fm-last'].forEach(id=>$(id).textContent='…');
+      $('fm-history').innerHTML='<div class="empty">Chargement de l\'historique…</div>';
+      $('friend-modal').hidden=false;
+      NX.friendHistory(f.pid).then(({history})=>{
+        history=history||[];
+        const total=history.reduce((s,h)=>s+(Number(h.seconds)||0),0);
+        const fav=history.slice().sort((a,b)=>(Number(b.seconds)||0)-(Number(a.seconds)||0))[0];
+        $('fm-total').textContent=history.length?fmtHours(total):'0 min';
+        $('fm-games').textContent=history.length;
+        $('fm-fav').textContent=fav?(fav.name||'Jeu'):'—';
+        $('fm-last').textContent=(history.length&&history[0].last_played)?fmtDate(history[0].last_played):'—';
+        renderHistoryInto($('fm-history'), history, 'Cet ami n\'a pas encore d\'historique de jeu public.');
+      }).catch(()=>{ ['fm-total','fm-games','fm-fav','fm-last'].forEach(id=>$(id).textContent='—'); $('fm-history').innerHTML='<div class="empty">Impossible de charger l\'historique.</div>'; });
+    }
+    function closeFriendModal(){ $('friend-modal').hidden=true; FRIEND_MODAL_PID=null; }
+
+    /* ---- modale d'un jeu (fiche façon Discord : bannière, jaquette, infos) ---- */
+    const GM_LINK_ICON={ website:'ph-globe', wikipedia:'ph-book-open-text', youtube:'ph-youtube-logo', x:'ph-x-logo', twitter:'ph-x-logo', twitch:'ph-twitch-logo', instagram:'ph-instagram-logo', reddit:'ph-reddit-logo', discord:'ph-discord-logo', eshop:'ph-storefront', facebook:'ph-facebook-logo' };
+    function safeUrl(u){ return /^https?:\/\//i.test(u||'')?u:'#'; }
+    function gmMetaClass(n){ return n>=75?'hi':n>=50?'mid':'lo'; }
+    function gmStage(url){ $('gm-stage').style.backgroundImage=url?('url('+url+')'):''; }
+    function openGameModal(h){
+      const tid=(h.title_id||'').toLowerCase();
+      const cover=$('gm-cover'), head=$('gm-head');
+      $('gm-name').textContent=h.name||'Jeu';
+      $('gm-sub').textContent=''; $('gm-desc').textContent=''; $('gm-badge').hidden=true;
+      ['gm-genres','gm-publisher','gm-developer','gm-release'].forEach(id=>$(id).textContent='…');
+      $('gm-platforms').textContent='…'; $('gm-links-row').hidden=true; $('gm-meta-row').hidden=true;
+      $('gm-media').hidden=true; $('gm-thumbs').innerHTML=''; gmStage('');
+      head.style.setProperty('--gm-accent','#1ca9e0'); $('gm-headbg').style.backgroundImage='';
+      cover.style.backgroundImage=h.icon?('url('+imgSrc(h.icon)+')'):'';
+      $('gm-playtime').textContent=fmtHours(h.seconds);
+      $('gm-lastplayed').textContent=h.last_played?fmtDate(h.last_played):'—';
+      $('game-modal').hidden=false;
+      NX.gameInfo(tid, h.name).then(g=>{
+        if(!g) return;
+        $('gm-name').textContent=g.name||h.name||'Jeu';
+        const acc=(g.accent && /^#[0-9a-fA-F]{6}$/.test(g.accent))?g.accent:'#1ca9e0';
+        head.style.setProperty('--gm-accent', acc);
+        if(g.hero) $('gm-headbg').style.backgroundImage='url('+g.hero+')';
+        if(g.cover) cover.style.backgroundImage='url('+g.cover+')';
+        if(g.metacritic){ const b=$('gm-badge'); b.hidden=false; b.className='gm-badge gm-badge--'+gmMetaClass(g.metacritic); b.innerHTML='<i class="ph ph-star-four"></i>'+g.metacritic+' Metascore'; }
+        $('gm-sub').textContent=(g.genres||[]).join(' · ');
+        $('gm-desc').textContent=g.description||'';
+        $('gm-genres').textContent=(g.genres||[]).join(', ')||'—';
+        $('gm-publisher').textContent=g.publisher||'—';
+        $('gm-developer').textContent=g.developer||'—';
+        $('gm-release').textContent=g.release_date||'—';
+        $('gm-platforms').innerHTML='<span class="gm-plat"><i class="ph ph-game-controller"></i>'+escapeHtml((g.platforms&&g.platforms[0])||'Nintendo Switch')+'</span>';
+        const links=g.links||[];
+        if(links.length){ $('gm-links-row').hidden=false; $('gm-links').innerHTML=links.map(l=>'<a href="'+escapeHtml(safeUrl(l.url))+'" target="_blank" rel="noopener" title="'+escapeHtml(l.type||'')+'"><i class="ph '+(GM_LINK_ICON[l.type]||'ph-link-simple')+'"></i></a>').join(''); }
+        if(g.metacritic){ $('gm-meta-row').hidden=false; const m=$('gm-metacritic'); m.className='gm-dv gm-meta gm-meta--'+gmMetaClass(g.metacritic); m.textContent=g.metacritic; }
+        const shots=[]; if(g.hero) shots.push(g.hero); (g.screenshots||[]).forEach(s=>shots.push(s));
+        if(shots.length){
+          $('gm-media').hidden=false; gmStage(shots[0]);
+          $('gm-thumbs').innerHTML=shots.map((s,i)=>'<button class="gm-thumb'+(i===0?' sel':'')+'" style="background-image:url('+s+')" data-shot="'+i+'" aria-label="Aperçu '+(i+1)+'"></button>').join('');
+          $('gm-thumbs').querySelectorAll('.gm-thumb').forEach(b=>b.addEventListener('click',()=>{ gmStage(shots[Number(b.dataset.shot)]); $('gm-thumbs').querySelectorAll('.gm-thumb').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); }));
+        }
+      }).catch(()=>{ ['gm-genres','gm-publisher','gm-developer','gm-release'].forEach(id=>$(id).textContent='—'); $('gm-platforms').textContent='Nintendo Switch'; });
+    }
+    function closeGameModal(){ $('game-modal').hidden=true; }
+    async function loadFriends(){
+      try {
+        const { friends, requests }=await NX.friends();
+        const rw=$('requests'); rw.innerHTML='';
+        (requests||[]).forEach(r=>{ const row=requestRow(r); rw.appendChild(row);
+          row.querySelector('[data-accept]').addEventListener('click', async e=>{ await NX.acceptFriend(Number(e.target.dataset.accept)); NX.toast('Ami ajouté'); loadFriends(); });
+          row.querySelector('[data-decline]').addEventListener('click', async e=>{ await NX.declineFriend(Number(e.target.dataset.decline)); loadFriends(); });
+        });
+        const w=$('friends'); w.innerHTML='';
+        if(!friends || !friends.length){ w.innerHTML='<div class="empty">Aucun ami pour l\'instant. Ajoute le friend code d\'un autre joueur.</div>'; return; }
+        friends.forEach(f=>w.appendChild(friendRow(f)));
+      } catch(_){ $('friends').innerHTML='<div class="empty">Impossible de charger tes amis.</div>'; }
+    }
+
+    /* ---- historique ---- */
+    function fmtHours(sec){ const h=(sec||0)/3600; if(h<1) return Math.max(1,Math.round((sec||0)/60))+' min'; return (h>=10?Math.round(h):h.toFixed(1))+' h'; }
+    function fmtDate(s){ if(!s) return ''; try { return new Date(s).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'}); } catch(_){ return ''; } }
+    function renderHistoryInto(w, history, emptyMsg){
+      if(!history || !history.length){ w.innerHTML='<div class="empty">'+escapeHtml(emptyMsg)+'</div>'; return; }
+      w.innerHTML='';
+      history.forEach(h=>{
+        const ico=h.icon?'<img src="'+imgSrc(h.icon)+'" alt="">':'<i class="ph ph-game-controller"></i>';
+        const el=document.createElement('div'); el.className='history-card history-card--click'; el.setAttribute('role','button'); el.tabIndex=0;
+        el.innerHTML='<div class="history-card__ico">'+ico+'</div><div class="history-card__main"><div class="history-card__name">'+escapeHtml(h.name||'Jeu')+'</div><div class="history-card__time">'+fmtHours(h.seconds)+' jouées</div><div class="history-card__meta">'+(h.last_played?('joué le '+fmtDate(h.last_played)):'')+'</div></div><i class="ph ph-caret-right history-card__go" aria-hidden="true"></i>';
+        el.addEventListener('click', ()=>openGameModal(h));
+        el.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openGameModal(h); } });
+        w.appendChild(el);
+      });
+    }
+    async function loadHistory(){
+      try {
+        const { history }=await NX.history();
+        renderHistoryInto($('history'), history, 'Aucun historique pour l\'instant — ton temps de jeu apparaîtra ici après tes parties (synchronisé automatiquement depuis l\'émulateur).');
+      } catch(_){ $('history').innerHTML='<div class="empty">Impossible de charger l\'historique.</div>'; }
+    }
+
+    /* ===================== éditeur ===================== */
+    function buildPickers(){
+      const sw=$('swatches'); sw.innerHTML='';
+      COLORS.forEach(c=>{ const b=document.createElement('button'); b.type='button'; b.className='swatch'; b.dataset.color=c; b.style.background=c; b.title=c; b.addEventListener('click',()=>{ if($('cpick').hidden){ ed.color=c; ed.dirty=true; markSel(); renderPreview(); } else cpSet(c); }); sw.appendChild(b); });
+      const custom=document.createElement('button'); custom.type='button'; custom.className='swatch swatch--custom'; custom.title='Couleur personnalisée';
+      custom.innerHTML='<i class="ph ph-sliders-horizontal"></i>';
+      custom.addEventListener('click',()=>{ const p=$('cpick'); p.hidden=!p.hidden; if(!p.hidden) cpSet(ed.color); }); sw.appendChild(custom);
+    }
+    /* ---- compositeur d'avatar à CALQUES : Personnage / Fond / Cadre (superposés) ---- */
+    const LAYERS = [
+      { key:'char',  cat:'characters',  label:'Personnage', icon:'ph-user' },
+      { key:'bg',    cat:'backgrounds', label:'Fond',       icon:'ph-image' },
+      { key:'frame', cat:'frames',      label:'Cadre',      icon:'ph-frame-corners' },
+    ];
+    const FW_GAME = '__fw__', CUSTOM_GAME = '__custom__';
+    let MAN = null, FIRMWARE = [], CUSTOM = [];
+    const ip = { layer:'char', game:'', items:[], shown:0 };
+
+    async function loadImageAvatars(){
+      const [mf, fw] = await Promise.all([
+        fetch('/assets/icons/manifest.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null),
+        fetch('/assets/avatars/manifest.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null),
+      ]);
+      MAN = mf || { byCat:{}, games:[] };
+      FIRMWARE = (fw && fw.avatars) || [];
+      CUSTOM = (fw && fw.custom) || [];
+      ipBuildTabs();
+      ipSelectLayer('char');
+      $('avatar-grid').addEventListener('scroll', ()=>{
+        const g=$('avatar-grid'); if(g.scrollTop+g.clientHeight >= g.scrollHeight-280) ipRenderMore();
+      });
+      $('ip-game').addEventListener('change', e=>{ ip.game=e.target.value; ipApply(); });
+      $('ip-clear').addEventListener('click', ()=>{ ed[ip.layer]=null; ed.dirty=true; markSel(); renderPreview(); });
+    }
+    function ipBuildTabs(){
+      const bar=$('ip-tabs'); bar.innerHTML='';
+      LAYERS.forEach(l=>{
+        const b=document.createElement('button'); b.type='button'; b.className='ip-tab'; b.dataset.layer=l.key;
+        b.innerHTML='<i class="ph '+l.icon+'"></i><span>'+l.label+'</span><i class="ph ph-check-circle ip-tab__dot"></i>';
+        b.addEventListener('click',()=>ipSelectLayer(l.key));
+        bar.appendChild(b);
+      });
+    }
+    function ipSelectLayer(key){
+      ip.layer=key; ip.game='';
+      const cat=LAYERS.find(l=>l.key===key).cat;
+      document.querySelectorAll('#ip-tabs .ip-tab').forEach(b=>b.classList.toggle('on', b.dataset.layer===key));
+      // remplir le filtre par jeu (+ pseudo-jeu "Nintendo Switch" pour les 147 firmware sur le calque Personnage)
+      const sel=$('ip-game');
+      const map=(MAN.byCat&&MAN.byCat[cat])||{};
+      const order={}, names={}; (MAN.games||[]).forEach((g,i)=>{ order[g.id]=i; names[g.id]=g.name; });
+      const gids=Object.keys(map).sort((a,b)=>(order[a]??999)-(order[b]??999));
+      let tot=gids.reduce((n,g)=>n+map[g].length,0);
+      if(key==='char') tot+=FIRMWARE.length+CUSTOM.length;
+      let html='<option value="">Tous ('+tot+')</option>';
+      if(key==='char' && CUSTOM.length) html+='<option value="'+CUSTOM_GAME+'">Custom / Nextendo ('+CUSTOM.length+')</option>';
+      if(key==='char' && FIRMWARE.length) html+='<option value="'+FW_GAME+'">Nintendo Switch — défaut ('+FIRMWARE.length+')</option>';
+      gids.forEach(g=>{ html+='<option value="'+g+'">'+escapeHtml(names[g]||g)+' ('+map[g].length+')</option>'; });
+      sel.innerHTML=html;
+      ipApply();
+    }
+    function ipApply(){
+      ip.items=[]; ip.shown=0;
+      const cat=LAYERS.find(l=>l.key===ip.layer).cat;
+      const transparent = cat!=='backgrounds';
+      // avatars "prêts" (calque Personnage) : custom Nextendo (opaques) puis firmware Switch (transparents)
+      if(ip.layer==='char'){
+        if(ip.game==='' || ip.game===CUSTOM_GAME) CUSTOM.forEach(fn=> ip.items.push({p:fn, url:'/assets/avatars/'+fn, t:false}));
+        if(ip.game==='' || ip.game===FW_GAME)     FIRMWARE.forEach(fn=> ip.items.push({p:fn, url:'/assets/avatars/'+fn, t:true}));
+      }
+      if(ip.game!==FW_GAME && ip.game!==CUSTOM_GAME){
+        const map=(MAN.byCat&&MAN.byCat[cat])||{};
+        const order={}; (MAN.games||[]).forEach((g,i)=>order[g.id]=i);
+        const gids=Object.keys(map).sort((a,b)=>(order[a]??999)-(order[b]??999));
+        gids.forEach(gid=>{ if(ip.game && gid!==ip.game) return;
+          map[gid].forEach(fn=> ip.items.push({p:'icons/'+gid+'/'+cat+'/'+fn, url:'/assets/icons/'+gid+'/'+cat+'/'+fn, t:transparent}));
+        });
+      }
+      const g=$('avatar-grid'); g.innerHTML='';
+      if(!ip.items.length){ g.innerHTML='<div class="empty" style="grid-column:1/-1">Rien ici.</div>'; markSel(); return; }
+      g.scrollTop=0; ipRenderMore(); ipRenderMore(); markSel();
+    }
+    function ipRenderMore(){
+      const g=$('avatar-grid'); if(ip.shown>=ip.items.length) return;
+      const cur=ed[ip.layer];
+      const end=Math.min(ip.shown+120, ip.items.length);
+      const frag=document.createDocumentFragment();
+      for(let i=ip.shown;i<end;i++){ const it=ip.items[i];
+        const b=document.createElement('button'); b.type='button';
+        b.className='avatar-opt avatar-opt--img'+(it.t?' avatar-opt--t':'')+(it.p===cur?' sel':'');
+        b.dataset.p=it.p;
+        b.innerHTML='<img src="'+it.url+'" alt="" loading="lazy" decoding="async">';
+        b.addEventListener('click',()=>{ ed[ip.layer]=(ed[ip.layer]===it.p)?null:it.p; ed.dirty=true; markSel(); renderPreview(); });
+        frag.appendChild(b);
+      }
+      ip.shown=end; g.appendChild(frag);
+    }
+    function markSel(){
+      const cur=ed[ip.layer];
+      document.querySelectorAll('#avatar-grid .avatar-opt').forEach(b=>b.classList.toggle('sel', b.dataset.p===cur && cur!=null));
+      document.querySelectorAll('#swatches .swatch[data-color]').forEach(b=>b.classList.toggle('sel', b.dataset.color.toLowerCase()===(ed.color||'').toLowerCase()));
+      document.querySelectorAll('#ip-tabs .ip-tab').forEach(b=>b.classList.toggle('has', !!ed[b.dataset.layer]));
+      const cl=$('ip-clear'); if(cl) cl.hidden=!cur;
+    }
+    function anyLayer(){ return !!(ed.bg||ed.char||ed.frame); }
+    function renderPreview(){ const c=$('avatar-canvas'); if(anyLayer()||ed.dirty) composeAvatar(c, ed); else drawB64(c, ed.currentImage); }
+
+    function openEditor(){
+      $('edit-msg').className='msg'; $('cpick').hidden=true;
+      $('edit-pseudo').value=ACC.username;
+      ed.currentImage=PROFILE.image||'';
+      ed.color=PROFILE.color || DEF_COLOR;
+      ed.bg=ed.char=ed.frame=null; ed.dirty=false;
+      // restaure les calques depuis l'avatar sauvegardé : JSON {bg,char,frame} ou legacy 'img:<payload>' (= personnage)
+      const a=PROFILE.avatar||'';
+      if(a.charAt(0)==='{'){ try{ const o=JSON.parse(a); ed.bg=o.bg||null; ed.char=o.char||null; ed.frame=o.frame||null; }catch(_){} }
+      else if(a.indexOf('img:')===0){ ed.char=a.slice(4); }
+      if(MAN) ipSelectLayer('char'); else markSel();
+      renderPreview();
+      $('edit-modal').hidden=false; document.body.style.overflow='hidden';
+    }
+    function closeEditor(){ $('edit-modal').hidden=true; document.body.style.overflow=''; }
+    $('edit-profile').addEventListener('click', openEditor);
+    document.querySelectorAll('#edit-modal [data-close]').forEach(el=>el.addEventListener('click', closeEditor));
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !$('edit-modal').hidden) closeEditor(); });
+
+    const reUser=/^[A-Za-z0-9_\-]{3,16}$/;
+    $('save-profile').addEventListener('click', async ()=>{
+      const m=$('edit-msg'); hideMsg(m);
+      const btn=$('save-profile'); btn.disabled=true; const prev=btn.textContent; btn.textContent='Enregistrement…';
+      try {
+        const pseudo=$('edit-pseudo').value.trim();
+        if(pseudo && pseudo!==ACC.username){
+          if(!reUser.test(pseudo)) throw new Error('Pseudo invalide : 3 à 16 caractères (lettres, chiffres, _ ou -).');
+          const r=await NX.setUsername(pseudo); ACC=r.account; paintIdentity(ACC);
+        }
+        let image, avatar;
+        if(anyLayer() || ed.dirty){ // calques/couleur touchés -> on compose les calques
+          await composeAvatar($('avatar-canvas'), ed);
+          image=canvasB64($('avatar-canvas'));
+          avatar=anyLayer() ? JSON.stringify({bg:ed.bg||undefined, char:ed.char||undefined, frame:ed.frame||undefined}) : '';
+        } else { // rien touché -> on GARDE la photo actuelle (ne pas l'écraser)
+          image=PROFILE.image||''; avatar=PROFILE.avatar||'';
+        }
+        // le pseudo du compte est l'unique nom : on l'écrit aussi dans Profile.Name (jeu + site alignés)
+        const body={ name:($('edit-pseudo').value.trim()||ACC.username), mii:PROFILE.mii||'', image:image, color:ed.color, avatar:avatar };
+        const pr=await NX.putProfile(body); PROFILE=pr.profile||body;
+        localStorage.setItem('nx_color', ed.color);
+        setAvatar(PROFILE.image, ACC.username);
+        NX.toast('Profil mis à jour'); closeEditor();
+      } catch(err){ showMsg(m, err.message, 'err'); }
+      finally { btn.disabled=false; btn.textContent=prev; }
+    });
+
+    /* ===================== init ===================== */
+    buildPickers(); loadImageAvatars(); ensurePhosphor();
+    (async ()=>{
+      if(!NX.token){ location.replace('/login'); return; }
+      try { ({ account: ACC }=await NX.me()); } catch(_){ NX.token=''; location.replace('/login'); return; }
+      paintIdentity(ACC);
+      /* sécurité / e-mail : chip vérifié, bannière si non vérifié, boutons renvoyer + réinitialiser */
+      (function security(){
+        const isGuest=(ACC.email||'').toLowerCase().endsWith('@nextendo.local');
+        if(isGuest){ const sp=$('security-panel'); if(sp) sp.hidden=true; return; }
+        const chip=$('email-chip'); chip.hidden=false;
+        if(ACC.email_verified){ chip.className='email-chip ok'; chip.innerHTML='<i class="ph ph-seal-check"></i> vérifié'; }
+        else { chip.className='email-chip no'; chip.innerHTML='<i class="ph ph-warning"></i> non vérifié'; $('verify-banner').hidden=false; }
+        $('resend-verify').addEventListener('click', async e=>{
+          const b=e.currentTarget; b.disabled=true;
+          try { await NX.resendVerification(); NX.toast('E-mail de vérification renvoyé — regarde ta boîte mail.'); }
+          catch(err){ NX.toast(err.message); } finally { b.disabled=false; }
+        });
+        $('reset-pw').addEventListener('click', async e=>{
+          const b=e.currentTarget; b.disabled=true;
+          try { await NX.forgot(ACC.email); NX.toast('Lien de réinitialisation envoyé à ' + ACC.email + '.'); }
+          catch(err){ NX.toast(err.message); } finally { b.disabled=false; }
+        });
+        // changer d'e-mail (modal)
+        const emModal=$('email-modal');
+        const closeEm=()=>{ emModal.hidden=true; };
+        $('change-email').addEventListener('click', ()=>{ $('em-msg').className='msg'; $('em-new').value=''; $('em-pw').value=''; emModal.hidden=false; });
+        emModal.querySelectorAll('[data-eclose]').forEach(el=>el.addEventListener('click', closeEm));
+        document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !emModal.hidden) closeEm(); });
+        $('em-save').addEventListener('click', async ()=>{
+          const m=$('em-msg'); hideMsg(m);
+          const email=$('em-new').value.trim(), pw=$('em-pw').value;
+          if(!/.+@.+\..+/.test(email)){ showMsg(m,'Adresse e-mail invalide.','err'); return; }
+          if(!pw){ showMsg(m,'Entre ton mot de passe actuel pour confirmer.','err'); return; }
+          const b=$('em-save'); b.disabled=true; const prev=b.textContent; b.textContent='Changement…';
+          try {
+            const r=await NX.changeEmail(email, pw);
+            ACC=r.account||ACC; paintIdentity(ACC);
+            chip.className='email-chip no'; chip.innerHTML='<i class="ph ph-warning"></i> non vérifié'; $('verify-banner').hidden=false;
+            NX.toast('E-mail changé — confirme-le via le lien envoyé à ' + email + '.');
+            closeEm();
+          } catch(err){ showMsg(m, err.message, 'err'); }
+          finally { b.disabled=false; b.textContent=prev; }
+        });
+      })();
+      try { const { profile }=await NX.profile(); PROFILE=profile||{}; } catch(_){ PROFILE={}; }
+      setAvatar(PROFILE.image, ACC.username);
+      document.querySelectorAll('[data-copy="fc"]').forEach(b=>b.addEventListener('click', async ()=>{
+        try { await navigator.clipboard.writeText(ACC.friend_code); NX.toast('Friend code copié'); } catch(_){ NX.toast('Copie impossible'); }
+      }));
+      $('add-friend').addEventListener('submit', async e=>{
+        e.preventDefault(); const input=$('fc-input'); const code=input.value.trim(); if(!code) return;
+        const b=e.target.querySelector('button'); b.disabled=true;
+        try { await NX.addFriend(code); NX.toast('Demande envoyée'); input.value=''; loadFriends(); }
+        catch(err){ NX.toast(err.message); } finally { b.disabled=false; }
+      });
+      document.querySelectorAll('#friend-modal [data-fclose]').forEach(el=>el.addEventListener('click', closeFriendModal));
+      document.querySelectorAll('#game-modal [data-gclose]').forEach(el=>el.addEventListener('click', closeGameModal));
+      $('fm-remove').addEventListener('click', async ()=>{
+        if(!FRIEND_MODAL_PID) return;
+        if(!confirm('Retirer cet ami de ta liste ?')) return;
+        try { await NX.removeFriend(FRIEND_MODAL_PID); NX.toast('Ami supprimé'); closeFriendModal(); loadFriends(); }
+        catch(err){ NX.toast(err.message); }
+      });
+      $('fm-block').addEventListener('click', async ()=>{
+        if(!FRIEND_MODAL_PID) return;
+        if(!confirm("Bloquer ce joueur ? Il sera retiré de tes amis et ne pourra plus t'envoyer de demande.")) return;
+        try { await NX.blockFriend(FRIEND_MODAL_PID); NX.toast('Joueur bloqué'); closeFriendModal(); loadFriends(); }
+        catch(err){ NX.toast(err.message); }
+      });
+      loadFriends(); loadHistory();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <title>Nextendo Network, le online de la Switch rendu à la communauté</title>
+  <meta name="description" content="Nextendo Network réimplémente, en open source, les services en ligne de la Nintendo Switch pour l'émulateur Ryujinx. Comptes, jeu en ligne, amis et communautés." />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=2" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <!-- Morphism backdrop: morphing field + canvas signal mesh -->
+  <div class="backdrop" aria-hidden="true">
+    <div class="field field--a"></div>
+    <div class="field field--b"></div>
+    <div class="grid-veil"></div>
+  </div>
+
+  <header class="nav" id="nav">
+    <div class="shell nav__inner">
+      <a class="brand" href="#top" aria-label="Nextendo Network, accueil">
+        <img class="brand__mark" src="assets/favicon.svg" alt="" width="30" height="30" />
+        <span class="brand__word">Nextendo<span class="brand__dim"> Network</span></span>
+      </a>
+
+      <nav class="nav__links" id="navlinks" aria-label="Navigation principale">
+        <a href="#features">Fonctionnalités</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#install">Installation</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="nav__end">
+        <a class="ghost-link" href="/login"><i class="ph ph-sign-in" aria-hidden="true"></i> Connexion</a>
+        <a class="btn btn--primary btn--sm" href="/register">Créer un compte</a>
+        <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navlinks">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <span id="top"></span>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="shell hero__grid">
+        <div class="hero__copy">
+          <p class="status" data-reveal>
+            <span class="status__dot" aria-hidden="true"></span>
+            Réseau opérationnel
+          </p>
+
+          <h1 class="hero__title" id="hero-title" data-reveal>
+            Un réseau <span class="hl">libre</span> pour votre Switch.
+          </h1>
+
+          <p class="hero__lede" data-reveal>
+            Nextendo Network réimplémente les services en ligne de la Switch, en open source,
+            pour l'émulateur Ryujinx.
+          </p>
+
+          <div class="hero__cta" data-reveal>
+            <a class="btn btn--primary" href="/register">
+              Créer mon compte
+              <i class="ph ph-arrow-right" aria-hidden="true"></i>
+            </a>
+            <a class="btn btn--ghost" href="#install">Comment ça marche</a>
+          </div>
+        </div>
+
+        <figure class="hero__viz" data-reveal aria-label="Visualisation du maillage réseau Nextendo">
+          <canvas id="mesh" width="560" height="460"></canvas>
+          <figcaption class="hero__viz-cap">
+            <span class="mono">maillage_réseau</span>
+            <span class="mono mono--dim">eu-west / cluster-02</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- STATEMENT -->
+    <section class="statement shell" aria-label="Le problème">
+      <p class="statement__text" data-reveal>
+        Quand un service officiel ferme, le jeu en ligne meurt avec lui.
+        <span class="statement__soft">Nextendo le fait revivre, proprement et au grand jour.</span>
+      </p>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section shell" id="features" aria-labelledby="features-title">
+      <header class="head">
+        <h2 class="head__title" id="features-title" data-reveal>Le online, réécrit proprement.</h2>
+        <p class="head__lede" data-reveal>Une pile lisible et auditable, pensée pour durer. Pas une copie obscure des serveurs d'origine.</p>
+      </header>
+
+      <div class="bento">
+        <article class="cell cell--feature cell--lead" data-reveal data-spotlight>
+          <div class="cell__viz" aria-hidden="true"><canvas id="cardmesh" width="440" height="240"></canvas></div>
+          <div class="cell__body">
+            <i class="ph ph-identification-card cell__ico" aria-hidden="true"></i>
+            <h3>Comptes communautaires</h3>
+            <p>Une identité indépendante des serveurs officiels. Gardez vos amis et votre présence en ligne d'un jeu à l'autre.</p>
+          </div>
+        </article>
+
+        <article class="cell cell--feature" data-reveal data-spotlight>
+          <i class="ph ph-globe-hemisphere-west cell__ico" aria-hidden="true"></i>
+          <h3>Jeu en ligne</h3>
+          <p>Mario Kart 8 Deluxe, Splatoon 2, Super Smash Bros. Ultimate&nbsp;: les modes multijoueurs, depuis Ryujinx ou votre Switch.</p>
+        </article>
+
+        <article class="cell cell--feature" data-reveal data-spotlight>
+          <i class="ph ph-users-three cell__ico" aria-hidden="true"></i>
+          <h3>Amis et présence</h3>
+          <p>Voyez qui est en ligne, à quoi ils jouent, et rejoignez la partie.</p>
+        </article>
+
+        <article class="cell cell--feature" data-reveal data-spotlight>
+          <i class="ph ph-git-fork cell__ico" aria-hidden="true"></i>
+          <h3>Open source</h3>
+          <p>Code libre et auditable. Aucune boîte noire, aucune surprise.</p>
+        </article>
+
+        <article class="cell cell--feature" data-reveal data-spotlight>
+          <i class="ph ph-shield-check cell__ico" aria-hidden="true"></i>
+          <h3>Vie privée</h3>
+          <p>Pas de pistage, pas de revente. Vos parties restent les vôtres.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section class="section shell" id="architecture" aria-labelledby="arch-title">
+      <header class="head">
+        <h2 class="head__title" id="arch-title" data-reveal>Comment Nextendo vous connecte.</h2>
+        <p class="head__lede" data-reveal>Votre jeu parle à nos serveurs comme il parlait à ceux d'origine. On gère l'identité, les amis et le matchmaking — la partie, elle, se joue en direct entre joueurs.</p>
+      </header>
+
+      <div class="flow" data-reveal>
+        <div class="node">
+          <i class="ph ph-game-controller node__ico" aria-hidden="true"></i>
+          <h3>Votre jeu</h3>
+          <p>Ryujinx ou une Switch en CFW. Le jeu n'est pas modifié.</p>
+        </div>
+
+        <div class="wire" aria-hidden="true"><span class="wire__pulse"></span></div>
+
+        <div class="node node--key">
+          <i class="ph ph-identification-card node__ico" aria-hidden="true"></i>
+          <h3>Compte Nextendo</h3>
+          <p>Votre identité et un jeton signé prennent la place des serveurs d'origine.</p>
+        </div>
+
+        <div class="wire" aria-hidden="true"><span class="wire__pulse wire__pulse--2"></span></div>
+
+        <div class="node">
+          <i class="ph ph-users-three node__ico" aria-hidden="true"></i>
+          <h3>Matchmaking &amp; amis</h3>
+          <p>Nos serveurs ouverts vous appairent ; la partie passe ensuite en P2P entre joueurs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTALL -->
+    <section class="section shell" id="install" aria-labelledby="install-title">
+      <div class="install">
+        <div class="install__left">
+          <header class="head head--left">
+            <h2 class="head__title" id="install-title" data-reveal>En ligne en quatre étapes.</h2>
+            <p class="head__lede" data-reveal>Sur l'émulateur Ryujinx ou sur une vraie Switch en CFW. Dans les deux cas, votre compte Nextendo est la clé — et tout est réversible.</p>
+          </header>
+
+          <div class="member-card" data-reveal style="margin-top:1.8rem">
+            <div class="member-card__top">
+              <span class="member-card__brand"><img src="assets/favicon.svg" alt="" /> NEXTENDO</span>
+              <span class="member-card__chip">MEMBRE</span>
+            </div>
+            <div class="member-card__label">Friend code</div>
+            <div class="member-card__code">SW-4815-1623-0842</div>
+            <div class="member-card__foot">
+              <div class="member-card__name">Inkling_Pro<span>Pseudo</span></div>
+              <div class="member-card__sig" aria-hidden="true"></div>
+            </div>
+          </div>
+          <p class="hint" data-reveal style="margin-top:1rem">Votre identité réseau : un pseudo, un friend code permanent, et vos amis — partagés entre tous vos jeux et vos appareils.</p>
+        </div>
+
+        <ol class="steps" data-reveal>
+          <li class="step">
+            <span class="step__n mono">01</span>
+            <div>
+              <h3>Créez votre compte Nextendo</h3>
+              <p>Gratuit, en trois champs. Vous obtenez aussitôt un pseudo et un friend code permanents. <a href="/register" style="color:var(--primary-bright)">Créer mon compte →</a></p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__n mono">02</span>
+            <div>
+              <h3>Récupérez Ryujinx Nextendo</h3>
+              <p>La build de l'émulateur préconfigurée pour notre réseau. Sur une Switch CFW, activez plutôt le profil Nextendo (redirection DNS).</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__n mono">03</span>
+            <div>
+              <h3>Connexion Nextendo Network</h3>
+              <p>Dans Ryujinx&nbsp;: <b>Actions → Connexion Nextendo Network</b>, puis entrez vos identifiants.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__n mono">04</span>
+            <div>
+              <h3>Jouez en ligne</h3>
+              <p>Lancez Mario Kart 8, Splatoon 2 ou Smash Ultimate, ouvrez le menu en ligne, et retrouvez la communauté.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- FIGURES -->
+    <section class="section section--tight shell" aria-label="Le réseau en chiffres">
+      <div class="figures" data-reveal>
+        <div class="figure">
+          <span class="figure__n mono">3</span>
+          <span class="figure__l">Jeux jouables en ligne</span>
+        </div>
+        <div class="figure">
+          <span class="figure__n mono">1</span>
+          <span class="figure__l">Compte, tous vos jeux</span>
+        </div>
+        <div class="figure">
+          <span class="figure__n mono">100 %</span>
+          <span class="figure__l">Open source</span>
+        </div>
+        <div class="figure">
+          <span class="figure__n mono">0 €</span>
+          <span class="figure__l">Gratuit, sans pub</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section shell" id="faq" aria-labelledby="faq-title">
+      <header class="head head--left">
+        <h2 class="head__title" id="faq-title" data-reveal>Les questions qui reviennent.</h2>
+      </header>
+
+      <div class="faq" data-reveal>
+        <details class="qa" open>
+          <summary>Nextendo est-il affilié à Nintendo ?<i class="ph ph-plus" aria-hidden="true"></i></summary>
+          <div class="qa__a"><p>Non. C'est un projet communautaire indépendant. Aucune affiliation, sponsoring ou approbation de Nintendo Co., Ltd.</p></div>
+        </details>
+        <details class="qa">
+          <summary>Faut-il fournir des jeux ?<i class="ph ph-plus" aria-hidden="true"></i></summary>
+          <div class="qa__a"><p>Nextendo ne distribue ni jeux, ni ROMs, ni clés. Le projet ne fournit que des services réseau. Vous restez responsable de vos propres copies.</p></div>
+        </details>
+        <details class="qa">
+          <summary>Quels émulateurs sont pris en charge ?<i class="ph ph-plus" aria-hidden="true"></i></summary>
+          <div class="qa__a"><p>La priorité va à Ryujinx. D'autres environnements pourront suivre à mesure que la communauté contribue.</p></div>
+        </details>
+        <details class="qa">
+          <summary>Que faites-vous de mes données ?<i class="ph ph-plus" aria-hidden="true"></i></summary>
+          <div class="qa__a"><p>Le strict minimum pour faire fonctionner le service. Pas de pistage, pas de revente. Le code étant ouvert, vous pouvez le vérifier.</p></div>
+        </details>
+        <details class="qa">
+          <summary>Comment contribuer ?<i class="ph ph-plus" aria-hidden="true"></i></summary>
+          <div class="qa__a"><p>Code, traduction, tests de compatibilité ou modération : tout aide. Rejoignez le dépôt et le serveur communautaire pour commencer.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section shell" aria-labelledby="cta-title">
+      <div class="cta" data-reveal>
+        <div class="cta__field" aria-hidden="true"></div>
+        <h2 id="cta-title">Prêt à rebrancher votre Switch ?</h2>
+        <p>Suivez le développement, rejoignez la communauté, et lancez votre première partie en ligne.</p>
+        <div class="cta__actions">
+          <a class="btn btn--primary" href="/register">Créer mon compte</a>
+          <a class="btn btn--ghost" href="/login">Se connecter</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer__grid">
+      <div class="footer__brand">
+        <a class="brand" href="#top" aria-label="Nextendo Network, accueil">
+          <img class="brand__mark" src="assets/favicon.svg" alt="" width="28" height="28" />
+          <span class="brand__word">Nextendo<span class="brand__dim"> Network</span></span>
+        </a>
+        <p class="footer__tag">Le online de la Switch, rendu à la communauté.</p>
+      </div>
+
+      <nav class="footer__cols" aria-label="Pied de page">
+        <div>
+          <h4>Projet</h4>
+          <a href="#features">Fonctionnalités</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#install">Installation</a>
+        </div>
+        <div>
+          <h4>Communauté</h4>
+          <a href="#" data-ext>Code source</a>
+          <a href="#" data-ext>Discord</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div>
+          <h4>État</h4>
+          <a href="#"><span class="status status--mini"><span class="status__dot" aria-hidden="true"></span>Opérationnel</span></a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="shell footer__legal">
+      <p>
+        Nextendo Network est un projet communautaire indépendant, sans aucune affiliation avec Nintendo Co., Ltd.
+        « Nintendo Switch » et « Ryujinx » appartiennent à leurs détenteurs respectifs.
+        Aucun jeu ni aucune ROM n'est fourni ou distribué.
+      </p>
+      <p class="footer__copy">© <span id="year">2026</span> Nextendo Network. Libre et open source.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js?v=2" defer></script>
+</body>
+</html>

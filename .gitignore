@@ -1,0 +1,6 @@
+*.conf
+*.yaml
+*.env
+*.key
+*.pem
+node_modules/

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <title>Mes sessions — Nextendo Network</title>
+  <meta name="robots" content="noindex" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=6" />
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true">
+    <div class="field field--a"></div>
+    <div class="field field--b"></div>
+    <div class="grid-veil"></div>
+  </div>
+
+  <header class="nav" id="nav">
+    <div class="shell nav__inner">
+      <a class="brand" href="/" aria-label="Nextendo Network, accueil">
+        <img class="brand__mark" src="assets/favicon.svg" alt="" width="30" height="30" />
+        <span class="brand__word">Nextendo<span class="brand__dim"> Network</span></span>
+      </a>
+      <div class="nav__end">
+        <a class="ghost-link" href="/compte"><i class="ph ph-arrow-left" aria-hidden="true"></i> Mon compte</a>
+        <button class="btn btn--soft btn--sm" id="logout"><i class="ph ph-sign-out" aria-hidden="true"></i> Déconnexion</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main"><div class="shell">
+    <section class="account">
+      <div class="account__head">
+        <div class="account__txt">
+          <span class="account__live"><span class="status__dot" aria-hidden="true"></span> sécurité du compte</span>
+          <div class="account__hi"><h1>Sessions actives</h1></div>
+        </div>
+      </div>
+
+      <div id="msg" class="msg" style="margin-bottom:1.1rem"></div>
+
+      <div class="panel">
+        <div class="panel__h"><h2>Où ton compte est connecté</h2><i class="ph ph-devices" aria-hidden="true"></i></div>
+        <p class="hint" style="margin-bottom:1rem">Chaque appareil connecté à ton compte Nextendo apparaît ici — navigateur, émulateur Ryujinx, ou Nintendo Switch. Tu peux en déconnecter un à distance, ou tout fermer d'un coup.</p>
+        <div class="sess-list" id="sessions"><div class="empty">Chargement de tes sessions…</div></div>
+        <div class="sec-actions" style="margin-top:1.3rem">
+          <button class="btn btn--danger" id="close-all"><i class="ph ph-sign-out" aria-hidden="true"></i> Fermer toutes les sessions</button>
+        </div>
+        <p class="hint" style="margin-top:0.7rem">« Fermer toutes les sessions » déconnecte <b>tous</b> tes appareils — y compris ce navigateur. Utile si tu penses que quelqu'un d'autre a accès à ton compte.</p>
+      </div>
+    </section>
+  </div></main>
+
+  <script src="assets/js/app.js?v=6"></script>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const msg = $('msg');
+    if (!NX.token) location.replace('/login');
+    $('logout').addEventListener('click', () => NX.logout());
+
+    const KIND_ICON = { browser: 'ph-monitor', ryujinx: 'ph-game-controller', switch: 'ph-device-mobile' };
+    function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    function ago(iso){
+      try {
+        const d = (Date.now() - new Date(iso).getTime()) / 1000;
+        if (d < 90) return "à l'instant";
+        if (d < 3600) return 'il y a ' + Math.round(d/60) + ' min';
+        if (d < 86400) return 'il y a ' + Math.round(d/3600) + ' h';
+        return 'il y a ' + Math.round(d/86400) + ' j';
+      } catch(_) { return ''; }
+    }
+
+    function render(sessions){
+      const w = $('sessions'); w.innerHTML = '';
+      if (!sessions || !sessions.length) { w.innerHTML = '<div class="empty">Aucune session active.</div>'; return; }
+      // la session courante d'abord
+      sessions.sort((a,b) => (b.current?1:0) - (a.current?1:0));
+      sessions.forEach(s => {
+        const row = document.createElement('div'); row.className = 'sess';
+        const loc = [s.geo, s.ip].filter(Boolean).join(' · ') || (s.ip || 'IP inconnue');
+        row.innerHTML =
+          '<div class="sess__ico"><i class="ph ' + (KIND_ICON[s.kind] || 'ph-question') + '"></i></div>' +
+          '<div class="sess__main">' +
+            '<div class="sess__top"><span class="sess__kind">' + esc(s.kind_label) + '</span>' +
+              (s.current ? '<span class="sess-cur">cet appareil</span>' : '') +
+              (s.playing ? '<span class="sess-play"><i class="ph ph-play"></i> en jeu</span>' : '') +
+            '</div>' +
+            '<div class="sess__meta"><span class="mono">' + esc(loc) + '</span> · vu ' + ago(s.last_seen) + '</div>' +
+          '</div>' +
+          '<button class="btn btn--soft btn--sm sess__x" data-id="' + esc(s.id) + '">' +
+            (s.current ? 'Me déconnecter' : 'Déconnecter') + '</button>';
+        row.querySelector('.sess__x').addEventListener('click', async (e) => {
+          const b = e.currentTarget; b.disabled = true;
+          try {
+            await NX.revokeSession(s.id);
+            if (s.current) { NX.logout(); return; }   // on a coupé notre propre session
+            load();
+          } catch(err){ showMsg(msg, err.message, 'err'); b.disabled = false; }
+        });
+        w.appendChild(row);
+      });
+    }
+
+    async function load(){
+      hideMsg(msg);
+      try { const { sessions } = await NX.sessions(); render(sessions); }
+      catch(err){
+        if (/401|invalide|expir/i.test(err.message)) { NX.logout(); return; }
+        $('sessions').innerHTML = '<div class="empty">Impossible de charger les sessions.</div>';
+      }
+    }
+
+    $('close-all').addEventListener('click', async () => {
+      if (!confirm('Fermer TOUTES les sessions, y compris ce navigateur ? Tu devras te reconnecter partout.')) return;
+      const b = $('close-all'); b.disabled = true;
+      try { await NX.revokeAllSessions(); NX.logout(); }
+      catch(err){ showMsg(msg, err.message, 'err'); b.disabled = false; }
+    });
+
+    load();
+  </script>
+</body>
+</html>

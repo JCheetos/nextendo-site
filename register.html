@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <title>Créer un compte — Nextendo Network</title>
+  <meta name="description" content="Crée ton compte Nextendo Network : une identité réseau, un friend code, et le online de tes jeux Switch sur Ryujinx." />
+  <meta name="robots" content="noindex" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=5" />
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true">
+    <div class="field field--a"></div>
+    <div class="field field--b"></div>
+    <div class="grid-veil"></div>
+  </div>
+
+  <header class="nav" id="nav">
+    <div class="shell nav__inner">
+      <a class="brand" href="/" aria-label="Nextendo Network, accueil">
+        <img class="brand__mark" src="assets/favicon.svg" alt="" width="30" height="30" />
+        <span class="brand__word">Nextendo<span class="brand__dim"> Network</span></span>
+      </a>
+      <div class="nav__end">
+        <a class="ghost-link" href="/">Accueil</a>
+        <a class="btn btn--soft btn--sm" href="/login">Se connecter</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main"><div class="shell">
+    <section class="auth">
+      <div class="auth__aside">
+        <span class="auth__tag"><span class="status__dot" aria-hidden="true"></span> gratuit, pour toujours</span>
+        <h1 class="auth__title">Ton identité, sur le réseau.</h1>
+        <p class="auth__lede">Un compte Nextendo te donne un friend code permanent, une liste d'amis et le jeu en ligne sur tous les titres compatibles.</p>
+        <div class="auth__points">
+          <div class="auth__point"><span class="ck"><i class="ph ph-check" aria-hidden="true"></i></span> Confirme ton e-mail en un clic, aucune pub</div>
+          <div class="auth__point"><span class="ck"><i class="ph ph-check" aria-hidden="true"></i></span> Un seul compte pour Ryujinx <em>et</em> ta Switch</div>
+          <div class="auth__point"><span class="ck"><i class="ph ph-check" aria-hidden="true"></i></span> Tes amis et ta présence en ligne te suivent</div>
+        </div>
+        <div class="member-card" style="margin-top:1.8rem;max-width:24rem">
+          <div class="member-card__top">
+            <span class="member-card__brand"><img src="assets/favicon.svg" alt="" /> NEXTENDO</span>
+            <span class="member-card__chip">NOUVEAU</span>
+          </div>
+          <div class="member-card__label">Friend code</div>
+          <div class="member-card__code" id="preview-fc">SW-••••-••••-••••</div>
+          <div class="member-card__foot">
+            <div class="member-card__name" id="preview-name">TonPseudo<span>Pseudo</span></div>
+            <div class="member-card__sig" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth__card">
+        <h2>Créer un compte</h2>
+        <p class="sub">Trois champs, et c'est en ligne.</p>
+        <div id="closed-notice" hidden style="padding:.95rem 1.1rem;border:1px solid var(--line);border-radius:.75rem;background:color-mix(in oklch, var(--signal) 14%, transparent);line-height:1.5">
+          <strong>Inscriptions temporairement fermées.</strong><br>On finalise la nouvelle version de Nextendo Network — la création de compte rouvrira très bientôt. Reviens dans quelques jours&nbsp;!
+        </div>
+        <div id="msg" class="msg"></div>
+        <form id="form" novalidate>
+          <div class="fld">
+            <label for="username">Pseudo (nom affiché)</label>
+            <input class="input" id="username" autocomplete="username" placeholder="Inkling_Pro" minlength="3" maxlength="16" required />
+            <span class="fld__hint" id="uhint">3 à 16 caractères. Ton pseudo peut être partagé — ton friend code te distingue.</span>
+          </div>
+          <div class="fld">
+            <label for="email">E-mail</label>
+            <input class="input" id="email" type="email" autocomplete="email" placeholder="toi@exemple.com" required />
+            <span class="fld__hint">C'est avec cet e-mail que tu te connecteras.</span>
+          </div>
+          <div class="fld">
+            <label for="password">Mot de passe</label>
+            <div class="pw">
+              <input class="input" id="password" type="password" autocomplete="new-password" placeholder="Au moins 8 caractères" required />
+              <button type="button" class="pw__eye" data-eye="password" aria-label="Afficher le mot de passe"><i class="ph ph-eye"></i></button>
+            </div>
+            <div class="pw-meter" id="pw-meter" data-level="-1"><i></i><i></i><i></i><i></i></div>
+            <div class="pw-meter__label" id="pw-label" aria-live="polite"></div>
+            <ul class="pw-reqs" id="pw-reqs">
+              <li data-req="len">Au moins 8 caractères</li>
+              <li data-req="digit">Au moins un chiffre</li>
+              <li data-req="special">Au moins un caractère spécial (! @ # $ …)</li>
+            </ul>
+          </div>
+          <div class="fld">
+            <label for="password2">Confirme le mot de passe</label>
+            <div class="pw">
+              <input class="input" id="password2" type="password" autocomplete="new-password" placeholder="Retape ton mot de passe" required />
+              <button type="button" class="pw__eye" data-eye="password2" aria-label="Afficher le mot de passe"><i class="ph ph-eye"></i></button>
+            </div>
+            <span class="fld__hint" id="p2hint">Les deux mots de passe doivent être identiques.</span>
+          </div>
+          <button class="btn btn--primary btn--block btn--lg" id="submit" type="submit" disabled>Créer mon compte <i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+        </form>
+        <div class="auth__foot">Déjà un compte ? <a href="/login">Se connecter</a></div>
+      </div>
+    </section>
+  </div></main>
+
+  <!-- Popup : vérifie ton adresse e-mail (après création) -->
+  <div class="modal" id="verify-modal" hidden>
+    <div class="modal__backdrop"></div>
+    <div class="modal__panel modal__panel--sm" role="dialog" aria-modal="true" aria-labelledby="vm-title">
+      <div class="modal__ic"><i class="ph ph-envelope-simple-open" aria-hidden="true"></i></div>
+      <h2 id="vm-title">Vérifie ton adresse e-mail</h2>
+      <p>On vient d'envoyer un lien de confirmation à <span class="mono" id="vm-email">ton adresse</span>. Clique dessus pour confirmer ton e-mail — ça sécurise ton compte et te permet de récupérer ton mot de passe si tu l'oublies.</p>
+      <p class="fld__hint">Pas reçu ? Regarde dans les spams, ou renvoie le lien depuis ton espace compte.</p>
+      <div class="modal__foot" style="justify-content:center;border:0">
+        <button class="btn btn--primary" id="vm-continue">Continuer vers mon compte <i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js?v=5"></script>
+  <script>
+    const msg = document.getElementById('msg');
+    if (NX.token) location.replace('/compte');
+
+    // Gel de relance : si les inscriptions sont fermées côté serveur, on masque le
+    // formulaire et on affiche l'avis (le backend renvoie de toute façon 403).
+    fetch('/api/site-config').then(r => r.json()).then(cfg => {
+      if (cfg && cfg.registration_open === false) {
+        document.getElementById('closed-notice').hidden = false;
+        const f = document.getElementById('form'); if (f) f.hidden = true;
+      }
+    }).catch(() => {});
+
+    const form = document.getElementById('form');
+    const u = document.getElementById('username');
+    const email = document.getElementById('email');
+    const uhint = document.getElementById('uhint');
+    const previewName = document.getElementById('preview-name');
+    const pw = document.getElementById('password');
+    const pw2 = document.getElementById('password2');
+    const p2hint = document.getElementById('p2hint');
+    const submit = document.getElementById('submit');
+    const reUser = /^[A-Za-z0-9_\-]{3,16}$/;
+
+    // jauge de force + règles obligatoires (helper partagé dans app.js) -> () => bool
+    const pwOk = wirePwMeter(pw, document.getElementById('pw-meter'), document.getElementById('pw-label'), document.getElementById('pw-reqs'));
+
+    const userOk  = () => reUser.test(u.value.trim());
+    const emailOk = () => /.+@.+\..+/.test(email.value.trim());
+    const matchOk = () => pw2.value.length > 0 && pw.value === pw2.value;
+
+    function refresh(){
+      p2hint.className = 'fld__hint';
+      if (pw2.value){
+        if (matchOk()){ p2hint.textContent = 'Les mots de passe correspondent.'; p2hint.classList.add('ok'); }
+        else { p2hint.textContent = 'Les mots de passe ne correspondent pas.'; p2hint.classList.add('bad'); }
+      } else { p2hint.textContent = 'Les deux mots de passe doivent être identiques.'; }
+      submit.disabled = !(userOk() && emailOk() && pwOk() && matchOk());
+    }
+
+    u.addEventListener('input', () => {
+      const v = u.value.trim();
+      previewName.firstChild.textContent = v || 'TonPseudo';
+      uhint.className = 'fld__hint';
+      if (v && !reUser.test(v)) { uhint.textContent = '3 à 16 caractères : lettres, chiffres, _ ou -.'; uhint.classList.add('bad'); }
+      else if (v) { uhint.textContent = '« ' + v + ' » — parfait. Ton friend code te distinguera.'; uhint.classList.add('ok'); }
+      else { uhint.textContent = '3 à 16 caractères. Ton pseudo peut être partagé — ton friend code te distingue.'; }
+      refresh();
+    });
+    [pw, pw2, email].forEach((el) => el.addEventListener('input', refresh));
+    refresh();
+
+    document.getElementById('vm-continue').addEventListener('click', () => location.href = '/compte');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); hideMsg(msg);
+      if (submit.disabled) return;
+      submit.disabled = true; submit.textContent = 'Création…';
+      try {
+        const addr = email.value.trim();
+        await NX.register(u.value.trim(), addr, pw.value);
+        document.getElementById('vm-email').textContent = addr;   // compte créé + connecté
+        document.getElementById('verify-modal').hidden = false;   // -> invite à confirmer l'e-mail
+      } catch (err) {
+        showMsg(msg, err.message, 'err');
+        submit.disabled = false; submit.innerHTML = 'Créer mon compte <i class="ph ph-arrow-right" aria-hidden="true"></i>';
+      }
+    });
+  </script>
+</body>
+</html>
