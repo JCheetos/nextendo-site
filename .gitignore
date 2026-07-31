@@ -4,3 +4,6 @@
 *.key
 *.pem
 node_modules/
+
+# Panneau admin : jamais dans le repo public
+admin.html

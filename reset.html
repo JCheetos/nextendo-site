@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark" />
-  <title>Nouveau mot de passe — Nextendo Network</title>
+  <title data-i18n="reset.metaTitle">Nouveau mot de passe — Nextendo Network</title>
   <meta name="robots" content="noindex" />
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -12,7 +12,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-  <link rel="stylesheet" href="assets/css/style.css?v=5" />
+  <link rel="stylesheet" href="assets/css/style.css?v=9" />
+  <link rel="stylesheet" href="assets/css/nx-ui.css?v=2" />
 </head>
 <body>
   <div class="backdrop" aria-hidden="true">
@@ -28,7 +29,7 @@
         <span class="brand__word">Nextendo<span class="brand__dim"> Network</span></span>
       </a>
       <div class="nav__end">
-        <a class="ghost-link" href="/login">Se connecter</a>
+        <a class="ghost-link" href="/login" data-i18n="nav.login">Se connecter</a>
       </div>
     </div>
   </header>
@@ -36,50 +37,55 @@
   <main id="main"><div class="shell">
     <section class="auth">
       <div class="auth__aside">
-        <span class="auth__tag"><span class="status__dot" aria-hidden="true"></span> dernière étape</span>
-        <h1 class="auth__title">Un nouveau mot de passe.</h1>
-        <p class="auth__lede">Choisis un mot de passe solide — au moins 8 caractères, un chiffre et un caractère spécial. Il remplacera immédiatement l'ancien.</p>
+        <span class="auth__tag"><span class="status__dot" aria-hidden="true"></span> <span data-i18n="reset.tag">dernière étape</span></span>
+        <h1 class="auth__title" data-i18n="reset.asideTitle">Un nouveau mot de passe.</h1>
+        <p class="auth__lede" data-i18n="reset.asideLede">Choisis un mot de passe solide — au moins 8 caractères, un chiffre et un caractère spécial. Il remplacera immédiatement l'ancien.</p>
         <div class="auth__points">
-          <div class="auth__point"><span class="ck"><i class="ph ph-check" aria-hidden="true"></i></span> Le lien est à usage unique</div>
-          <div class="auth__point"><span class="ck"><i class="ph ph-check" aria-hidden="true"></i></span> Tu resteras connecté à tes parties</div>
+          <div class="auth__point"><span class="ck"><i class="ph ph-check" aria-hidden="true"></i></span> <span data-i18n="reset.point1">Le lien est à usage unique</span></div>
+          <div class="auth__point"><span class="ck"><i class="ph ph-check" aria-hidden="true"></i></span> <span data-i18n="reset.point2">Tu resteras connecté à tes parties</span></div>
         </div>
       </div>
 
       <div class="auth__card">
-        <h2>Nouveau mot de passe</h2>
-        <p class="sub">Saisis-le deux fois pour éviter les fautes de frappe.</p>
+        <h2 data-i18n="reset.cardTitle">Nouveau mot de passe</h2>
+        <p class="sub" data-i18n="reset.cardSub">Saisis-le deux fois pour éviter les fautes de frappe.</p>
         <div id="msg" class="msg"></div>
         <form id="form" novalidate>
           <div class="fld">
-            <label for="password">Nouveau mot de passe</label>
+            <label for="password" data-i18n="reset.newPassword">Nouveau mot de passe</label>
             <div class="pw">
-              <input class="input" id="password" type="password" autocomplete="new-password" placeholder="Au moins 8 caractères" required />
-              <button type="button" class="pw__eye" data-eye="password" aria-label="Afficher le mot de passe"><i class="ph ph-eye"></i></button>
+              <input class="input" id="password" type="password" autocomplete="new-password" data-i18n-attr="placeholder:reset.pwPh" placeholder="Au moins 8 caractères" required />
+              <button type="button" class="pw__eye" data-eye="password" data-i18n-attr="aria-label:form.showPw" aria-label="Afficher le mot de passe"><i class="ph ph-eye"></i></button>
             </div>
             <div class="pw-meter" id="pw-meter" data-level="-1"><i></i><i></i><i></i><i></i></div>
             <div class="pw-meter__label" id="pw-label" aria-live="polite"></div>
             <ul class="pw-reqs" id="pw-reqs">
-              <li data-req="len">Au moins 8 caractères</li>
-              <li data-req="digit">Au moins un chiffre</li>
-              <li data-req="special">Au moins un caractère spécial (! @ # $ …)</li>
+              <li data-req="len" data-i18n="reset.reqLen">Au moins 8 caractères</li>
+              <li data-req="digit" data-i18n="reset.reqDigit">Au moins un chiffre</li>
+              <li data-req="special" data-i18n="reset.reqSpecial">Au moins un caractère spécial (! @ # $ …)</li>
             </ul>
           </div>
           <div class="fld">
-            <label for="password2">Confirme le mot de passe</label>
+            <label for="password2" data-i18n="reset.confirm">Confirme le mot de passe</label>
             <div class="pw">
-              <input class="input" id="password2" type="password" autocomplete="new-password" placeholder="Retape ton mot de passe" required />
-              <button type="button" class="pw__eye" data-eye="password2" aria-label="Afficher le mot de passe"><i class="ph ph-eye"></i></button>
+              <input class="input" id="password2" type="password" autocomplete="new-password" data-i18n-attr="placeholder:reset.pw2Ph" placeholder="Retape ton mot de passe" required />
+              <button type="button" class="pw__eye" data-eye="password2" data-i18n-attr="aria-label:form.showPw" aria-label="Afficher le mot de passe"><i class="ph ph-eye"></i></button>
             </div>
             <span class="fld__hint" id="p2hint">Les deux mots de passe doivent être identiques.</span>
           </div>
-          <button class="btn btn--primary btn--block btn--lg" id="submit" type="submit" disabled>Enregistrer le mot de passe <i class="ph ph-check" aria-hidden="true"></i></button>
+          <button class="btn btn--primary btn--block btn--lg" id="submit" type="submit" disabled><span data-i18n="reset.submit">Enregistrer le mot de passe</span> <i class="ph ph-check" aria-hidden="true"></i></button>
         </form>
-        <div class="auth__foot"><a href="/login">Retour à la connexion</a></div>
+        <div class="auth__foot"><a href="/login" data-i18n="reset.footLink">Retour à la connexion</a></div>
       </div>
     </section>
   </div></main>
 
   <script src="assets/js/app.js?v=5"></script>
+  <script src="assets/js/nx-ui.js?v=3"></script>
+  <script src="assets/js/nx-i18n.js?v=1"></script>
+  <script src="assets/js/nx-i18n-more.js?v=2"></script>
+  <script src="assets/js/nx-i18n-pages.js?v=1"></script>
+  <script src="assets/js/nx-i18n-pages-more.js?v=1"></script>
   <script>
     const msg = document.getElementById('msg');
     const token = new URLSearchParams(location.search).get('token') || '';
@@ -88,9 +94,10 @@
     const pw2 = document.getElementById('password2');
     const p2hint = document.getElementById('p2hint');
     const submit = document.getElementById('submit');
+    const T = (k, fb) => (window.NXI18N && NXI18N.t(k)) || fb;
 
     if (!token) {
-      showMsg(msg, "Lien invalide : aucun jeton. Redemande un lien depuis « Mot de passe oublié ».", 'err');
+      showMsg(msg, T('reset.errNoToken', "Lien invalide : aucun jeton. Redemande un lien depuis « Mot de passe oublié »."), 'err');
       form.querySelectorAll('input,button').forEach((el) => el.disabled = true);
     }
 
@@ -99,9 +106,9 @@
     function refresh(){
       p2hint.className = 'fld__hint';
       if (pw2.value){
-        if (matchOk()){ p2hint.textContent = 'Les mots de passe correspondent.'; p2hint.classList.add('ok'); }
-        else { p2hint.textContent = 'Les mots de passe ne correspondent pas.'; p2hint.classList.add('bad'); }
-      } else { p2hint.textContent = 'Les deux mots de passe doivent être identiques.'; }
+        if (matchOk()){ p2hint.textContent = T('reset.p2Match', 'Les mots de passe correspondent.'); p2hint.classList.add('ok'); }
+        else { p2hint.textContent = T('reset.p2NoMatch', 'Les mots de passe ne correspondent pas.'); p2hint.classList.add('bad'); }
+      } else { p2hint.textContent = T('reset.p2Default', 'Les deux mots de passe doivent être identiques.'); }
       submit.disabled = !(token && pwOk() && matchOk());
     }
     [pw, pw2].forEach((el) => el.addEventListener('input', refresh));
@@ -110,15 +117,15 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault(); hideMsg(msg);
       if (submit.disabled) return;
-      submit.disabled = true; submit.textContent = 'Enregistrement…';
+      submit.disabled = true; submit.textContent = T('reset.saving', 'Enregistrement…');
       try {
         await NX.reset(token, pw.value);
-        showMsg(msg, 'Mot de passe réinitialisé ! Redirection vers la connexion…', 'ok');
-        submit.textContent = 'C\'est fait ✓';
+        showMsg(msg, T('reset.okReset', 'Mot de passe réinitialisé ! Redirection vers la connexion…'), 'ok');
+        submit.textContent = T('reset.done', 'C\'est fait ✓');
         setTimeout(() => location.href = '/login', 1600);
       } catch (err) {
         showMsg(msg, err.message, 'err');
-        submit.disabled = false; submit.innerHTML = 'Enregistrer le mot de passe <i class="ph ph-check" aria-hidden="true"></i>';
+        submit.disabled = false; submit.innerHTML = '<span>' + T('reset.submit', 'Enregistrer le mot de passe') + '</span> <i class="ph ph-check" aria-hidden="true"></i>';
       }
     });
   </script>

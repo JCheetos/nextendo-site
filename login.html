@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark" />
-  <title>Connexion — Nextendo Network</title>
-  <meta name="description" content="Connecte-toi à ton compte Nextendo Network pour retrouver ton friend code, tes amis et le online de tes jeux." />
+  <title data-i18n="login.metaTitle">Connexion — Nextendo Network</title>
+  <meta name="description" data-i18n-attr="content:login.metaDesc" content="Connecte-toi à ton compte Nextendo Network pour retrouver ton friend code, tes amis et le online de tes jeux." />
   <meta name="robots" content="noindex" />
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -13,7 +13,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-  <link rel="stylesheet" href="assets/css/style.css?v=5" />
+  <link rel="stylesheet" href="assets/css/style.css?v=9" />
+  <link rel="stylesheet" href="assets/css/nx-ui.css?v=2" />
 </head>
 <body>
   <div class="backdrop" aria-hidden="true">
@@ -29,8 +30,8 @@
         <span class="brand__word">Nextendo<span class="brand__dim"> Network</span></span>
       </a>
       <div class="nav__end">
-        <a class="ghost-link" href="/">Accueil</a>
-        <a class="btn btn--soft btn--sm" href="/register">Créer un compte</a>
+        <a class="ghost-link" href="/" data-i18n="nav.home">Accueil</a>
+        <a class="btn btn--soft btn--sm" href="/register" data-i18n="nav.register">Créer un compte</a>
       </div>
     </div>
   </header>
@@ -38,65 +39,108 @@
   <main id="main"><div class="shell">
     <section class="auth">
       <div class="auth__aside">
-        <span class="auth__tag"><span class="status__dot" aria-hidden="true"></span> content de te revoir</span>
-        <h1 class="auth__title">Reprends la partie.</h1>
-        <p class="auth__lede">Connecte-toi à ton compte Nextendo pour retrouver ton friend code, tes amis et le online de tes jeux.</p>
+        <span class="auth__tag"><span class="status__dot" aria-hidden="true"></span> <span data-i18n="login.tag">content de te revoir</span></span>
+        <h1 class="auth__title" data-i18n="login.asideTitle">Reprends la partie.</h1>
+        <p class="auth__lede" data-i18n="login.asideLede">Connecte-toi à ton compte Nextendo pour retrouver ton friend code, tes amis et le online de tes jeux.</p>
         <div class="auth__points">
-          <div class="auth__point"><span class="ck"><i class="ph ph-check" aria-hidden="true"></i></span> Une identité réseau qui te suit sur tous tes jeux</div>
-          <div class="auth__point"><span class="ck"><i class="ph ph-check" aria-hidden="true"></i></span> Ton friend code conservé d'une session à l'autre</div>
-          <div class="auth__point"><span class="ck"><i class="ph ph-check" aria-hidden="true"></i></span> Prêt à brancher dans Ryujinx ou sur Switch</div>
+          <div class="auth__point"><span class="ck"><i class="ph ph-check" aria-hidden="true"></i></span> <span data-i18n="login.point1">Une identité réseau qui te suit sur tous tes jeux</span></div>
+          <div class="auth__point"><span class="ck"><i class="ph ph-check" aria-hidden="true"></i></span> <span data-i18n="login.point2">Ton friend code conservé d'une session à l'autre</span></div>
+          <div class="auth__point"><span class="ck"><i class="ph ph-check" aria-hidden="true"></i></span> <span data-i18n="login.point3">Prêt à brancher dans Ryujinx ou sur Switch</span></div>
         </div>
         <div class="member-card" style="margin-top:1.8rem;max-width:24rem">
           <div class="member-card__top">
             <span class="member-card__brand"><img src="assets/favicon.svg" alt="" /> NEXTENDO</span>
-            <span class="member-card__chip">MEMBRE</span>
+            <span class="member-card__chip" data-i18n="member.chip">MEMBRE</span>
           </div>
-          <div class="member-card__label">Friend code</div>
+          <div class="member-card__label" data-i18n="member.label">Friend code</div>
           <div class="member-card__code">SW-4815-1623-0842</div>
           <div class="member-card__foot">
-            <div class="member-card__name">Inkling_Pro<span>Pseudo</span></div>
+            <div class="member-card__name">Inkling_Pro<span data-i18n="member.pseudo">Pseudo</span></div>
             <div class="member-card__sig" aria-hidden="true"></div>
           </div>
         </div>
       </div>
 
       <div class="auth__card">
-        <h2>Connexion</h2>
-        <p class="sub">Connecte-toi avec ton e-mail et ton mot de passe.</p>
+        <h2 data-i18n="login.cardTitle">Connexion</h2>
+        <p class="sub" data-i18n="login.cardSub">Connecte-toi avec ton e-mail et ton mot de passe.</p>
         <div id="msg" class="msg"></div>
         <form id="form" novalidate>
           <div class="fld">
-            <label for="login">Adresse e-mail</label>
-            <input class="input" id="login" type="email" autocomplete="email" inputmode="email" placeholder="toi@exemple.com" required />
+            <label for="login" data-i18n="form.email">Adresse e-mail</label>
+            <input class="input" id="login" type="email" autocomplete="email" inputmode="email" data-i18n-attr="placeholder:form.emailPh" placeholder="toi@exemple.com" required />
           </div>
           <div class="fld">
-            <div class="fld__row"><label for="password">Mot de passe</label><a class="fld__link" href="/forgot">Mot de passe oublié ?</a></div>
+            <div class="fld__row"><label for="password" data-i18n="form.password">Mot de passe</label><a class="fld__link" href="/forgot" data-i18n="login.forgot">Mot de passe oublié ?</a></div>
             <div class="pw">
               <input class="input" id="password" type="password" autocomplete="current-password" placeholder="••••••••" required />
-              <button type="button" class="pw__eye" data-eye="password" aria-label="Afficher le mot de passe"><i class="ph ph-eye"></i></button>
+              <button type="button" class="pw__eye" data-eye="password" data-i18n-attr="aria-label:form.showPw" aria-label="Afficher le mot de passe"><i class="ph ph-eye"></i></button>
             </div>
           </div>
-          <button class="btn btn--primary btn--block btn--lg" id="submit" type="submit">Se connecter <i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+          <!-- verrou anti-relais (Cloudflare Turnstile) : rendu uniquement si une sitekey est configurée -->
+          <div id="ts" style="margin:4px 0 2px"></div>
+          <button class="btn btn--primary btn--block btn--lg" id="submit" type="submit"><span data-i18n="login.submit">Se connecter</span> <i class="ph ph-arrow-right" aria-hidden="true"></i></button>
         </form>
-        <div class="auth__foot">Pas encore de compte ? <a href="/register">En créer un</a></div>
+        <div class="auth__foot"><span data-i18n="login.footText">Pas encore de compte ?</span> <a href="/register" data-i18n="login.footLink">En créer un</a></div>
       </div>
     </section>
   </div></main>
 
-  <script src="assets/js/app.js?v=5"></script>
+  <script src="assets/js/app.js?v=6"></script>
+  <script src="assets/js/nx-ui.js?v=3"></script>
+  <script src="assets/js/nx-i18n.js?v=1"></script>
+  <script src="assets/js/nx-i18n-more.js?v=2"></script>
+  <script src="assets/js/nx-i18n-pages.js?v=1"></script>
+  <script src="assets/js/nx-i18n-pages-more.js?v=1"></script>
+  <!-- Turnstile (verrou anti-relais). Laisse la sitekey vide tant que ce n'est pas configuré → login normal (fail-open). -->
+  <script>
+    window.NEXTENDO_TURNSTILE_SITEKEY = "0x4AAAAAAD7S4rKlUZb5jrS1"; // sitekey Cloudflare Turnstile (publique)
+    window.__nxTsToken = ""; // dernier token résolu, posé par le callback (évite la course getResponse au submit)
+    window.nxTurnstileOnload = function () {
+      if (window.NEXTENDO_TURNSTILE_SITEKEY && window.turnstile) {
+        turnstile.render('#ts', {
+          sitekey: window.NEXTENDO_TURNSTILE_SITEKEY, theme: 'auto',
+          callback: function (t) { window.__nxTsToken = t || ''; },
+          'expired-callback': function () { window.__nxTsToken = ''; try { turnstile.reset('#ts'); } catch (e) {} },
+          'error-callback': function () { window.__nxTsToken = ''; return true; }
+        });
+      }
+    };
+  </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=nxTurnstileOnload" async defer></script>
   <script>
     const msg = document.getElementById('msg');
-    if (NX.token) location.replace('/compte');
+    // ?next= : retour vers une page interne après connexion (ex. flow OAuth /api/oauth/authorize).
+    // Uniquement un chemin same-origin (commence par "/" sans "//") → jamais d'open-redirect.
+    const nextUrl = () => { const n = new URLSearchParams(location.search).get('next'); return (n && n.startsWith('/') && !n.startsWith('//')) ? n : '/compte'; };
+    if (NX.token) location.replace(nextUrl());
+    const T = (k, fb) => (window.NXI18N && NXI18N.t(k)) || fb;
+    // Récupère le token Turnstile en attendant brièvement que le widget résolve. Renvoie ''
+    // si le widget est absent/bloqué (adblock, extension vie privée) — le serveur laisse alors
+    // passer (missing-token = fail-open), donc le login n'est jamais verrouillé par le captcha.
+    async function nxAwaitTurnstile(maxMs) {
+      if (!window.NEXTENDO_TURNSTILE_SITEKEY || !window.turnstile) return '';
+      const deadline = Date.now() + (maxMs || 2500);
+      let tok = window.__nxTsToken || '';
+      if (!tok) { try { tok = turnstile.getResponse() || ''; } catch (e) {} }
+      while (!tok && Date.now() < deadline) {
+        await new Promise(r => setTimeout(r, 150));
+        tok = window.__nxTsToken || '';
+        if (!tok) { try { tok = turnstile.getResponse() || ''; } catch (e) {} }
+      }
+      return tok || '';
+    }
     document.getElementById('form').addEventListener('submit', async (e) => {
       e.preventDefault(); hideMsg(msg);
       const btn = document.getElementById('submit');
-      btn.disabled = true; btn.textContent = 'Connexion…';
+      btn.disabled = true; btn.textContent = T('login.loading', 'Connexion…');
       try {
+        NX.turnstileToken = await nxAwaitTurnstile(2500);
         await NX.login(document.getElementById('login').value.trim(), document.getElementById('password').value);
-        location.href = '/compte';
+        location.href = nextUrl();
       } catch (err) {
         showMsg(msg, err.message, 'err');
-        btn.disabled = false; btn.innerHTML = 'Se connecter <i class="ph ph-arrow-right" aria-hidden="true"></i>';
+        btn.disabled = false; btn.innerHTML = '<span>' + T('login.submit', 'Se connecter') + '</span> <i class="ph ph-arrow-right" aria-hidden="true"></i>';
       }
     });
   </script>

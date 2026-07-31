@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark" />
-  <title>Mon compte — Nextendo Network</title>
+  <title data-i18n="acc.metaTitle">Mon compte — Nextendo Network</title>
   <meta name="robots" content="noindex" />
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -12,7 +12,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-  <link rel="stylesheet" href="assets/css/style.css?v=6" />
+  <link rel="stylesheet" href="assets/css/style.css?v=9" />
+  <link rel="stylesheet" href="assets/css/nx-ui.css?v=2" />
 </head>
 <body>
   <div class="backdrop" aria-hidden="true">
@@ -28,8 +29,8 @@
         <span class="brand__word">Nextendo<span class="brand__dim"> Network</span></span>
       </a>
       <div class="nav__end">
-        <a class="ghost-link" href="/"><i class="ph ph-house" aria-hidden="true"></i> Accueil</a>
-        <button class="btn btn--soft btn--sm" id="logout"><i class="ph ph-sign-out" aria-hidden="true"></i> Déconnexion</button>
+        <a class="ghost-link" href="/"><i class="ph ph-house" aria-hidden="true"></i> <span data-i18n="nav.home">Accueil</span></a>
+        <button class="btn btn--soft btn--sm" id="logout"><i class="ph ph-sign-out" aria-hidden="true"></i> <span data-i18n="profile.logout">Déconnexion</span></button>
       </div>
     </div>
   </header>
@@ -40,18 +41,18 @@
         <div class="account__id">
           <div class="account__avatar" id="avatar">…</div>
           <div class="account__txt">
-            <span class="account__live"><span class="status__dot" aria-hidden="true"></span> connecté à Nextendo</span>
-            <div class="account__hi"><h1>Salut, <span id="uname" class="skeleton">chargement</span>.</h1></div>
+            <span class="account__live"><span class="status__dot" aria-hidden="true"></span> <span data-i18n="acc.live">connecté à Nextendo</span></span>
+            <div class="account__hi"><h1 id="acc-greet"><span class="skeleton" data-i18n="acc.greetLoading">chargement…</span></h1></div>
           </div>
-          <button class="btn btn--soft btn--sm account__edit" id="edit-profile"><i class="ph ph-pencil-simple" aria-hidden="true"></i> Éditer le profil</button>
+          <button class="btn btn--soft btn--sm account__edit" id="edit-profile"><i class="ph ph-pencil-simple" aria-hidden="true"></i> <span data-i18n="acc.editProfile">Éditer le profil</span></button>
         </div>
       </div>
 
       <!-- Bannière : e-mail non vérifié (masquée par défaut, affichée au chargement si besoin) -->
       <div class="banner banner--warn" id="verify-banner" hidden>
         <span class="banner__i"><i class="ph ph-warning-circle" aria-hidden="true"></i></span>
-        <span class="banner__t"><b>Confirme ton adresse e-mail.</b> On t'a envoyé un lien de vérification à ta création de compte. Sans ça, tu ne pourras pas récupérer ton mot de passe en cas d'oubli.</span>
-        <span class="banner__a"><button class="btn btn--soft btn--sm" id="resend-verify"><i class="ph ph-paper-plane-tilt"></i> Renvoyer l'e-mail</button></span>
+        <span class="banner__t" data-i18n-html="acc.verifyBanner"><b>Confirme ton adresse e-mail.</b> On t'a envoyé un lien de vérification à ta création de compte. Sans ça, tu ne pourras pas récupérer ton mot de passe en cas d'oubli.</span>
+        <span class="banner__a"><button class="btn btn--soft btn--sm" id="resend-verify"><i class="ph ph-paper-plane-tilt"></i> <span data-i18n="acc.resend">Renvoyer l'e-mail</span></button></span>
       </div>
 
       <div class="account__grid">
@@ -59,65 +60,70 @@
           <div class="member-card">
             <div class="member-card__top">
               <span class="member-card__brand"><img src="assets/favicon.svg" alt="" /> NEXTENDO</span>
-              <span class="member-card__chip" id="card-chip">MEMBRE</span>
+              <span class="member-card__chip" id="card-chip" data-i18n="acc.member">MEMBRE</span>
             </div>
-            <div class="member-card__label">Friend code</div>
+            <div class="member-card__label" data-i18n="member.label">Friend code</div>
             <div class="member-card__code" id="fc">SW-••••-••••-••••</div>
             <div class="member-card__foot">
-              <div class="member-card__name"><span id="card-name">…</span><span>Pseudo</span></div>
+              <div class="member-card__name"><span id="card-name">…</span><span data-i18n="member.pseudo">Pseudo</span></div>
               <div class="member-card__pic" id="mc-pic"><div class="member-card__sig" aria-hidden="true"></div></div>
             </div>
           </div>
 
           <div class="panel" style="margin-top:1.1rem">
             <div class="callout">
-              <div class="callout__h"><i class="ph ph-plug" aria-hidden="true" style="color:var(--accent)"></i> Brancher ce compte</div>
-              <p class="hint" style="margin-bottom:0.7rem"><b>Sur Ryujinx&nbsp;:</b> ouvre <b>Actions → Connexion Nextendo Network</b>, entre tes identifiants, puis lance un jeu compatible et va dans son menu en ligne.</p>
-              <p class="hint"><b>Sur Switch (CFW)&nbsp;:</b> active le profil <b>Nextendo</b> (redirection DNS), connecte ce compte, et joue. Ta photo de profil et ton pseudo te suivent.</p>
+              <div class="callout__h"><i class="ph ph-plug" aria-hidden="true" style="color:var(--accent)"></i> <span data-i18n="acc.plugTitle">Brancher ce compte</span></div>
+              <p class="hint" style="margin-bottom:0.7rem" data-i18n-html="acc.plugRyujinx"><b>Sur Ryujinx&nbsp;:</b> ouvre <b>Actions → Connexion Nextendo Network</b>, entre tes identifiants, puis lance un jeu compatible et va dans son menu en ligne.</p>
+              <p class="hint" data-i18n-html="acc.plugSwitch"><b>Sur Switch (CFW)&nbsp;:</b> active le profil <b>Nextendo</b> (redirection DNS), connecte ce compte, et joue. Ta photo de profil et ton pseudo te suivent.</p>
             </div>
           </div>
 
           <div class="panel" style="margin-top:1.1rem" id="security-panel">
-            <div class="panel__h"><h2>Sécurité</h2><i class="ph ph-lock-key" aria-hidden="true"></i></div>
-            <p class="hint" style="margin-bottom:0.85rem">Gère ton mot de passe, ton adresse e-mail et les appareils connectés à ton compte.</p>
+            <div class="panel__h"><h2 data-i18n="acc.security">Sécurité</h2><i class="ph ph-lock-key" aria-hidden="true"></i></div>
+            <p class="hint" style="margin-bottom:0.85rem" data-i18n="acc.securityIntro">Gère ton mot de passe, ton adresse e-mail et les appareils connectés à ton compte.</p>
             <div class="sec-actions">
-              <button class="btn btn--soft btn--sm" id="reset-pw"><i class="ph ph-key" aria-hidden="true"></i> Réinitialiser le mot de passe</button>
-              <button class="btn btn--soft btn--sm" id="change-email"><i class="ph ph-at" aria-hidden="true"></i> Changer d'e-mail</button>
-              <a class="btn btn--soft btn--sm" href="/sessions"><i class="ph ph-devices" aria-hidden="true"></i> Mes sessions</a>
+              <button class="btn btn--soft btn--sm" id="reset-pw"><i class="ph ph-key" aria-hidden="true"></i> <span data-i18n="acc.resetPw">Réinitialiser le mot de passe</span></button>
+              <button class="btn btn--soft btn--sm" id="change-email"><i class="ph ph-at" aria-hidden="true"></i> <span data-i18n="acc.changeEmail">Changer d'e-mail</span></button>
+              <a class="btn btn--soft btn--sm" href="/sessions"><i class="ph ph-devices" aria-hidden="true"></i> <span data-i18n="acc.mySessions">Mes sessions</span></a>
+              <a class="btn btn--soft btn--sm" href="/admin" id="admin-link" hidden><i class="ph ph-shield-star" aria-hidden="true"></i> <span data-i18n="acc.adminSpace">Espace admin</span></a>
+            </div>
+            <div class="sec-actions" style="margin-top:0.8rem;border-top:1px solid var(--line-soft,rgba(255,255,255,.07));padding-top:0.85rem">
+              <button class="btn btn--danger btn--sm" id="delete-account"><i class="ph ph-trash" aria-hidden="true"></i> <span data-i18n="acc.deleteAccount">Supprimer mon compte</span></button>
             </div>
           </div>
         </div>
 
         <div>
           <div class="panel">
-            <div class="panel__h"><h2>Identité réseau</h2><i class="ph ph-identification-card" aria-hidden="true"></i></div>
+            <div class="panel__h"><h2 data-i18n="acc.identity">Identité réseau</h2><i class="ph ph-identification-card" aria-hidden="true"></i></div>
             <div class="kv">
-              <div class="kv__row"><span class="kv__k">Pseudo</span><span class="kv__v" id="kv-name">…</span></div>
-              <div class="kv__row"><span class="kv__k">Friend code</span>
-                <span class="kv__v inline-copy"><span class="mono" id="kv-fc">SW-…</span><button class="copy-btn" data-copy="fc">copier</button></span>
+              <div class="kv__row"><span class="kv__k" data-i18n="acc.pseudo">Pseudo</span><span class="kv__v" id="kv-name">…</span></div>
+              <div class="kv__row"><span class="kv__k" data-i18n="member.label">Friend code</span>
+                <span class="kv__v inline-copy"><span class="mono" id="kv-fc">SW-…</span><button class="copy-btn" data-copy="fc" data-i18n="acc.copy">copier</button></span>
               </div>
-              <div class="kv__row"><span class="kv__k">Identifiant réseau (PID)</span><span class="kv__v mono" id="kv-pid">…</span></div>
-              <div class="kv__row"><span class="kv__k">E-mail</span><span class="kv__v"><span id="kv-email">…</span> <span class="email-chip" id="email-chip" hidden></span></span></div>
-              <div class="kv__row"><span class="kv__k">Membre depuis</span><span class="kv__v" id="kv-since">…</span></div>
+              <div class="kv__row"><span class="kv__k" data-i18n="acc.pid">Identifiant réseau (PID)</span><span class="kv__v mono" id="kv-pid">…</span></div>
+              <div class="kv__row"><span class="kv__k" data-i18n="form.email">E-mail</span><span class="kv__v"><span id="kv-email">…</span> <span class="email-chip" id="email-chip" hidden></span></span></div>
+              <div class="kv__row"><span class="kv__k" data-i18n="acc.discord">Discord</span><span class="kv__v" id="kv-discord">…</span></div>
+              <div class="kv__row"><span class="kv__k" data-i18n="acc.memberSince">Membre depuis</span><span class="kv__v" id="kv-since">…</span></div>
             </div>
           </div>
 
           <div class="panel">
-            <div class="panel__h"><h2>Amis</h2><i class="ph ph-users-three" aria-hidden="true"></i></div>
+            <div class="panel__h"><h2 data-i18n="acc.friends">Amis</h2><i class="ph ph-users-three" aria-hidden="true"></i></div>
             <div id="requests"></div>
-            <div class="friends" id="friends"><div class="empty">Chargement de tes amis…</div></div>
+            <div class="friends" id="friends"><div class="empty" data-i18n="acc.friendsLoading">Chargement de tes amis…</div></div>
             <form class="add-friend" id="add-friend">
               <input class="input" id="fc-input" placeholder="SW-0000-0000-0000" autocomplete="off" />
-              <button class="btn btn--primary" type="submit">Ajouter</button>
+              <button class="btn btn--primary" type="submit" data-i18n="acc.add">Ajouter</button>
             </form>
-            <p class="hint" style="margin-top:0.7rem">Partage ton friend code pour que tes amis t'ajoutent — vous vous retrouverez en ligne dans vos parties.</p>
+            <p class="hint" style="margin-top:0.7rem" data-i18n="acc.friendsHint">Partage ton friend code pour que tes amis t'ajoutent — vous vous retrouverez en ligne dans vos parties.</p>
           </div>
         </div>
       </div>
 
       <div class="panel" style="margin-top:1.5rem">
-        <div class="panel__h"><h2>Historique de jeu</h2><i class="ph ph-clock-counter-clockwise" aria-hidden="true"></i></div>
-        <div class="history" id="history"><div class="empty">Chargement de l'historique…</div></div>
+        <div class="panel__h"><h2 data-i18n="acc.history">Historique de jeu</h2><i class="ph ph-clock-counter-clockwise" aria-hidden="true"></i></div>
+        <div class="history" id="history"><div class="empty" data-i18n="acc.historyLoading">Chargement de l'historique…</div></div>
       </div>
     </section>
   </div></main>
@@ -127,50 +133,50 @@
     <div class="modal__backdrop" data-close></div>
     <div class="modal__panel modal__panel--editor" role="dialog" aria-modal="true" aria-labelledby="edit-title">
       <div class="modal__head">
-        <h2 id="edit-title">Éditer le profil</h2>
-        <button class="modal__x" data-close aria-label="Fermer"><i class="ph ph-x"></i></button>
+        <h2 id="edit-title" data-i18n="ed.title">Éditer le profil</h2>
+        <button class="modal__x" data-close data-i18n-attr="aria-label:form.close" aria-label="Fermer"><i class="ph ph-x"></i></button>
       </div>
       <div class="modal__body">
         <div id="edit-msg" class="msg"></div>
 
         <div class="editor">
           <div class="editor__preview">
-            <canvas id="avatar-canvas" width="256" height="256" aria-label="Aperçu de la photo de profil"></canvas>
-            <span>Aperçu</span>
+            <canvas id="avatar-canvas" width="256" height="256" data-i18n-attr="aria-label:ed.previewAria" aria-label="Aperçu de la photo de profil"></canvas>
+            <span data-i18n="ed.preview">Aperçu</span>
           </div>
           <div class="editor__controls">
             <div class="fld">
-              <label for="edit-pseudo">Pseudo</label>
+              <label for="edit-pseudo" data-i18n="ed.pseudo">Pseudo</label>
               <input class="input" id="edit-pseudo" maxlength="16" autocomplete="off" />
-              <span class="fld__hint">3 à 16 caractères — lettres, chiffres, _ ou -.</span>
+              <span class="fld__hint" data-i18n="ed.pseudoHint">3 à 16 caractères — lettres, chiffres, _ ou -.</span>
             </div>
             <div class="fld">
-              <label>Couleur de fond</label>
+              <label data-i18n="ed.bgColor">Couleur de fond</label>
               <div class="swatches" id="swatches"></div>
               <div class="cpick" id="cpick" hidden>
                 <div class="cpick__sv" id="cpick-sv"><div class="cpick__sv-thumb" id="cpick-sv-thumb"></div></div>
                 <div class="cpick__hue" id="cpick-hue"><div class="cpick__hue-thumb" id="cpick-hue-thumb"></div></div>
-                <div class="cpick__row"><span class="cpick__prev" id="cpick-prev"></span><input class="input cpick__hex" id="cpick-hex" maxlength="7" spellcheck="false" aria-label="Code couleur hexadécimal"></div>
+                <div class="cpick__row"><span class="cpick__prev" id="cpick-prev"></span><input class="input cpick__hex" id="cpick-hex" maxlength="7" spellcheck="false" data-i18n-attr="aria-label:ed.hexAria" aria-label="Code couleur hexadécimal"></div>
               </div>
             </div>
           </div>
         </div>
 
         <div class="icon-picker">
-          <div class="modal__sub">Photo de profil <span class="ip-hint">— superpose un personnage, un fond et un cadre</span></div>
+          <div class="modal__sub" data-i18n-html="ed.photoSub">Photo de profil <span class="ip-hint">— superpose un personnage, un fond et un cadre</span></div>
           <div class="ip-head">
             <div class="ip-tabs" id="ip-tabs"></div>
             <div class="ip-head__r">
-              <button class="ip-clear" id="ip-clear" type="button" hidden><i class="ph ph-x"></i> Retirer</button>
-              <select class="input ip-game" id="ip-game" aria-label="Filtrer par jeu"></select>
+              <button class="ip-clear" id="ip-clear" type="button" hidden><i class="ph ph-x"></i> <span data-i18n="ed.remove">Retirer</span></button>
+              <select class="input ip-game" id="ip-game" data-i18n-attr="aria-label:ed.filterGame" aria-label="Filtrer par jeu"></select>
             </div>
           </div>
           <div class="avatar-grid ip-grid" id="avatar-grid"></div>
         </div>
       </div>
       <div class="modal__foot">
-        <button class="btn btn--soft" data-close>Annuler</button>
-        <button class="btn btn--primary" id="save-profile">Enregistrer</button>
+        <button class="btn btn--soft" data-close data-i18n="form.cancel">Annuler</button>
+        <button class="btn btn--primary" id="save-profile" data-i18n="ed.save">Enregistrer</button>
       </div>
     </div>
   </div>
@@ -183,7 +189,7 @@
       <div class="fm-hero" id="fm-hero">
         <div class="fm-pic" id="fm-pic" aria-hidden="true"></div>
         <div class="fm-hero__id">
-          <h2 id="fm-name">Ami</h2>
+          <h2 id="fm-name" data-i18n="fr.defaultName">Ami</h2>
           <div class="fm-hero__meta">
             <span class="fm-badge" id="fm-status"></span>
             <span class="fm-code" id="fm-code">—</span>
@@ -192,24 +198,24 @@
       </div>
       <div class="modal__body">
         <div class="fm-stats">
-          <div class="fm-stat"><i class="ph ph-clock-user"></i><div><span class="fm-stat__v" id="fm-total">—</span><span class="fm-stat__k">Temps de jeu</span></div></div>
-          <div class="fm-stat"><i class="ph ph-game-controller"></i><div><span class="fm-stat__v" id="fm-games">—</span><span class="fm-stat__k">Jeux joués</span></div></div>
-          <div class="fm-stat"><i class="ph ph-star"></i><div><span class="fm-stat__v fm-stat__v--sm" id="fm-fav">—</span><span class="fm-stat__k">Jeu favori</span></div></div>
-          <div class="fm-stat"><i class="ph ph-calendar-blank"></i><div><span class="fm-stat__v fm-stat__v--sm" id="fm-since">—</span><span class="fm-stat__k">Membre depuis</span></div></div>
+          <div class="fm-stat"><i class="ph ph-clock-user"></i><div><span class="fm-stat__v" id="fm-total">—</span><span class="fm-stat__k" data-i18n="fr.playtime">Temps de jeu</span></div></div>
+          <div class="fm-stat"><i class="ph ph-game-controller"></i><div><span class="fm-stat__v" id="fm-games">—</span><span class="fm-stat__k" data-i18n="fr.gamesPlayed">Jeux joués</span></div></div>
+          <div class="fm-stat"><i class="ph ph-star"></i><div><span class="fm-stat__v fm-stat__v--sm" id="fm-fav">—</span><span class="fm-stat__k" data-i18n="fr.favGame">Jeu favori</span></div></div>
+          <div class="fm-stat"><i class="ph ph-calendar-blank"></i><div><span class="fm-stat__v fm-stat__v--sm" id="fm-since">—</span><span class="fm-stat__k" data-i18n="acc.memberSince">Membre depuis</span></div></div>
         </div>
         <div class="kv">
-          <div class="kv__row"><span class="kv__k">Identifiant réseau (PID)</span><span class="kv__v" id="fm-pid">—</span></div>
-          <div class="kv__row"><span class="kv__k">Dernière activité</span><span class="kv__v" id="fm-last">—</span></div>
+          <div class="kv__row"><span class="kv__k" data-i18n="acc.pid">Identifiant réseau (PID)</span><span class="kv__v" id="fm-pid">—</span></div>
+          <div class="kv__row"><span class="kv__k" data-i18n="fr.lastActivity">Dernière activité</span><span class="kv__v" id="fm-last">—</span></div>
         </div>
         <div>
-          <div class="modal__sub">Historique de jeu</div>
-          <div class="history" id="fm-history"><div class="empty">Chargement…</div></div>
+          <div class="modal__sub" data-i18n="acc.history">Historique de jeu</div>
+          <div class="history" id="fm-history"><div class="empty" data-i18n="fr.loading">Chargement…</div></div>
         </div>
       </div>
       <div class="modal__foot">
-        <button class="btn btn--danger" id="fm-block"><i class="ph ph-prohibit"></i> Bloquer</button>
-        <button class="btn btn--soft" id="fm-remove"><i class="ph ph-user-minus"></i> Supprimer</button>
-        <button class="btn btn--soft" data-fclose>Fermer</button>
+        <button class="btn btn--danger" id="fm-block"><i class="ph ph-prohibit"></i> <span data-i18n="fr.block">Bloquer</span></button>
+        <button class="btn btn--soft" id="fm-remove"><i class="ph ph-user-minus"></i> <span data-i18n="fr.remove">Supprimer</span></button>
+        <button class="btn btn--soft" data-fclose data-i18n="form.close">Fermer</button>
       </div>
     </div>
   </div>
@@ -226,7 +232,7 @@
           <div class="gm-cover" id="gm-cover" aria-hidden="true"></div>
           <div class="gm-head__id">
             <span class="gm-badge" id="gm-badge" hidden></span>
-            <h2 id="gm-name">Jeu</h2>
+            <h2 id="gm-name" data-i18n="gm.defaultName">Jeu</h2>
             <div class="gm-sub" id="gm-sub"></div>
           </div>
         </div>
@@ -242,24 +248,24 @@
         </div>
         <aside class="gm-side">
           <div class="gm-block gm-prog">
-            <div class="modal__sub">Ta progression</div>
-            <div class="gm-prog__row"><i class="ph ph-clock-user"></i><div><b id="gm-playtime">—</b><span>de jeu</span></div></div>
-            <div class="gm-prog__row"><i class="ph ph-calendar-blank"></i><div><b id="gm-lastplayed">—</b><span>dernière partie</span></div></div>
+            <div class="modal__sub" data-i18n="gm.yourProgress">Ta progression</div>
+            <div class="gm-prog__row"><i class="ph ph-clock-user"></i><div><b id="gm-playtime">—</b><span data-i18n="gm.playtimeOf">de jeu</span></div></div>
+            <div class="gm-prog__row"><i class="ph ph-calendar-blank"></i><div><b id="gm-lastplayed">—</b><span data-i18n="gm.lastSession">dernière partie</span></div></div>
           </div>
           <div class="gm-block gm-details">
-            <div class="modal__sub">Détails</div>
-            <div class="gm-drow"><span class="gm-dk">Genres</span><span class="gm-dv" id="gm-genres">—</span></div>
-            <div class="gm-drow"><span class="gm-dk">Éditeur</span><span class="gm-dv" id="gm-publisher">—</span></div>
-            <div class="gm-drow"><span class="gm-dk">Développeur</span><span class="gm-dv" id="gm-developer">—</span></div>
-            <div class="gm-drow"><span class="gm-dk">Date de sortie</span><span class="gm-dv" id="gm-release">—</span></div>
-            <div class="gm-drow"><span class="gm-dk">Plateformes</span><span class="gm-dv gm-icons" id="gm-platforms">—</span></div>
-            <div class="gm-drow" id="gm-links-row" hidden><span class="gm-dk">Liens</span><span class="gm-dv gm-icons" id="gm-links"></span></div>
-            <div class="gm-drow" id="gm-meta-row" hidden><span class="gm-dk">Métacritique</span><span class="gm-dv" id="gm-metacritic"></span></div>
+            <div class="modal__sub" data-i18n="gm.details">Détails</div>
+            <div class="gm-drow"><span class="gm-dk" data-i18n="gm.genres">Genres</span><span class="gm-dv" id="gm-genres">—</span></div>
+            <div class="gm-drow"><span class="gm-dk" data-i18n="gm.publisher">Éditeur</span><span class="gm-dv" id="gm-publisher">—</span></div>
+            <div class="gm-drow"><span class="gm-dk" data-i18n="gm.developer">Développeur</span><span class="gm-dv" id="gm-developer">—</span></div>
+            <div class="gm-drow"><span class="gm-dk" data-i18n="gm.release">Date de sortie</span><span class="gm-dv" id="gm-release">—</span></div>
+            <div class="gm-drow"><span class="gm-dk" data-i18n="gm.platforms">Plateformes</span><span class="gm-dv gm-icons" id="gm-platforms">—</span></div>
+            <div class="gm-drow" id="gm-links-row" hidden><span class="gm-dk" data-i18n="gm.links">Liens</span><span class="gm-dv gm-icons" id="gm-links"></span></div>
+            <div class="gm-drow" id="gm-meta-row" hidden><span class="gm-dk" data-i18n="gm.metacritic">Métacritique</span><span class="gm-dv" id="gm-metacritic"></span></div>
           </div>
         </aside>
       </div>
       <div class="modal__foot">
-        <button class="btn btn--soft" data-gclose>Fermer</button>
+        <button class="btn btn--soft" data-gclose data-i18n="form.close">Fermer</button>
       </div>
     </div>
   </div>
@@ -269,35 +275,94 @@
     <div class="modal__backdrop" data-eclose></div>
     <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="em-title" style="max-width:27rem">
       <div class="modal__head">
-        <h2 id="em-title">Changer d'adresse e-mail</h2>
-        <button class="modal__x" data-eclose aria-label="Fermer"><i class="ph ph-x"></i></button>
+        <h2 id="em-title" data-i18n="em.title">Changer d'adresse e-mail</h2>
+        <button class="modal__x" data-eclose data-i18n-attr="aria-label:form.close" aria-label="Fermer"><i class="ph ph-x"></i></button>
       </div>
       <div class="modal__body">
         <div id="em-msg" class="msg"></div>
-        <p class="hint" style="margin-bottom:0.9rem">Ta nouvelle adresse devra être confirmée par e-mail. En attendant, ton compte redevient « non vérifié ».</p>
+        <p class="hint" style="margin-bottom:0.9rem" data-i18n="em.intro">Ta nouvelle adresse devra être confirmée par e-mail. En attendant, ton compte redevient « non vérifié ».</p>
         <div class="fld">
-          <label for="em-new">Nouvelle adresse e-mail</label>
-          <input class="input" id="em-new" type="email" autocomplete="email" placeholder="nouvelle@exemple.com" />
+          <label for="em-new" data-i18n="em.new">Nouvelle adresse e-mail</label>
+          <input class="input" id="em-new" type="email" autocomplete="email" data-i18n-attr="placeholder:em.newPh" placeholder="nouvelle@exemple.com" />
         </div>
         <div class="fld">
-          <label for="em-pw">Ton mot de passe actuel</label>
+          <label for="em-pw" data-i18n="em.currentPw">Ton mot de passe actuel</label>
           <div class="pw">
-            <input class="input" id="em-pw" type="password" autocomplete="current-password" placeholder="pour confirmer que c'est bien toi" />
-            <button type="button" class="pw__eye" data-eye="em-pw" aria-label="Afficher le mot de passe"><i class="ph ph-eye"></i></button>
+            <input class="input" id="em-pw" type="password" autocomplete="current-password" data-i18n-attr="placeholder:em.currentPwPh" placeholder="pour confirmer que c'est bien toi" />
+            <button type="button" class="pw__eye" data-eye="em-pw" data-i18n-attr="aria-label:form.showPw" aria-label="Afficher le mot de passe"><i class="ph ph-eye"></i></button>
           </div>
         </div>
       </div>
       <div class="modal__foot">
-        <button class="btn btn--soft" data-eclose>Annuler</button>
-        <button class="btn btn--primary" id="em-save">Changer l'e-mail</button>
+        <button class="btn btn--soft" data-eclose data-i18n="form.cancel">Annuler</button>
+        <button class="btn btn--primary" id="em-save" data-i18n="em.save">Changer l'e-mail</button>
       </div>
     </div>
   </div>
 
-  <script src="assets/js/app.js?v=6"></script>
+  <!-- Modal : suppression du compte (confirmée par mot de passe) -->
+  <div class="modal" id="delete-modal" hidden>
+    <div class="modal__backdrop" data-dclose></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="del-title" style="max-width:29rem">
+      <div class="modal__head">
+        <h2 id="del-title" data-i18n="del.title">Supprimer mon compte</h2>
+        <button class="modal__x" data-dclose data-i18n-attr="aria-label:form.close" aria-label="Fermer"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal__body">
+        <div id="del-msg" class="msg"></div>
+        <p class="hint" data-i18n-html="del.warn">Cette action est <b>irréversible</b>. Ton pseudo, ton PID, ton e-mail et ton Discord sont libérés, tu es retiré de la liste d'amis de tout le monde, et tu perds l'accès. Un enregistrement « supprimé » est conservé pour la modération.</p>
+        <div class="fld" style="margin-top:0.9rem">
+          <label for="del-pw" data-i18n="del.pw">Ton mot de passe, pour confirmer</label>
+          <div class="pw">
+            <input class="input" id="del-pw" type="password" autocomplete="current-password" data-i18n-attr="placeholder:del.pwPh" placeholder="mot de passe" />
+            <button type="button" class="pw__eye" data-eye="del-pw" data-i18n-attr="aria-label:form.showPw" aria-label="Afficher le mot de passe"><i class="ph ph-eye"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="modal__foot">
+        <button class="btn btn--soft" data-dclose data-i18n="form.cancel">Annuler</button>
+        <button class="btn btn--danger" id="del-save"><i class="ph ph-trash"></i> <span data-i18n="del.confirm">Supprimer définitivement</span></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js?v=8"></script>
+  <script src="assets/js/nx-ui.js?v=3"></script>
+  <script src="assets/js/nx-i18n.js?v=1"></script>
+  <script src="assets/js/nx-i18n-more.js?v=2"></script>
+  <script src="assets/js/nx-i18n-app.js?v=2"></script>
+  <script src="assets/js/nx-i18n-app-more.js?v=2"></script>
   <script>
     const $ = (id) => document.getElementById(id);
+    // helpers i18n : T(clé, secours, {vars}) + locale date selon la langue courante
+    const T = (k, fb, vars) => { let s = (window.NXI18N && NXI18N.t(k)); if (s == null) s = fb; if (vars) for (const p in vars) s = String(s).split('{'+p+'}').join(vars[p]); return s; };
+    const LOCS = { en:'en-US', fr:'fr-FR', es:'es-ES', pt:'pt-BR', de:'de-DE', it:'it-IT', ru:'ru-RU', zh:'zh-CN', ja:'ja-JP', ar:'ar' };
+    const LOC = () => LOCS[(window.NXI18N && NXI18N.lang && NXI18N.lang()) || 'fr'] || 'fr-FR';
     $('logout').addEventListener('click', () => NX.logout());
+
+    /* ---- suppression du compte (danger, confirmée par mot de passe) ---- */
+    (function(){
+      const dModal=$('delete-modal'); if(!dModal) return;
+      const dMsg=$('del-msg');
+      const openD=()=>{ dMsg.textContent=''; dMsg.className='msg'; $('del-pw').value=''; dModal.hidden=false; setTimeout(()=>$('del-pw').focus(),50); };
+      const closeD=()=>{ dModal.hidden=true; };
+      $('delete-account').addEventListener('click', openD);
+      dModal.querySelectorAll('[data-dclose]').forEach(el=>el.addEventListener('click', closeD));
+      document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !dModal.hidden) closeD(); });
+      $('del-save').addEventListener('click', async ()=>{
+        const pw=$('del-pw').value;
+        if(!pw){ dMsg.textContent=T('del.needPw','Entre ton mot de passe pour confirmer.'); dMsg.className='msg err'; return; }
+        const b=$('del-save'); b.disabled=true;
+        try {
+          await NX.api('/api/delete-account', { password: pw });
+          NX.toast(T('del.done','Compte supprimé. À bientôt.'));
+          setTimeout(()=>NX.logout(), 1000);
+        } catch(err){
+          dMsg.textContent=(err&&err.message)||T('del.err','Échec de la suppression.'); dMsg.className='msg err';
+          b.disabled=false;
+        }
+      });
+    })();
     function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
     function initial(name){ return (name||'?').trim().charAt(0).toUpperCase(); }
     const ICONS = ['ph-game-controller','ph-ghost','ph-rocket','ph-star','ph-cat','ph-dog','ph-alien','ph-robot','ph-skull','ph-heart','ph-lightning','ph-fire','ph-crown','ph-diamond','ph-planet','ph-sword','ph-shield','ph-paw-print','ph-bird','ph-flower','ph-smiley','ph-soccer-ball','ph-trophy','ph-sparkle'];
@@ -335,11 +400,20 @@
       if(img){ const s=Math.max(256/img.width,256/img.height),w=img.width*s,h=img.height*s; ctx.drawImage(img,(256-w)/2,(256-h)/2,w,h); }
       else { ctx.fillStyle=DEF_COLOR; ctx.fillRect(0,0,256,256); }
     }
-    function imgSrc(b64){ return b64 ? (b64.startsWith('data:')?b64:'data:image/jpeg;base64,'+b64) : ''; }
+    // Ces images viennent d'AUTRES membres (pp d'un ami, icône de jeu de son historique) et
+    // finissent dans des attributs src et des styles. On n'accepte donc QUE du base64 : une
+    // valeur contenant un guillemet ou une parenthèse est rejetée plutôt que rendue.
+    const RE_B64 = /^[A-Za-z0-9+/=\s]*$/;
+    function imgSrc(b64){
+      const v = String(b64 || '');
+      if(!v) return '';
+      if(v.indexOf('data:image/') === 0){ const c = v.indexOf(','); return (c > 0 && RE_B64.test(v.slice(c+1))) ? v : ''; }
+      return RE_B64.test(v) ? 'data:image/jpeg;base64,'+v : '';
+    }
 
     function setAvatar(image, name){
       const src=imgSrc(image);
-      if(src){ $('avatar').innerHTML='<img src="'+src+'" alt="">'; $('mc-pic').innerHTML='<img src="'+src+'" alt="">'; }
+      if(src){ const e=escapeHtml(src); $('avatar').innerHTML='<img src="'+e+'" alt="">'; $('mc-pic').innerHTML='<img src="'+e+'" alt="">'; }
       else { $('avatar').textContent=initial(name); $('mc-pic').innerHTML='<div class="member-card__sig" aria-hidden="true"></div>'; }
     }
 
@@ -369,39 +443,77 @@
     // Calques de l'avatar : bg (fond) / char (personnage) / frame (cadre) = payloads ('icons/..' ou 'avatar_..') ou null. dirty=true dès qu'on touche un calque/couleur.
     const ed = { color:DEF_COLOR, bg:null, char:null, frame:null, currentImage:'', dirty:false };
 
+    // Le compte Discord lié, tel que le bot de vérif l'a poussé sur nos serveurs. On montre le
+    // PSEUDO (pas l'identifiant numérique) : c'est ce qu'on lit sur le serveur.
+    function paintDiscord(a){
+      const el=$('kv-discord'); if(!el) return;
+      if(a.discord){
+        let since='';
+        try { if(a.discord_linked_at) since=' <span class="email-chip ok">'+escapeHtml(T('acc.discordLinkedOn','lié le {d}',{d:new Date(a.discord_linked_at).toLocaleDateString(LOC(),{day:'2-digit',month:'2-digit',year:'numeric'})}))+'</span>'; }
+        catch(_){}
+        el.innerHTML='<span class="mono">'+escapeHtml(a.discord)+'</span>'+since;
+      } else {
+        el.innerHTML='<span style="opacity:.7">'+escapeHtml(T('acc.noDiscord','Aucun compte lié'))+'</span> <a class="ghost-link" href="https://discord.gg/XPfeCMwnzQ" target="_blank" rel="noopener" style="font-size:.8rem"><i class="ph ph-discord-logo" aria-hidden="true"></i> '+escapeHtml(T('acc.linkDiscord','Lier sur le Discord'))+'</a>';
+      }
+    }
+
     function paintIdentity(a){
       const isGuest=(a.email||'').toLowerCase().endsWith('@nextendo.local');
-      $('uname').textContent=a.username; $('uname').classList.remove('skeleton');
+      const g=$('acc-greet'); if(g){ g.textContent=T('acc.hi','Salut, {name}.',{name:a.username}); }
       $('fc').textContent=a.friend_code; $('kv-fc').textContent=a.friend_code;
       $('card-name').textContent=a.username; $('kv-name').textContent=a.username;
       $('kv-pid').textContent=a.pid;
-      $('kv-email').textContent=isGuest?'Compte invité (aucun e-mail)':a.email;
-      $('card-chip').textContent=isGuest?'INVITÉ':'MEMBRE';
-      try { $('kv-since').textContent=new Date(a.created_at).toLocaleDateString('fr-FR',{year:'numeric',month:'long',day:'numeric'}); }
+      $('kv-email').textContent=isGuest?T('acc.guestEmail','Compte invité (aucun e-mail)'):a.email;
+      paintDiscord(a);
+      $('card-chip').textContent=isGuest?T('acc.guest','INVITÉ'):T('acc.member','MEMBRE');
+      try { $('kv-since').textContent=new Date(a.created_at).toLocaleDateString(LOC(),{year:'numeric',month:'long',day:'numeric'}); }
       catch(_){ $('kv-since').textContent='—'; }
     }
 
     /* ---- amis ---- */
     // Rendu de la pp d'un ami/demande : image composée > avatar galerie (firmware/icône) > initiale.
     function friendAvatarHtml(f){
-      if(f.image) return '<img src="'+imgSrc(f.image)+'" alt="">';
+      // ÉCHAPPEMENT OBLIGATOIRE : f.image vient d'un AUTRE membre (profil, ou simple
+      // demande d'ami non acceptée). Sans ça, un guillemet dans la valeur sort de
+      // l'attribut et exécute du script dans la session de celui qui regarde.
+      if(f.image) return '<img src="'+escapeHtml(imgSrc(f.image))+'" alt="">';
       const av=f.avatar||'';
       if(av.indexOf('img:')===0) return '<img src="'+escapeHtml(avatarImgUrl(av.slice(4)))+'" alt="">';
       if(av.indexOf('ph-')===0) return '<i class="ph '+escapeHtml(av)+'"></i>';
       return escapeHtml(initial(f.name||f.username));
     }
-    function friendAvStyle(f){ return (!f.image && f.avatar && f.avatar.indexOf('img:')!==0 && f.color) ? ' style="background:'+escapeHtml(f.color)+'"' : ''; }
+    // La couleur doit être validée, pas seulement échappée : échapper n'empêche pas
+    // d'injecter d'AUTRES déclarations CSS (position:fixed, background-image distante…).
+    function friendAvStyle(f){ const c=(f.color && /^#[0-9a-fA-F]{6}$/.test(f.color))?f.color:''; return (!f.image && f.avatar && f.avatar.indexOf('img:')!==0 && c) ? ' style="background:'+c+'"' : ''; }
+    /* ---- rich presence : résout app_id -> nom du jeu (caché) + libellé de statut ----
+       Le serveur renvoie presence:{status, app_id, app_detail}. status>0 = en ligne ;
+       app_id présent = en jeu -> on affiche « En jeu · <nom du jeu> » (nom résolu async). */
+    const GAME_NAME_CACHE={};
+    function resolveGameName(appId, cb){
+      const id=(appId||'').toLowerCase(); if(!id) return cb(null);
+      if(id in GAME_NAME_CACHE) return cb(GAME_NAME_CACHE[id]);
+      NX.gameInfo(id).then(g=>{ const n=(g&&g.name)||null; GAME_NAME_CACHE[id]=n; cb(n); }).catch(()=>{ GAME_NAME_CACHE[id]=null; cb(null); });
+    }
+    function presenceInfo(f){ const p=(f&&f.presence)||{}; const online=Number(p.status)>0; return { online, inGame: online && !!p.app_id, appId:p.app_id||'', detail:(p.app_detail||'').trim() }; }
+    function fillGameLabel(el, pi){ if(!el||!pi.inGame) return; el.textContent = pi.detail || T('fr.inGameShort','En jeu…'); resolveGameName(pi.appId, name=>{ el.textContent = name ? T('fr.inGameName','En jeu · {name}',{name:name}) : (pi.detail || T('fr.inGame','En jeu')); }); }
+
     function friendRow(f){
-      const online=f.presence && Number(f.presence.status)>0;
+      const pi=presenceInfo(f);
       const row=document.createElement('div'); row.className='friend friend--click'; row.setAttribute('role','button'); row.tabIndex=0;
-      row.innerHTML='<div class="friend__av"'+friendAvStyle(f)+'>'+friendAvatarHtml(f)+'</div><div class="friend__main"><div class="friend__name">'+escapeHtml(f.name||f.username)+'</div><div class="friend__code">'+escapeHtml(f.friend_code||'')+'</div></div><div class="friend__status"><span class="friend__dot '+(online?'on':'')+'"></span>'+(online?'en ligne':'hors ligne')+'</div><i class="ph ph-caret-right friend__go" aria-hidden="true"></i>';
+      const dotCls = pi.inGame ? 'on playing' : (pi.online ? 'on' : '');
+      const stCls  = pi.inGame ? 'friend__status friend__status--game' : 'friend__status';
+      const stTxt  = pi.online ? (pi.inGame ? T('fr.inGameShort','En jeu…') : T('fr.online','en ligne')) : T('fr.offline','hors ligne');
+      row.innerHTML='<div class="friend__av"'+friendAvStyle(f)+'>'+friendAvatarHtml(f)+'</div><div class="friend__main"><div class="friend__name">'+escapeHtml(f.name||f.username)+'</div><div class="friend__code">'+escapeHtml(f.friend_code||'')+'</div></div><div class="'+stCls+'"><span class="friend__dot '+dotCls+'"></span><span class="friend__st-txt">'+stTxt+'</span></div><button class="friend__fav'+(f.favorite?' friend__fav--on':'')+'" type="button" title="'+escapeHtml(T('fr.favorite','Favori'))+'" aria-label="'+escapeHtml(T('fr.favorite','Favori'))+'" tabindex="-1">★</button><i class="ph ph-caret-right friend__go" aria-hidden="true"></i>';
+      if(pi.inGame) fillGameLabel(row.querySelector('.friend__st-txt'), pi);
+      const favBtn=row.querySelector('.friend__fav');
+      if(favBtn) favBtn.addEventListener('click', async (e)=>{ e.stopPropagation(); const on=!favBtn.classList.contains('friend__fav--on'); favBtn.classList.toggle('friend__fav--on', on); f.favorite=on; try{ await NX.setFavorite(f.pid, on); }catch(_){ favBtn.classList.toggle('friend__fav--on', !on); f.favorite=!on; } });
       row.addEventListener('click', ()=>openFriendModal(f));
       row.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openFriendModal(f); } });
       return row;
     }
     function requestRow(f){
       const row=document.createElement('div'); row.className='friend';
-      row.innerHTML='<div class="friend__av"'+friendAvStyle(f)+'>'+friendAvatarHtml(f)+'</div><div class="friend__main"><div class="friend__name">'+escapeHtml(f.name||f.username)+'</div><div class="friend__code">veut t\'ajouter</div></div><div style="display:flex;gap:0.4rem"><button class="btn btn--primary btn--sm" data-accept="'+f.pid+'">Accepter</button><button class="btn btn--soft btn--sm" data-decline="'+f.pid+'">Refuser</button></div>';
+      row.innerHTML='<div class="friend__av"'+friendAvStyle(f)+'>'+friendAvatarHtml(f)+'</div><div class="friend__main"><div class="friend__name">'+escapeHtml(f.name||f.username)+'</div><div class="friend__code">'+escapeHtml(T('fr.wantsToAdd',"veut t'ajouter"))+'</div></div><div style="display:flex;gap:0.4rem"><button class="btn btn--primary btn--sm" data-accept="'+f.pid+'">'+escapeHtml(T('fr.accept','Accepter'))+'</button><button class="btn btn--soft btn--sm" data-decline="'+f.pid+'">'+escapeHtml(T('fr.decline','Refuser'))+'</button></div>';
       return row;
     }
 
@@ -409,32 +521,33 @@
     let FRIEND_MODAL_PID = null;
     function openFriendModal(f){
       FRIEND_MODAL_PID = f.pid;
-      const online=f.presence && Number(f.presence.status)>0;
+      const pi=presenceInfo(f);
       $('fm-name').textContent=f.name||f.username;
       $('fm-code').textContent=f.friend_code||'—';
       $('fm-pid').textContent=f.pid;
-      $('fm-status').className='fm-badge '+(online?'fm-badge--on':'fm-badge--off');
-      $('fm-status').innerHTML='<span class="friend__dot '+(online?'on':'')+'"></span>'+(online?'en ligne':'hors ligne');
+      $('fm-status').className='fm-badge '+(pi.inGame?'fm-badge--game':(pi.online?'fm-badge--on':'fm-badge--off'));
+      $('fm-status').innerHTML='<span class="friend__dot '+(pi.inGame?'on playing':(pi.online?'on':''))+'"></span><span class="fm-st-txt">'+(pi.online?(pi.inGame?T('fr.inGameShort','En jeu…'):T('fr.online','en ligne')):T('fr.offline','hors ligne'))+'</span>';
+      if(pi.inGame) fillGameLabel($('fm-status').querySelector('.fm-st-txt'), pi);
       // photo + couleur d'accent de l'ami (teinte l'en-tête)
       const accent=(f.color && /^#[0-9a-fA-F]{6}$/.test(f.color))?f.color:'#1ca9e0';
       const pic=$('fm-pic'); pic.style.background=''; pic.innerHTML=friendAvatarHtml(f);
       if(!f.image && f.avatar && f.avatar.indexOf('img:')!==0 && f.color) pic.style.background=f.color;
       $('friend-modal').style.setProperty('--fm-accent', accent);
-      let since='—'; try{ if(f.created_at) since=new Date(f.created_at).toLocaleDateString('fr-FR',{month:'short',year:'numeric'}); }catch(_){}
+      let since='—'; try{ if(f.created_at) since=new Date(f.created_at).toLocaleDateString(LOC(),{month:'short',year:'numeric'}); }catch(_){}
       $('fm-since').textContent=since;
       ['fm-total','fm-games','fm-fav','fm-last'].forEach(id=>$(id).textContent='…');
-      $('fm-history').innerHTML='<div class="empty">Chargement de l\'historique…</div>';
+      $('fm-history').innerHTML='<div class="empty">'+escapeHtml(T('acc.historyLoading',"Chargement de l'historique…"))+'</div>';
       $('friend-modal').hidden=false;
       NX.friendHistory(f.pid).then(({history})=>{
         history=history||[];
         const total=history.reduce((s,h)=>s+(Number(h.seconds)||0),0);
         const fav=history.slice().sort((a,b)=>(Number(b.seconds)||0)-(Number(a.seconds)||0))[0];
-        $('fm-total').textContent=history.length?fmtHours(total):'0 min';
+        $('fm-total').textContent=history.length?fmtHours(total):T('fr.zeroMin','0 min');
         $('fm-games').textContent=history.length;
-        $('fm-fav').textContent=fav?(fav.name||'Jeu'):'—';
+        $('fm-fav').textContent=fav?(fav.name||T('gm.defaultName','Jeu')):'—';
         $('fm-last').textContent=(history.length&&history[0].last_played)?fmtDate(history[0].last_played):'—';
-        renderHistoryInto($('fm-history'), history, 'Cet ami n\'a pas encore d\'historique de jeu public.');
-      }).catch(()=>{ ['fm-total','fm-games','fm-fav','fm-last'].forEach(id=>$(id).textContent='—'); $('fm-history').innerHTML='<div class="empty">Impossible de charger l\'historique.</div>'; });
+        renderHistoryInto($('fm-history'), history, T('fr.noHistory',"Cet ami n'a pas encore d'historique de jeu public."));
+      }).catch(()=>{ ['fm-total','fm-games','fm-fav','fm-last'].forEach(id=>$(id).textContent='—'); $('fm-history').innerHTML='<div class="empty">'+escapeHtml(T('acc.historyErr',"Impossible de charger l'historique."))+'</div>'; });
     }
     function closeFriendModal(){ $('friend-modal').hidden=true; FRIEND_MODAL_PID=null; }
 
@@ -446,7 +559,7 @@
     function openGameModal(h){
       const tid=(h.title_id||'').toLowerCase();
       const cover=$('gm-cover'), head=$('gm-head');
-      $('gm-name').textContent=h.name||'Jeu';
+      $('gm-name').textContent=h.name||T('gm.defaultName','Jeu');
       $('gm-sub').textContent=''; $('gm-desc').textContent=''; $('gm-badge').hidden=true;
       ['gm-genres','gm-publisher','gm-developer','gm-release'].forEach(id=>$(id).textContent='…');
       $('gm-platforms').textContent='…'; $('gm-links-row').hidden=true; $('gm-meta-row').hidden=true;
@@ -458,7 +571,7 @@
       $('game-modal').hidden=false;
       NX.gameInfo(tid, h.name).then(g=>{
         if(!g) return;
-        $('gm-name').textContent=g.name||h.name||'Jeu';
+        $('gm-name').textContent=g.name||h.name||T('gm.defaultName','Jeu');
         const acc=(g.accent && /^#[0-9a-fA-F]{6}$/.test(g.accent))?g.accent:'#1ca9e0';
         head.style.setProperty('--gm-accent', acc);
         if(g.hero) $('gm-headbg').style.backgroundImage='url('+g.hero+')';
@@ -477,7 +590,7 @@
         const shots=[]; if(g.hero) shots.push(g.hero); (g.screenshots||[]).forEach(s=>shots.push(s));
         if(shots.length){
           $('gm-media').hidden=false; gmStage(shots[0]);
-          $('gm-thumbs').innerHTML=shots.map((s,i)=>'<button class="gm-thumb'+(i===0?' sel':'')+'" style="background-image:url('+s+')" data-shot="'+i+'" aria-label="Aperçu '+(i+1)+'"></button>').join('');
+          $('gm-thumbs').innerHTML=shots.map((s,i)=>'<button class="gm-thumb'+(i===0?' sel':'')+'" style="background-image:url('+s+')" data-shot="'+i+'" aria-label="'+escapeHtml(T('gm.screenshotAria','Aperçu {n}',{n:i+1}))+'"></button>').join('');
           $('gm-thumbs').querySelectorAll('.gm-thumb').forEach(b=>b.addEventListener('click',()=>{ gmStage(shots[Number(b.dataset.shot)]); $('gm-thumbs').querySelectorAll('.gm-thumb').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); }));
         }
       }).catch(()=>{ ['gm-genres','gm-publisher','gm-developer','gm-release'].forEach(id=>$(id).textContent='—'); $('gm-platforms').textContent='Nintendo Switch'; });
@@ -488,25 +601,37 @@
         const { friends, requests }=await NX.friends();
         const rw=$('requests'); rw.innerHTML='';
         (requests||[]).forEach(r=>{ const row=requestRow(r); rw.appendChild(row);
-          row.querySelector('[data-accept]').addEventListener('click', async e=>{ await NX.acceptFriend(Number(e.target.dataset.accept)); NX.toast('Ami ajouté'); loadFriends(); });
+          row.querySelector('[data-accept]').addEventListener('click', async e=>{ await NX.acceptFriend(Number(e.target.dataset.accept)); NX.toast(T('fr.toastAdded','Ami ajouté')); loadFriends(); });
           row.querySelector('[data-decline]').addEventListener('click', async e=>{ await NX.declineFriend(Number(e.target.dataset.decline)); loadFriends(); });
         });
         const w=$('friends'); w.innerHTML='';
-        if(!friends || !friends.length){ w.innerHTML='<div class="empty">Aucun ami pour l\'instant. Ajoute le friend code d\'un autre joueur.</div>'; return; }
-        friends.forEach(f=>w.appendChild(friendRow(f)));
-      } catch(_){ $('friends').innerHTML='<div class="empty">Impossible de charger tes amis.</div>'; }
+        if(!friends || !friends.length){ w.innerHTML='<div class="empty">'+escapeHtml(T('fr.empty',"Aucun ami pour l'instant. Ajoute le friend code d'un autre joueur."))+'</div>'; return; }
+        // N'affiche que les premiers amis ; « Voir plus » révèle le reste (évite une liste
+        // interminable quand on a beaucoup d'amis).
+        const FRIENDS_SHOWN=8;
+        friends.slice(0,FRIENDS_SHOWN).forEach(f=>w.appendChild(friendRow(f)));
+        if(friends.length>FRIENDS_SHOWN){
+          const more=document.createElement('button');
+          more.type='button'; more.className='btn btn--soft btn--sm';
+          more.style.cssText='margin-top:0.7rem;width:100%';
+          more.textContent=T('fr.showMore','Voir plus')+' ('+(friends.length-FRIENDS_SHOWN)+')';
+          more.addEventListener('click',()=>{ friends.slice(FRIENDS_SHOWN).forEach(f=>w.insertBefore(friendRow(f),more)); more.remove(); });
+          w.appendChild(more);
+        }
+      } catch(_){ $('friends').innerHTML='<div class="empty">'+escapeHtml(T('fr.loadErr','Impossible de charger tes amis.'))+'</div>'; }
     }
 
     /* ---- historique ---- */
     function fmtHours(sec){ const h=(sec||0)/3600; if(h<1) return Math.max(1,Math.round((sec||0)/60))+' min'; return (h>=10?Math.round(h):h.toFixed(1))+' h'; }
-    function fmtDate(s){ if(!s) return ''; try { return new Date(s).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'}); } catch(_){ return ''; } }
+    function fmtDate(s){ if(!s) return ''; try { return new Date(s).toLocaleDateString(LOC(),{day:'numeric',month:'short',year:'numeric'}); } catch(_){ return ''; } }
     function renderHistoryInto(w, history, emptyMsg){
       if(!history || !history.length){ w.innerHTML='<div class="empty">'+escapeHtml(emptyMsg)+'</div>'; return; }
       w.innerHTML='';
       history.forEach(h=>{
-        const ico=h.icon?'<img src="'+imgSrc(h.icon)+'" alt="">':'<i class="ph ph-game-controller"></i>';
+        // h.icon peut venir de l'historique d'un AMI (modale de profil) : même échappement.
+        const ico=h.icon?'<img src="'+escapeHtml(imgSrc(h.icon))+'" alt="">':'<i class="ph ph-game-controller"></i>';
         const el=document.createElement('div'); el.className='history-card history-card--click'; el.setAttribute('role','button'); el.tabIndex=0;
-        el.innerHTML='<div class="history-card__ico">'+ico+'</div><div class="history-card__main"><div class="history-card__name">'+escapeHtml(h.name||'Jeu')+'</div><div class="history-card__time">'+fmtHours(h.seconds)+' jouées</div><div class="history-card__meta">'+(h.last_played?('joué le '+fmtDate(h.last_played)):'')+'</div></div><i class="ph ph-caret-right history-card__go" aria-hidden="true"></i>';
+        el.innerHTML='<div class="history-card__ico">'+ico+'</div><div class="history-card__main"><div class="history-card__name">'+escapeHtml(h.name||T('gm.defaultName','Jeu'))+'</div><div class="history-card__time">'+escapeHtml(T('acc.played','{t} jouées',{t:fmtHours(h.seconds)}))+'</div><div class="history-card__meta">'+(h.last_played?escapeHtml(T('acc.playedOn','joué le {d}',{d:fmtDate(h.last_played)})):'')+'</div></div><i class="ph ph-caret-right history-card__go" aria-hidden="true"></i>';
         el.addEventListener('click', ()=>openGameModal(h));
         el.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openGameModal(h); } });
         w.appendChild(el);
@@ -515,23 +640,23 @@
     async function loadHistory(){
       try {
         const { history }=await NX.history();
-        renderHistoryInto($('history'), history, 'Aucun historique pour l\'instant — ton temps de jeu apparaîtra ici après tes parties (synchronisé automatiquement depuis l\'émulateur).');
-      } catch(_){ $('history').innerHTML='<div class="empty">Impossible de charger l\'historique.</div>'; }
+        renderHistoryInto($('history'), history, T('acc.historyEmpty',"Aucun historique pour l'instant — ton temps de jeu apparaîtra ici après tes parties (synchronisé automatiquement depuis l'émulateur)."));
+      } catch(_){ $('history').innerHTML='<div class="empty">'+escapeHtml(T('acc.historyErr',"Impossible de charger l'historique."))+'</div>'; }
     }
 
     /* ===================== éditeur ===================== */
     function buildPickers(){
       const sw=$('swatches'); sw.innerHTML='';
       COLORS.forEach(c=>{ const b=document.createElement('button'); b.type='button'; b.className='swatch'; b.dataset.color=c; b.style.background=c; b.title=c; b.addEventListener('click',()=>{ if($('cpick').hidden){ ed.color=c; ed.dirty=true; markSel(); renderPreview(); } else cpSet(c); }); sw.appendChild(b); });
-      const custom=document.createElement('button'); custom.type='button'; custom.className='swatch swatch--custom'; custom.title='Couleur personnalisée';
+      const custom=document.createElement('button'); custom.type='button'; custom.className='swatch swatch--custom'; custom.title=T('ed.customColor','Couleur personnalisée');
       custom.innerHTML='<i class="ph ph-sliders-horizontal"></i>';
       custom.addEventListener('click',()=>{ const p=$('cpick'); p.hidden=!p.hidden; if(!p.hidden) cpSet(ed.color); }); sw.appendChild(custom);
     }
     /* ---- compositeur d'avatar à CALQUES : Personnage / Fond / Cadre (superposés) ---- */
     const LAYERS = [
-      { key:'char',  cat:'characters',  label:'Personnage', icon:'ph-user' },
-      { key:'bg',    cat:'backgrounds', label:'Fond',       icon:'ph-image' },
-      { key:'frame', cat:'frames',      label:'Cadre',      icon:'ph-frame-corners' },
+      { key:'char',  cat:'characters',  labelKey:'ed.layerChar',  label:'Personnage', icon:'ph-user' },
+      { key:'bg',    cat:'backgrounds', labelKey:'ed.layerBg',    label:'Fond',       icon:'ph-image' },
+      { key:'frame', cat:'frames',      labelKey:'ed.layerFrame', label:'Cadre',      icon:'ph-frame-corners' },
     ];
     const FW_GAME = '__fw__', CUSTOM_GAME = '__custom__';
     let MAN = null, FIRMWARE = [], CUSTOM = [];
@@ -557,7 +682,7 @@
       const bar=$('ip-tabs'); bar.innerHTML='';
       LAYERS.forEach(l=>{
         const b=document.createElement('button'); b.type='button'; b.className='ip-tab'; b.dataset.layer=l.key;
-        b.innerHTML='<i class="ph '+l.icon+'"></i><span>'+l.label+'</span><i class="ph ph-check-circle ip-tab__dot"></i>';
+        b.innerHTML='<i class="ph '+l.icon+'"></i><span>'+escapeHtml(T(l.labelKey,l.label))+'</span><i class="ph ph-check-circle ip-tab__dot"></i>';
         b.addEventListener('click',()=>ipSelectLayer(l.key));
         bar.appendChild(b);
       });
@@ -573,9 +698,9 @@
       const gids=Object.keys(map).sort((a,b)=>(order[a]??999)-(order[b]??999));
       let tot=gids.reduce((n,g)=>n+map[g].length,0);
       if(key==='char') tot+=FIRMWARE.length+CUSTOM.length;
-      let html='<option value="">Tous ('+tot+')</option>';
-      if(key==='char' && CUSTOM.length) html+='<option value="'+CUSTOM_GAME+'">Custom / Nextendo ('+CUSTOM.length+')</option>';
-      if(key==='char' && FIRMWARE.length) html+='<option value="'+FW_GAME+'">Nintendo Switch — défaut ('+FIRMWARE.length+')</option>';
+      let html='<option value="">'+escapeHtml(T('ed.optAll','Tous ({n})',{n:tot}))+'</option>';
+      if(key==='char' && CUSTOM.length) html+='<option value="'+CUSTOM_GAME+'">'+escapeHtml(T('ed.optCustom','Custom / Nextendo ({n})',{n:CUSTOM.length}))+'</option>';
+      if(key==='char' && FIRMWARE.length) html+='<option value="'+FW_GAME+'">'+escapeHtml(T('ed.optFirmware','Nintendo Switch — défaut ({n})',{n:FIRMWARE.length}))+'</option>';
       gids.forEach(g=>{ html+='<option value="'+g+'">'+escapeHtml(names[g]||g)+' ('+map[g].length+')</option>'; });
       sel.innerHTML=html;
       ipApply();
@@ -598,7 +723,7 @@
         });
       }
       const g=$('avatar-grid'); g.innerHTML='';
-      if(!ip.items.length){ g.innerHTML='<div class="empty" style="grid-column:1/-1">Rien ici.</div>'; markSel(); return; }
+      if(!ip.items.length){ g.innerHTML='<div class="empty" style="grid-column:1/-1">'+escapeHtml(T('ed.nothingHere','Rien ici.'))+'</div>'; markSel(); return; }
       g.scrollTop=0; ipRenderMore(); ipRenderMore(); markSel();
     }
     function ipRenderMore(){
@@ -648,11 +773,11 @@
     const reUser=/^[A-Za-z0-9_\-]{3,16}$/;
     $('save-profile').addEventListener('click', async ()=>{
       const m=$('edit-msg'); hideMsg(m);
-      const btn=$('save-profile'); btn.disabled=true; const prev=btn.textContent; btn.textContent='Enregistrement…';
+      const btn=$('save-profile'); btn.disabled=true; const prev=btn.textContent; btn.textContent=T('ed.saving','Enregistrement…');
       try {
         const pseudo=$('edit-pseudo').value.trim();
         if(pseudo && pseudo!==ACC.username){
-          if(!reUser.test(pseudo)) throw new Error('Pseudo invalide : 3 à 16 caractères (lettres, chiffres, _ ou -).');
+          if(!reUser.test(pseudo)) throw new Error(T('ed.badPseudo','Pseudo invalide : 3 à 16 caractères (lettres, chiffres, _ ou -).'));
           const r=await NX.setUsername(pseudo); ACC=r.account; paintIdentity(ACC);
         }
         let image, avatar;
@@ -668,7 +793,7 @@
         const pr=await NX.putProfile(body); PROFILE=pr.profile||body;
         localStorage.setItem('nx_color', ed.color);
         setAvatar(PROFILE.image, ACC.username);
-        NX.toast('Profil mis à jour'); closeEditor();
+        NX.toast(T('ed.toastSaved','Profil mis à jour')); closeEditor();
       } catch(err){ showMsg(m, err.message, 'err'); }
       finally { btn.disabled=false; btn.textContent=prev; }
     });
@@ -684,16 +809,16 @@
         const isGuest=(ACC.email||'').toLowerCase().endsWith('@nextendo.local');
         if(isGuest){ const sp=$('security-panel'); if(sp) sp.hidden=true; return; }
         const chip=$('email-chip'); chip.hidden=false;
-        if(ACC.email_verified){ chip.className='email-chip ok'; chip.innerHTML='<i class="ph ph-seal-check"></i> vérifié'; }
-        else { chip.className='email-chip no'; chip.innerHTML='<i class="ph ph-warning"></i> non vérifié'; $('verify-banner').hidden=false; }
+        if(ACC.email_verified){ chip.className='email-chip ok'; chip.innerHTML='<i class="ph ph-seal-check"></i> '+escapeHtml(T('acc.verified','vérifié')); }
+        else { chip.className='email-chip no'; chip.innerHTML='<i class="ph ph-warning"></i> '+escapeHtml(T('acc.unverified','non vérifié')); $('verify-banner').hidden=false; }
         $('resend-verify').addEventListener('click', async e=>{
           const b=e.currentTarget; b.disabled=true;
-          try { await NX.resendVerification(); NX.toast('E-mail de vérification renvoyé — regarde ta boîte mail.'); }
+          try { await NX.resendVerification(); NX.toast(T('acc.toastResent','E-mail de vérification renvoyé — regarde ta boîte mail.')); }
           catch(err){ NX.toast(err.message); } finally { b.disabled=false; }
         });
         $('reset-pw').addEventListener('click', async e=>{
           const b=e.currentTarget; b.disabled=true;
-          try { await NX.forgot(ACC.email); NX.toast('Lien de réinitialisation envoyé à ' + ACC.email + '.'); }
+          try { await NX.forgot(ACC.email); NX.toast(T('acc.toastResetSent','Lien de réinitialisation envoyé à {email}.',{email:ACC.email})); }
           catch(err){ NX.toast(err.message); } finally { b.disabled=false; }
         });
         // changer d'e-mail (modal)
@@ -702,17 +827,19 @@
         $('change-email').addEventListener('click', ()=>{ $('em-msg').className='msg'; $('em-new').value=''; $('em-pw').value=''; emModal.hidden=false; });
         emModal.querySelectorAll('[data-eclose]').forEach(el=>el.addEventListener('click', closeEm));
         document.addEventListener('keydown', e=>{ if(e.key==='Escape' && !emModal.hidden) closeEm(); });
+        // Espace admin : révèle le lien uniquement si le compte connecté est admin.
+        NX.adminCheck().then(r=>{ if(r && r.admin){ const a=$('admin-link'); if(a) a.hidden=false; } }).catch(()=>{});
         $('em-save').addEventListener('click', async ()=>{
           const m=$('em-msg'); hideMsg(m);
           const email=$('em-new').value.trim(), pw=$('em-pw').value;
-          if(!/.+@.+\..+/.test(email)){ showMsg(m,'Adresse e-mail invalide.','err'); return; }
-          if(!pw){ showMsg(m,'Entre ton mot de passe actuel pour confirmer.','err'); return; }
-          const b=$('em-save'); b.disabled=true; const prev=b.textContent; b.textContent='Changement…';
+          if(!/.+@.+\..+/.test(email)){ showMsg(m,T('em.invalidEmail','Adresse e-mail invalide.'),'err'); return; }
+          if(!pw){ showMsg(m,T('em.needPw','Entre ton mot de passe actuel pour confirmer.'),'err'); return; }
+          const b=$('em-save'); b.disabled=true; const prev=b.textContent; b.textContent=T('em.changing','Changement…');
           try {
             const r=await NX.changeEmail(email, pw);
             ACC=r.account||ACC; paintIdentity(ACC);
-            chip.className='email-chip no'; chip.innerHTML='<i class="ph ph-warning"></i> non vérifié'; $('verify-banner').hidden=false;
-            NX.toast('E-mail changé — confirme-le via le lien envoyé à ' + email + '.');
+            chip.className='email-chip no'; chip.innerHTML='<i class="ph ph-warning"></i> '+escapeHtml(T('acc.unverified','non vérifié')); $('verify-banner').hidden=false;
+            NX.toast(T('em.toastChanged','E-mail changé — confirme-le via le lien envoyé à {email}.',{email:email}));
             closeEm();
           } catch(err){ showMsg(m, err.message, 'err'); }
           finally { b.disabled=false; b.textContent=prev; }
@@ -721,29 +848,31 @@
       try { const { profile }=await NX.profile(); PROFILE=profile||{}; } catch(_){ PROFILE={}; }
       setAvatar(PROFILE.image, ACC.username);
       document.querySelectorAll('[data-copy="fc"]').forEach(b=>b.addEventListener('click', async ()=>{
-        try { await navigator.clipboard.writeText(ACC.friend_code); NX.toast('Friend code copié'); } catch(_){ NX.toast('Copie impossible'); }
+        try { await navigator.clipboard.writeText(ACC.friend_code); NX.toast(T('acc.fcCopied','Friend code copié')); } catch(_){ NX.toast(T('acc.copyFail','Copie impossible')); }
       }));
       $('add-friend').addEventListener('submit', async e=>{
         e.preventDefault(); const input=$('fc-input'); const code=input.value.trim(); if(!code) return;
         const b=e.target.querySelector('button'); b.disabled=true;
-        try { await NX.addFriend(code); NX.toast('Demande envoyée'); input.value=''; loadFriends(); }
+        try { await NX.addFriend(code); NX.toast(T('fr.requestSent','Demande envoyée')); input.value=''; loadFriends(); }
         catch(err){ NX.toast(err.message); } finally { b.disabled=false; }
       });
       document.querySelectorAll('#friend-modal [data-fclose]').forEach(el=>el.addEventListener('click', closeFriendModal));
       document.querySelectorAll('#game-modal [data-gclose]').forEach(el=>el.addEventListener('click', closeGameModal));
       $('fm-remove').addEventListener('click', async ()=>{
         if(!FRIEND_MODAL_PID) return;
-        if(!confirm('Retirer cet ami de ta liste ?')) return;
-        try { await NX.removeFriend(FRIEND_MODAL_PID); NX.toast('Ami supprimé'); closeFriendModal(); loadFriends(); }
+        if(!confirm(T('fr.confirmRemove','Retirer cet ami de ta liste ?'))) return;
+        try { await NX.removeFriend(FRIEND_MODAL_PID); NX.toast(T('fr.toastRemoved','Ami supprimé')); closeFriendModal(); loadFriends(); }
         catch(err){ NX.toast(err.message); }
       });
       $('fm-block').addEventListener('click', async ()=>{
         if(!FRIEND_MODAL_PID) return;
-        if(!confirm("Bloquer ce joueur ? Il sera retiré de tes amis et ne pourra plus t'envoyer de demande.")) return;
-        try { await NX.blockFriend(FRIEND_MODAL_PID); NX.toast('Joueur bloqué'); closeFriendModal(); loadFriends(); }
+        if(!confirm(T('fr.confirmBlock',"Bloquer ce joueur ? Il sera retiré de tes amis et ne pourra plus t'envoyer de demande."))) return;
+        try { await NX.blockFriend(FRIEND_MODAL_PID); NX.toast(T('fr.toastBlocked','Joueur bloqué')); closeFriendModal(); loadFriends(); }
         catch(err){ NX.toast(err.message); }
       });
       loadFriends(); loadHistory();
+      // Changement de langue : rafraîchit l'identité et les listes rendues en JS.
+      document.addEventListener('nx:lang', ()=>{ try{ if(ACC) paintIdentity(ACC); }catch(_){}; loadFriends(); loadHistory(); });
     })();
   </script>
 </body>

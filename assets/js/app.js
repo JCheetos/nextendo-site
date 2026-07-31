@@ -7,6 +7,7 @@
    ========================================================================== */
 const NX = {
   nexKey: "nx_nex_token",
+  turnstileToken: "", // verrou anti-relais : jeton Turnstile, posé par les pages login/register
 
   // Retourne l'ancien token localStorage s'il existe (compat ascendante).
   // Les nouveaux sessions utilisent le cookie HttpOnly — on n'écrit plus ici.
@@ -21,6 +22,7 @@ const NX = {
     // Envoie l'ancien token localStorage si présent (compat ascendante) ;
     // le serveur tokenFromRequest() checke d'abord le header, puis le cookie.
     if (this.token) opts.headers["Authorization"] = "Bearer " + this.token;
+    if (this.turnstileToken) opts.headers["Cf-Turnstile-Response"] = this.turnstileToken;
     const res = await fetch(path, opts);
     let data = {};
     try { data = await res.json(); } catch (_) {}
