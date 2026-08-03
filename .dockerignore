@@ -1,0 +1,58 @@
+# Things we don't need inside the build image. Kept narrow on purpose —
+# only exclude paths that are *generated* at build time. We let the
+# `Dockerfile` whittle .next/ out of the final stage explicitly.
+
+# Local environment files
+.env
+.env.local
+.env*.local
+
+# Git + GitHub metadata
+.git/
+.gitignore
+.gitattributes
+
+# CI / tests
+.github/
+.vscode/
+.idea/
+coverage/
+playwright-report/
+test-results/
+
+# Tooling caches
+.eslintcache
+.turbo
+.vercel
+
+# Editor configs we don't need in the runtime
+.DS_Store
+*.log
+*.swp
+*.bak
+*.tmp
+
+# Documentation that's useful locally but not in a running container.
+README-NEXT.md
+AGENTS.md
+Dockerfile
+.dockerignore
+
+# The legacy vanilla-JS site that nginx serves until cutover.
+# (Phase 6 assumes cutover will happen in a separate repo / worktree.)
+index.html
+login.html
+register.html
+compte.html
+sessions.html
+status.html
+telecharger.html
+forgot.html
+reset.html
+verify.html
+admin.html
+assets/
+
+# Dependency manifest *is* needed for the standalone bundle — `next start`
+# reads it to resolve workspace packages. Keep package.json + pnpm-lock.yaml.
+# (Both are listed in the COPY line of the Dockerfile.)
