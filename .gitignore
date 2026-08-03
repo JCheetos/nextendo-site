@@ -1,5 +1,5 @@
 *.conf
-*.yaml
+# Note: *.yaml is intentionally NOT ignored — pnpm-lock.yaml must be tracked.
 *.env
 *.key
 *.pem
