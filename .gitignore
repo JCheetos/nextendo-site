@@ -5,5 +5,37 @@
 *.pem
 node_modules/
 
-# Panneau admin : jamais dans le repo public
+# Next.js
+.next/
+out/
+build/
+dist/
+next-env.d.ts
+
+# Testing
+coverage/
+playwright-report/
+test-results/
+
+# OS / editor
+.DS_Store
+*.log
+.vscode/
+.idea/
+
+# Build artifacts
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+.playwright/
+
+# AI agent context — working notes for local AI sessions, not for the
+# public repo. The skill definitions under .agents/skills/ (~2.2 MB) and
+# the project-specific AI guidance in AGENTS.md are intentionally kept
+# out of version control. The condensed public-facing architecture doc
+# lives in README.md.
+AGENTS.md
+.agents/
+README-NEXT.md
+
+# Admin : jamais dans le repo public
 admin.html
