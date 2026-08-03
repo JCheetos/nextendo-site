@@ -1,15 +1,18 @@
 # syntax=docker/dockerfile:1.7
 # -----------------------------------------------------------------------------
-# Nextendo Network front-end — Next.js 16 (output: standalone)
+# Nextendo Network front-end — Next.js 16 (output: standalone) + pnpm
 # -----------------------------------------------------------------------------
 # Two-stage build:
-#  1. `deps` installs the full dev toolchain (Biome, TypeScript, Playwright,
-#     Vitest) only to compile and test the source. The standalone output
-#     doesn't need them in production.
-#  2. `runner` runs the standalone bundle on a slim node:lts-alpine image.
+#  1. `builder` installs the full dev toolchain (Biome, TypeScript,
+#     Playwright, Vitest) via pnpm/corepack, builds the source, and
+#     copies the standalone bundle to the runner stage.
+#  2. `runner` runs the standalone bundle on a slim node:20-alpine image
+#     as the unprivileged 'nextjs' user. The bundle ships with a minimal
+#     node_modules/ that already excludes devDeps (Next.js' standalone
+#     tracer handles that automatically).
 #
 # Build:  docker build -t nextendo-site:latest .
-# Run:    docker run -p 3000:3000 \
+# Run:    docker run --rm -p 3000:3000 \
 #             -e NEXT_PUBLIC_SITE_URL=https://nextendo.network \
 #             -e NEXTENDO_ACCOUNT_BASE_URL=https://account.nextendo.network \
 #             nextendo-site:latest
@@ -17,36 +20,27 @@
 
 ARG NODE_VERSION=20-alpine
 
-# ---- Stage 1: install devDeps + build the standalone bundle ----
+# ---- Stage 1: builder ----
 FROM node:${NODE_VERSION} AS builder
 
-# pnpm via corepack (matches `packageManager` field in package.json).
+# Enable pnpm via corepack (pinned by `packageManager` field in package.json).
 RUN corepack enable
 WORKDIR /app
 
 # Copy lockfile first for layer caching.
-COPY package.json pnpm-lock.yaml .npmrc ./
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 # Copy the rest of the source + config.
 COPY . .
 
-# Build the standalone output. The bundle lives under .next/standalone/.
+# Build the standalone output. .next/standalone/ already contains
+# server.js + a trimmed node_modules/ (Next.js' standalone tracer drops
+# devDeps automatically — no `pnpm deploy` needed).
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN pnpm run build
 
-# Strip dev-only deps from the standalone output to keep the image small.
-RUN pnpm deploy --filter ./nextendo-site --prod ./.next/standalone-build \
-    || cp -r ./.next/standalone ./.next/standalone-build
-
-# Prune devDeps so the standalone bundle doesn't carry Playwright/Vitest/etc.
-RUN cd ./.next/standalone-build && rm -rf node_modules/.cache
-
-# Copy the public assets into the standalone server.js's expected location.
-COPY --from=builder /app/public ./.next/standalone-build/public
-COPY --from=builder /app/.next/static ./.next/standalone-build/.next/static
-
-# ---- Stage 2: minimal runtime image ----
+# ---- Stage 2: runner (minimal runtime image) ----
 FROM node:${NODE_VERSION} AS runner
 
 ENV NODE_ENV=production \
@@ -54,14 +48,17 @@ ENV NODE_ENV=production \
     HOSTNAME=0.0.0.0 \
     NEXT_TELEMETRY_DISABLED=1
 
-# Run as the unprivileged `nextjs` user (Node's official image pattern).
+# Run as the unprivileged 'nextjs' user (Node's official image pattern).
 RUN addgroup --system --gid 1001 nodejs \
     && adduser --system --uid 1001 nextjs
 
 WORKDIR /app
 
-# Copy only what's needed at runtime.
-COPY --from=builder --chown=nextjs:nodejs /.next/standalone-build ./
+# Copy only what's needed at runtime:
+#  - .next/standalone/ contains server.js + trimmed node_modules/.
+#  - public/ holds static assets (favicon, avatars).
+#  - .next/static/ holds the hashed JS/CSS chunks referenced by server.js.
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
@@ -75,16 +72,3 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
     || exit 1
 
 CMD ["node", "server.js"]
-
-
-# -------------------------------------------------------------------
-# To build a smaller image without the standalone split, drop the
-# `runner` stage and use `node server.js` directly:
-#
-#   docker build -t nextendo-site:slim \
-#     --target builder .
-#   docker run -p 3000:3000 nextendo-site:slim
-#
-# The resulting image is ~400 MB instead of ~180 MB but skips the
-# `pnpm deploy` step, making CI simpler.
-# -------------------------------------------------------------------
