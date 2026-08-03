@@ -1,0 +1,634 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "features": "特徴",
+    "architecture": "仕組み",
+    "install": "導入",
+    "faq": "FAQ",
+    "login": "ログイン",
+    "register": "アカウント作成",
+    "download": "ダウンロード",
+    "status": "ステータス",
+    "mainNav": "メインナビゲーション",
+    "openMenu": "メニューを開く"
+  },
+  "form": {
+    "email": "メールアドレス",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "confirm": "確認",
+    "showPw": "パスワードを表示",
+    "emailPh": "you@example.com",
+    "password": "パスワード",
+    "hidePw": "パスワードを非表示",
+    "errors": {
+      "email": {
+        "required": "メールアドレスは必須です。",
+        "invalid": "メールアドレスが無効です。"
+      },
+      "password": {
+        "required": "パスワードは必須です。"
+      },
+      "username": {
+        "tooShort": "3文字以上。",
+        "tooLong": "16文字以下。",
+        "badChars": "英数字、_、- のみ。"
+      },
+      "login": {
+        "required": "この項目は必須です。"
+      }
+    }
+  },
+  "sess": {
+    "metaTitle": "マイセッション — Nextendo Network",
+    "live": "アカウントのセキュリティ",
+    "title": "アクティブなセッション",
+    "panelTitle": "アカウントにサインインしている場所",
+    "intro": "Nextendo アカウントに接続されているすべての機器がここに表示されます — ブラウザ、Ryujinx エミュレーター、Nintendo Switch など。1台をリモートで切断したり、すべてを一度に閉じたりできます。",
+    "loading": "セッションを読み込んでいます…",
+    "closeAll": "すべてのセッションを閉じる",
+    "closeAllHint": "「すべてのセッションを閉じる」は、このブラウザを含む<b>すべての</b>機器を切断します。誰かがあなたのアカウントにアクセスしていると思われる場合に便利です。",
+    "disconnect": "切断",
+    "disconnectMe": "自分を切断",
+    "now": "たった今",
+    "minAgo": "{n}分前",
+    "hAgo": "{n}時間前",
+    "jAgo": "{n}日前",
+    "seen": "最終アクセス {t}",
+    "empty": "アクティブなセッションはありません。",
+    "thisDevice": "この機器",
+    "playing": "ゲーム中",
+    "ipUnknown": "不明な IP",
+    "confirmMeTitle": "この機器から切断しますか？",
+    "confirmMeText": "このブラウザで再度サインインする必要があります。",
+    "confirmOtherTitle": "この機器を切断しますか？",
+    "confirmOtherText": "この機器は Nextendo アカウントから切断されます。Ryujinx または Switch では、再度サインインを促すメッセージが表示されます。",
+    "confirmAllTitle": "すべてのセッションを閉じますか？",
+    "confirmAllText": "このブラウザを含むすべての機器が切断されます。どこでも再度サインインする必要があります。",
+    "closeAllBtn": "すべて閉じる",
+    "loadErr": "セッションを読み込めませんでした。"
+  },
+  "acc": {
+    "metaTitle": "マイアカウント — Nextendo Network",
+    "live": "Nextendo に接続中",
+    "greetLoading": "読み込み中…",
+    "hi": "こんにちは、{name} さん。",
+    "editProfile": "プロフィールを編集",
+    "verifyBanner": "<b>メールアドレスを確認してください。</b> アカウント作成時に確認リンクをお送りしました。確認しないと、パスワードを忘れた際に再設定できなくなります。",
+    "resend": "メールを再送信",
+    "member": "メンバー",
+    "guest": "ゲスト",
+    "guestEmail": "ゲストアカウント（メールなし）",
+    "plugTitle": "このアカウントを接続",
+    "plugRyujinx": "<b>Ryujinx で：</b><b>アクション → Nextendo Network ログイン</b>を開き、認証情報を入力してから、対応ゲームを起動してそのオンラインメニューに進みます。",
+    "plugSwitch": "<b>Switch（CFW）で：</b><b>Nextendo</b> プロフィール（DNS リダイレクト）を有効にし、このアカウントを接続してプレイします。プロフィール画像とニックネームが引き継がれます。",
+    "security": "セキュリティ",
+    "securityIntro": "パスワード、メールアドレス、アカウントに接続されている機器を管理します。",
+    "resetPw": "パスワードを再設定",
+    "changeEmail": "メールを変更",
+    "mySessions": "マイセッション",
+    "adminSpace": "管理エリア",
+    "identity": "ネットワークアイデンティティ",
+    "pseudo": "ニックネーム",
+    "pid": "ネットワーク ID（PID）",
+    "discord": "Discord",
+    "memberSince": "登録日",
+    "friends": "フレンド",
+    "friendsLoading": "フレンドを読み込んでいます…",
+    "add": "追加",
+    "friendsHint": "friend code を共有すると、フレンドがあなたを追加できます — ゲーム内のオンラインで出会えます。",
+    "history": "プレイ履歴",
+    "historyLoading": "履歴を読み込んでいます…",
+    "historyEmpty": "まだ履歴がありません — プレイ後にプレイ時間がここに表示されます（エミュレーターから自動的に同期されます）。",
+    "historyErr": "履歴を読み込めませんでした。",
+    "copy": "コピー",
+    "fcCopied": "friend code をコピーしました",
+    "copyFail": "コピーに失敗しました",
+    "discordLinkedOn": "{d}に連携",
+    "noDiscord": "連携アカウントなし",
+    "linkDiscord": "Discord で連携",
+    "verified": "確認済み",
+    "unverified": "未確認",
+    "toastResent": "確認メールを再送信しました — 受信トレイをご確認ください。",
+    "toastResetSent": "再設定リンクを {email} に送信しました。",
+    "played": "{t} プレイ",
+    "playedOn": "{d}にプレイ",
+    "deleteAccount": "アカウントを削除"
+  },
+  "ed": {
+    "title": "プロフィールを編集",
+    "previewAria": "プロフィール画像のプレビュー",
+    "preview": "プレビュー",
+    "pseudo": "ニックネーム",
+    "pseudoHint": "3〜16文字 — 英数字、_ または -。",
+    "bgColor": "背景色",
+    "hexAria": "16進数カラーコード",
+    "photoSub": "プロフィール画像 <span class=\"ip-hint\">— キャラクター、背景、フレームを重ねます</span>",
+    "remove": "削除",
+    "filterGame": "ゲームで絞り込む",
+    "save": "保存",
+    "customColor": "カスタムカラー",
+    "layerChar": "キャラクター",
+    "layerBg": "背景",
+    "layerFrame": "フレーム",
+    "optAll": "すべて（{n}）",
+    "optCustom": "Custom / Nextendo（{n}）",
+    "optFirmware": "Nintendo Switch — デフォルト（{n}）",
+    "nothingHere": "ここには何もありません。",
+    "saving": "保存中…",
+    "badPseudo": "無効なニックネーム：3〜16文字（英数字、_ または -）。",
+    "toastSaved": "プロフィールを更新しました"
+  },
+  "fr": {
+    "defaultName": "フレンド",
+    "playtime": "プレイ時間",
+    "gamesPlayed": "プレイしたゲーム数",
+    "favGame": "お気に入りのゲーム",
+    "lastActivity": "最終アクティビティ",
+    "loading": "読み込み中…",
+    "block": "ブロック",
+    "remove": "削除",
+    "inGameShort": "ゲーム中…",
+    "inGameName": "ゲーム中 · {name}",
+    "inGame": "ゲーム中",
+    "online": "オンライン",
+    "offline": "オフライン",
+    "wantsToAdd": "があなたを追加しようとしています",
+    "accept": "承認",
+    "decline": "拒否",
+    "zeroMin": "0分",
+    "noHistory": "このフレンドにはまだ公開されているプレイ履歴がありません。",
+    "empty": "まだフレンドがいません。他のプレイヤーの friend code を追加してください。",
+    "loadErr": "フレンドを読み込めませんでした。",
+    "requestSent": "リクエストを送信しました",
+    "confirmRemove": "このフレンドをリストから削除しますか？",
+    "toastRemoved": "フレンドを削除しました",
+    "confirmBlock": "このプレイヤーをブロックしますか？フレンドから削除され、リクエストを送れなくなります。",
+    "toastBlocked": "プレイヤーをブロックしました",
+    "toastAdded": "フレンドを追加しました",
+    "favorite": "お気に入り",
+    "showMore": "もっと見る ({n})"
+  },
+  "gm": {
+    "defaultName": "ゲーム",
+    "yourProgress": "あなたの進捗",
+    "playtimeOf": "プレイ",
+    "lastSession": "前回のセッション",
+    "details": "詳細",
+    "genres": "ジャンル",
+    "publisher": "パブリッシャー",
+    "developer": "デベロッパー",
+    "release": "発売日",
+    "platforms": "プラットフォーム",
+    "links": "リンク",
+    "metacritic": "Metacritic",
+    "screenshotAria": "プレビュー {n}"
+  },
+  "em": {
+    "title": "メールアドレスを変更",
+    "intro": "新しいアドレスはメールでの確認が必要です。それまでの間、あなたのアカウントは再び「未確認」になります。",
+    "new": "新しいメールアドレス",
+    "newPh": "new@example.com",
+    "currentPw": "現在のパスワード",
+    "currentPwPh": "本人確認のため",
+    "save": "メールを変更",
+    "invalidEmail": "無効なメールアドレスです。",
+    "needPw": "確認のため現在のパスワードを入力してください。",
+    "changing": "変更中…",
+    "toastChanged": "メールを変更しました — {email} に送信されたリンクから確認してください。"
+  },
+  "del": {
+    "title": "アカウントを削除",
+    "warn": "この操作は<b>取り消せません</b>。ニックネーム、PID、メール、Discord が解放され、全員のフレンドリストから削除され、アクセスできなくなります。モデレーション用に「削除済み」の記録が残ります。",
+    "pw": "確認のためパスワードを入力",
+    "pwPh": "パスワード",
+    "confirm": "完全に削除",
+    "needPw": "確認のためパスワードを入力してください。",
+    "done": "アカウントを削除しました。またね。",
+    "err": "削除に失敗しました。"
+  },
+  "adm": {
+    "deleted": "削除されたアカウント",
+    "deletedIntro": "本人によって削除されたアカウントの記録（識別子は解放済み）。",
+    "thDeletedAt": "削除日",
+    "noDeleted": "削除されたアカウントはありません。",
+    "metaTitle": "管理 — Nextendo Network",
+    "live": "管理者エリア",
+    "title": "管理",
+    "checking": "アクセスを確認しています…",
+    "reports": "通報",
+    "showHandled": "対応済みを表示",
+    "refresh": "更新",
+    "users": "ユーザー",
+    "searchPh": "絞り込み（ニックネーム、メール、Discord、friend code、IP）…",
+    "thPseudo": "ニックネーム",
+    "thDiscord": "Discord",
+    "thFriendCode": "friend code",
+    "thStatus": "ステータス",
+    "thSessions": "セッション",
+    "thFriends": "フレンド",
+    "thCreated": "作成日",
+    "loading": "読み込み中…",
+    "confirmDeleteTitle": "このアカウントを削除しますか？",
+    "deleteForever": "完全に削除",
+    "now": "たった今",
+    "min": "{n}分",
+    "h": "{n}時間",
+    "j": "{n}日",
+    "stTotal": "ユーザー",
+    "stOnline": "オンライン",
+    "stVerified": "確認済み",
+    "stUnverified": "未確認",
+    "stDiscord": "Discord 連携済み",
+    "stBanned": "BAN済み",
+    "stToday": "今日",
+    "pillBanned": "BAN済み",
+    "pillOnline": "オンライン",
+    "pillOffline": "オフライン",
+    "pillPlaying": "ゲーム中",
+    "pillVerified": "確認済み",
+    "pillUnverified": "未確認",
+    "pillDisabled": "無効",
+    "pillAdmin": "管理者",
+    "notLinked": "未連携",
+    "unban": "BAN解除",
+    "delete": "削除",
+    "ban": "BAN",
+    "noUsers": "ユーザーがいません。",
+    "bannedIp": "BANされた IP：{ip}",
+    "count": "{n} / {t} ユーザー",
+    "confirmDeleteText": "アカウント「{name}」（PID {pid}）は完全に削除されます。メールアドレスと friend code は再び使用可能になります。",
+    "confirmBanTitle": "このアカウントを BAN しますか？",
+    "confirmBanText": "アカウント「{name}」（PID {pid}）は完全に削除され、BANされます：メールアドレス、登録時の IP、friend code は予約され（新規作成は不可能）、クラウドセーブと履歴は消去され、Discord を連携していた場合は Discord サーバーからもBANされます。",
+    "banForever": "完全に BAN",
+    "banReason": "管理エリアからの BAN",
+    "confirmUnbanTitle": "BAN を解除しますか？",
+    "confirmUnbanText": "「{name}」（PID {pid}）の BAN が解除されます：メールアドレス、登録時の IP、friend code は再び使用可能になり、Discord で BAN されていた場合はそこでも BAN が解除されます。アカウント自体は削除されたままです — BAN によって妨げられていた新規作成を、改めて行う必要があります。",
+    "liftBan": "BAN を解除",
+    "error": "エラー",
+    "reportNoDiscord": "Discord 未連携",
+    "noComment": "（コメントなし）",
+    "emulatorLog": "エミュレーターログ",
+    "empty": "（空）",
+    "reopen": "再オープン",
+    "markHandled": "対応済みにする",
+    "notInGame": "ゲーム中ではない",
+    "toHandle": "· 対応待ち{n}件",
+    "noneWaiting": "· 対応待ちなし",
+    "nothingToShow": "表示するものがありません。",
+    "accessDenied": "管理者のみアクセスできます。",
+    "loadError": "読み込みエラー",
+    "invalidSession": "無効なセッションです。"
+  },
+  "status": {
+    "metaTitle": "サーバーステータス — Nextendo Network",
+    "metaDesc": "Nextendo Network のゲームサーバーのリアルタイムステータスとオンラインプレイヤー数。",
+    "title": "サーバーステータス",
+    "lede": "各 Nextendo ゲームサーバーのリアルタイムステータスとオンラインプレイヤー数。自動的に更新されます。",
+    "checking": "確認中…",
+    "online": "オンライン",
+    "offline": "オフライン",
+    "player": "人",
+    "players": "人",
+    "allUp": "すべてのシステムが正常に稼働中",
+    "allUpSub": "すべてのゲームサーバーが応答しています。",
+    "allDown": "サーバーに接続できません",
+    "allDownSub": "現在、応答しているゲームサーバーはありません。",
+    "partial": "一部で障害発生",
+    "partialSub": "台のサーバーが応答していません。",
+    "unreachable": "ステータスを取得できません",
+    "unreachableSub": "ステータスサービスに接続できませんでした。",
+    "totalLabel": "オンラインプレイヤー",
+    "updated": "更新"
+  },
+  "download": {
+    "metaTitle": "ダウンロード — Nextendo Network",
+    "metaDesc": "Nextendo ネットワーク向けに事前設定されたエミュレーター Ryujinx Nextendo を Windows、Linux、macOS 用にダウンロード。",
+    "title": "Ryujinx Nextendo をダウンロード",
+    "lede": "Nextendo ネットワーク向けに事前設定されたエミュレーターのビルド。無料・オープンソース。プラットフォームを選択してください。",
+    "loading": "最新バージョンを検索中…",
+    "version": "最新バージョン",
+    "fallbackVersion": "GitHub の最新バージョン",
+    "button": "ダウンロード",
+    "fallback": "GitHub ですべてのバージョンを見る →",
+    "switch": {
+      "h": "実機の Switch（CFW）で",
+      "p": "エミュレーター不要：Nextendo homebrew をインストールし、DNS リダイレクトを有効にします。手順ガイドは Discord にあります。",
+      "cta": "Discord のガイド"
+    },
+    "legal": "Nextendo はゲーム、ROM、キーを一切配布しません。ご自身のコピーはご自身の責任で管理してください。"
+  },
+  "profile": {
+    "online": "接続中",
+    "account": "マイアカウント",
+    "sessions": "デバイス",
+    "logout": "ログアウト"
+  },
+  "footer": {
+    "tag": "Switchのオンラインを、コミュニティの手に。",
+    "project": "プロジェクト",
+    "community": "コミュニティ",
+    "status": "ステータス",
+    "operational": "稼働中",
+    "legal": "Nextendo Networkは独立したコミュニティプロジェクトであり、Nintendo Co., Ltd.とは一切関係ありません。「Nintendo Switch」および「Ryujinx」は各権利者に帰属します。ゲームやROMsの提供・配布は一切行いません。",
+    "rights": "Nextendo Network.",
+    "colsAria": "フッター"
+  },
+  "skip": "コンテンツへスキップ",
+  "index": {
+    "metaTitle": "Nextendo Network — Switchのオンラインを、コミュニティの手に",
+    "metaDesc": "Nextendo Networkは、Ryujinxエミュレータ向けにNintendo Switchのオンラインサービスを再実装します。アカウント、オンラインプレイ、フレンド、コミュニティ。"
+  },
+  "hero": {
+    "status": "ネットワーク稼働中",
+    "title": "あなたのSwitchのための<hl>独立した</hl>ネットワーク。",
+    "lede": "Nextendo Networkは、Ryujinxエミュレータ向けにSwitchのオンラインサービスを再実装します。",
+    "cta1": "アカウントを作成",
+    "cta2": "仕組みを見る"
+  },
+  "statement": {
+    "ariaLabel": "問題",
+    "text": "公式サービスが終了すれば、オンラインプレイもそれとともに失われます。<soft>Nextendoは、クリーンかつオープンにそれを取り戻します。</soft>"
+  },
+  "features": {
+    "title": "オンラインを、クリーンに再構築。",
+    "lede": "長く使えるよう作られた、明快で洗練されたスタック。元のサーバーの不透明なコピーではありません。"
+  },
+  "feat": {
+    "accounts": {
+      "h": "コミュニティアカウント",
+      "p": "公式サーバーから独立したアイデンティティ。フレンドやオンラインでの存在を、ゲームをまたいで引き継げます。"
+    },
+    "online": {
+      "h": "オンラインプレイ",
+      "p": "Mario Kart 8 Deluxe、Splatoon 2、Super Smash Bros. Ultimate。RyujinxやSwitchから、マルチプレイモードを楽しめます。"
+    },
+    "friends": {
+      "h": "フレンドとオンライン状況",
+      "p": "誰がオンラインで何をプレイしているかを確認して、そのままゲームに参加。"
+    },
+    "community": {
+      "h": "コミュニティ主導",
+      "p": "コミュニティによる、コミュニティのための非営利プロジェクト。"
+    },
+    "privacy": {
+      "h": "プライバシー",
+      "p": "トラッキングも転売もありません。あなたのゲームは、あなたのものです。"
+    }
+  },
+  "arch": {
+    "title": "Nextendoがあなたをつなぐ仕組み。",
+    "lede": "ゲームは、元のサーバーと通信していたのと同じように、私たちのサーバーと通信します。私たちはアイデンティティ、フレンド、マッチメイキングを担当し、対戦そのものはプレイヤー間でリアルタイムに行われます。",
+    "game": {
+      "h": "あなたのゲーム",
+      "p": "RyujinxまたはCFW導入済みのSwitch。ゲーム自体は改変しません。"
+    },
+    "account": {
+      "h": "Nextendoアカウント",
+      "p": "あなたのアイデンティティと署名済みトークンが、元のサーバーの代わりを務めます。"
+    },
+    "match": {
+      "h": "マッチメイキングとフレンド",
+      "p": "オープンなサーバーがマッチングを行い、その後の対戦はプレイヤー間のP2Pで行われます。"
+    }
+  },
+  "install": {
+    "title": "4ステップでオンラインへ。",
+    "lede": "Ryujinxエミュレータでも、CFW導入済みの実機Switchでも。どちらの場合も、Nextendoアカウントが鍵となり、すべては元に戻せます。",
+    "hint": "あなたのネットワーク上のアイデンティティ。ニックネーム、恒久的なFriend code、そしてフレンド。すべてのゲームとデバイスで共有されます。"
+  },
+  "member": {
+    "chip": "メンバー",
+    "label": "Friend code",
+    "pseudo": "ニックネーム"
+  },
+  "step1": {
+    "h": "Nextendoアカウントを作成",
+    "p": "3つの項目を入力するだけ、無料。恒久的なニックネームとFriend codeがすぐに手に入ります。",
+    "link": "アカウントを作成 →"
+  },
+  "step2": {
+    "h": "Ryujinx Nextendoを入手",
+    "p": "私たちのネットワーク向けに事前設定されたエミュレータビルド。CFW導入済みのSwitchの場合は、代わりにNextendoプロファイル（DNSリダイレクト）を有効にします。"
+  },
+  "step3": {
+    "h": "Nextendo Networkに接続",
+    "p": "Ryujinxで<b>Actions → Connect to Nextendo Network</b>を選び、認証情報を入力します。"
+  },
+  "step4": {
+    "h": "オンラインでプレイ",
+    "p": "Mario Kart 8、Splatoon 2、Smash Ultimateのいずれかを起動し、オンラインメニューを開いて、コミュニティに参加しましょう。"
+  },
+  "fig1": {
+    "l": "オンライン対応ゲーム"
+  },
+  "fig2": {
+    "l": "全ゲーム共通のアカウント"
+  },
+  "fig3": {
+    "l": "ボランティア運営"
+  },
+  "fig4": {
+    "l": "無料・広告なし"
+  },
+  "faq": {
+    "title": "よくある質問。",
+    "q1": "NextendoはNintendoと関係がありますか？",
+    "a1": "いいえ。独立したコミュニティプロジェクトです。Nintendo Co., Ltd.との提携・スポンサー・承認は一切ありません。",
+    "q2": "ゲームは自分で用意する必要がありますか？",
+    "a2": "Nextendoはゲーム、ROMs、キーを一切配布しません。本プロジェクトが提供するのはネットワークサービスのみです。ご自身のコピーの管理は、ご自身の責任となります。",
+    "q3": "対応しているエミュレータは何ですか？",
+    "a3": "優先対応はRyujinxです。コミュニティの貢献に応じて、他の環境にも対応していく可能性があります。",
+    "q4": "私のデータはどう扱われますか？",
+    "a4": "サービスの運用に必要な最小限のみです。トラッキングも転売もありません。コードは公開されているので、ご自身で確認できます。",
+    "q5": "どうすれば貢献できますか？",
+    "a5": "コード、翻訳、互換性テスト、モデレーションなど、どれも力になります。まずはリポジトリとコミュニティサーバーに参加してみてください。"
+  },
+  "cta": {
+    "title": "Switchを、もう一度つなぐ準備はできましたか？",
+    "lede": "開発をフォローし、コミュニティに参加して、最初のオンライン対戦を始めましょう。",
+    "b1": "アカウントを作成",
+    "b2": "ログイン"
+  },
+  "pw": {
+    "tooweak": "弱すぎます",
+    "weak": "弱い",
+    "medium": "普通",
+    "strong": "強い",
+    "verystrong": "非常に強い",
+    "reqLen": "8文字以上",
+    "reqDigit": "数字を1つ以上",
+    "reqSpecial": "特殊文字を1つ以上",
+    "show": "パスワードを表示",
+    "hide": "パスワードを隠す"
+  },
+  "login": {
+    "metaTitle": "ログイン — Nextendo Network",
+    "metaDesc": "Nextendo Network アカウントにログインして、friend code、フレンド、ゲームのオンラインを確認しましょう。",
+    "tag": "おかえりなさい",
+    "asideTitle": "続きから始めましょう。",
+    "asideLede": "Nextendo アカウントにログインして、friend code、フレンド、ゲームのオンラインを確認しましょう。",
+    "point1": "すべてのゲームで共通のネットワークアイデンティティ",
+    "point2": "friend code はセッションをまたいで保持されます",
+    "point3": "Ryujinx や Switch にすぐ接続できます",
+    "cardTitle": "ログイン",
+    "cardSub": "メールアドレスとパスワードでログインしてください。",
+    "forgot": "パスワードをお忘れですか？",
+    "submit": "ログイン",
+    "loading": "ログイン中…",
+    "footText": "アカウントをお持ちでないですか？",
+    "footLink": "作成する"
+  },
+  "register": {
+    "metaTitle": "アカウント作成 — Nextendo Network",
+    "metaDesc": "Nextendo Network アカウントを作成しましょう。ネットワークアイデンティティ、friend code、そして Ryujinx での Switch ゲームのオンラインプレイが手に入ります。",
+    "tag": "ずっと無料",
+    "asideTitle": "あなたのアイデンティティを、ネットワークに。",
+    "asideLede": "Nextendo アカウントがあれば、永続的な friend code、フレンドリスト、そして対応するすべてのタイトルでのオンラインプレイが利用できます。",
+    "point1": "ワンクリックでメールを確認、広告なし",
+    "point2": "Ryujinx <em>と</em> Switch を1つのアカウントで",
+    "point3": "フレンドとオンラインの在席状況があなたについてきます",
+    "chip": "新規",
+    "previewName": "あなたのニックネーム",
+    "cardTitle": "アカウントを作成",
+    "cardSub": "3つの項目で、オンラインに。",
+    "closedNotice": "<strong>登録は一時的に停止しています。</strong><br>Nextendo Network の新バージョンを準備中です。アカウント作成はまもなく再開します。数日後にまたご確認ください！",
+    "username": "ニックネーム（表示名）",
+    "usernamePh": "Inkling_Pro",
+    "usernameHint": "3〜16文字。ニックネームは他の人と同じでも構いません。あなたを区別するのは friend code です。",
+    "emailHint": "このメールアドレスでログインします。",
+    "passwordPh": "8文字以上",
+    "reqLen": "8文字以上",
+    "reqDigit": "数字を1文字以上",
+    "reqSpecial": "特殊文字を1文字以上（! @ # $ …）",
+    "password2": "パスワードの確認",
+    "password2Ph": "パスワードを再入力",
+    "password2Hint": "2つのパスワードが一致している必要があります。",
+    "submit": "アカウントを作成",
+    "footText": "すでにアカウントをお持ちですか？",
+    "footLink": "ログイン",
+    "vmTitle": "メールアドレスを確認",
+    "vmBody": "確認リンクを <span class=\"mono\" id=\"vm-email\">あなたのアドレス</span> に送信しました。クリックしてメールアドレスを確認してください。アカウントが保護され、パスワードを忘れたときに再設定できるようになります。",
+    "vmHint": "届きませんでしたか？迷惑メールフォルダを確認するか、アカウントページからリンクを再送してください。",
+    "vmContinue": "アカウントに進む",
+    "pwMatch": "パスワードが一致しています。",
+    "pwNoMatch": "パスワードが一致しません。",
+    "usernameHintBad": "3〜16文字：英数字、_ または -。",
+    "usernameHintOk": "完璧です。あなたを区別するのは friend code です。",
+    "loading": "作成中…",
+    "closedNoticeTitle": "登録は一時的に停止しています。",
+    "closedNoticeBody": "Nextendo Network の新バージョンを準備中です。アカウント作成はまもなく再開します。数日後にまたご確認ください！"
+  },
+  "forgot": {
+    "metaTitle": "パスワードをお忘れの方 — Nextendo Network",
+    "metaDesc": "Nextendo Network アカウントのパスワードを再設定します。安全なリンクをメールでお送りします。",
+    "tag": "誰にでもあることです",
+    "asideTitle": "パスワードをお忘れですか？",
+    "asideLede": "アカウントのメールアドレスを入力してください。新しいパスワードを設定するための安全なリンクをお送りします。リンクは1時間で期限切れになります。",
+    "point1": "1回限りのリンク、有効期限は1時間",
+    "point2": "friend code とフレンドは保持されます",
+    "point3": "他のデータには一切影響しません",
+    "cardTitle": "再設定",
+    "cardSub": "再設定用のリンクをメールでお送りします。",
+    "submit": "リンクを送信",
+    "footText": "やっぱり思い出しましたか？",
+    "footLink": "ログイン",
+    "loading": "送信中…",
+    "sent": "このアドレスのアカウントが存在する場合、再設定リンクを送信しました。受信トレイ（および迷惑メール）をご確認ください。",
+    "done": "リンクを送信しました ✓"
+  },
+  "reset": {
+    "metaTitle": "新しいパスワード — Nextendo Network",
+    "tag": "最後のステップ",
+    "asideTitle": "新しいパスワード。",
+    "asideLede": "強力なパスワードを設定してください。8文字以上で、数字と特殊文字を含めてください。設定すると、すぐに古いパスワードと置き換わります。",
+    "point1": "リンクは1回限りです",
+    "point2": "ゲームにはログインしたままになります",
+    "cardTitle": "新しいパスワード",
+    "cardSub": "入力ミスを防ぐため、2回入力してください。",
+    "newPassword": "新しいパスワード",
+    "pwPh": "8文字以上",
+    "reqLen": "8文字以上",
+    "reqDigit": "数字を1文字以上",
+    "reqSpecial": "特殊文字を1文字以上（! @ # $ …）",
+    "confirm": "パスワードの確認",
+    "pw2Ph": "パスワードを再入力",
+    "submit": "パスワードを保存",
+    "footLink": "ログインに戻る",
+    "errNoToken": "無効なリンクです：トークンがありません。「パスワードをお忘れの方」から再度リクエストしてください。",
+    "p2Match": "パスワードが一致しています。",
+    "p2NoMatch": "パスワードが一致しません。",
+    "p2Default": "2つのパスワードが一致している必要があります。",
+    "saving": "保存中…",
+    "okReset": "パスワードを再設定しました！ログインへ移動します…",
+    "done": "完了 ✓"
+  },
+  "verify": {
+    "metaTitle": "メール確認 — Nextendo Network",
+    "title": "確認中…",
+    "checking": "メールアドレスを確認しています。少々お待ちください。",
+    "ctaAccount": "アカウントへ移動",
+    "ctaLogin": "ログイン",
+    "failTitle": "確認に失敗しました",
+    "errNoToken": "無効なリンクです：確認トークンがありません。アカウントページからメールを再送してください。",
+    "successTitle": "メールを確認しました！",
+    "successMsg": "アドレス {email} が確認されました。アカウントが保護されました。",
+    "errGeneric": "無効または期限切れのリンクです。"
+  },
+  "progress": {
+    "title": "進捗状況",
+    "lede": "各ゲームの進捗状況。多くはすでにプレイ可能ですが、まだ100%ではありません。残りの状況はパーセンテージで表示されます。",
+    "chart": {
+      "courses": {
+        "detail": "世界中のオンラインレース、ロビーとフレンド"
+      },
+      "turf": {
+        "detail": "8人用タフウォー、フレンドとサーモンラン"
+      },
+      "arenas": {
+        "detail": "オンラインアリーナとフレンド"
+      },
+      "islands": {
+        "detail": "フレンド同士の島への訪問"
+      },
+      "clubs": {
+        "detail": "オンラインマッチメイキングとクラブ"
+      },
+      "servers": {
+        "detail": "オンラインサーバーへの接続"
+      },
+      "launch": {
+        "detail": "ゲームは正しく起動します"
+      },
+      "wip": {
+        "detail": "準備中"
+      }
+    }
+  },
+  "lang": {
+    "label": "言語"
+  },
+  "figures": {
+    "ariaLabel": "ネットワークを数字で"
+  },
+  "auth": {
+    "errors": {
+      "network": "ネットワークエラーです。少ししてから再試行してください。",
+      "invalidCredentials": "メールまたはパスワードが正しくありません。",
+      "emailTaken": "このメールアドレスはすでに使用されています。",
+      "usernameTaken": "このニックネームはすでに使われています。",
+      "invalidEmail": "メールアドレスが無効です。",
+      "invalidUsername": "ニックネームが無効です（3〜16文字：英数字、_ または -）。",
+      "passwordTooWeak": "パスワードが弱すぎます。8文字以上、数字、記号を含めてください。",
+      "passwordsMismatch": "パスワードが一致しません。",
+      "closedRegistration": "登録は一時的に停止されています。",
+      "turnstile": "CAPTCHA 認証に失敗しました。もう一度お試しください。",
+      "unknown": "エラーが発生しました。もう一度お試しください。"
+    }
+  },
+  "a11y": {
+    "a11y": {
+      "skip": "本文へスキップ"
+    }
+  }
+}

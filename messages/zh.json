@@ -1,0 +1,634 @@
+{
+  "nav": {
+    "home": "首页",
+    "features": "功能",
+    "architecture": "架构",
+    "install": "安装",
+    "faq": "FAQ",
+    "login": "登录",
+    "register": "创建账号",
+    "download": "下载",
+    "status": "状态",
+    "mainNav": "主导航",
+    "openMenu": "打开菜单"
+  },
+  "form": {
+    "email": "电子邮箱",
+    "cancel": "取消",
+    "close": "关闭",
+    "confirm": "确认",
+    "showPw": "显示密码",
+    "emailPh": "you@example.com",
+    "password": "密码",
+    "hidePw": "隐藏密码",
+    "errors": {
+      "email": {
+        "required": "请输入邮箱地址。",
+        "invalid": "邮箱地址无效。"
+      },
+      "password": {
+        "required": "请输入密码。"
+      },
+      "username": {
+        "tooShort": "至少 3 个字符。",
+        "tooLong": "最多 16 个字符。",
+        "badChars": "仅支持字母、数字、_ 或 -。"
+      },
+      "login": {
+        "required": "此字段为必填项。"
+      }
+    }
+  },
+  "sess": {
+    "metaTitle": "我的会话 — Nextendo Network",
+    "live": "账户安全",
+    "title": "活动会话",
+    "panelTitle": "您的账户已在哪些设备上登录",
+    "intro": "每一台连接到您 Nextendo 账户的设备都会显示在这里——浏览器、Ryujinx 模拟器或 Nintendo Switch。您可以远程断开其中一台，或一次性全部注销。",
+    "loading": "正在加载您的会话…",
+    "closeAll": "注销所有会话",
+    "closeAllHint": "“注销所有会话”将断开您的<b>所有</b>设备——包括当前这个浏览器。如果您怀疑有其他人访问了您的账户，此功能会很有用。",
+    "disconnect": "断开",
+    "disconnectMe": "断开本设备",
+    "now": "刚刚",
+    "minAgo": "{n} 分钟前",
+    "hAgo": "{n} 小时前",
+    "jAgo": "{n} 天前",
+    "seen": "上次活动 {t}",
+    "empty": "没有活动会话。",
+    "thisDevice": "当前设备",
+    "playing": "游戏中",
+    "ipUnknown": "未知 IP",
+    "confirmMeTitle": "从此设备断开？",
+    "confirmMeText": "您需要在此浏览器上重新登录。",
+    "confirmOtherTitle": "断开此设备？",
+    "confirmOtherText": "此设备将与您的 Nextendo 账户断开连接。在 Ryujinx 或 Switch 上，将弹出提示要求重新登录。",
+    "confirmAllTitle": "注销所有会话？",
+    "confirmAllText": "您的所有设备都将断开连接，包括当前浏览器。您需要在所有设备上重新登录。",
+    "closeAllBtn": "全部注销",
+    "loadErr": "无法加载会话。"
+  },
+  "acc": {
+    "metaTitle": "我的账户 — Nextendo Network",
+    "live": "已连接到 Nextendo",
+    "greetLoading": "加载中…",
+    "hi": "你好，{name}。",
+    "editProfile": "编辑资料",
+    "verifyBanner": "<b>请确认您的邮箱地址。</b>我们在您创建账户时向您发送了一个验证链接。若不验证，一旦忘记密码，您将无法找回。",
+    "resend": "重新发送邮件",
+    "member": "会员",
+    "guest": "访客",
+    "guestEmail": "访客账户（无邮箱）",
+    "plugTitle": "连接此账户",
+    "plugRyujinx": "<b>在 Ryujinx 上：</b>打开 <b>Actions → Nextendo Network login</b>，输入您的凭据，然后启动一款受支持的游戏并进入其联机菜单。",
+    "plugSwitch": "<b>在 Switch（CFW）上：</b>启用 <b>Nextendo</b> 配置文件（DNS 重定向），连接此账户，即可游戏。您的头像和昵称会跟随您。",
+    "security": "安全",
+    "securityIntro": "管理您的密码、邮箱地址以及连接到您账户的设备。",
+    "resetPw": "重置密码",
+    "changeEmail": "更改邮箱",
+    "mySessions": "我的会话",
+    "adminSpace": "管理区",
+    "identity": "网络身份",
+    "pseudo": "昵称",
+    "pid": "网络 ID（PID）",
+    "discord": "Discord",
+    "memberSince": "注册于",
+    "friends": "好友",
+    "friendsLoading": "正在加载您的好友…",
+    "add": "添加",
+    "friendsHint": "分享您的 friend code，好友便能添加您——你们将在游戏中联机相遇。",
+    "history": "游戏记录",
+    "historyLoading": "正在加载记录…",
+    "historyEmpty": "暂无记录——您游玩后，游戏时长将显示在这里（从模拟器自动同步）。",
+    "historyErr": "无法加载记录。",
+    "copy": "复制",
+    "fcCopied": "已复制 friend code",
+    "copyFail": "复制失败",
+    "discordLinkedOn": "于 {d} 关联",
+    "noDiscord": "未关联账户",
+    "linkDiscord": "在 Discord 上关联",
+    "verified": "已验证",
+    "unverified": "未验证",
+    "toastResent": "验证邮件已重新发送——请查收您的收件箱。",
+    "toastResetSent": "重置链接已发送至 {email}。",
+    "played": "已游玩 {t}",
+    "playedOn": "于 {d} 游玩",
+    "deleteAccount": "删除我的账号"
+  },
+  "ed": {
+    "title": "编辑资料",
+    "previewAria": "头像预览",
+    "preview": "预览",
+    "pseudo": "昵称",
+    "pseudoHint": "3 到 16 个字符——字母、数字、_ 或 -。",
+    "bgColor": "背景颜色",
+    "hexAria": "十六进制颜色代码",
+    "photoSub": "头像 <span class=\"ip-hint\">— 叠加角色、背景和边框</span>",
+    "remove": "移除",
+    "filterGame": "按游戏筛选",
+    "save": "保存",
+    "customColor": "自定义颜色",
+    "layerChar": "角色",
+    "layerBg": "背景",
+    "layerFrame": "边框",
+    "optAll": "全部（{n}）",
+    "optCustom": "Custom / Nextendo（{n}）",
+    "optFirmware": "Nintendo Switch — 默认（{n}）",
+    "nothingHere": "这里什么也没有。",
+    "saving": "正在保存…",
+    "badPseudo": "昵称无效：3 到 16 个字符（字母、数字、_ 或 -）。",
+    "toastSaved": "资料已更新"
+  },
+  "fr": {
+    "defaultName": "好友",
+    "playtime": "游戏时长",
+    "gamesPlayed": "已玩游戏",
+    "favGame": "最爱的游戏",
+    "lastActivity": "最近活动",
+    "loading": "加载中…",
+    "block": "屏蔽",
+    "remove": "移除",
+    "inGameShort": "游戏中…",
+    "inGameName": "游戏中 · {name}",
+    "inGame": "游戏中",
+    "online": "在线",
+    "offline": "离线",
+    "wantsToAdd": "想添加您为好友",
+    "accept": "接受",
+    "decline": "拒绝",
+    "zeroMin": "0 分钟",
+    "noHistory": "该好友暂无公开的游戏记录。",
+    "empty": "暂无好友。添加其他玩家的 friend code。",
+    "loadErr": "无法加载您的好友。",
+    "requestSent": "请求已发送",
+    "confirmRemove": "将该好友从您的列表中移除？",
+    "toastRemoved": "已移除好友",
+    "confirmBlock": "屏蔽该玩家？他们将被从您的好友中移除，且无法再向您发送请求。",
+    "toastBlocked": "已屏蔽玩家",
+    "toastAdded": "已添加好友",
+    "favorite": "收藏",
+    "showMore": "查看更多 ({n})"
+  },
+  "gm": {
+    "defaultName": "游戏",
+    "yourProgress": "您的进度",
+    "playtimeOf": "已游玩",
+    "lastSession": "上次游玩",
+    "details": "详情",
+    "genres": "类型",
+    "publisher": "发行商",
+    "developer": "开发商",
+    "release": "发行日期",
+    "platforms": "平台",
+    "links": "链接",
+    "metacritic": "Metacritic",
+    "screenshotAria": "预览 {n}"
+  },
+  "em": {
+    "title": "更改邮箱地址",
+    "intro": "您的新地址需要通过邮件确认。在此之前，您的账户将再次变为“未验证”状态。",
+    "new": "新邮箱地址",
+    "newPh": "new@example.com",
+    "currentPw": "您当前的密码",
+    "currentPwPh": "以确认确实是您本人",
+    "save": "更改邮箱",
+    "invalidEmail": "邮箱地址无效。",
+    "needPw": "请输入您当前的密码以确认。",
+    "changing": "正在更改…",
+    "toastChanged": "邮箱已更改——请通过发送至 {email} 的链接进行确认。"
+  },
+  "del": {
+    "title": "删除我的账号",
+    "warn": "此操作<b>不可撤销</b>。你的昵称、PID、邮箱和 Discord 都会被释放，你会从所有人的好友列表中移除，并失去访问权限。系统会保留一条“已删除”记录以供管理。",
+    "pw": "输入密码以确认",
+    "pwPh": "密码",
+    "confirm": "永久删除",
+    "needPw": "请输入密码以确认。",
+    "done": "账号已删除。再见。",
+    "err": "删除失败。"
+  },
+  "adm": {
+    "deleted": "已删除的账号",
+    "deletedIntro": "由用户本人删除的账号记录（标识符已释放）。",
+    "thDeletedAt": "删除于",
+    "noDeleted": "没有已删除的账号。",
+    "metaTitle": "管理 — Nextendo Network",
+    "live": "管理员区域",
+    "title": "管理",
+    "checking": "正在检查访问权限…",
+    "reports": "举报",
+    "showHandled": "显示已处理",
+    "refresh": "刷新",
+    "users": "用户",
+    "searchPh": "筛选（昵称、邮箱、Discord、friend code、IP）…",
+    "thPseudo": "昵称",
+    "thDiscord": "Discord",
+    "thFriendCode": "friend code",
+    "thStatus": "状态",
+    "thSessions": "会话",
+    "thFriends": "好友",
+    "thCreated": "创建时间",
+    "loading": "加载中…",
+    "confirmDeleteTitle": "删除此账户？",
+    "deleteForever": "永久删除",
+    "now": "刚刚",
+    "min": "{n} 分钟",
+    "h": "{n} 小时",
+    "j": "{n} 天",
+    "stTotal": "用户",
+    "stOnline": "在线",
+    "stVerified": "已验证",
+    "stUnverified": "未验证",
+    "stDiscord": "已关联 Discord",
+    "stBanned": "已封禁",
+    "stToday": "今日",
+    "pillBanned": "已封禁",
+    "pillOnline": "在线",
+    "pillOffline": "离线",
+    "pillPlaying": "游戏中",
+    "pillVerified": "已验证",
+    "pillUnverified": "未验证",
+    "pillDisabled": "已禁用",
+    "pillAdmin": "管理员",
+    "notLinked": "未关联",
+    "unban": "解除封禁",
+    "delete": "删除",
+    "ban": "封禁",
+    "noUsers": "没有用户。",
+    "bannedIp": "已封禁 IP：{ip}",
+    "count": "{n} / {t} 位用户",
+    "confirmDeleteText": "账户“{name}”（PID {pid}）将被永久删除。其邮箱和 friend code 将重新可用。",
+    "confirmBanTitle": "封禁此账户？",
+    "confirmBanText": "账户“{name}”（PID {pid}）将被永久删除并封禁：其邮箱、注册 IP 和 friend code 将被保留（无法创建新账户），其云存档和记录将被清除；如果它关联了 Discord，也将被从 Discord 服务器封禁。",
+    "banForever": "永久封禁",
+    "banReason": "从管理区封禁",
+    "confirmUnbanTitle": "解除封禁？",
+    "confirmUnbanText": "对“{name}”（PID {pid}）的封禁将被解除：其邮箱、注册 IP 和 friend code 将重新可用；如果它曾被从 Discord 封禁，也将在那里解除封禁。账户本身仍保持删除状态——他们需要重新创建一个账户，而这正是此前封禁所阻止的。",
+    "liftBan": "解除封禁",
+    "error": "错误",
+    "reportNoDiscord": "未关联 Discord",
+    "noComment": "（无备注）",
+    "emulatorLog": "模拟器日志",
+    "empty": "（空）",
+    "reopen": "重新打开",
+    "markHandled": "标记为已处理",
+    "notInGame": "不在游戏中",
+    "toHandle": "· {n} 待处理",
+    "noneWaiting": "· 无待处理",
+    "nothingToShow": "没有可显示的内容。",
+    "accessDenied": "仅限管理员访问。",
+    "loadError": "加载错误",
+    "invalidSession": "会话无效。"
+  },
+  "status": {
+    "metaTitle": "服务器状态 — Nextendo Network",
+    "metaDesc": "Nextendo Network 游戏服务器的实时状态和在线玩家数量。",
+    "title": "服务器状态",
+    "lede": "每个 Nextendo 游戏服务器的实时状态以及在线玩家数量。自动刷新。",
+    "checking": "检查中…",
+    "online": "在线",
+    "offline": "离线",
+    "player": "位玩家",
+    "players": "位玩家",
+    "allUp": "所有服务正常运行",
+    "allUpSub": "所有游戏服务器均有响应。",
+    "allDown": "服务器无法访问",
+    "allDownSub": "目前没有游戏服务器响应。",
+    "partial": "部分中断",
+    "partialSub": "个服务器无响应。",
+    "unreachable": "状态不可用",
+    "unreachableSub": "无法连接到状态服务。",
+    "totalLabel": "在线玩家",
+    "updated": "更新于"
+  },
+  "download": {
+    "metaTitle": "下载 — Nextendo Network",
+    "metaDesc": "下载 Ryujinx Nextendo，为 Nextendo 网络预配置的模拟器，支持 Windows、Linux 和 macOS。",
+    "title": "下载 Ryujinx Nextendo",
+    "lede": "为 Nextendo 网络预配置的模拟器版本。免费且开源。选择您的平台。",
+    "loading": "正在查找最新版本…",
+    "version": "最新版本",
+    "fallbackVersion": "GitHub 上的最新版本",
+    "button": "下载",
+    "fallback": "在 GitHub 上查看所有版本 →",
+    "switch": {
+      "h": "在真实的 Switch 上（CFW）",
+      "p": "无需模拟器：安装 Nextendo homebrew 并启用 DNS 重定向。分步指南在我们的 Discord 上。",
+      "cta": "Discord 上的指南"
+    },
+    "legal": "Nextendo 不分发任何游戏、ROM 或密钥。您需自行对自己的副本负责。"
+  },
+  "profile": {
+    "online": "已连接",
+    "account": "我的账号",
+    "sessions": "设备",
+    "logout": "退出登录"
+  },
+  "footer": {
+    "tag": "Switch 联机，交还给社区。",
+    "project": "项目",
+    "community": "社区",
+    "status": "状态",
+    "operational": "正常运行",
+    "legal": "Nextendo Network 是一个独立的社区项目，与 Nintendo Co., Ltd. 没有任何隶属关系。“Nintendo Switch”和“Ryujinx”归其各自所有者所有。本项目不提供或分发任何游戏或 ROMs。",
+    "rights": "Nextendo Network.",
+    "colsAria": "页脚"
+  },
+  "skip": "跳到主要内容",
+  "index": {
+    "metaTitle": "Nextendo Network — Switch 联机，交还给社区",
+    "metaDesc": "Nextendo Network 为 Ryujinx 模拟器重新实现了 Nintendo Switch 的联机服务。账号、联机对战、好友与社区。"
+  },
+  "hero": {
+    "status": "网络运行中",
+    "title": "为你的 Switch 打造的<hl>独立</hl>网络。",
+    "lede": "Nextendo Network 为 Ryujinx 模拟器重新实现了 Switch 的联机服务。",
+    "cta1": "创建我的账号",
+    "cta2": "工作原理"
+  },
+  "statement": {
+    "ariaLabel": "问题",
+    "text": "当官方服务关闭时，联机对战也随之消亡。<soft>Nextendo 让它以干净、开放的方式重获新生。</soft>"
+  },
+  "features": {
+    "title": "联机服务，干净重写。",
+    "lede": "清晰、精良、经得起时间考验的技术栈。而非对原始服务器的晦涩复制。"
+  },
+  "feat": {
+    "accounts": {
+      "h": "社区账号",
+      "p": "独立于官方服务器的身份。在不同游戏之间保留你的好友和在线状态。"
+    },
+    "online": {
+      "h": "联机对战",
+      "p": "Mario Kart 8 Deluxe、Splatoon 2、Super Smash Bros. Ultimate：多人模式，来自 Ryujinx 或你的 Switch。"
+    },
+    "friends": {
+      "h": "好友与在线状态",
+      "p": "查看谁在线、正在玩什么，并加入游戏。"
+    },
+    "community": {
+      "h": "社区驱动",
+      "p": "一个非营利项目，由社区打造、为社区服务。"
+    },
+    "privacy": {
+      "h": "隐私",
+      "p": "不追踪，不转售。你的游戏始终属于你。"
+    }
+  },
+  "arch": {
+    "title": "Nextendo 如何连接你。",
+    "lede": "你的游戏与我们的服务器通信，就像它与原始服务器通信一样。我们负责身份、好友和匹配 —— 对战本身则在玩家之间实时进行。",
+    "game": {
+      "h": "你的游戏",
+      "p": "Ryujinx 或运行 CFW 的 Switch。游戏本身不会被修改。"
+    },
+    "account": {
+      "h": "Nextendo 账号",
+      "p": "你的身份和一个已签名的令牌取代了原始服务器。"
+    },
+    "match": {
+      "h": "匹配与好友",
+      "p": "我们的开放服务器为你配对；随后对战在玩家之间以 P2P 进行。"
+    }
+  },
+  "install": {
+    "title": "四步开始联机。",
+    "lede": "在 Ryujinx 模拟器或运行 CFW 的真实 Switch 上。无论哪种方式，你的 Nextendo 账号都是关键 —— 而且一切都可以还原。",
+    "hint": "你的网络身份：一个昵称、一个永久的 Friend code，以及你的好友 —— 在你所有的游戏和设备之间共享。"
+  },
+  "member": {
+    "chip": "会员",
+    "label": "Friend code",
+    "pseudo": "昵称"
+  },
+  "step1": {
+    "h": "创建你的 Nextendo 账号",
+    "p": "免费，只需填写三个字段。你将立即获得永久的昵称和 Friend code。",
+    "link": "创建我的账号 →"
+  },
+  "step2": {
+    "h": "获取 Ryujinx Nextendo",
+    "p": "为我们的网络预先配置好的模拟器版本。在 Switch CFW 上，则改为启用 Nextendo 配置文件（DNS 重定向）。"
+  },
+  "step3": {
+    "h": "连接到 Nextendo Network",
+    "p": "在 Ryujinx 中：<b>操作 → 连接到 Nextendo Network</b>，然后输入你的凭据。"
+  },
+  "step4": {
+    "h": "开始联机",
+    "p": "启动 Mario Kart 8、Splatoon 2 或 Smash Ultimate，打开联机菜单，找到社区。"
+  },
+  "fig1": {
+    "l": "可联机游戏"
+  },
+  "fig2": {
+    "l": "一个账号，畅玩所有游戏"
+  },
+  "fig3": {
+    "l": "志愿运营"
+  },
+  "fig4": {
+    "l": "免费，无广告"
+  },
+  "faq": {
+    "title": "常见问题。",
+    "q1": "Nextendo 与 Nintendo 有关联吗？",
+    "a1": "没有。这是一个独立的社区项目。与 Nintendo Co., Ltd. 没有任何隶属、赞助或认可关系。",
+    "q2": "我必须自备游戏吗？",
+    "a2": "Nextendo 不分发任何游戏、ROMs 或密钥。本项目仅提供网络服务。你需自行为你的游戏副本负责。",
+    "q3": "支持哪些模拟器？",
+    "a3": "优先支持 Ryujinx。随着社区的贡献，未来可能支持其他环境。",
+    "q4": "你们如何处理我的数据？",
+    "a4": "仅保留运行服务所需的最少数据。不追踪，不转售。代码是开放的，你可以自行查看。",
+    "q5": "我该如何参与贡献？",
+    "a5": "代码、翻译、兼容性测试或社区管理：一切贡献都有帮助。加入代码仓库和社区服务器即可开始。"
+  },
+  "cta": {
+    "title": "准备好重新连接你的 Switch 了吗？",
+    "lede": "关注开发进展，加入社区，开始你的第一场联机对战。",
+    "b1": "创建我的账号",
+    "b2": "登录"
+  },
+  "pw": {
+    "tooweak": "太弱",
+    "weak": "弱",
+    "medium": "中等",
+    "strong": "强",
+    "verystrong": "非常强",
+    "reqLen": "至少 8 个字符",
+    "reqDigit": "至少一位数字",
+    "reqSpecial": "至少一个特殊字符",
+    "show": "显示密码",
+    "hide": "隐藏密码"
+  },
+  "login": {
+    "metaTitle": "登录 — Nextendo Network",
+    "metaDesc": "登录你的 Nextendo Network 账号，找回你的 Friend code、好友以及游戏的在线联机。",
+    "tag": "很高兴再次见到你",
+    "asideTitle": "从上次离开的地方继续。",
+    "asideLede": "登录你的 Nextendo 账号，找回你的 Friend code、好友以及游戏的在线联机。",
+    "point1": "一个贯穿你所有游戏的网络身份",
+    "point2": "你的 Friend code 在每次登录之间都会保留",
+    "point3": "随时接入 Ryujinx 或你的 Switch",
+    "cardTitle": "登录",
+    "cardSub": "使用你的邮箱和密码登录。",
+    "forgot": "忘记密码？",
+    "submit": "登录",
+    "loading": "正在登录…",
+    "footText": "还没有账号？",
+    "footLink": "创建一个"
+  },
+  "register": {
+    "metaTitle": "创建账号 — Nextendo Network",
+    "metaDesc": "创建你的 Nextendo Network 账号：一个网络身份、一个 Friend code，以及在 Ryujinx 上畅玩 Switch 游戏的在线联机。",
+    "tag": "永久免费",
+    "asideTitle": "你的身份，联入网络。",
+    "asideLede": "Nextendo 账号为你提供永久的 Friend code、好友列表，以及所有支持游戏的在线联机。",
+    "point1": "一键确认邮箱，没有广告",
+    "point2": "一个账号，同时用于 Ryujinx <em>和</em>你的 Switch",
+    "point3": "你的好友和在线状态始终跟随你",
+    "chip": "新",
+    "previewName": "你的昵称",
+    "cardTitle": "创建账号",
+    "cardSub": "填写三项，即可上线。",
+    "closedNotice": "<strong>注册暂时关闭。</strong><br>我们正在完善新版 Nextendo Network，账号创建很快就会重新开放。过几天再来看看吧！",
+    "username": "昵称（显示名称）",
+    "usernamePh": "Inkling_Pro",
+    "usernameHint": "3 到 16 个字符。昵称可以重复，让你与众不同的是 Friend code。",
+    "emailHint": "你将使用这个邮箱登录。",
+    "passwordPh": "至少 8 个字符",
+    "reqLen": "至少 8 个字符",
+    "reqDigit": "至少一个数字",
+    "reqSpecial": "至少一个特殊字符（! @ # $ …）",
+    "password2": "确认你的密码",
+    "password2Ph": "再次输入你的密码",
+    "password2Hint": "两次输入的密码必须一致。",
+    "submit": "创建我的账号",
+    "footText": "已经有账号了？",
+    "footLink": "登录",
+    "vmTitle": "验证你的电子邮箱",
+    "vmBody": "我们刚刚向 <span class=\"mono\" id=\"vm-email\">你的邮箱</span> 发送了一封确认链接。点击它确认你的邮箱，这能保护你的账号安全，并在你忘记密码时帮你找回。",
+    "vmHint": "没有收到？检查你的垃圾邮件文件夹，或从账号页面重新发送链接。",
+    "vmContinue": "前往我的账号",
+    "pwMatch": "密码一致。",
+    "pwNoMatch": "密码不一致。",
+    "usernameHintBad": "3 到 16 个字符：字母、数字、_ 或 -。",
+    "usernameHintOk": "完美。你的 Friend code 会让你与众不同。",
+    "loading": "正在创建…",
+    "closedNoticeTitle": "注册暂时关闭。",
+    "closedNoticeBody": "我们正在完善新版 Nextendo Network，账号创建很快就会重新开放。过几天再来看看吧！"
+  },
+  "forgot": {
+    "metaTitle": "忘记密码 — Nextendo Network",
+    "metaDesc": "重置你的 Nextendo Network 账号密码，我们会通过邮件向你发送一个安全链接。",
+    "tag": "谁都会遇到",
+    "asideTitle": "忘记密码了？",
+    "asideLede": "输入你账号的电子邮箱。我们会向你发送一个安全链接来设置新密码，该链接一小时后失效。",
+    "point1": "一次性链接，有效期 1 小时",
+    "point2": "你的 Friend code 和好友都会保留",
+    "point3": "不会改动任何其他数据",
+    "cardTitle": "重置",
+    "cardSub": "我们会通过邮件向你发送重置链接。",
+    "submit": "发送链接",
+    "footText": "又想起来了？",
+    "footLink": "登录",
+    "loading": "正在发送…",
+    "sent": "如果该邮箱对应的账号存在，重置链接已经发送。请查看你的收件箱（以及垃圾邮件）。",
+    "done": "链接已发送 ✓"
+  },
+  "reset": {
+    "metaTitle": "新密码 — Nextendo Network",
+    "tag": "最后一步",
+    "asideTitle": "一个新密码。",
+    "asideLede": "设置一个强密码，至少 8 个字符，并包含一个数字和一个特殊字符。它会立即替换旧密码。",
+    "point1": "该链接仅可使用一次",
+    "point2": "你的游戏将保持登录状态",
+    "cardTitle": "新密码",
+    "cardSub": "输入两次以避免打错。",
+    "newPassword": "新密码",
+    "pwPh": "至少 8 个字符",
+    "reqLen": "至少 8 个字符",
+    "reqDigit": "至少一个数字",
+    "reqSpecial": "至少一个特殊字符（! @ # $ …）",
+    "confirm": "确认密码",
+    "pw2Ph": "再次输入你的密码",
+    "submit": "保存密码",
+    "footLink": "返回登录",
+    "errNoToken": "链接无效：缺少令牌。请通过“忘记密码”重新申请一个。",
+    "p2Match": "密码一致。",
+    "p2NoMatch": "密码不一致。",
+    "p2Default": "两次输入的密码必须一致。",
+    "saving": "正在保存…",
+    "okReset": "密码已重置！正在跳转到登录页…",
+    "done": "完成 ✓"
+  },
+  "verify": {
+    "metaTitle": "邮箱验证 — Nextendo Network",
+    "title": "正在验证…",
+    "checking": "我们正在确认你的电子邮箱，请稍候。",
+    "ctaAccount": "前往我的账号",
+    "ctaLogin": "登录",
+    "failTitle": "验证失败",
+    "errNoToken": "链接无效：缺少验证令牌。请从账号页面重新发送邮件。",
+    "successTitle": "邮箱已确认！",
+    "successMsg": "你的邮箱 {email} 已验证。你的账号现已安全。",
+    "errGeneric": "链接无效或已过期。"
+  },
+  "progress": {
+    "title": "进度",
+    "lede": "每款游戏的进度。有些已经可以游玩，但尚未完全完成——其余情况以百分比显示。",
+    "chart": {
+      "courses": {
+        "detail": "全球在线锦标赛、房间与好友"
+      },
+      "turf": {
+        "detail": "8 人对战、好友与 Salmon Run"
+      },
+      "arenas": {
+        "detail": "在线竞技场与好友"
+      },
+      "islands": {
+        "detail": "好友之间的岛屿拜访"
+      },
+      "clubs": {
+        "detail": "在线匹配与俱乐部"
+      },
+      "servers": {
+        "detail": "在线服务器连接"
+      },
+      "launch": {
+        "detail": "游戏可正常启动"
+      },
+      "wip": {
+        "detail": "正在准备中"
+      }
+    }
+  },
+  "lang": {
+    "label": "语言"
+  },
+  "figures": {
+    "ariaLabel": "网络数据"
+  },
+  "auth": {
+    "errors": {
+      "network": "网络错误。请稍后重试。",
+      "invalidCredentials": "邮箱或密码错误。",
+      "emailTaken": "该邮箱地址已被使用。",
+      "usernameTaken": "该昵称已被占用。",
+      "invalidEmail": "邮箱地址无效。",
+      "invalidUsername": "昵称无效（3 到 16 个字符：字母、数字、_ 或 -）。",
+      "passwordTooWeak": "密码强度不足。至少需要 8 个字符、一个数字和一个特殊字符。",
+      "passwordsMismatch": "两次输入的密码不一致。",
+      "closedRegistration": "注册功能暂时关闭。",
+      "turnstile": "CAPTCHA 验证失败。请重试。",
+      "unknown": "出现错误。请重试。"
+    }
+  },
+  "a11y": {
+    "a11y": {
+      "skip": "跳到内容"
+    }
+  }
+}

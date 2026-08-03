@@ -1,0 +1,634 @@
+{
+  "nav": {
+    "home": "Início",
+    "features": "Recursos",
+    "architecture": "Arquitetura",
+    "install": "Instalar",
+    "faq": "FAQ",
+    "login": "Entrar",
+    "register": "Criar conta",
+    "download": "Baixar",
+    "status": "Status",
+    "mainNav": "Navegação principal",
+    "openMenu": "Abrir menu"
+  },
+  "form": {
+    "email": "Endereço de e-mail",
+    "cancel": "Cancelar",
+    "close": "Fechar",
+    "confirm": "Confirmar",
+    "showPw": "Mostrar senha",
+    "emailPh": "voce@exemplo.com",
+    "password": "Senha",
+    "hidePw": "Ocultar senha",
+    "errors": {
+      "email": {
+        "required": "O e-mail é obrigatório.",
+        "invalid": "E-mail inválido."
+      },
+      "password": {
+        "required": "A senha é obrigatória."
+      },
+      "username": {
+        "tooShort": "Mínimo 3 caracteres.",
+        "tooLong": "Máximo 16 caracteres.",
+        "badChars": "Apenas letras, números, _ ou -."
+      },
+      "login": {
+        "required": "Este campo é obrigatório."
+      }
+    }
+  },
+  "sess": {
+    "metaTitle": "Minhas sessões — Nextendo Network",
+    "live": "segurança da conta",
+    "title": "Sessões ativas",
+    "panelTitle": "Onde sua conta está conectada",
+    "intro": "Cada dispositivo conectado à sua conta Nextendo aparece aqui — navegador, emulador Ryujinx ou Nintendo Switch. Você pode desconectar um remotamente ou encerrar todos de uma vez.",
+    "loading": "Carregando suas sessões…",
+    "closeAll": "Encerrar todas as sessões",
+    "closeAllHint": "“Encerrar todas as sessões” desconecta <b>todos</b> os seus dispositivos — incluindo este navegador. Útil se você acha que outra pessoa tem acesso à sua conta.",
+    "disconnect": "Desconectar",
+    "disconnectMe": "Desconectar-me",
+    "now": "agora mesmo",
+    "minAgo": "há {n} min",
+    "hAgo": "há {n} h",
+    "jAgo": "há {n} d",
+    "seen": "visto {t}",
+    "empty": "Nenhuma sessão ativa.",
+    "thisDevice": "este dispositivo",
+    "playing": "em jogo",
+    "ipUnknown": "IP desconhecido",
+    "confirmMeTitle": "Desconectar deste dispositivo?",
+    "confirmMeText": "Você precisará entrar novamente neste navegador.",
+    "confirmOtherTitle": "Desconectar este dispositivo?",
+    "confirmOtherText": "Este dispositivo será desconectado da sua conta Nextendo. No Ryujinx ou no Switch, uma mensagem pedirá para entrar novamente.",
+    "confirmAllTitle": "Encerrar todas as sessões?",
+    "confirmAllText": "Todos os seus dispositivos serão desconectados, incluindo este navegador. Você precisará entrar novamente em todos os lugares.",
+    "closeAllBtn": "Encerrar tudo",
+    "loadErr": "Não foi possível carregar as sessões."
+  },
+  "acc": {
+    "metaTitle": "Minha conta — Nextendo Network",
+    "live": "conectado à Nextendo",
+    "greetLoading": "carregando…",
+    "hi": "Olá, {name}.",
+    "editProfile": "Editar perfil",
+    "verifyBanner": "<b>Confirme seu endereço de e-mail.</b> Enviamos um link de verificação quando você criou sua conta. Sem ele, você não poderá recuperar sua senha caso a esqueça.",
+    "resend": "Reenviar o e-mail",
+    "member": "MEMBRO",
+    "guest": "CONVIDADO",
+    "guestEmail": "Conta de convidado (sem e-mail)",
+    "plugTitle": "Conectar esta conta",
+    "plugRyujinx": "<b>No Ryujinx:</b> abra <b>Ações → Nextendo Network login</b>, insira suas credenciais e, em seguida, inicie um jogo compatível e vá ao menu online.",
+    "plugSwitch": "<b>No Switch (CFW):</b> ative o perfil <b>Nextendo</b> (redirecionamento DNS), conecte esta conta e jogue. Sua foto de perfil e apelido acompanham você.",
+    "security": "Segurança",
+    "securityIntro": "Gerencie sua senha, endereço de e-mail e os dispositivos conectados à sua conta.",
+    "resetPw": "Redefinir senha",
+    "changeEmail": "Alterar e-mail",
+    "mySessions": "Minhas sessões",
+    "adminSpace": "Área de administração",
+    "identity": "Identidade de rede",
+    "pseudo": "Apelido",
+    "pid": "ID de rede (PID)",
+    "discord": "Discord",
+    "memberSince": "Membro desde",
+    "friends": "Amigos",
+    "friendsLoading": "Carregando seus amigos…",
+    "add": "Adicionar",
+    "friendsHint": "Compartilhe seu friend code para que seus amigos possam adicionar você — vocês se encontrarão online nos seus jogos.",
+    "history": "Histórico de jogos",
+    "historyLoading": "Carregando histórico…",
+    "historyEmpty": "Ainda não há histórico — seu tempo de jogo aparecerá aqui depois que você jogar (sincronizado automaticamente do emulador).",
+    "historyErr": "Não foi possível carregar o histórico.",
+    "copy": "copiar",
+    "fcCopied": "Friend code copiado",
+    "copyFail": "Falha ao copiar",
+    "discordLinkedOn": "vinculado em {d}",
+    "noDiscord": "Nenhuma conta vinculada",
+    "linkDiscord": "Vincular no Discord",
+    "verified": "verificado",
+    "unverified": "não verificado",
+    "toastResent": "E-mail de verificação reenviado — verifique sua caixa de entrada.",
+    "toastResetSent": "Link de redefinição enviado para {email}.",
+    "played": "{t} jogado",
+    "playedOn": "jogado em {d}",
+    "deleteAccount": "Excluir minha conta"
+  },
+  "ed": {
+    "title": "Editar perfil",
+    "previewAria": "Pré-visualização da foto de perfil",
+    "preview": "Pré-visualização",
+    "pseudo": "Apelido",
+    "pseudoHint": "3 a 16 caracteres — letras, dígitos, _ ou -.",
+    "bgColor": "Cor de fundo",
+    "hexAria": "Código de cor hexadecimal",
+    "photoSub": "Foto de perfil <span class=\"ip-hint\">— sobreponha um personagem, um fundo e uma moldura</span>",
+    "remove": "Remover",
+    "filterGame": "Filtrar por jogo",
+    "save": "Salvar",
+    "customColor": "Cor personalizada",
+    "layerChar": "Personagem",
+    "layerBg": "Fundo",
+    "layerFrame": "Moldura",
+    "optAll": "Todos ({n})",
+    "optCustom": "Custom / Nextendo ({n})",
+    "optFirmware": "Nintendo Switch — padrão ({n})",
+    "nothingHere": "Nada aqui.",
+    "saving": "Salvando…",
+    "badPseudo": "Apelido inválido: 3 a 16 caracteres (letras, dígitos, _ ou -).",
+    "toastSaved": "Perfil atualizado"
+  },
+  "fr": {
+    "defaultName": "Amigo",
+    "playtime": "Tempo de jogo",
+    "gamesPlayed": "Jogos jogados",
+    "favGame": "Jogo favorito",
+    "lastActivity": "Última atividade",
+    "loading": "Carregando…",
+    "block": "Bloquear",
+    "remove": "Remover",
+    "inGameShort": "Em jogo…",
+    "inGameName": "Em jogo · {name}",
+    "inGame": "Em jogo",
+    "online": "online",
+    "offline": "offline",
+    "wantsToAdd": "quer adicionar você",
+    "accept": "Aceitar",
+    "decline": "Recusar",
+    "zeroMin": "0 min",
+    "noHistory": "Este amigo ainda não tem histórico de jogos público.",
+    "empty": "Ainda não há amigos. Adicione o friend code de outro jogador.",
+    "loadErr": "Não foi possível carregar seus amigos.",
+    "requestSent": "Solicitação enviada",
+    "confirmRemove": "Remover este amigo da sua lista?",
+    "toastRemoved": "Amigo removido",
+    "confirmBlock": "Bloquear este jogador? Ele será removido dos seus amigos e não poderá enviar uma solicitação a você.",
+    "toastBlocked": "Jogador bloqueado",
+    "toastAdded": "Amigo adicionado",
+    "favorite": "Favorito",
+    "showMore": "Ver mais ({n})"
+  },
+  "gm": {
+    "defaultName": "Jogo",
+    "yourProgress": "Seu progresso",
+    "playtimeOf": "jogado",
+    "lastSession": "última sessão",
+    "details": "Detalhes",
+    "genres": "Gêneros",
+    "publisher": "Distribuidora",
+    "developer": "Desenvolvedora",
+    "release": "Data de lançamento",
+    "platforms": "Plataformas",
+    "links": "Links",
+    "metacritic": "Metacritic",
+    "screenshotAria": "Pré-visualização {n}"
+  },
+  "em": {
+    "title": "Alterar endereço de e-mail",
+    "intro": "Seu novo endereço precisará ser confirmado por e-mail. Até lá, sua conta volta a ficar “não verificada”.",
+    "new": "Novo endereço de e-mail",
+    "newPh": "novo@exemplo.com",
+    "currentPw": "Sua senha atual",
+    "currentPwPh": "para confirmar que é realmente você",
+    "save": "Alterar e-mail",
+    "invalidEmail": "Endereço de e-mail inválido.",
+    "needPw": "Digite sua senha atual para confirmar.",
+    "changing": "Alterando…",
+    "toastChanged": "E-mail alterado — confirme pelo link enviado para {email}."
+  },
+  "del": {
+    "title": "Excluir minha conta",
+    "warn": "Esta ação é <b>irreversível</b>. Seu apelido, PID, e-mail e Discord são liberados, você é removido da lista de amigos de todos e perde o acesso. Um registro “excluído” é mantido para moderação.",
+    "pw": "Sua senha, para confirmar",
+    "pwPh": "senha",
+    "confirm": "Excluir definitivamente",
+    "needPw": "Digite sua senha para confirmar.",
+    "done": "Conta excluída. Até logo.",
+    "err": "Falha ao excluir."
+  },
+  "adm": {
+    "deleted": "Contas excluídas",
+    "deletedIntro": "Registro das contas excluídas pelos donos (identificadores já liberados).",
+    "thDeletedAt": "Excluída em",
+    "noDeleted": "Nenhuma conta excluída.",
+    "metaTitle": "Admin — Nextendo Network",
+    "live": "área do administrador",
+    "title": "Administração",
+    "checking": "Verificando acesso…",
+    "reports": "Denúncias",
+    "showHandled": "Mostrar tratadas",
+    "refresh": "Atualizar",
+    "users": "Usuários",
+    "searchPh": "Filtrar (apelido, e-mail, Discord, friend code, IP)…",
+    "thPseudo": "Apelido",
+    "thDiscord": "Discord",
+    "thFriendCode": "Friend code",
+    "thStatus": "Status",
+    "thSessions": "Sessões",
+    "thFriends": "Amigos",
+    "thCreated": "Criada",
+    "loading": "Carregando…",
+    "confirmDeleteTitle": "Excluir esta conta?",
+    "deleteForever": "Excluir permanentemente",
+    "now": "agora mesmo",
+    "min": "{n} min",
+    "h": "{n} h",
+    "j": "{n} d",
+    "stTotal": "Usuários",
+    "stOnline": "Online",
+    "stVerified": "Verificados",
+    "stUnverified": "Não verificados",
+    "stDiscord": "Discord vinculado",
+    "stBanned": "Banidos",
+    "stToday": "Hoje",
+    "pillBanned": "banido",
+    "pillOnline": "online",
+    "pillOffline": "offline",
+    "pillPlaying": "em jogo",
+    "pillVerified": "verificado",
+    "pillUnverified": "não verificado",
+    "pillDisabled": "desativado",
+    "pillAdmin": "admin",
+    "notLinked": "não vinculado",
+    "unban": "Desbanir",
+    "delete": "Excluir",
+    "ban": "Banir",
+    "noUsers": "Nenhum usuário.",
+    "bannedIp": "IP banido: {ip}",
+    "count": "{n} / {t} usuários",
+    "confirmDeleteText": "A conta “{name}” (PID {pid}) será excluída PERMANENTEMENTE. Seu e-mail e friend code ficam livres novamente.",
+    "confirmBanTitle": "Banir esta conta?",
+    "confirmBanText": "A conta “{name}” (PID {pid}) será excluída e banida PERMANENTEMENTE: seu e-mail, seu IP de cadastro e seu friend code ficam reservados (impossível criar uma nova), seus saves na nuvem e histórico são apagados e, se o Discord estiver vinculado, ela também será banida do servidor do Discord.",
+    "banForever": "Banir permanentemente",
+    "banReason": "Banimento pela área de administração",
+    "confirmUnbanTitle": "Suspender o banimento?",
+    "confirmUnbanText": "O banimento de “{name}” (PID {pid}) será suspenso: seu e-mail, seu IP de cadastro e seu friend code ficam livres novamente e, se tiver sido banida do Discord, será desbanida lá. A conta em si permanece excluída — será preciso criar uma nova, o que o banimento impedia.",
+    "liftBan": "Suspender o banimento",
+    "error": "Erro",
+    "reportNoDiscord": "Discord não vinculado",
+    "noComment": "(sem comentário)",
+    "emulatorLog": "Log do emulador",
+    "empty": "(vazio)",
+    "reopen": "Reabrir",
+    "markHandled": "Marcar como tratada",
+    "notInGame": "fora de jogo",
+    "toHandle": "· {n} a tratar",
+    "noneWaiting": "· nenhuma pendente",
+    "nothingToShow": "Nada a mostrar.",
+    "accessDenied": "Acesso restrito ao administrador.",
+    "loadError": "Erro de carregamento",
+    "invalidSession": "Sessão inválida."
+  },
+  "status": {
+    "metaTitle": "Status dos servidores — Nextendo Network",
+    "metaDesc": "Status em tempo real dos servidores de jogo da Nextendo Network e o número de jogadores online.",
+    "title": "Status dos servidores",
+    "lede": "O status em tempo real de cada servidor de jogo Nextendo e quantos jogadores estão online. Atualiza automaticamente.",
+    "checking": "Verificando…",
+    "online": "Online",
+    "offline": "Offline",
+    "player": "jogador",
+    "players": "jogadores",
+    "allUp": "Todos os serviços operacionais",
+    "allUpSub": "Todos os servidores de jogo estão respondendo.",
+    "allDown": "Servidores inacessíveis",
+    "allDownSub": "Nenhum servidor de jogo está respondendo no momento.",
+    "partial": "Falha parcial",
+    "partialSub": "servidor(es) sem resposta.",
+    "unreachable": "Status indisponível",
+    "unreachableSub": "Não foi possível acessar o serviço de status.",
+    "totalLabel": "Jogadores online",
+    "updated": "Atualizado"
+  },
+  "download": {
+    "metaTitle": "Baixar — Nextendo Network",
+    "metaDesc": "Baixe o Ryujinx Nextendo, o emulador pré-configurado para a rede Nextendo, para Windows, Linux e macOS.",
+    "title": "Baixar Ryujinx Nextendo",
+    "lede": "A build do emulador pré-configurada para a rede Nextendo. Grátis e de código aberto. Escolha sua plataforma.",
+    "loading": "Procurando a versão mais recente…",
+    "version": "Versão mais recente",
+    "fallbackVersion": "Versão mais recente no GitHub",
+    "button": "Baixar",
+    "fallback": "Ver todas as versões no GitHub →",
+    "switch": {
+      "h": "Em um Switch real (CFW)",
+      "p": "Sem emulador: instale o homebrew Nextendo e ative o redirecionamento de DNS. O guia passo a passo está no nosso Discord.",
+      "cta": "Guia no Discord"
+    },
+    "legal": "A Nextendo não distribui jogos, ROMs ou chaves. Você continua responsável pelas suas próprias cópias."
+  },
+  "profile": {
+    "online": "Conectado",
+    "account": "Minha conta",
+    "sessions": "Dispositivos",
+    "logout": "Sair"
+  },
+  "footer": {
+    "tag": "O online do Switch, devolvido à comunidade.",
+    "project": "Projeto",
+    "community": "Comunidade",
+    "status": "Status",
+    "operational": "Operacional",
+    "legal": "A Nextendo Network é um projeto comunitário independente, sem afiliação com a Nintendo Co., Ltd. “Nintendo Switch” e “Ryujinx” pertencem aos seus respectivos donos. Nenhum jogo ou ROMs são fornecidos ou distribuídos.",
+    "rights": "Nextendo Network.",
+    "colsAria": "Rodapé"
+  },
+  "skip": "Pular para o conteúdo",
+  "index": {
+    "metaTitle": "Nextendo Network — O online do Switch, devolvido à comunidade",
+    "metaDesc": "A Nextendo Network reimplementa os serviços online do Nintendo Switch para o emulador Ryujinx. Contas, jogo online, amigos e comunidades."
+  },
+  "hero": {
+    "status": "Rede operacional",
+    "title": "Uma rede <hl>independente</hl> para o seu Switch.",
+    "lede": "A Nextendo Network reimplementa os serviços online do Switch para o emulador Ryujinx.",
+    "cta1": "Criar minha conta",
+    "cta2": "Como funciona"
+  },
+  "statement": {
+    "ariaLabel": "O problema",
+    "text": "Quando um serviço oficial é desligado, o jogo online morre junto. <soft>A Nextendo traz ele de volta, de forma limpa e aberta.</soft>"
+  },
+  "features": {
+    "title": "O online, reescrito de forma limpa.",
+    "lede": "Uma stack clara e polida, feita para durar. Não uma cópia obscura dos servidores originais."
+  },
+  "feat": {
+    "accounts": {
+      "h": "Contas comunitárias",
+      "p": "Uma identidade independente dos servidores oficiais. Mantenha seus amigos e sua presença online de um jogo para o outro."
+    },
+    "online": {
+      "h": "Jogo online",
+      "p": "Mario Kart 8 Deluxe, Splatoon 2, Super Smash Bros. Ultimate: os modos multijogador, do Ryujinx ou do seu Switch."
+    },
+    "friends": {
+      "h": "Amigos e presença",
+      "p": "Veja quem está online, o que está jogando, e entre na partida."
+    },
+    "community": {
+      "h": "Movido pela comunidade",
+      "p": "Um projeto sem fins lucrativos, feito pela e para a comunidade."
+    },
+    "privacy": {
+      "h": "Privacidade",
+      "p": "Sem rastreamento, sem revenda. Seus jogos continuam seus."
+    }
+  },
+  "arch": {
+    "title": "Como a Nextendo conecta você.",
+    "lede": "Seu jogo se comunica com nossos servidores exatamente como fazia com os originais. Cuidamos da identidade, dos amigos e do matchmaking — a partida em si acontece ao vivo entre os jogadores.",
+    "game": {
+      "h": "Seu jogo",
+      "p": "Ryujinx ou um Switch com CFW. O jogo não é modificado."
+    },
+    "account": {
+      "h": "Conta Nextendo",
+      "p": "Sua identidade e um token assinado tomam o lugar dos servidores originais."
+    },
+    "match": {
+      "h": "Matchmaking e amigos",
+      "p": "Nossos servidores abertos formam os pares; a partida então vai para P2P entre os jogadores."
+    }
+  },
+  "install": {
+    "title": "Online em quatro passos.",
+    "lede": "No emulador Ryujinx ou num Switch real com CFW. De qualquer forma, sua conta Nextendo é a chave — e tudo é reversível.",
+    "hint": "Sua identidade na rede: um apelido, um friend code permanente e seus amigos — compartilhados em todos os seus jogos e dispositivos."
+  },
+  "member": {
+    "chip": "MEMBRO",
+    "label": "Friend code",
+    "pseudo": "Apelido"
+  },
+  "step1": {
+    "h": "Crie sua conta Nextendo",
+    "p": "Grátis, em três campos. Você recebe na hora um apelido e um friend code permanentes.",
+    "link": "Criar minha conta →"
+  },
+  "step2": {
+    "h": "Baixe o Ryujinx Nextendo",
+    "p": "A build do emulador pré-configurada para a nossa rede. Num Switch com CFW, ative o perfil Nextendo (redirecionamento de DNS)."
+  },
+  "step3": {
+    "h": "Conecte-se à Nextendo Network",
+    "p": "No Ryujinx: <b>Ações → Conectar à Nextendo Network</b>, depois insira suas credenciais."
+  },
+  "step4": {
+    "h": "Jogue online",
+    "p": "Inicie Mario Kart 8, Splatoon 2 ou Smash Ultimate, abra o menu online e encontre a comunidade."
+  },
+  "fig1": {
+    "l": "Jogos jogáveis online"
+  },
+  "fig2": {
+    "l": "Uma conta, todos os seus jogos"
+  },
+  "fig3": {
+    "l": "Voluntário"
+  },
+  "fig4": {
+    "l": "Grátis, sem anúncios"
+  },
+  "faq": {
+    "title": "Perguntas frequentes.",
+    "q1": "A Nextendo é afiliada à Nintendo?",
+    "a1": "Não. É um projeto comunitário independente. Sem afiliação, patrocínio ou endosso da Nintendo Co., Ltd.",
+    "q2": "Preciso fornecer os jogos?",
+    "a2": "A Nextendo não distribui jogos, ROMs ou chaves. O projeto fornece apenas serviços de rede. Você continua responsável pelas suas próprias cópias.",
+    "q3": "Quais emuladores são suportados?",
+    "a3": "A prioridade é o Ryujinx. Outros ambientes podem vir conforme a comunidade contribui.",
+    "q4": "O que vocês fazem com meus dados?",
+    "a4": "O mínimo necessário para operar o serviço. Sem rastreamento, sem revenda. O código é aberto, então você pode conferir.",
+    "q5": "Como posso contribuir?",
+    "a5": "Código, tradução, testes de compatibilidade ou moderação: tudo ajuda. Entre no repositório e no servidor da comunidade para começar."
+  },
+  "cta": {
+    "title": "Pronto para reconectar o seu Switch?",
+    "lede": "Acompanhe o desenvolvimento, entre na comunidade e comece sua primeira partida online.",
+    "b1": "Criar minha conta",
+    "b2": "Entrar"
+  },
+  "pw": {
+    "tooweak": "Muito fraca",
+    "weak": "Fraca",
+    "medium": "Média",
+    "strong": "Forte",
+    "verystrong": "Muito forte",
+    "reqLen": "8 caracteres no mínimo",
+    "reqDigit": "Pelo menos um dígito",
+    "reqSpecial": "Pelo menos um caractere especial",
+    "show": "Mostrar senha",
+    "hide": "Ocultar senha"
+  },
+  "login": {
+    "metaTitle": "Entrar — Nextendo Network",
+    "metaDesc": "Entre na sua conta Nextendo Network para encontrar seu friend code, seus amigos e o online dos seus jogos.",
+    "tag": "que bom te ver de novo",
+    "asideTitle": "Continue de onde parou.",
+    "asideLede": "Entre na sua conta Nextendo para encontrar seu friend code, seus amigos e o online dos seus jogos.",
+    "point1": "Uma identidade de rede que te acompanha em todos os seus jogos",
+    "point2": "Seu friend code mantido de uma sessão para outra",
+    "point3": "Pronto para conectar no Ryujinx ou no seu Switch",
+    "cardTitle": "Entrar",
+    "cardSub": "Entre com seu e-mail e senha.",
+    "forgot": "Esqueceu a senha?",
+    "submit": "Entrar",
+    "loading": "Entrando…",
+    "footText": "Ainda não tem conta?",
+    "footLink": "Crie uma"
+  },
+  "register": {
+    "metaTitle": "Criar conta — Nextendo Network",
+    "metaDesc": "Crie sua conta Nextendo Network: uma identidade de rede, um friend code e o jogo online dos seus jogos de Switch no Ryujinx.",
+    "tag": "grátis, para sempre",
+    "asideTitle": "Sua identidade, na rede.",
+    "asideLede": "Uma conta Nextendo te dá um friend code permanente, uma lista de amigos e jogo online em todos os títulos compatíveis.",
+    "point1": "Confirme seu e-mail em um clique, sem anúncios",
+    "point2": "Uma só conta para o Ryujinx <em>e</em> seu Switch",
+    "point3": "Seus amigos e sua presença online te acompanham",
+    "chip": "NOVO",
+    "previewName": "SeuApelido",
+    "cardTitle": "Criar uma conta",
+    "cardSub": "Três campos, e você está online.",
+    "closedNotice": "<strong>Cadastros temporariamente fechados.</strong><br>Estamos finalizando a nova versão do Nextendo Network — a criação de contas vai reabrir muito em breve. Volte daqui a alguns dias!",
+    "username": "Apelido (nome de exibição)",
+    "usernamePh": "Inkling_Pro",
+    "usernameHint": "3 a 16 caracteres. Seu apelido pode ser compartilhado — seu friend code te diferencia.",
+    "emailHint": "É com este e-mail que você vai entrar.",
+    "passwordPh": "Pelo menos 8 caracteres",
+    "reqLen": "Pelo menos 8 caracteres",
+    "reqDigit": "Pelo menos um número",
+    "reqSpecial": "Pelo menos um caractere especial (! @ # $ …)",
+    "password2": "Confirme sua senha",
+    "password2Ph": "Digite sua senha novamente",
+    "password2Hint": "As duas senhas devem ser iguais.",
+    "submit": "Criar minha conta",
+    "footText": "Já tem uma conta?",
+    "footLink": "Entrar",
+    "vmTitle": "Verifique seu endereço de e-mail",
+    "vmBody": "Acabamos de enviar um link de confirmação para <span class=\"mono\" id=\"vm-email\">seu endereço</span>. Clique nele para confirmar seu e-mail — isso protege sua conta e permite recuperar sua senha se você esquecer.",
+    "vmHint": "Não recebeu? Verifique sua caixa de spam, ou reenvie o link pela área da sua conta.",
+    "vmContinue": "Ir para minha conta",
+    "pwMatch": "As senhas coincidem.",
+    "pwNoMatch": "As senhas não coincidem.",
+    "usernameHintBad": "3 a 16 caracteres: letras, números, _ ou -.",
+    "usernameHintOk": "perfeito. Seu friend code vai te diferenciar.",
+    "loading": "Criando…",
+    "closedNoticeTitle": "Cadastros temporariamente fechados.",
+    "closedNoticeBody": "Estamos finalizando a nova versão do Nextendo Network — a criação de contas vai reabrir muito em breve. Volte daqui a alguns dias!"
+  },
+  "forgot": {
+    "metaTitle": "Esqueci a senha — Nextendo Network",
+    "metaDesc": "Redefina a senha da sua conta Nextendo Network — enviaremos um link seguro por e-mail.",
+    "tag": "acontece com todo mundo",
+    "asideTitle": "Esqueceu sua senha?",
+    "asideLede": "Digite o endereço de e-mail da sua conta. Enviaremos um link seguro para escolher uma nova senha — ele expira em uma hora.",
+    "point1": "Link de uso único, válido por 1 hora",
+    "point2": "Seu friend code e seus amigos são mantidos",
+    "point3": "Nenhum outro dado é alterado",
+    "cardTitle": "Redefinir",
+    "cardSub": "Enviaremos um link de redefinição por e-mail.",
+    "submit": "Enviar o link",
+    "footText": "Acabou lembrando?",
+    "footLink": "Entrar",
+    "loading": "Enviando…",
+    "sent": "Se existir uma conta para este endereço, um link de redefinição acabou de ser enviado. Verifique sua caixa de entrada (e o spam).",
+    "done": "Link enviado ✓"
+  },
+  "reset": {
+    "metaTitle": "Nova senha — Nextendo Network",
+    "tag": "última etapa",
+    "asideTitle": "Uma nova senha.",
+    "asideLede": "Escolha uma senha forte — pelo menos 8 caracteres, um número e um caractere especial. Ela substitui a antiga na hora.",
+    "point1": "O link é de uso único",
+    "point2": "Você continuará conectado nos seus jogos",
+    "cardTitle": "Nova senha",
+    "cardSub": "Digite duas vezes para evitar erros de digitação.",
+    "newPassword": "Nova senha",
+    "pwPh": "Pelo menos 8 caracteres",
+    "reqLen": "Pelo menos 8 caracteres",
+    "reqDigit": "Pelo menos um número",
+    "reqSpecial": "Pelo menos um caractere especial (! @ # $ …)",
+    "confirm": "Confirme a senha",
+    "pw2Ph": "Digite sua senha novamente",
+    "submit": "Salvar senha",
+    "footLink": "Voltar para o login",
+    "errNoToken": "Link inválido: sem token. Solicite um novo em “Esqueci a senha”.",
+    "p2Match": "As senhas coincidem.",
+    "p2NoMatch": "As senhas não coincidem.",
+    "p2Default": "As duas senhas devem ser iguais.",
+    "saving": "Salvando…",
+    "okReset": "Senha redefinida! Redirecionando para o login…",
+    "done": "Pronto ✓"
+  },
+  "verify": {
+    "metaTitle": "Verificação de e-mail — Nextendo Network",
+    "title": "Verificando…",
+    "checking": "Estamos confirmando seu endereço de e-mail, um momento.",
+    "ctaAccount": "Ir para minha conta",
+    "ctaLogin": "Entrar",
+    "failTitle": "Falha na verificação",
+    "errNoToken": "Link inválido: sem token de verificação. Reenvie o e-mail pela área da sua conta.",
+    "successTitle": "E-mail confirmado!",
+    "successMsg": "Seu endereço {email} está verificado. Sua conta agora está segura.",
+    "errGeneric": "Link inválido ou expirado."
+  },
+  "progress": {
+    "title": "Progresso",
+    "lede": "O andamento de cada jogo. Vários já são jogáveis, mas ainda não estão a 100% — os casos restantes são mostrados pela porcentagem.",
+    "chart": {
+      "courses": {
+        "detail": "Corridas online mundiais, salas e amigos"
+      },
+      "turf": {
+        "detail": "Turf War a 8, amigos e Salmon Run"
+      },
+      "arenas": {
+        "detail": "Arenas online e amigos"
+      },
+      "islands": {
+        "detail": "Visitas a ilhas entre amigos"
+      },
+      "clubs": {
+        "detail": "Matchmaking online e clubes"
+      },
+      "servers": {
+        "detail": "Conexão ao servidor online"
+      },
+      "launch": {
+        "detail": "O jogo inicia corretamente"
+      },
+      "wip": {
+        "detail": "Em preparação"
+      }
+    }
+  },
+  "lang": {
+    "label": "Idioma"
+  },
+  "figures": {
+    "ariaLabel": "A rede em números"
+  },
+  "auth": {
+    "errors": {
+      "network": "Erro de rede. Tente novamente em alguns instantes.",
+      "invalidCredentials": "E-mail ou senha incorretos.",
+      "emailTaken": "Este endereço de e-mail já está em uso.",
+      "usernameTaken": "Este apelido já está em uso.",
+      "invalidEmail": "Endereço de e-mail inválido.",
+      "invalidUsername": "Apelido inválido (3 a 16 caracteres: letras, números, _ ou -).",
+      "passwordTooWeak": "Senha muito fraca. Precisa de pelo menos 8 caracteres, um número e um caractere especial.",
+      "passwordsMismatch": "As duas senhas não coincidem.",
+      "closedRegistration": "Cadastros temporariamente fechados.",
+      "turnstile": "Verificação CAPTCHA falhou. Tente novamente.",
+      "unknown": "Algo deu errado. Tente novamente."
+    }
+  },
+  "a11y": {
+    "a11y": {
+      "skip": "Saltar para o conteúdo"
+    }
+  }
+}
