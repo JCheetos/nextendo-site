@@ -265,6 +265,18 @@ function send(res, status, body, extraHeaders = {}) {
   res.end(payload)
 }
 
+function sendWithSetCookie(res, status, body, setCookieValue) {
+  const payload = JSON.stringify(body)
+  res.writeHead(status, {
+    'content-type': 'application/json; charset=utf-8',
+    'content-length': Buffer.byteLength(payload),
+    'cache-control': 'no-store',
+    'set-cookie': setCookieValue,
+    ...CORS_HEADERS,
+  })
+  res.end(payload)
+}
+
 function sendNoBody(res, status, extraHeaders = {}) {
   res.writeHead(status, { 'cache-control': 'no-store', ...CORS_HEADERS, ...extraHeaders })
   res.end()
@@ -352,6 +364,15 @@ async function handle(req, res, url, body) {
       body.login === state.account.email &&
       body.password === state.account.password
     ) {
+      const sessionToken = 'mock_session_' + Math.random().toString(36).slice(2)
+      // Mirror what the Go backend's setTokenCookie does: Set-Cookie
+      // HttpOnly SameSite=Lax Path=/. The browser will then send this
+      // cookie on every subsequent /api/* request to the same origin,
+      // which our requireAuth() check honours.
+      res.setHeader(
+        'set-cookie',
+        `nx_session=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=31536000`,
+      )
       return { status: 200, body: { account: publicAccount(), nex_token: 'mock_nex_token' } }
     }
     return { status: 401, body: { error: 'invalid_credentials' } }
