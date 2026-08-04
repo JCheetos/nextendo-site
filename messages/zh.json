@@ -630,5 +630,14 @@
     "a11y": {
       "skip": "跳到内容"
     }
-  }
+  },
+  "step1.h": "创建你的 Nextendo 账号",
+  "step1.p": "免费，只需填写三个字段。你将立即获得永久的昵称和 Friend code。",
+  "step1.link": "创建我的账号 →",
+  "step2.h": "获取 Ryujinx Nextendo",
+  "step2.p": "为我们的网络预先配置好的模拟器版本。在 Switch CFW 上，则改为启用 Nextendo 配置文件（DNS 重定向）。",
+  "step3.h": "连接到 Nextendo Network",
+  "step3.p": "在 Ryujinx 中：<b>操作 → 连接到 Nextendo Network</b>，然后输入你的凭据。",
+  "step4.h": "开始联机",
+  "step4.p": "启动 Mario Kart 8、Splatoon 2 或 Smash Ultimate，打开联机菜单，找到社区。"
 }

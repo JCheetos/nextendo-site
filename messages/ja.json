@@ -630,5 +630,14 @@
     "a11y": {
       "skip": "本文へスキップ"
     }
-  }
+  },
+  "step1.h": "Nextendoアカウントを作成",
+  "step1.p": "3つの項目を入力するだけ、無料。恒久的なニックネームとFriend codeがすぐに手に入ります。",
+  "step1.link": "アカウントを作成 →",
+  "step2.h": "Ryujinx Nextendoを入手",
+  "step2.p": "私たちのネットワーク向けに事前設定されたエミュレータビルド。CFW導入済みのSwitchの場合は、代わりにNextendoプロファイル（DNSリダイレクト）を有効にします。",
+  "step3.h": "Nextendo Networkに接続",
+  "step3.p": "Ryujinxで<b>Actions → Connect to Nextendo Network</b>を選び、認証情報を入力します。",
+  "step4.h": "オンラインでプレイ",
+  "step4.p": "Mario Kart 8、Splatoon 2、Smash Ultimateのいずれかを起動し、オンラインメニューを開いて、コミュニティに参加しましょう。"
 }

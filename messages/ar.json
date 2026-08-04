@@ -630,5 +630,14 @@
     "a11y": {
       "skip": "تخطّي إلى المحتوى"
     }
-  }
+  },
+  "step1.h": "أنشئ حساب Nextendo الخاص بك",
+  "step1.p": "مجانًا، في ثلاثة حقول. تحصل فورًا على اسم مستعار دائم وFriend code.",
+  "step1.link": "إنشاء حسابي →",
+  "step2.h": "احصل على Ryujinx Nextendo",
+  "step2.p": "نسخة المحاكي المُعدّة مسبقًا لشبكتنا. على جهاز Switch يعمل بـCFW، فعّل ملف Nextendo التعريفي بدلًا من ذلك (إعادة توجيه DNS).",
+  "step3.h": "اتصل بـNextendo Network",
+  "step3.p": "في Ryujinx: <b>الإجراءات → الاتصال بـNextendo Network</b>، ثم أدخل بيانات اعتمادك.",
+  "step4.h": "العب عبر الإنترنت",
+  "step4.p": "شغّل Mario Kart 8 أو Splatoon 2 أو Smash Ultimate، وافتح قائمة الإنترنت، واعثر على المجتمع."
 }

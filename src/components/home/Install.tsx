@@ -44,13 +44,20 @@ export async function Install() {
         <ol className="steps">
           {STEPS.map((step, idx) => {
             const n = String(idx + 1).padStart(2, '0')
+            // step3.p contains <b>...</b> tags (e.g. "Dans Ryujinx : <b>Actions →
+            // Connexion Nextendo Network</b>, puis entrez vos identifiants.") —
+            // use t.rich() so the placeholder is rendered as <b>...</b> in the
+            // browser. Other steps have plain text and ignore the `b`
+            // parameter, so passing it uniformly is safe.
             return (
               <li key={step.key} className="step">
                 <span className="step__n mono">{n}</span>
                 <div>
                   <h3>{t(`${step.key}.h`)}</h3>
                   <p>
-                    <span>{t(`${step.key}.p`)}</span>{' '}
+                    {t.rich(`${step.key}.p`, {
+                      b: (chunks) => <b>{chunks}</b>,
+                    })}{' '}
                     {step.hasLink ? (
                       <a href="/register" style={{ color: 'var(--primary-bright)' }}>
                         {t(`${step.key}.link`)}
