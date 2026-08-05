@@ -10,6 +10,7 @@ type Props = {
   onChange: (v: string) => void
   onValidityChange?: (ok: boolean) => void
   autoComplete?: string
+  placeholder?: string
 }
 
 const PW_LEVELS = ['tooweak', 'weak', 'medium', 'strong', 'verystrong'] as const
@@ -20,6 +21,7 @@ export function PasswordField({
   onChange,
   onValidityChange,
   autoComplete = 'new-password',
+  placeholder,
 }: Props) {
   const t = useTranslations('pw')
   const reqsId = useId()
@@ -53,6 +55,7 @@ export function PasswordField({
           className="input"
           type={visible ? 'text' : 'password'}
           autoComplete={autoComplete}
+          placeholder={placeholder}
           aria-describedby={`${reqsId} ${labelId}`}
           value={value}
           onChange={(e) => onChange(e.target.value)}

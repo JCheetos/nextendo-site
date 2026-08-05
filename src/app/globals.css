@@ -537,6 +537,15 @@ button {
   padding: 0.3rem 0.7rem;
   font-size: 0.8rem;
 }
+.status--partial .status__dot {
+  background: var(--accent);
+  animation: none;
+}
+.status--down .status__dot,
+.status--unknown .status__dot {
+  background: var(--danger);
+  animation: none;
+}
 
 .hero__title {
   font-weight: 600;

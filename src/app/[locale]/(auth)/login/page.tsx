@@ -1,7 +1,6 @@
 import { AuthShell } from '@/components/auth/AuthShell'
 import { LoginForm } from '@/components/auth/LoginForm'
-import { SiteFooter } from '@/components/layout/SiteFooter'
-import { SiteHeader } from '@/components/layout/SiteHeader'
+import { AuthHeader } from '@/components/layout/AuthHeader'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 
@@ -22,11 +21,12 @@ export default async function LoginPage({
   const { locale } = await params
   const { next } = await searchParams
   const t = await getTranslations('login')
+  const tMember = await getTranslations('member')
   const tNav = await getTranslations('nav')
 
   return (
     <>
-      <SiteHeader />
+      <AuthHeader primaryHref="/register" primaryLabel={tNav('register')} />
       <main id="main" tabIndex={-1}>
         <div className="shell">
           <AuthShell
@@ -63,13 +63,13 @@ export default async function LoginPage({
                       <img src="/favicon.svg" alt="" width={18} height={18} />
                       NEXTENDO
                     </span>
-                    <span className="member-card__chip">{tNav('home')}</span>
+                    <span className="member-card__chip">{tMember('chip')}</span>
                   </div>
-                  <div className="member-card__label">{tNav('install')}</div>
+                  <div className="member-card__label">{tMember('label')}</div>
                   <div className="member-card__code">SW-4815-1623-0842</div>
                   <div className="member-card__foot">
                     <div className="member-card__name">
-                      Inkling_Pro<span>{t('asideTitle')}</span>
+                      Inkling_Pro<span>{tMember('pseudo')}</span>
                     </div>
                     <div className="member-card__sig" aria-hidden="true" />
                   </div>
@@ -86,7 +86,6 @@ export default async function LoginPage({
           </AuthShell>
         </div>
       </main>
-      <SiteFooter />
     </>
   )
 }

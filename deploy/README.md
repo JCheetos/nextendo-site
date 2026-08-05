@@ -7,7 +7,7 @@ for the cutover window — not deployed automatically.
 ## `nginx-before.conf`
 
 The config the VPS was running before the cutover. It served the legacy
-vanilla-JS site (`index.html`, `login.html`, `compte.html`, …) directly
+vanilla-JS site (`Legacy/index.html`, `Legacy/login.html`, `Legacy/compte.html`, …) directly
 from `/var/www/nextendo-legacy/`, with `/api/*` proxied to the Go backend.
 
 Captured 2026-08-03 as a historical reference. **Do not re-apply** this
@@ -65,7 +65,8 @@ Highlights:
 If the cutover needs to be reverted:
 
 1. Restore the legacy `root` directive and the `location` blocks for
-   `/assets/`, the legacy `*.html` files, and `/api/`.
+   `/assets/`, the legacy `*.html` files, and `/api/`. The deployment copy
+   should use the contents of `Legacy/` as the static root.
 2. Re-point the `/` location back at the legacy static root.
 3. `sudo nginx -t && sudo systemctl reload nginx`.
 

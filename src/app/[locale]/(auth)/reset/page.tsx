@@ -1,7 +1,6 @@
 import { AuthShell } from '@/components/auth/AuthShell'
 import { ResetForm } from '@/components/auth/ResetForm'
-import { SiteFooter } from '@/components/layout/SiteFooter'
-import { SiteHeader } from '@/components/layout/SiteHeader'
+import { AuthHeader } from '@/components/layout/AuthHeader'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 
@@ -22,10 +21,11 @@ export default async function ResetPage({
   const { locale } = await params
   const { token } = await searchParams
   const t = await getTranslations('reset')
+  const tNav = await getTranslations('nav')
 
   return (
     <>
-      <SiteHeader />
+      <AuthHeader secondaryHref="/login" secondaryLabel={tNav('login')} />
       <main id="main" tabIndex={-1}>
         <div className="shell">
           <AuthShell
@@ -62,7 +62,6 @@ export default async function ResetPage({
           </AuthShell>
         </div>
       </main>
-      <SiteFooter />
     </>
   )
 }

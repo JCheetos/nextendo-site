@@ -1,7 +1,6 @@
 import { AuthShell } from '@/components/auth/AuthShell'
 import { RegisterForm } from '@/components/auth/RegisterForm'
-import { SiteFooter } from '@/components/layout/SiteFooter'
-import { SiteHeader } from '@/components/layout/SiteHeader'
+import { AuthHeader } from '@/components/layout/AuthHeader'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Link from 'next/link'
 
@@ -18,10 +17,12 @@ export default async function RegisterPage({
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations('register')
+  const tMember = await getTranslations('member')
+  const tNav = await getTranslations('nav')
 
   return (
     <>
-      <SiteHeader />
+      <AuthHeader primaryHref="/login" primaryLabel={tNav('login')} />
       <main id="main" tabIndex={-1}>
         <div className="shell">
           <AuthShell
@@ -62,12 +63,12 @@ export default async function RegisterPage({
                     </span>
                     <span className="member-card__chip">{t('chip')}</span>
                   </div>
-                  <div className="member-card__label">Friend code</div>
+                  <div className="member-card__label">{tMember('label')}</div>
                   <div className="member-card__code">SW-••••-••••-••••</div>
                   <div className="member-card__foot">
                     <div className="member-card__name" id="preview-name">
                       {t('previewName')}
-                      <span>{t('vmTitle')}</span>
+                      <span>{tMember('pseudo')}</span>
                     </div>
                     <div className="member-card__sig" aria-hidden="true" />
                   </div>
@@ -84,7 +85,6 @@ export default async function RegisterPage({
           </AuthShell>
         </div>
       </main>
-      <SiteFooter />
     </>
   )
 }

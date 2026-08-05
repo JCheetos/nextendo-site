@@ -155,6 +155,7 @@ export function RegisterForm({ locale, initialClosed, turnstileSitekey }: Props)
           <PasswordField
             id="password"
             autoComplete="new-password"
+            placeholder={t('passwordPh')}
             value={watch('password')}
             onChange={(v) => setValue('password', v, { shouldValidate: true })}
             onValidityChange={setPwValid}

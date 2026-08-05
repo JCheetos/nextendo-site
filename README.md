@@ -66,7 +66,7 @@ e2e/                      Playwright specs (auth, compte, sessions, home, a11y, 
 ## Deploy
 
 See **[DEPLOY.md](DEPLOY.md)** for env vars, Docker build, and the nginx cutover
-plan. The legacy vanilla-JS site (in repo root: `*.html` + `assets/`) is still
+plan. The legacy vanilla-JS site (under `Legacy/`) is still
 served by nginx until the cutover commit lands; it can be deleted once the
 new Next.js site is live.
 

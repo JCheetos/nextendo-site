@@ -1,7 +1,7 @@
 # Deployment guide — Phase 6
 
 This file documents how to ship the Next.js site to production. The previous
-vanilla-JS site (in `index.html` + `assets/`) is still served by nginx until
+vanilla-JS site (under `Legacy/`) is still served by nginx until
 cutover; see "Cutover" at the bottom.
 
 ## Stack at a glance
@@ -71,7 +71,7 @@ The container pings `/api/health` every 30 s via `HEALTHCHECK`.
 
 ## Reverse proxy / cutover
 
-Until the cutover commit lands, the legacy server (in this repo root) is
+Until the cutover commit lands, the legacy server (under `Legacy/`) is
 served by nginx. The Next.js container is meant to live behind the same
 nginx instance — the cutover is one nginx config flip.
 
@@ -120,7 +120,7 @@ When you're ready to switch from the legacy site to the Next.js one:
 2. Ensure `proxy_pass http://nextendo_app;` catches every path.
 3. Keep `/api/*` proxied to the Go backend (no change).
 4. Confirm `/api/health` returns 200 from a public test.
-5. Remove the legacy files from the repo root (separate PR).
+5. Remove the `Legacy/` directory from the repo (separate PR).
 
 Until then, the legacy vanilla-JS site and the new Next.js site coexist.
 

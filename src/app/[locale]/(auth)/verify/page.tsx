@@ -1,5 +1,4 @@
-import { SiteFooter } from '@/components/layout/SiteFooter'
-import { SiteHeader } from '@/components/layout/SiteHeader'
+import { AuthHeader } from '@/components/layout/AuthHeader'
 import { verifyAction } from '@/server/auth'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
@@ -29,7 +28,7 @@ export default async function VerifyPage({
 
   return (
     <>
-      <SiteHeader />
+      <AuthHeader />
       <main id="main" tabIndex={-1}>
         <div className="shell">
           <section className="auth" style={{ justifyContent: 'center' }}>
@@ -68,7 +67,6 @@ export default async function VerifyPage({
           </section>
         </div>
       </main>
-      <SiteFooter />
     </>
   )
 }

@@ -1,10 +1,23 @@
+import { fetchOnlineCounts } from '@/lib/api'
+import { aggregate, computeStatuses } from '@/lib/status'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 
 export async function SiteFooter() {
   const t = await getTranslations('footer')
   const nav = await getTranslations('nav')
+  const tStatus = await getTranslations('status')
   const year = new Date().getFullYear()
+  const payload = await fetchOnlineCounts()
+  const serviceStatus = payload ? aggregate(computeStatuses(payload)) : 'unknown'
+  const statusLabel =
+    serviceStatus === 'up'
+      ? t('operational')
+      : serviceStatus === 'partial'
+        ? tStatus('partial')
+        : serviceStatus === 'down'
+          ? tStatus('offline')
+          : tStatus('unreachable')
 
   return (
     <footer className="footer">
@@ -39,9 +52,9 @@ export async function SiteFooter() {
           <div>
             <h4>{t('status')}</h4>
             <Link href="/status">
-              <span className="status status--mini">
+              <span className={`status status--mini status--${serviceStatus}`}>
                 <span className="status__dot" aria-hidden="true" />
-                <span>{t('operational')}</span>
+                <span>{statusLabel}</span>
               </span>
             </Link>
           </div>
