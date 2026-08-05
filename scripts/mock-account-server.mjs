@@ -17,6 +17,8 @@
 // ============================================================================
 
 import http from 'node:http'
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { URL } from 'node:url'
 
 const args = process.argv.slice(2)
@@ -35,7 +37,28 @@ const LATENCY_MS = Number(
 
 const NOW = () => new Date().toISOString()
 
-const ACCOUNT = {
+// ------------------------------------------------------------------
+// Load fixtures from mock-fixtures.json (real data captured from
+// nextendo.network). Fall back to a small placeholder fixture set if
+// the file is missing or malformed — keeps the mock usable in tests
+// before fixtures are seeded.
+// ------------------------------------------------------------------
+const FIXTURE_PATH = fileURLToPath(new URL('./mock-fixtures.json', import.meta.url))
+function loadFixtures() {
+  try {
+    return JSON.parse(readFileSync(FIXTURE_PATH, 'utf8'))
+  } catch (err) {
+    console.error(
+      `[mock-account] could not load ${FIXTURE_PATH}:`,
+      err instanceof Error ? err.message : err,
+    )
+    return null
+  }
+}
+
+let _fixtures = loadFixtures()
+
+const ACCOUNT = _fixtures?.account ?? {
   username: 'Inkling_Pro',
   email: 'inkling@example.com',
   password: 'Test123!',
@@ -49,14 +72,14 @@ const ACCOUNT = {
   created_at: '2024-03-15T10:00:00.000Z',
 }
 
-const PROFILE = {
+const PROFILE = _fixtures?.profile ?? {
   name: 'Inkling_Pro',
   color: '#1ca9e0',
   avatar: 'ph-game-controller',
   image: null,
 }
 
-const FRIENDS = [
+const FRIENDS = _fixtures?.friends ?? [
   {
     pid: 'NX-AAAAAA',
     username: 'Buddy_One',
@@ -92,7 +115,7 @@ const FRIENDS = [
   },
 ]
 
-const REQUESTS = [
+const REQUESTS = _fixtures?.requests ?? [
   {
     pid: 'NX-DDDDDD',
     username: 'Wannabe',
@@ -104,7 +127,7 @@ const REQUESTS = [
   },
 ]
 
-const HISTORY = [
+const HISTORY = _fixtures?.history ?? [
   {
     title_id: '0100000000010000',
     name: 'Splatoon 3',
@@ -121,7 +144,7 @@ const HISTORY = [
   },
 ]
 
-const FRIEND_HISTORY = [
+const FRIEND_HISTORY = _fixtures?.friendHistory ?? [
   {
     title_id: '0100000000010000',
     name: 'Splatoon 3',
@@ -131,7 +154,7 @@ const FRIEND_HISTORY = [
   },
 ]
 
-const SESSIONS = [
+const SESSIONS = _fixtures?.sessions ?? [
   {
     id: 'sess_current',
     kind: 'browser',
@@ -166,7 +189,7 @@ const SESSIONS = [
   },
 ]
 
-const GAME_INFO = {
+const GAME_INFO = _fixtures?.gameInfo ?? {
   '0100000000010000': {
     name: 'Splatoon 3',
     description:
@@ -322,12 +345,25 @@ async function handle(req, res, url, body) {
 
   // ---- Meta endpoints (not part of the real backend, used for tests) ----
   if (p === '/__mock/reset' && req.method === 'POST') {
-    state.account = structuredClone(ACCOUNT)
-    state.profile = structuredClone(PROFILE)
-    state.friends = structuredClone(FRIENDS)
-    state.requests = structuredClone(REQUESTS)
-    state.history = structuredClone(HISTORY)
-    state.sessions = structuredClone(SESSIONS)
+    // Re-read fixtures so a test can edit mock-fixtures.json on the fly
+    // and have the next reset pick up the new data.
+    const reloaded = loadFixtures()
+    if (reloaded) {
+      _fixtures = reloaded
+      state.account = structuredClone(reloaded.account)
+      state.profile = structuredClone(reloaded.profile)
+      state.friends = structuredClone(reloaded.friends)
+      state.requests = structuredClone(reloaded.requests)
+      state.history = structuredClone(reloaded.history)
+      state.sessions = structuredClone(reloaded.sessions)
+    } else {
+      state.account = structuredClone(ACCOUNT)
+      state.profile = structuredClone(PROFILE)
+      state.friends = structuredClone(FRIENDS)
+      state.requests = structuredClone(REQUESTS)
+      state.history = structuredClone(HISTORY)
+      state.sessions = structuredClone(SESSIONS)
+    }
     state.takenUsernames = new Set([ACCOUNT.username, 'admin', 'test_user'])
     state.emailVerified = true
     state.revokedTokens = new Set()
@@ -582,6 +618,7 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, () => {
   console.log(`[mock-account] listening on http://localhost:${PORT}`)
   console.log(`[mock-account] latency: ${LATENCY_MS}ms per request`)
+  console.log(`[mock-account] fixture source: ${_fixtures ? 'mock-fixtures.json' : 'inline fallback'}`)
   console.log(`[mock-account] fixture user: ${ACCOUNT.email} / ${ACCOUNT.password}`)
   console.log(`[mock-account] reset endpoint: POST /__mock/reset`)
 })

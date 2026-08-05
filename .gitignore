@@ -1,5 +1,8 @@
 *.conf
 # Note: *.yaml is intentionally NOT ignored — pnpm-lock.yaml must be tracked.
+# Re-include deploy/ — the nginx cutover configs (deploy/nginx-*.conf) live
+# there and must be tracked, despite the *.conf rule above.
+!deploy/**
 *.env
 *.key
 *.pem

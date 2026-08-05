@@ -63,21 +63,24 @@ test.describe('Integration — real bundle + mock backend', () => {
   })
 
   test('POST /api/login (correct creds) returns 200 + sets the cookie', async ({ request }) => {
+    // Uses the production-captured fixture (yosoycheetos@outlook.com / Test123!).
     const res = await request.post('http://localhost:3000/api/login', {
       headers: { 'Content-Type': 'application/json' },
-      data: JSON.stringify({ login: 'inkling@example.com', password: 'Test123!' }),
+      data: JSON.stringify({ login: 'yosoycheetos@outlook.com', password: 'Test123!' }),
     })
     expect(res.status()).toBe(200)
     expect(res.headers()['set-cookie']).toContain('nx_session=')
     const body = await res.json()
-    expect(body.account.username).toBe('Inkling_Pro')
+    expect(body.account.username).toBe('JCheetos')
+    expect(body.account.pid).toBe('1800003302')
+    expect(body.account.friend_code).toBe('SW-2622-5979-6316')
     expect(body.nex_token).toBe('mock_nex_token')
   })
 
   test('POST /api/login (wrong creds) returns 401', async ({ request }) => {
     const res = await request.post('http://localhost:3000/api/login', {
       headers: { 'Content-Type': 'application/json' },
-      data: JSON.stringify({ login: 'inkling@example.com', password: 'wrong' }),
+      data: JSON.stringify({ login: 'yosoycheetos@outlook.com', password: 'wrong' }),
     })
     expect(res.status()).toBe(401)
     const body = await res.json()

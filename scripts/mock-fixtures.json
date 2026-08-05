@@ -1,0 +1,220 @@
+{
+  "_comment": "Captured from nextendo.network on 2026-08-03. Long base64 image fields are omitted here and can be pasted in later if you want the real avatars to render in the EditProfileModal. For the visual validation the avatar falls back to the Phosphor icon (or initial letter) when image is null.",
+
+  "account": {
+    "username": "JCheetos",
+    "email": "yosoycheetos@outlook.com",
+    "password": "Test123!",
+    "pid": "1800003302",
+    "friend_code": "SW-2622-5979-6316",
+    "id": 3302,
+    "discord": "jcheetos",
+    "discord_linked_at": "2026-07-29T15:01:12Z",
+    "email_verified": true,
+    "is_guest": false,
+    "color": "#1ca9e0",
+    "avatar": "ph-game-controller",
+    "image": null,
+    "created_at": "2026-07-29T14:58:43Z"
+  },
+
+  "profile": {
+    "name": "JCheetos",
+    "image": null,
+    "mii": "N0BABgwGEwgIAheMBgFpbYpqghQABQAgZHJERG4AbwAgAG4AYQBtAGUAAAAAAAAA+WTs/uzZzhaELh1Z2TdFawfGUPg=",
+    "updated_at": "2026-07-29T17:06:02.168649052Z"
+  },
+
+  "friends": [
+    {
+      "pid": "1800003002",
+      "username": "VMLec",
+      "name": "VMLec",
+      "friend_code": "SW-4397-2386-7621",
+      "color": "#64748b",
+      "avatar": "{\"char\":\"icons/the-legend-of-zelda-tears-of-the-kingdom/characters/LZTKc023.png\"}",
+      "image": null,
+      "favorite": false,
+      "created_at": "2026-07-28T20:38:23Z",
+      "presence": { "app_detail": "", "app_field": "", "app_id": "", "status": 0 }
+    },
+    {
+      "pid": "1800003316",
+      "username": "EDUARDOX7",
+      "name": "EDUARDOX7",
+      "friend_code": "SW-4559-2626-8491",
+      "color": "#e4404a",
+      "avatar": "{\"bg\":\"icons/animal-crossing-new-horizons/backgrounds/ACNHd001.png\",\"char\":\"avatar_145.png\"}",
+      "image": null,
+      "favorite": false,
+      "created_at": "2026-07-29T15:46:50Z",
+      "presence": { "app_detail": "", "app_field": "", "app_id": "", "status": 0 }
+    },
+    {
+      "pid": "1800000315",
+      "username": "jhordanluq",
+      "name": "jhordanluq",
+      "friend_code": "SW-9394-6710-2449",
+      "color": "",
+      "avatar": "",
+      "image": null,
+      "favorite": false,
+      "created_at": "2026-07-30T23:18:03Z",
+      "presence": { "app_detail": "", "app_field": "", "app_id": "", "status": 0 }
+    },
+    {
+      "pid": "1800003755",
+      "username": "lordcoruna",
+      "name": "lordcoruna",
+      "friend_code": "SW-0089-6859-3748",
+      "color": "",
+      "avatar": "",
+      "image": null,
+      "favorite": false,
+      "created_at": "2026-07-31T13:47:38Z",
+      "presence": { "app_detail": "", "app_field": "", "app_id": "", "status": 0 }
+    },
+    {
+      "pid": "1800004079",
+      "username": "Pyngaloka",
+      "name": "Pyngaloka",
+      "friend_code": "SW-0718-2296-1995",
+      "color": "",
+      "avatar": "",
+      "image": null,
+      "favorite": false,
+      "created_at": "2026-07-13T00:19:58Z",
+      "presence": {
+        "app_detail": "Jugando una carrera regional GameMode 3 GUID 533 CompID 0 EnableJoin 1",
+        "app_field": "sys_description",
+        "app_id": "01007820196a6000",
+        "status": 2
+      }
+    }
+  ],
+
+  "requests": [],
+
+  "history": [],
+
+  "sessions": [
+    {
+      "id": "9593af354cd6713517c2282943bfaf0a",
+      "kind": "browser",
+      "kind_label": "Navigateur",
+      "current": true,
+      "playing": false,
+      "ip": "152.202.71.205",
+      "geo": "Bogotá, Colombia",
+      "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0",
+      "last_seen": "2026-08-04T03:26:48Z",
+      "created": "2026-07-29T16:59:33Z"
+    },
+    {
+      "id": "c4e38493dda1b3ec120596a874154a6c",
+      "kind": "ryujinx",
+      "kind_label": "Ryujinx (émulateur)",
+      "current": false,
+      "playing": false,
+      "ip": "152.202.71.205",
+      "geo": "Bogotá, Colombia",
+      "agent": "Émulateur Ryujinx",
+      "last_seen": "2026-07-29T17:17:50Z",
+      "created": "2026-07-29T14:58:45Z"
+    },
+    {
+      "id": "646c8240ddbe063f941279dd878c3b0e",
+      "kind": "ryujinx",
+      "kind_label": "Ryujinx (émulateur)",
+      "current": false,
+      "playing": false,
+      "ip": "191.108.29.53",
+      "geo": "Suba, Colombia",
+      "agent": "Émulateur Ryujinx",
+      "last_seen": "2026-08-01T05:11:37Z",
+      "created": "2026-08-01T04:43:29Z"
+    },
+    {
+      "id": "d4a9537c471fc148d9d2dc44ef82bb13",
+      "kind": "ryujinx",
+      "kind_label": "Ryujinx (émulateur)",
+      "current": false,
+      "playing": true,
+      "ip": "",
+      "geo": "",
+      "agent": "Émulateur Ryujinx",
+      "last_seen": "2026-08-01T05:13:33Z",
+      "created": "2026-07-29T17:16:17Z"
+    },
+    {
+      "id": "670827a93d07140c3afa158c2976e754",
+      "kind": "browser",
+      "kind_label": "Navigateur",
+      "current": false,
+      "playing": false,
+      "ip": "152.202.71.205",
+      "geo": "Bogotá, Colombia",
+      "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0",
+      "last_seen": "2026-07-29T16:07:14Z",
+      "created": "2026-07-29T14:58:45Z"
+    },
+    {
+      "id": "0dab7c42ebb96298d9cc6e5b8185aac5",
+      "kind": "browser",
+      "kind_label": "Navigateur",
+      "current": false,
+      "playing": false,
+      "ip": "10.0.1.1",
+      "geo": "Réseau local",
+      "agent": "node",
+      "last_seen": "2026-07-29T15:01:11Z",
+      "created": "2026-07-29T15:01:11Z"
+    }
+  ],
+
+  "friendHistory": [
+    {
+      "title_id": "0100000000010000",
+      "name": "Splatoon 3",
+      "seconds": 14400,
+      "last_played": "2025-12-05T18:00:00.000Z",
+      "icon": null
+    }
+  ],
+
+  "gameInfo": {
+    "0100000000010000": {
+      "name": "Splatoon 3",
+      "description": "A colorful, squid-themed online multiplayer shooter with turf-war, salmon run, and ranked battles.",
+      "accent": "#ff5a8a",
+      "hero": null,
+      "cover": null,
+      "screenshots": [],
+      "genres": ["Action", "Shooter"],
+      "publisher": "Nintendo",
+      "developer": "Nintendo EPD",
+      "release_date": "2022-09-09",
+      "platforms": ["Nintendo Switch"],
+      "links": [
+        { "type": "website", "url": "https://splatoon.nintendo.com" },
+        { "type": "twitter", "url": "https://twitter.com/splatoonjp" }
+      ],
+      "metacritic": 83
+    },
+    "0100000000020000": {
+      "name": "Mario Kart 8 Deluxe",
+      "description": "The definitive Mario Kart experience with 48 courses, 42 characters, and battle mode.",
+      "accent": "#e4404a",
+      "hero": null,
+      "cover": null,
+      "screenshots": [],
+      "genres": ["Racing", "Party"],
+      "publisher": "Nintendo",
+      "developer": "Nintendo EPD",
+      "release_date": "2017-04-28",
+      "platforms": ["Nintendo Switch"],
+      "links": [{ "type": "website", "url": "https://mariokart8deluxe.nintendo.com" }],
+      "metacritic": 92
+    }
+  }
+}
