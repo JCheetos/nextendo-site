@@ -630,14 +630,5 @@
     "a11y": {
       "skip": "Saltar para o conteúdo"
     }
-  },
-  "step1.h": "Crie sua conta Nextendo",
-  "step1.p": "Grátis, em três campos. Você recebe na hora um apelido e um friend code permanentes.",
-  "step1.link": "Criar minha conta →",
-  "step2.h": "Baixe o Ryujinx Nextendo",
-  "step2.p": "A build do emulador pré-configurada para a nossa rede. Num Switch com CFW, ative o perfil Nextendo (redirecionamento de DNS).",
-  "step3.h": "Conecte-se à Nextendo Network",
-  "step3.p": "No Ryujinx: <b>Ações → Conectar à Nextendo Network</b>, depois insira suas credenciais.",
-  "step4.h": "Jogue online",
-  "step4.p": "Inicie Mario Kart 8, Splatoon 2 ou Smash Ultimate, abra o menu online e encontre a comunidade."
+  }
 }

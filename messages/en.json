@@ -630,14 +630,5 @@
     "a11y": {
       "skip": "Skip to content"
     }
-  },
-  "step1.h": "Create your Nextendo account",
-  "step1.p": "Free, in three fields. You instantly get a permanent nickname and friend code.",
-  "step1.link": "Create my account →",
-  "step2.h": "Get Ryujinx Nextendo",
-  "step2.p": "The emulator build preconfigured for our network. On a Switch CFW, enable the Nextendo profile instead (DNS redirect).",
-  "step3.h": "Connect to Nextendo Network",
-  "step3.p": "In Ryujinx: <b>Actions → Connect to Nextendo Network</b>, then enter your credentials.",
-  "step4.h": "Play online",
-  "step4.p": "Launch Mario Kart 8, Splatoon 2 or Smash Ultimate, open the online menu, and find the community."
+  }
 }

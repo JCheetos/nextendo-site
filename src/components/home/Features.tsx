@@ -20,17 +20,25 @@ export async function Features() {
       </header>
 
       <div className="bento">
-        {FEATURES.map((feature, idx) => (
-          <article
-            key={feature.key}
-            className={`cell cell--feature${idx === 0 ? ' cell--lead' : ''}`}
-            data-spotlight
-          >
-            <i className={`ph ${feature.icon} cell__ico`} aria-hidden="true" />
-            <h3>{t(`feat.${feature.key}.h`)}</h3>
-            <p>{t(`feat.${feature.key}.p`)}</p>
-          </article>
-        ))}
+        {FEATURES.map((feature, idx) => {
+          const isLead = idx === 0
+          const inner = (
+            <>
+              <i className={`ph ${feature.icon} cell__ico`} aria-hidden="true" />
+              <h3>{t(`feat.${feature.key}.h`)}</h3>
+              <p>{t(`feat.${feature.key}.p`)}</p>
+            </>
+          )
+          return (
+            <article
+              key={feature.key}
+              className={`cell cell--feature${isLead ? ' cell--lead' : ''}`}
+              data-spotlight
+            >
+              {isLead ? <div className="cell__body">{inner}</div> : inner}
+            </article>
+          )
+        })}
       </div>
     </section>
   )

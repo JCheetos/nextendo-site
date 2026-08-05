@@ -19,6 +19,19 @@ export const localeLabels: Record<Locale, string> = {
   ar: 'العربية',
 }
 
+export const localeCodes: Record<Locale, string> = {
+  fr: 'FR',
+  en: 'EN',
+  es: 'ES',
+  pt: 'PT',
+  de: 'DE',
+  it: 'IT',
+  ru: 'RU',
+  zh: 'ZH',
+  ja: 'JA',
+  ar: 'AR',
+}
+
 export function isLocale(value: string | undefined | null): value is Locale {
   return typeof value === 'string' && (locales as readonly string[]).includes(value)
 }

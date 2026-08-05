@@ -1,4 +1,5 @@
 import { Backdrop } from '@/components/layout/Backdrop'
+import { SiteEffects } from '@/components/layout/SiteEffects'
 import { locales } from '@/i18n/config'
 import type { Metadata } from 'next'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
@@ -137,6 +138,7 @@ export default async function LocaleLayout({
             {skipLabel}
           </a>
           <Backdrop />
+          <SiteEffects />
           {children}
         </NextIntlClientProvider>
       </body>
