@@ -130,6 +130,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={locale === 'ar' ? 'rtl' : 'ltr'}
+      data-scroll-behavior="smooth"
       className={`${bricolage.variable} ${jetbrains.variable}`}
     >
       <body className="js">

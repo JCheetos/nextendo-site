@@ -8,6 +8,7 @@ type Props = {
 
 export async function IdentityPanel({ account }: Props) {
   const t = await getTranslations('acc')
+  const tMember = await getTranslations('member')
   const tForm = await getTranslations('form')
   const locale = await getLocale()
 
@@ -47,7 +48,7 @@ export async function IdentityPanel({ account }: Props) {
         <Row label={t('pseudo')}>
           <span>{(account.username as string | undefined) ?? '—'}</span>
         </Row>
-        <Row label={t('member.label')}>
+        <Row label={tMember('label')}>
           <span className="inline-copy">
             <span className="mono">{friendCode || '—'}</span>
             {friendCode ? <CopyButton value={friendCode} label={t('copy')} /> : null}

@@ -123,7 +123,7 @@
     "pseudoHint": "3 到 16 个字符——字母、数字、_ 或 -。",
     "bgColor": "背景颜色",
     "hexAria": "十六进制颜色代码",
-    "photoSub": "头像 <span class=\"ip-hint\">— 叠加角色、背景和边框</span>",
+    "photoSub": "头像 <hint>— 叠加角色、背景和边框</hint>",
     "remove": "移除",
     "filterGame": "按游戏筛选",
     "save": "保存",

@@ -323,7 +323,7 @@ export function EditProfileModal({ open, onClose, username, currentColor, curren
         <div className="icon-picker">
           <div className="modal__sub">
             {t.rich('photoSub', {
-              span: (chunks) => <span className="ip-hint"> — {chunks}</span>,
+              hint: (chunks) => <span className="ip-hint">{chunks}</span>,
             })}
           </div>
           <div className="ip-head">

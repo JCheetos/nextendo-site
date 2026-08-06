@@ -2,6 +2,7 @@
 
 import { revokeAllSessions, revokeSession } from '@/lib/api'
 import { clearNexToken } from '@/server/auth'
+import { getRequestCookieHeader } from '@/server/request'
 import { redirect } from 'next/navigation'
 
 type SessionsErrorKey = 'network' | 'invalidSession' | 'unknown'
@@ -23,7 +24,7 @@ export async function revokeSessionAction(input: {
   isCurrent: boolean
   locale: string
 }): Promise<{ ok: true } | ReturnType<typeof fail>> {
-  const result = await revokeSession(input.id)
+  const result = await revokeSession(input.id, { cookie: await getRequestCookieHeader() })
   if (!result.ok) return fail(normalizeError(result.error))
 
   // If the user revoked their own current session, force-logout server-side
@@ -38,7 +39,7 @@ export async function revokeSessionAction(input: {
 export async function revokeAllSessionsAction(input: {
   locale: string
 }): Promise<{ ok: true } | ReturnType<typeof fail>> {
-  const result = await revokeAllSessions()
+  const result = await revokeAllSessions({ cookie: await getRequestCookieHeader() })
   if (!result.ok) return fail(normalizeError(result.error))
   await clearNexToken()
   redirect(`/${input.locale}`)

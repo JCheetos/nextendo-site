@@ -5,6 +5,10 @@ import { getEnv } from '@/lib/env'
 
 type Counts = Record<string, number>
 
+export type ApiRequestOptions = {
+  cookie?: string
+}
+
 export type OnlineCounts = {
   counts: Counts
 }
@@ -38,6 +42,7 @@ async function apiFetch(
   init?: Omit<RequestInit, 'next'> & {
     next?: { revalidate?: number; tags?: string[] }
   },
+  options?: ApiRequestOptions,
 ): Promise<Response | null> {
   const baseUrl = getEnv().NEXTENDO_ACCOUNT_BASE_URL
   const url = baseUrl ? `${baseUrl}${path}` : path
@@ -47,7 +52,11 @@ async function apiFetch(
     return await fetch(url, {
       ...init,
       signal: controller.signal,
-      headers: { Accept: 'application/json', ...(init?.headers ?? {}) },
+      headers: {
+        Accept: 'application/json',
+        ...(options?.cookie ? { Cookie: options.cookie } : {}),
+        ...(init?.headers ?? {}),
+      },
       // biome-ignore lint/suspicious/noExplicitAny: Next extends RequestInit with `next`
       next: init?.next as any,
     })
@@ -77,53 +86,75 @@ export type FetchOptions = Parameters<typeof apiFetch>[1]
 // Auth endpoints (use only from Server Actions / Route Handlers)
 // -----------------------------------------------------------------------------
 
-export type AuthResult<T> = { ok: true; data: T } | { ok: false; error: string }
+export type AuthResult<T> =
+  | { ok: true; data: T; setCookie?: string }
+  | { ok: false; error: string; setCookie?: string }
 
 type PostInit = Omit<RequestInit, 'method' | 'body' | 'headers' | 'next'> & {
   headers?: Record<string, string>
   next?: { revalidate?: number; tags?: string[] }
 }
 
-async function postJson<T>(path: string, body: unknown, init?: PostInit): Promise<AuthResult<T>> {
-  const res = await apiFetch(path, {
-    method: 'POST',
-    body: JSON.stringify(body),
-    ...init,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(init?.headers ?? {}),
+async function postJson<T>(
+  path: string,
+  body: unknown,
+  init?: PostInit,
+  options?: ApiRequestOptions,
+): Promise<AuthResult<T>> {
+  const res = await apiFetch(
+    path,
+    {
+      method: 'POST',
+      body: JSON.stringify(body),
+      ...init,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(init?.headers ?? {}),
+      },
     },
-  })
+    options,
+  )
   if (!res) return { ok: false, error: 'network' }
+  const setCookie = res.headers?.get?.('set-cookie') ?? undefined
   let data: T & { error?: string } = {} as T & { error?: string }
   try {
     data = (await res.json()) as T & { error?: string }
   } catch {
     // Empty body is fine for some endpoints.
   }
-  if (!res.ok) return { ok: false, error: data.error ?? `http_${res.status}` }
-  return { ok: true, data }
+  if (!res.ok) return { ok: false, error: data.error ?? `http_${res.status}`, setCookie }
+  return { ok: true, data, setCookie }
 }
 
-async function putJson<T>(path: string, body: unknown, init?: PostInit): Promise<AuthResult<T>> {
-  const res = await apiFetch(path, {
-    method: 'PUT',
-    body: JSON.stringify(body),
-    ...init,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(init?.headers ?? {}),
+async function putJson<T>(
+  path: string,
+  body: unknown,
+  init?: PostInit,
+  options?: ApiRequestOptions,
+): Promise<AuthResult<T>> {
+  const res = await apiFetch(
+    path,
+    {
+      method: 'PUT',
+      body: JSON.stringify(body),
+      ...init,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(init?.headers ?? {}),
+      },
     },
-  })
+    options,
+  )
   if (!res) return { ok: false, error: 'network' }
+  const setCookie = res.headers?.get?.('set-cookie') ?? undefined
   let data: T & { error?: string } = {} as T & { error?: string }
   try {
     data = (await res.json()) as T & { error?: string }
   } catch {
     // Empty body is fine for some endpoints.
   }
-  if (!res.ok) return { ok: false, error: data.error ?? `http_${res.status}` }
-  return { ok: true, data }
+  if (!res.ok) return { ok: false, error: data.error ?? `http_${res.status}`, setCookie }
+  return { ok: true, data, setCookie }
 }
 
 export type RegisterPayload = {
@@ -143,11 +174,16 @@ export async function registerAccount(
 
 export async function loginAccount(
   payload: { login: string; password: string },
-  opts?: { turnstile?: string },
+  opts?: { turnstile?: string; cookie?: string },
 ): Promise<AuthResult<{ account?: Account; nex_token?: string }>> {
-  return postJson('/api/login', payload, {
-    headers: opts?.turnstile ? { 'Cf-Turnstile-Response': opts.turnstile } : undefined,
-  })
+  return postJson(
+    '/api/login',
+    payload,
+    {
+      headers: opts?.turnstile ? { 'Cf-Turnstile-Response': opts.turnstile } : undefined,
+    },
+    opts,
+  )
 }
 
 export async function forgotPassword(payload: {
@@ -181,8 +217,8 @@ export async function resendVerification(): Promise<AuthResult<null>> {
   return postJson('/api/resend-verification', {})
 }
 
-export async function fetchMe(): Promise<Account | null> {
-  const res = await apiFetch('/api/me')
+export async function fetchMe(options?: ApiRequestOptions): Promise<Account | null> {
+  const res = await apiFetch('/api/me', undefined, options)
   if (!res || !res.ok) return null
   try {
     const data = (await res.json()) as { account?: Account }
@@ -366,12 +402,19 @@ export async function setUsername(username: string): Promise<AuthResult<unknown>
   return putJson('/api/username', { username })
 }
 
-export async function changeEmail(email: string, password: string): Promise<AuthResult<null>> {
-  return postJson('/api/email', { email, password })
+export async function changeEmail(
+  email: string,
+  password: string,
+  options?: ApiRequestOptions,
+): Promise<AuthResult<null>> {
+  return postJson('/api/email', { email, password }, undefined, options)
 }
 
-export async function deleteAccount(password: string): Promise<AuthResult<null>> {
-  return postJson('/api/delete-account', { password })
+export async function deleteAccount(
+  password: string,
+  options?: ApiRequestOptions,
+): Promise<AuthResult<null>> {
+  return postJson('/api/delete-account', { password }, undefined, options)
 }
 
 // -----------------------------------------------------------------------------
@@ -390,8 +433,10 @@ export type Session = {
   [key: string]: unknown
 }
 
-export async function fetchSessions(): Promise<{ sessions: Session[] } | null> {
-  const res = await apiFetch('/api/sessions')
+export async function fetchSessions(
+  options?: ApiRequestOptions,
+): Promise<{ sessions: Session[] } | null> {
+  const res = await apiFetch('/api/sessions', undefined, options)
   if (!res || !res.ok) return null
   try {
     const data = (await res.json()) as { sessions?: Session[] }
@@ -401,10 +446,13 @@ export async function fetchSessions(): Promise<{ sessions: Session[] } | null> {
   }
 }
 
-export async function revokeSession(id: string): Promise<AuthResult<unknown>> {
-  return postJson('/api/sessions/revoke', { id })
+export async function revokeSession(
+  id: string,
+  options?: ApiRequestOptions,
+): Promise<AuthResult<unknown>> {
+  return postJson('/api/sessions/revoke', { id }, undefined, options)
 }
 
-export async function revokeAllSessions(): Promise<AuthResult<unknown>> {
-  return postJson('/api/sessions/revoke-all', {})
+export async function revokeAllSessions(options?: ApiRequestOptions): Promise<AuthResult<unknown>> {
+  return postJson('/api/sessions/revoke-all', {}, undefined, options)
 }

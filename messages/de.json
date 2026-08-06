@@ -123,7 +123,7 @@
     "pseudoHint": "3 bis 16 Zeichen — Buchstaben, Ziffern, _ oder -.",
     "bgColor": "Hintergrundfarbe",
     "hexAria": "Hexadezimaler Farbcode",
-    "photoSub": "Profilbild <span class=\"ip-hint\">— lege eine Figur, einen Hintergrund und einen Rahmen übereinander</span>",
+    "photoSub": "Profilbild <hint>— lege eine Figur, einen Hintergrund und einen Rahmen übereinander</hint>",
     "remove": "Entfernen",
     "filterGame": "Nach Spiel filtern",
     "save": "Speichern",

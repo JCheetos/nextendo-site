@@ -2,6 +2,7 @@
 
 import { changeEmail, deleteAccount } from '@/lib/api'
 import { changeEmailSchema, deleteAccountSchema } from '@/lib/schemas'
+import { getRequestCookieHeader } from '@/server/request'
 import { redirect } from 'next/navigation'
 
 type AccountErrorKey = 'network' | 'invalidPassword' | 'emailTaken' | 'invalidEmail' | 'unknown'
@@ -34,7 +35,9 @@ export async function changeEmailAction(input: {
     return fail('unknown', fieldErrors)
   }
 
-  const result = await changeEmail(parsed.data.email, parsed.data.password)
+  const result = await changeEmail(parsed.data.email, parsed.data.password, {
+    cookie: await getRequestCookieHeader(),
+  })
   if (!result.ok) return fail(normalizeError(result.error))
   return { ok: true }
 }
@@ -53,7 +56,9 @@ export async function deleteAccountAction(input: {
     return fail('unknown', fieldErrors)
   }
 
-  const result = await deleteAccount(parsed.data.password)
+  const result = await deleteAccount(parsed.data.password, {
+    cookie: await getRequestCookieHeader(),
+  })
   if (!result.ok) return fail(normalizeError(result.error))
   // After deletion, force the client to land on the homepage — the session
   // cookie is dead, so /compte would 401 on the next request.

@@ -123,7 +123,7 @@
     "pseudoHint": "3〜16文字 — 英数字、_ または -。",
     "bgColor": "背景色",
     "hexAria": "16進数カラーコード",
-    "photoSub": "プロフィール画像 <span class=\"ip-hint\">— キャラクター、背景、フレームを重ねます</span>",
+    "photoSub": "プロフィール画像 <hint>— キャラクター、背景、フレームを重ねます</hint>",
     "remove": "削除",
     "filterGame": "ゲームで絞り込む",
     "save": "保存",

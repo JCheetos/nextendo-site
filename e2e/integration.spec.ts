@@ -87,6 +87,30 @@ test.describe('Integration — real bundle + mock backend', () => {
     expect(body.error).toBe('invalid_credentials')
   })
 
+  test('browser login carries the session into /compte and /sessions', async ({ page }) => {
+    await context_addFr(page)
+    await page.goto('/login')
+    await page.getByLabel('Adresse e-mail').fill('yosoycheetos@outlook.com')
+    await page.locator('#password').fill('Test123!')
+    await page.locator('form.auth__form button[type="submit"]').click()
+
+    await page.waitForURL(/\/compte$/)
+    await expect(page.locator('.account')).toBeVisible()
+    await expect(page.getByText('JCheetos').first()).toBeVisible()
+    await expect(page.getByText('SW-2622-5979-6316').first()).toBeVisible()
+    await expect(page.locator('dialog.modal[open]')).toHaveCount(0)
+    await page
+      .getByRole('button', { name: /Éditer el perfil|Editar perfil|Éditer le profil/ })
+      .click()
+    await expect(page.getByRole('heading', { name: /Éditer|Editar/ })).toBeVisible()
+    await page.keyboard.press('Escape')
+    await expect(page.locator('dialog.modal[open]')).toHaveCount(0)
+
+    await page.goto('/sessions')
+    await expect(page.locator('.sess-list')).toBeVisible()
+    await expect(page.getByText('Navigateur').first()).toBeVisible()
+  })
+
   test('mock reset between tests keeps the suite deterministic', async ({ request }) => {
     let res = await request.get('http://localhost:3000/api/online-counts')
     let body = await res.json()

@@ -2032,9 +2032,12 @@ button {
   position: fixed;
   inset: 0;
   z-index: 200;
-  display: grid;
+  display: none;
   place-items: center;
   padding: 1.2rem;
+}
+.modal[open] {
+  display: grid;
 }
 .modal__backdrop {
   position: absolute;

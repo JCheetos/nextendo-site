@@ -4,6 +4,7 @@ import { SiteFooter } from '@/components/layout/SiteFooter'
 import type { locales } from '@/i18n/config'
 import { isLocale } from '@/i18n/config'
 import { fetchMe } from '@/lib/api'
+import { getRequestCookieHeader } from '@/server/request'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { redirect } from 'next/navigation'
 
@@ -27,7 +28,7 @@ export default async function ComptePage({ params }: { params: Promise<Params> }
   const locale = rawLocale as (typeof locales)[number]
   setRequestLocale(locale)
 
-  const account = await fetchMe()
+  const account = await fetchMe({ cookie: await getRequestCookieHeader() })
   if (!account) {
     redirect(`/login?next=${encodeURIComponent('/compte')}`)
   }

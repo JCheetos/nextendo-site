@@ -15,6 +15,7 @@ import { redirect } from 'next/navigation'
 
 const NEX_TOKEN_COOKIE = 'nx_nex_token'
 const SESSION_COOKIE = 'nx_session'
+const SESSION_MAX_AGE = 60 * 60 * 24 * 365
 
 // Translation keys for known backend errors — kept generic so the page can
 // localize them via t(`auth.errors.${key}`).
@@ -63,6 +64,21 @@ async function setNexToken(token: string | undefined) {
   })
 }
 
+async function setSessionFromBackend(setCookie: string | undefined) {
+  const match = setCookie?.match(/(?:^|,\s*)nx_session=([^;]+)/)
+  if (!match) return
+  const store = await cookies()
+  store.set({
+    name: SESSION_COOKIE,
+    value: decodeURIComponent(match[1]),
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+    maxAge: SESSION_MAX_AGE,
+  })
+}
+
 export async function clearNexToken() {
   const store = await cookies()
   store.delete(NEX_TOKEN_COOKIE)
@@ -98,6 +114,7 @@ export async function loginAction(input: {
     return fail(normalizeError(result.error))
   }
 
+  await setSessionFromBackend(result.setCookie)
   if (result.data.nex_token) await setNexToken(result.data.nex_token)
   redirectAfterAuth(input.locale, input.next)
 }

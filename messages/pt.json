@@ -123,7 +123,7 @@
     "pseudoHint": "3 a 16 caracteres — letras, dígitos, _ ou -.",
     "bgColor": "Cor de fundo",
     "hexAria": "Código de cor hexadecimal",
-    "photoSub": "Foto de perfil <span class=\"ip-hint\">— sobreponha um personagem, um fundo e uma moldura</span>",
+    "photoSub": "Foto de perfil <hint>— sobreponha um personagem, um fundo e uma moldura</hint>",
     "remove": "Remover",
     "filterGame": "Filtrar por jogo",
     "save": "Salvar",

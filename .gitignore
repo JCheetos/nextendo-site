@@ -42,3 +42,7 @@ README-NEXT.md
 
 # Admin : jamais dans le repo public
 admin.html
+
+# Local development helpers and manual validation notes
+scripts/
+MANUAL-VALIDATION.md
