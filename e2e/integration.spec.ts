@@ -98,17 +98,125 @@ test.describe('Integration — real bundle + mock backend', () => {
     await expect(page.locator('.account')).toBeVisible()
     await expect(page.getByText('JCheetos').first()).toBeVisible()
     await expect(page.getByText('SW-2622-5979-6316').first()).toBeVisible()
-    await expect(page.locator('dialog.modal[open]')).toHaveCount(0)
+    await expect(page.locator('.modal:not([hidden])')).toHaveCount(0)
     await page
       .getByRole('button', { name: /Éditer el perfil|Editar perfil|Éditer le profil/ })
       .click()
     await expect(page.getByRole('heading', { name: /Éditer|Editar/ })).toBeVisible()
+    await expect(page.locator('.modal:not([hidden])')).toHaveCount(1)
+    {
+      const vp = page.viewportSize()
+      const box = await page.locator('.modal:not([hidden]) .modal__panel').boundingBox()
+      const cx = box.x + box.width / 2
+      const cy = box.y + box.height / 2
+      expect(Math.abs(cx - vp.width / 2)).toBeLessThan(8)
+      expect(Math.abs(cy - vp.height / 2)).toBeLessThan(Math.max(16, vp.height * 0.03))
+      const z = await page
+        .locator('.modal:not([hidden])')
+        .evaluate((el) => Number(window.getComputedStyle(el).zIndex))
+      expect(z).toBeGreaterThan(100)
+    }
     await page.keyboard.press('Escape')
-    await expect(page.locator('dialog.modal[open]')).toHaveCount(0)
+    await expect(page.locator('.modal:not([hidden])')).toHaveCount(0)
 
     await page.goto('/sessions')
     await expect(page.locator('.sess-list')).toBeVisible()
     await expect(page.getByText('Navigateur').first()).toBeVisible()
+  })
+
+  async function browserLogin(page, locale = 'es') {
+    await page
+      .context()
+      .addCookies([{ name: 'nx_lang', value: locale, domain: 'localhost', path: '/' }])
+    await page.goto('/login')
+    await page.locator('#login').fill('yosoycheetos@outlook.com')
+    await page.locator('#password').fill('Test123!')
+    await page.locator('form.auth__form button[type="submit"]').click()
+    await page.waitForURL(/\/compte$/, { timeout: 15000 })
+    await page.waitForSelector('.account', { timeout: 10000 })
+  }
+
+  test('change email modal is anchored to the viewport', async ({ page }) => {
+    await browserLogin(page, 'es')
+    await page.getByRole('button', { name: /Cambiar correo/i }).click()
+    const modal = page.locator('.modal:not([hidden])')
+    await expect(modal).toHaveCount(1)
+    const vp = page.viewportSize()
+    const container = await modal.boundingBox()
+    expect(container.x).toBe(0)
+    expect(container.y).toBe(0)
+    expect(container.width).toBe(vp.width)
+    expect(container.height).toBe(vp.height)
+    const panel = await modal.locator('.modal__panel').boundingBox()
+    const cx = panel.x + panel.width / 2
+    const cy = panel.y + panel.height / 2
+    expect(Math.abs(cx - vp.width / 2)).toBeLessThan(8)
+    expect(Math.abs(cy - vp.height / 2)).toBeLessThan(Math.max(16, vp.height * 0.03))
+    await page.keyboard.press('Escape')
+  })
+
+  test('modal backdrop covers the viewport with blur', async ({ page }) => {
+    await browserLogin(page, 'es')
+    await page.getByRole('button', { name: /Eliminar mi cuenta/i }).click()
+    const modal = page.locator('.modal:not([hidden])')
+    const container = await modal.boundingBox()
+    const vp = page.viewportSize()
+    expect(container.width).toBe(vp.width)
+    expect(container.height).toBe(vp.height)
+    // Verify the .modal:not([hidden]) rule declares backdrop-filter or
+    // -webkit-backdrop-filter. Headless Chromium sometimes reports the
+    // computed value as 'none' even when the rule is applied, so we check
+    // the CSSOM directly.
+    const ruleHasBlur = await modal.evaluate(() => {
+      for (const sheet of Array.from(document.styleSheets)) {
+        let rules: CSSRuleList | null
+        try {
+          rules = sheet.cssRules
+        } catch {
+          continue
+        }
+        if (!rules) continue
+        for (const rule of Array.from(rules)) {
+          if (!rule.cssText) continue
+          if (rule.cssText.includes('.modal:not([hidden])')) {
+            if (
+              rule.cssText.includes('backdrop-filter') ||
+              rule.cssText.includes('-webkit-backdrop-filter')
+            ) {
+              return true
+            }
+          }
+        }
+      }
+      return false
+    })
+    expect(ruleHasBlur).toBe(true)
+    await page.keyboard.press('Escape')
+  })
+
+  test('SV picker drag does not produce an infinite render loop', async ({ page }) => {
+    await browserLogin(page, 'es')
+    const errors = []
+    page.on('console', (m) => {
+      if (m.type() === 'error') errors.push(m.text())
+    })
+    page.on('pageerror', (err) => errors.push(err.message))
+    await page.getByRole('button', { name: /Editar perfil/i }).click()
+    await page.locator('.swatch--custom').click()
+    const sv = page.locator('.cpick__sv')
+    const box = await sv.boundingBox()
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2)
+    await page.mouse.down()
+    for (let i = 1; i <= 15; i++) {
+      await page.mouse.move(
+        box.x + box.width * (0.2 + 0.6 * (i / 15)),
+        box.y + box.height * (0.8 - 0.6 * (i / 15)),
+        { steps: 1 },
+      )
+    }
+    await page.mouse.up()
+    await page.waitForTimeout(300)
+    expect(errors.some((e) => /Maximum update depth|too many re-renders/i.test(e))).toBe(false)
   })
 
   test('mock reset between tests keeps the suite deterministic', async ({ request }) => {

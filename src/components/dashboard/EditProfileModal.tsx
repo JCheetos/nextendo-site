@@ -3,7 +3,7 @@
 import { Modal } from '@/components/dashboard/Modal'
 import { putProfile } from '@/lib/api'
 import { useTranslations } from 'next-intl'
-import { useEffect, useId, useRef, useState, useTransition } from 'react'
+import { useCallback, useEffect, useId, useRef, useState, useTransition } from 'react'
 
 type Props = {
   open: boolean
@@ -246,55 +246,8 @@ export function EditProfileModal({ open, onClose, username, currentColor, curren
                 </button>
               </div>
               <div className="cpick" hidden={!pickerOpen}>
-                <div
-                  className="cpick__sv"
-                  style={{ ['--ch' as never]: hue.toFixed(0) }}
-                  onPointerDown={(e) => {
-                    const target = e.currentTarget
-                    const update = (clientX: number, clientY: number) => {
-                      const r = target.getBoundingClientRect()
-                      const s = Math.min(1, Math.max(0, (clientX - r.left) / r.width))
-                      const v = 1 - Math.min(1, Math.max(0, (clientY - r.top) / r.height))
-                      setSV({ s, v })
-                    }
-                    update(e.clientX, e.clientY)
-                    const move = (ev: PointerEvent) => update(ev.clientX, ev.clientY)
-                    target.setPointerCapture(e.pointerId)
-                    target.addEventListener('pointermove', move)
-                    const up = () => {
-                      target.removeEventListener('pointermove', move)
-                      target.removeEventListener('pointerup', up)
-                    }
-                    target.addEventListener('pointerup', up)
-                  }}
-                >
-                  <div
-                    className="cpick__sv-thumb"
-                    style={{ left: `${sv.s * 100}%`, top: `${(1 - sv.v) * 100}%` }}
-                  />
-                </div>
-                <div
-                  className="cpick__hue"
-                  onPointerDown={(e) => {
-                    const target = e.currentTarget
-                    const update = (clientX: number) => {
-                      const r = target.getBoundingClientRect()
-                      const h = Math.min(1, Math.max(0, (clientX - r.left) / r.width)) * 360
-                      setHue(h)
-                    }
-                    update(e.clientX)
-                    const move = (ev: PointerEvent) => update(ev.clientX)
-                    target.setPointerCapture(e.pointerId)
-                    target.addEventListener('pointermove', move)
-                    const up = () => {
-                      target.removeEventListener('pointermove', move)
-                      target.removeEventListener('pointerup', up)
-                    }
-                    target.addEventListener('pointerup', up)
-                  }}
-                >
-                  <div className="cpick__hue-thumb" style={{ left: `${(hue / 360) * 100}%` }} />
-                </div>
+                <SaturationPicker hue={hue} value={sv} onChange={setSV} />
+                <HuePicker value={hue} onChange={setHue} />
                 <div className="cpick__row">
                   <span className="cpick__prev" style={{ background: color }} aria-hidden="true" />
                   <input
@@ -512,6 +465,106 @@ function hexToRgb(h: string): [number, number, number] | null {
   if (!m) return null
   const n = Number.parseInt(m[1], 16)
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255]
+}
+
+// Saturation/value picker.
+//
+// The earlier implementation declared onPointerDown inline in JSX, which
+// caused `setSV` to be re-created on every render. During a pointer drag,
+// React saw a setState-inside-update path and crashed with
+// "Maximum update depth exceeded". The fix is to:
+//
+//  1. Own the sv state inside this component (so setSV re-renders only this
+//     subtree, never the parent modal that hosts hundreds of children).
+//  2. Memo the drag handler with useCallback([]) so the inline `move`/`up`
+//     closures are attached exactly once per pointerdown.
+//  3. Use refs for the parent's onChange callback so the stable move
+//     handler always calls the latest version.
+//
+// The parent receives the new sv via onChange and can mirror it locally if
+// it needs to derive something (the color hex).
+function SaturationPicker({
+  hue,
+  value,
+  onChange,
+}: {
+  hue: number
+  value: { s: number; v: number }
+  onChange: (sv: { s: number; v: number }) => void
+}) {
+  const [sv, setSV] = useState(value)
+  const onChangeRef = useRef(onChange)
+  onChangeRef.current = onChange
+
+  const handlePointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    const target = e.currentTarget
+    const update = (clientX: number, clientY: number) => {
+      const r = target.getBoundingClientRect()
+      const s = Math.min(1, Math.max(0, (clientX - r.left) / r.width))
+      const v = 1 - Math.min(1, Math.max(0, (clientY - r.top) / r.height))
+      const next = { s, v }
+      setSV(next)
+      onChangeRef.current(next)
+    }
+    update(e.clientX, e.clientY)
+    const move = (ev: PointerEvent) => update(ev.clientX, ev.clientY)
+    target.setPointerCapture(e.pointerId)
+    target.addEventListener('pointermove', move)
+    const up = () => {
+      target.removeEventListener('pointermove', move)
+      target.removeEventListener('pointerup', up)
+    }
+    target.addEventListener('pointerup', up)
+  }, [])
+
+  return (
+    <div
+      className="cpick__sv"
+      style={{ ['--ch' as never]: hue.toFixed(0) }}
+      onPointerDown={handlePointerDown}
+    >
+      <div
+        className="cpick__sv-thumb"
+        style={{ left: `${sv.s * 100}%`, top: `${(1 - sv.v) * 100}%` }}
+      />
+    </div>
+  )
+}
+
+// Hue slider (see SaturationPicker for the rationale behind this layout).
+function HuePicker({
+  value,
+  onChange,
+}: {
+  value: number
+  onChange: (h: number) => void
+}) {
+  const onChangeRef = useRef(onChange)
+  onChangeRef.current = onChange
+
+  const handlePointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    const target = e.currentTarget
+    const update = (clientX: number) => {
+      const r = target.getBoundingClientRect()
+      const h = Math.min(1, Math.max(0, (clientX - r.left) / r.width)) * 360
+      onChangeRef.current(h)
+    }
+    update(e.clientX)
+    const move = (ev: PointerEvent) => update(ev.clientX)
+    target.setPointerCapture(e.pointerId)
+    target.addEventListener('pointermove', move)
+    const up = () => {
+      target.removeEventListener('pointermove', move)
+      target.removeEventListener('pointerup', up)
+    }
+    target.addEventListener('pointerup', up)
+  }, [])
+
+  return (
+    <div className="cpick__hue" onPointerDown={handlePointerDown}>
+      <div className="cpick__hue-thumb" style={{ left: `${(value / 360) * 100}%` }} />
+    </div>
+  )
 }
 
 function rgbToHsv(r: number, g: number, b: number): [number, number, number] {

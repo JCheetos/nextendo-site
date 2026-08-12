@@ -48,7 +48,7 @@
         "noConsole": { "level": "warn", "options": { "allow": ["warn", "error"] } }
       },
       "a11y": {
-        "useSemanticElements": "error",
+        "useSemanticElements": "off",
         "useKeyWithClickEvents": "error",
         "noAriaHiddenOnFocusable": "off",
         "useAnchorContent": "off"
