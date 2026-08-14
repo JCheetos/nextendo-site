@@ -219,6 +219,28 @@ test.describe('Integration — real bundle + mock backend', () => {
     expect(errors.some((e) => /Maximum update depth|too many re-renders/i.test(e))).toBe(false)
   })
 
+  test('friend modal opens when clicking a friend in the list', async ({ page }) => {
+    await browserLogin(page, 'es')
+    const friend = page.locator('[data-testid="friend-list"] .friend').first()
+    await friend.click()
+    const modal = page.locator('.modal:not([hidden])')
+    await expect(modal).toHaveCount(1)
+    await expect(modal.locator('.modal__panel')).toBeVisible()
+    await page.keyboard.press('Escape')
+    await expect(page.locator('.modal:not([hidden])')).toHaveCount(0)
+  })
+
+  test('game modal opens when a history card is present', async ({ page }) => {
+    await browserLogin(page, 'es')
+    const cards = page.locator('.history-card')
+    const count = await cards.count()
+    test.skip(count === 0, 'no history cards in fixture')
+    await cards.first().click()
+    const modal = page.locator('.modal:not([hidden])')
+    await expect(modal).toHaveCount(1)
+    await page.keyboard.press('Escape')
+  })
+
   test('mock reset between tests keeps the suite deterministic', async ({ request }) => {
     let res = await request.get('http://localhost:3000/api/online-counts')
     let body = await res.json()

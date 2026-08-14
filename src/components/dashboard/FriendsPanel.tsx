@@ -134,7 +134,13 @@ export function FriendsPanel() {
         </p>
       </div>
 
-      {selected ? <FriendModal friend={selected} onClose={() => setSelected(null)} /> : null}
+      {/*
+        Render FriendModal with the open prop instead of `{selected && ...}`.
+        The conditional render caused a race: the effect that removes the
+        `hidden` attribute ran only on the very first mount, before the
+        portal was committed, so `hidden` stuck and the modal stayed invisible.
+        */}
+      <FriendModal open={selected !== null} friend={selected} onClose={() => setSelected(null)} />
 
       {toast ? (
         <output className="toast show" aria-live="polite">
