@@ -27,13 +27,6 @@ type Props = {
 // also keeps the modal out of the page's stacking context so it always
 // renders above all content, regardless of any z-index set on the route's
 // own sections.
-//
-// TODO(modal-pattern): migrate to a fully declarative `data-open` attribute
-// pattern (CSS reads `.modal[data-open="false"] { display: none }`) so we
-// don't rely on imperative DOM manipulation. The current effect that
-// removes `hidden` and registers the keyboard listener is racy because the
-// first run sees a null `ref.current` (the portal has not committed yet),
-// and the effect never re-runs because the deps don't change.
 export function Modal({
   open,
   onClose,
@@ -44,13 +37,14 @@ export function Modal({
 }: Props) {
   const ref = useRef<HTMLDivElement | null>(null)
   const lastFocusedRef = useRef<HTMLElement | null>(null)
+  // Defer the portal render to client mount so SSR + hydration produce
+  // matching markup (the portal target only exists in the browser).
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: `mounted` is required as a dep so the effect re-runs after the portal commits.
   useEffect(() => {
     const el = ref.current
     if (!el) return
@@ -69,9 +63,8 @@ export function Modal({
       lastFocusedRef.current?.focus?.()
       delete document.body.dataset.modalOpen
     }
-  }, [open, mounted])
+  }, [open])
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: `mounted` is required as a dep so the listener registers after the portal commits.
   useEffect(() => {
     const el = ref.current
     if (!el || !open) return
@@ -102,7 +95,7 @@ export function Modal({
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [open, onClose, mounted])
+  }, [open, onClose])
 
   const onBackdrop = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!closeOnBackdrop) return

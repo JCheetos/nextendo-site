@@ -13,13 +13,11 @@ import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useId, useState } from 'react'
 
 type Props = {
-  open: boolean
-  friend: Friend | null
+  friend: Friend
   onClose: () => void
 }
 
-export function FriendModal({ open, friend, onClose }: Props) {
-  if (!open || !friend) return null
+export function FriendModal({ friend, onClose }: Props) {
   const titleId = useId()
   const tFr = useTranslations('fr')
   const _tFm = useTranslations('fr')

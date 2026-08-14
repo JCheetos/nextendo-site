@@ -70,18 +70,14 @@ export function HistoryPanel() {
           />
         ))}
       </div>
-      {/*
-        Render GameModal always mounted with the open prop. The conditional
-        render caused the same race the friend modal had: the useEffect
-        removing the `hidden` attribute ran only on the first mount, before
-        the portal was committed, so the modal stayed invisible. */}
-      <GameModal
-        open={selected !== null}
-        entry={selected}
-        fmtHours={fmtHours}
-        fmtDate={fmtDate}
-        onClose={() => setSelected(null)}
-      />
+      {selected ? (
+        <GameModal
+          entry={selected}
+          fmtHours={fmtHours}
+          fmtDate={fmtDate}
+          onClose={() => setSelected(null)}
+        />
+      ) : null}
     </>
   )
 }

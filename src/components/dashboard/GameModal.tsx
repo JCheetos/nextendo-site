@@ -6,8 +6,7 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useId, useState } from 'react'
 
 type Props = {
-  open: boolean
-  entry: HistoryEntry | null
+  entry: HistoryEntry
   fmtHours: (sec: number) => string
   fmtDate: (s?: string) => string
   onClose: () => void
@@ -27,8 +26,7 @@ const LINK_ICON: Record<string, string> = {
   facebook: 'ph-facebook-logo',
 }
 
-export function GameModal({ open, entry, fmtHours, fmtDate, onClose }: Props) {
-  if (!open || !entry) return null
+export function GameModal({ entry, fmtHours, fmtDate, onClose }: Props) {
   const titleId = useId()
   const tGm = useTranslations('gm')
   const tForm = useTranslations('form')
