@@ -21,7 +21,7 @@ point at the Go host.
 
 ## `nginx-after.conf`
 
-The config to apply at the cutover. It assumes:
+The post-cutover template. It assumes:
 
 - The Next.js standalone bundle is running on `http://127.0.0.1:3000`
   (started by `node .next/standalone/server.js` under systemd / pm2 /
@@ -39,23 +39,24 @@ Highlights:
 - `/api/*` is proxied to the Go backend with no caching. The front-end
   sends the `Authorization: Bearer ...` header and the `nx_session` cookie;
   nginx must forward both.
-- Everything else (`/`, `/login`, `/compte`, `/sessions`, …) is proxied
-  to the Next.js app, with a short (10 s) HTML cache that uses stale
-  responses on upstream errors so a flaky Go backend doesn't take down
-  the marketing pages.
+- Public GET/HEAD responses are eligible for a short (10 s) HTML cache. Auth
+  pages and dashboard routes bypass it, as do requests/responses involving
+  cookies, authorization or `Set-Cookie`. Review this policy against the
+  production application's personalization behavior before enabling it.
 - Security headers (`X-Content-Type-Options`, `X-Frame-Options`,
   `Referrer-Policy`, `Permissions-Policy`) are applied to every response.
 
 ## Cutover procedure
 
 1. **T-30 min**: announce the cutover window in `#nextendo-ops`.
-2. **T-5 min**: copy `nginx-after.conf` to
-   `/etc/nginx/sites-available/nextendo.network` on the VPS.
-3. **T-0**: `sudo nginx -t && sudo systemctl reload nginx`. The Go
-   backend does not need to be restarted.
-4. **T+0**: the new config is live. Verify with
-   `curl -I https://nextendo.network/` (200 OK) and
-   `curl https://nextendo.network/api/health` (`{"status":"ok",...}`).
+2. **T-5 min**: adapt the placeholders in `nginx-after.conf`, then copy the
+   reviewed template to `/etc/nginx/sites-available/nextendo.network` on the
+   VPS. This repository does not know the real Go backend host, TLS paths or
+   active nginx layout.
+3. **T-0**: run `sudo nginx -t && sudo systemctl reload nginx`. The Go
+   backend should not need to be restarted, but confirm that with its owner.
+4. **T+0**: the new config is live. Verify the homepage, `/api/health`,
+   `/robots.txt`, `/sitemap.xml`, `/_next/static/` and authenticated flows.
 5. **T+5 min**: monitor the error rate. If you see 5xx, fall back with
    `sudo cp /etc/nginx/sites-available/nextendo.network.bak
    /etc/nginx/sites-available/nextendo.network && sudo systemctl reload nginx`.
@@ -71,5 +72,6 @@ If the cutover needs to be reverted:
 3. `sudo nginx -t && sudo systemctl reload nginx`.
 
 The Next.js container can keep running in the background; the nginx
-config just won't reach it. No DB or data migration is needed — both
-sites read the same Go backend.
+config just won't reach it. Database compatibility and migration behavior
+belong to the private Go backend and must be confirmed with its owner; this
+repository cannot guarantee them.

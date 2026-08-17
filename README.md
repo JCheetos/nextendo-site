@@ -4,7 +4,7 @@
 
 # nextendo-site
 
-The **[nextendo.network](https://nextendo.network)** website — the front door to Nextendo Network. Accounts, friends, profile, presence, and the active-session manager.
+The **[nextendo.network](https://nextendo.network)** website and account front-end for Nextendo Network.
 
 [![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/XPfeCMwnzQ)
 [![Visit](https://img.shields.io/badge/Visit-nextendo.network-3EE8C8?style=for-the-badge)](https://nextendo.network)
@@ -14,96 +14,177 @@ The **[nextendo.network](https://nextendo.network)** website — the front door 
 
 ---
 
-## What's here
+## Overview
 
-- **Marketing pages** — homepage (9 sections: hero, statement, features, architecture, install, figures, progress, FAQ, CTA), `/telecharger` (per-platform download with GitHub-releases fallback), `/status` (live server status with online counts).
-- **Authentication** — `/login`, `/register`, `/forgot`, `/reset`, `/verify`, with HttpOnly-cookie auth, Cloudflare Turnstile integration, RHF + Zod validation, and same-origin redirect enforcement.
-- **Account dashboard** — `/compte`: avatar editor (canvas-based composition), friends list with requests + "voir plus" pagination, game history, identity panel, security panel (change email / sessions / delete account), verify-email banner.
-- **Active sessions** — `/sessions`: list of devices currently signed in (browser / Ryujinx / Switch), per-session revoke + close-all.
-- **SEO** — hreflang × 10 locales + x-default, canonical URLs, Open Graph, Twitter Card, JSON-LD (Organization + WebSite + SoftwareApplication), sitemap.xml.
-- **Accessibility** — skip link, single `<h1>` per page, portal-based modal overlays with focus trap + Escape/backdrop close, `role="alert"` on errors, `aria-live="polite"` on toasts, `prefers-reduced-motion` honoured.
+This repository contains the Next.js front-end for Nextendo Network: public project pages, authentication, account management, active sessions and cloud saves. The private Go account service is consumed through the same-origin `/api/*` boundary and is not included here.
+
+The repository is currently in a migration phase. The new Next.js application and the historical vanilla-JS implementation under `Legacy/` coexist until the production nginx cutover is completed. See [DEPLOY.md](DEPLOY.md) for the deployment and rollback procedure.
+
+## Features
+
+- **Public pages**: homepage, per-platform downloads with GitHub Releases fallback, and live server status.
+- **Authentication**: login, registration, password recovery, reset and email verification.
+- **Account dashboard**: profile and avatar editing, identity, friends, game history, account security and email verification.
+- **Active sessions**: device listing, per-session revocation and close-all.
+- **Cloud saves**: account-backed save management for eligible games.
+- **Internationalization**: 10 locales with French as the default language and Arabic RTL support.
+- **SEO**: canonical URLs, Open Graph metadata, JSON-LD, sitemap and hreflang alternates.
+- **Accessibility**: skip links, keyboard-oriented modal behavior, focus management, live status messages and reduced-motion support.
 
 ## Stack
 
-- **Next.js 16** (App Router) with React 19, Server Components by default, `output: 'standalone'` for production.
-- **Tailwind CSS v4** via `@tailwindcss/postcss`; design tokens (OKLCH) live in the `@theme` block of `globals.css`.
-- **next-intl 4** for 10 locales (fr default, en/es/pt/de/it/ru/zh/ja/ar); URLs stay clean (`localePrefix: 'never'`), the `nx_lang` cookie drives server-side locale.
-- **RHF 7 + Zod 4** for forms.
-- **Biome 1.9** for lint + format + organize-imports.
-- **Vitest 1.6** for unit tests (116 tests across 7 files).
-- **Playwright 1.49** for e2e tests (~60 specs across 6 files).
+- **Next.js 16** with App Router, React 19 and Server Components by default.
+- **Tailwind CSS v4** with OKLCH design tokens in `src/app/globals.css`.
+- **next-intl 4** for `fr`, `en`, `es`, `pt`, `de`, `it`, `ru`, `zh`, `ja` and `ar`.
+- **React Hook Form 7 + Zod 4** for form state and validation.
+- **Biome 1.9** for linting and formatting.
+- **Vitest 1.6** for unit tests.
+- **Playwright 1.49** for end-to-end tests.
+- **Node.js 20 or newer** and **pnpm 9.15.0**.
+
+## Requirements
+
+- Node.js `>=20`
+- Corepack with pnpm `9.15.0`
+- Docker, if using the container workflow
+- Chromium and its system dependencies for Playwright E2E tests
+
+## Development
+
+```bash
+corepack enable
+pnpm install --frozen-lockfile
+pnpm run dev
+```
+
+The development server runs at <http://localhost:3000>.
+
+The Go account service is private and is not part of this repository. Set `NEXTENDO_ACCOUNT_BASE_URL` to an accessible account service, or place the service behind the same-origin reverse proxy. The repository's local mock-account helpers are intentionally excluded from Git and are not available from a clean public clone.
+
+## Environment variables
+
+All variables are optional for a basic local boot. Production deployments should configure the values required by the enabled integrations.
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `NODE_ENV` | `development` | Next.js runtime mode. |
+| `NEXT_PUBLIC_SITE_URL` | `https://nextendo.network` | Canonical public origin used by site metadata and URL generation. |
+| `NEXTENDO_ACCOUNT_BASE_URL` | empty | Explicit base URL for the private Go account API; empty uses same-origin routing. |
+| `NEXT_PUBLIC_TURNSTILE_SITEKEY` | empty | Public Cloudflare Turnstile site key. |
+| `TURNSTILE_SECRET` | empty | Server-side Cloudflare Turnstile secret. Never expose it to the browser. |
+| `NEXT_PUBLIC_SENTRY_DSN` | empty | Optional client telemetry DSN. |
+
+`src/lib/env.ts` validates the environment at runtime. Turnstile and telemetry are disabled when their values are empty.
+
+## Routes
+
+| Route | Access | Purpose |
+| --- | --- | --- |
+| `/` | Public | Homepage. |
+| `/telecharger` | Public | Ryujinx Nextendo downloads. |
+| `/status` | Public | Live server status. |
+| `/login` | Public | Sign in. |
+| `/register` | Public | Create an account. |
+| `/forgot`, `/reset`, `/verify` | Public | Account recovery and verification. |
+| `/compte` | Authenticated | Account dashboard. |
+| `/sessions` | Authenticated | Active session management. |
+| `/api/health` | Public | Application health probe. |
+| `/api/cloud-saves/[titleId]` | Authenticated | Cloud-save API route. |
+
+URLs remain clean in the browser. The locale is resolved by the Next.js 16 proxy and the `nx_lang` cookie rather than being added as a visible path prefix.
 
 ## Repository layout
 
-```
+```text
 src/
   app/
-    [locale]/
-      layout.tsx          locale-aware <html>, NextIntlProvider, metadata
-      page.tsx            homepage (9 sections + JSON-LD)
-      telecharger/        /telecharger (SSG × 10)
-      status/             /status (force-dynamic, 15s revalidate)
-      compte/             /compte (force-dynamic, server-side auth guard)
-      sessions/           /sessions (force-dynamic)
-      (auth)/              /login /register /forgot /reset /verify
-    api/health/           GET /api/health (Route Handler)
-    sitemap.ts            MetadataRoute.Sitemap with hreflang
-    robots.ts             disallow /api/ /admin/, reference sitemap
+    [locale]/             Locale-aware pages and layouts
+    api/                   Health and cloud-save route handlers
+    sitemap.ts             Sitemap with locale alternates
+    robots.ts              Robots metadata
   components/
-    layout/               Backdrop, SiteHeader, SiteFooter, SiteAppHeader, LangSwitcher
-    home/                 Hero, Statement, Features, Architecture, Install, Figures, Progress, FAQ, CTA
-    auth/                 AuthShell, LoginForm, RegisterForm, ForgotForm, ResetForm, PasswordField, Turnstile
-    dashboard/            AccountShell, MemberCard, IdentityPanel, SecurityPanel, FriendsPanel, HistoryPanel, EditProfileModal, EmailModal, DeleteModal, FriendModal, GameModal, SessionsPanel, Modal, Avatar, CopyButton, LogoutButton, …
-  i18n/                   locales, routing, request config, actions
-  lib/                    api (typed Go client), env (Zod), github (release fetcher), status (helpers), schemas (Zod), utils (cn)
-  server/                 'use server' modules: auth, account, sessions
-  proxy.ts                Next.js 16 proxy.ts → next-intl/middleware
-messages/                 10 nested JSON dictionaries (~500 keys each)
-scripts/                  extract-i18n.mjs, add-ui-messages.mjs
-e2e/                      Playwright specs (auth, compte, sessions, home, a11y, smoke)
+    layout/               Public and authenticated site chrome
+    home/                 Homepage sections
+    auth/                 Authentication forms and shell
+    dashboard/            Account, friends, sessions and saves UI
+  i18n/                   Locale configuration, routing and actions
+  lib/                    API client, environment, schemas and helpers
+  server/                 Server Actions for auth, account, sessions and saves
+  proxy.ts                next-intl request proxy
+messages/                 10 nested locale dictionaries
+public/                   Public assets (currently favicon.svg)
+Legacy/                   Historical vanilla-JS implementation during cutover
+Dockerfile                Standalone production image
+DEPLOY.md                 Deployment, reverse proxy and rollback guide
+LICENSE.md                PolyForm Shield 1.0.0 license
 ```
 
-## Deploy
-
-See **[DEPLOY.md](DEPLOY.md)** for env vars, Docker build, and the nginx cutover
-plan. The legacy vanilla-JS site (under `Legacy/`) is still
-served by nginx until the cutover commit lands; it can be deleted once the
-new Next.js site is live.
+## Quality checks
 
 ```bash
-# Local production build
-npm ci
-npm run build
-PORT=3000 node .next/standalone/server.js
+pnpm run lint
+pnpm run typecheck
+pnpm run test
+pnpm run build
+```
 
-# Docker (multi-stage, ~180 MB)
-docker build -t nextendo-site:2.0.0 .
+The unit-test suite currently contains 124 tests. E2E tests require Chromium and an account-service test backend; the local mock helpers referenced by `playwright.config.ts` are not tracked in the public repository.
+
+```bash
+pnpm run test:e2e:install
+pnpm run test:e2e
+```
+
+## Production and Docker
+
+Next.js is configured with `output: 'standalone'`.
+
+```bash
+pnpm install --frozen-lockfile
+pnpm run build
+PORT=3000 node .next/standalone/server.js
+```
+
+Build and run the production container with:
+
+```bash
+docker build -t nextendo-site:latest .
 docker run --rm -p 3000:3000 \
   -e NEXT_PUBLIC_SITE_URL=https://nextendo.network \
   -e NODE_ENV=production \
-  nextendo-site:2.0.0
-
-# Health probe
-curl -s http://localhost:3000/api/health
-# → {"status":"ok","uptime":12,"now":"…","version":"2.0.0"}
+  nextendo-site:latest
 ```
 
-## Backend
+Check the application health endpoint:
 
-The Go account service (`nextendo-account`) is **private** and not in this repo.
-It is reached via `/api/*` (same origin). All calls go through `src/lib/api.ts`
-which:
+```bash
+curl -s http://localhost:3000/api/health
+```
 
-- Times out after 5s (`AbortController`).
-- Whitelists GitHub release URLs before accepting them.
-- Returns typed `AuthResult<T>` for auth endpoints so Server Actions can branch on `ok` / `error`.
+For nginx proxying, the Go API boundary, cutover and rollback steps, see [DEPLOY.md](DEPLOY.md) and [deploy/README.md](deploy/README.md).
+
+## Backend boundary
+
+The private `nextendo-account` Go service is reached through `/api/*`. Requests are centralized in `src/lib/api.ts`, which provides typed responses, five-second request timeouts and GitHub release URL validation. Server Actions use the typed auth results to handle success and failure states without exposing backend implementation details to the UI.
+
+## Contributing
+
+Before opening a pull request:
+
+1. Keep changes scoped to the relevant feature.
+2. Run `pnpm run lint`, `pnpm run typecheck` and `pnpm run test`.
+3. Run the relevant E2E tests when changing authenticated flows or page behavior.
+4. Update all 10 message dictionaries when adding user-facing translations.
+5. Do not commit secrets, private backend code or local validation helpers.
+
+For questions, bug reports and community support, use the [Nextendo Discord server](https://discord.gg/XPfeCMwnzQ).
 
 ## License
 
-This website's source is available under the **[PolyForm Shield License 1.0.0](LICENSE.md)** — you may read, use, modify, and self-host it, but not use it to provide a product that competes with Nextendo Network.
+This source is available under the [PolyForm Shield License 1.0.0](LICENSE.md). It permits reading, modifying and self-hosting for permitted purposes, but prohibits using the software to provide a competing product or service. Preserve `LICENSE.md` and the required copyright notices when distributing copies or derived works.
 
 ---
 
 <div align="center">
-<sub><b>Nextendo Network Team</b> · Kazuals — founder &amp; developer</sub>
+<sub><b>Nextendo Network Team</b> · Kazuals - founder &amp; developer</sub>
 </div>
