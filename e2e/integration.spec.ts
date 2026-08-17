@@ -98,26 +98,26 @@ test.describe('Integration — real bundle + mock backend', () => {
     await expect(page.locator('.account')).toBeVisible()
     await expect(page.getByText('JCheetos').first()).toBeVisible()
     await expect(page.getByText('SW-2622-5979-6316').first()).toBeVisible()
-    await expect(page.locator('.modal:not([hidden])')).toHaveCount(0)
+    await expect(page.locator('.modal[data-open="true"]')).toHaveCount(0)
     await page
       .getByRole('button', { name: /Éditer el perfil|Editar perfil|Éditer le profil/ })
       .click()
     await expect(page.getByRole('heading', { name: /Éditer|Editar/ })).toBeVisible()
-    await expect(page.locator('.modal:not([hidden])')).toHaveCount(1)
+    await expect(page.locator('.modal[data-open="true"]')).toHaveCount(1)
     {
       const vp = page.viewportSize()
-      const box = await page.locator('.modal:not([hidden]) .modal__panel').boundingBox()
+      const box = await page.locator('.modal[data-open="true"] .modal__panel').boundingBox()
       const cx = box.x + box.width / 2
       const cy = box.y + box.height / 2
       expect(Math.abs(cx - vp.width / 2)).toBeLessThan(8)
       expect(Math.abs(cy - vp.height / 2)).toBeLessThan(Math.max(16, vp.height * 0.03))
       const z = await page
-        .locator('.modal:not([hidden])')
+        .locator('.modal[data-open="true"]')
         .evaluate((el) => Number(window.getComputedStyle(el).zIndex))
       expect(z).toBeGreaterThan(100)
     }
     await page.keyboard.press('Escape')
-    await expect(page.locator('.modal:not([hidden])')).toHaveCount(0)
+    await expect(page.locator('.modal[data-open="true"]')).toHaveCount(0)
 
     await page.goto('/sessions')
     await expect(page.locator('.sess-list')).toBeVisible()
@@ -139,7 +139,7 @@ test.describe('Integration — real bundle + mock backend', () => {
   test('change email modal is anchored to the viewport', async ({ page }) => {
     await browserLogin(page, 'es')
     await page.getByRole('button', { name: /Cambiar correo/i }).click()
-    const modal = page.locator('.modal:not([hidden])')
+    const modal = page.locator('.modal[data-open="true"]')
     await expect(modal).toHaveCount(1)
     const vp = page.viewportSize()
     const container = await modal.boundingBox()
@@ -158,12 +158,12 @@ test.describe('Integration — real bundle + mock backend', () => {
   test('modal backdrop covers the viewport with blur', async ({ page }) => {
     await browserLogin(page, 'es')
     await page.getByRole('button', { name: /Eliminar mi cuenta/i }).click()
-    const modal = page.locator('.modal:not([hidden])')
+    const modal = page.locator('.modal[data-open="true"]')
     const container = await modal.boundingBox()
     const vp = page.viewportSize()
     expect(container.width).toBe(vp.width)
     expect(container.height).toBe(vp.height)
-    // Verify the .modal:not([hidden]) rule declares backdrop-filter or
+    // Verify the open modal rule declares backdrop-filter or
     // -webkit-backdrop-filter. Headless Chromium sometimes reports the
     // computed value as 'none' even when the rule is applied, so we check
     // the CSSOM directly.
@@ -178,7 +178,7 @@ test.describe('Integration — real bundle + mock backend', () => {
         if (!rules) continue
         for (const rule of Array.from(rules)) {
           if (!rule.cssText) continue
-          if (rule.cssText.includes('.modal:not([hidden])')) {
+          if (rule.cssText.includes('.modal[data-open="true"]')) {
             if (
               rule.cssText.includes('backdrop-filter') ||
               rule.cssText.includes('-webkit-backdrop-filter')
@@ -192,6 +192,29 @@ test.describe('Integration — real bundle + mock backend', () => {
     })
     expect(ruleHasBlur).toBe(true)
     await page.keyboard.press('Escape')
+  })
+
+  test('friend modal opens, reports no React error, and closes from the backdrop', async ({
+    page,
+  }) => {
+    await browserLogin(page, 'es')
+    const errors: string[] = []
+    page.on('console', (message) => {
+      if (message.type() === 'error') errors.push(message.text())
+    })
+    page.on('pageerror', (error) => errors.push(error.message))
+
+    await page.locator('[data-testid="friend-list"] .friend').first().click()
+    const modal = page.locator('.modal[data-open="true"]')
+    await expect(modal).toHaveCount(1)
+    await expect(modal.locator('.modal__panel')).toBeVisible()
+    await modal.locator('.modal__backdrop').click({ position: { x: 8, y: 8 } })
+    await expect(page.locator('.modal[data-open="true"]')).toHaveCount(0)
+    expect(
+      errors.some((error) =>
+        /Expected static flag|Maximum update depth|too many re-renders/i.test(error),
+      ),
+    ).toBe(false)
   })
 
   test('SV picker drag does not produce an infinite render loop', async ({ page }) => {

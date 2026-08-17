@@ -21,7 +21,7 @@ The **[nextendo.network](https://nextendo.network)** website — the front door 
 - **Account dashboard** — `/compte`: avatar editor (canvas-based composition), friends list with requests + "voir plus" pagination, game history, identity panel, security panel (change email / sessions / delete account), verify-email banner.
 - **Active sessions** — `/sessions`: list of devices currently signed in (browser / Ryujinx / Switch), per-session revoke + close-all.
 - **SEO** — hreflang × 10 locales + x-default, canonical URLs, Open Graph, Twitter Card, JSON-LD (Organization + WebSite + SoftwareApplication), sitemap.xml.
-- **Accessibility** — skip link, single `<h1>` per page, `<dialog>`-native modals with focus trap + ESC, `role="alert"` on errors, `aria-live="polite"` on toasts, `prefers-reduced-motion` honoured.
+- **Accessibility** — skip link, single `<h1>` per page, portal-based modal overlays with focus trap + Escape/backdrop close, `role="alert"` on errors, `aria-live="polite"` on toasts, `prefers-reduced-motion` honoured.
 
 ## Stack
 

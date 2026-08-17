@@ -37,8 +37,8 @@ export function Modal({
 }: Props) {
   const ref = useRef<HTMLDivElement | null>(null)
   const lastFocusedRef = useRef<HTMLElement | null>(null)
-  // Defer the portal render to client mount so SSR + hydration produce
-  // matching markup (the portal target only exists in the browser).
+  // Defer the portal render to client mount because document.body is not
+  // available during SSR. The modal remains declarative after that point.
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -46,28 +46,27 @@ export function Modal({
   }, [])
 
   useEffect(() => {
+    if (!mounted || !open) return
     const el = ref.current
     if (!el) return
 
-    if (open) {
-      lastFocusedRef.current = (document.activeElement as HTMLElement) ?? null
-      el.removeAttribute('hidden')
-      const focusable = el.querySelector<HTMLElement>(
-        'input, textarea, select, button, a[href], [tabindex]:not([tabindex="-1"])',
-      )
-      if (focusable) focusable.focus()
-      else el.focus()
-      document.body.dataset.modalOpen = 'true'
-    } else if (!el.hasAttribute('hidden')) {
-      el.setAttribute('hidden', '')
+    lastFocusedRef.current = (document.activeElement as HTMLElement) ?? null
+    const focusable = el.querySelector<HTMLElement>(
+      'input, textarea, select, button, a[href], [tabindex]:not([tabindex="-1"])',
+    )
+    if (focusable) focusable.focus()
+    else el.focus()
+    document.body.dataset.modalOpen = 'true'
+
+    return () => {
       lastFocusedRef.current?.focus?.()
       delete document.body.dataset.modalOpen
     }
-  }, [open])
+  }, [open, mounted])
 
   useEffect(() => {
     const el = ref.current
-    if (!el || !open) return
+    if (!mounted || !el || !open) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         e.preventDefault()
@@ -95,11 +94,11 @@ export function Modal({
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [open, onClose])
+  }, [open, onClose, mounted])
 
   const onBackdrop = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!closeOnBackdrop) return
-    if (e.target === ref.current) onClose()
+    if (e.target === e.currentTarget) onClose()
   }
 
   if (!mounted || typeof document === 'undefined') return null
@@ -111,14 +110,24 @@ export function Modal({
       aria-modal="true"
       aria-labelledby={titleId}
       className="modal"
-      hidden
+      data-open={open}
       onClick={onBackdrop}
       onKeyDown={() => {
         // Keyboard equivalent is handled globally via the Escape listener in
         // the useEffect above; the backdrop click is mouse-only by design.
       }}
     >
-      <div className="modal__backdrop" aria-hidden="true" />
+      <div
+        className="modal__backdrop"
+        aria-hidden="true"
+        onClick={onClose}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            onClose()
+          }
+        }}
+      />
       <div className={cn('modal__panel', className)}>{children}</div>
     </div>,
     document.body,

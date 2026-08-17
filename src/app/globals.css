@@ -2053,7 +2053,7 @@ button {
   min-height: 100dvh;
   box-sizing: border-box;
 }
-.modal[hidden] {
+.modal[data-open="false"] {
   display: none;
 }
 .modal__backdrop {
@@ -2062,7 +2062,7 @@ button {
   background: color-mix(in oklch, var(--bg-deep) 68%, transparent);
   z-index: 0;
 }
-.modal:not([hidden]) {
+.modal[data-open="true"] {
   /* The blur lives on the .modal container itself (not on .modal__backdrop)
      so it covers the page content underneath. The background color is needed
      for backdrop-filter to take effect in Chromium/WebKit: an alpha below
