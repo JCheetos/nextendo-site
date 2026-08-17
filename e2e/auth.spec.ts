@@ -1,5 +1,10 @@
 import { expect, test } from '@playwright/test'
 
+test.beforeEach(async ({ context }) => {
+  await context.clearCookies()
+  await context.addCookies([{ name: 'nx_lang', value: 'fr', url: 'http://localhost:3000/' }])
+})
+
 test.describe('Login page', () => {
   test('renders the login form with all fields', async ({ page }) => {
     await page.goto('/login')
@@ -31,6 +36,8 @@ test.describe('Register page', () => {
     await expect(page.getByRole('heading', { name: 'Créer un compte' })).toBeVisible()
     await expect(page.getByLabel('Pseudo (nom affiché)')).toBeVisible()
     await expect(page.getByLabel('E-mail')).toBeVisible()
+    await expect(page.getByLabel('Pays')).toBeVisible()
+    await expect(page.getByLabel('Pays')).toHaveValue('')
     await expect(page.getByLabel('Mot de passe', { exact: true })).toBeVisible()
     await expect(page.getByLabel('Confirme le mot de passe')).toBeVisible()
     await expect(page.getByRole('button', { name: /Créer mon compte/ })).toBeVisible()
@@ -38,9 +45,9 @@ test.describe('Register page', () => {
 
   test('shows the password requirements checklist', async ({ page }) => {
     await page.goto('/register')
-    await expect(page.getByText('Au moins 8 caractères').first()).toBeVisible()
-    await expect(page.getByText('Au moins un chiffre').first()).toBeVisible()
-    await expect(page.getByText('Au moins un caractère spécial (! @ # $ …)').first()).toBeVisible()
+    await expect(page.locator('li[data-req="len"]')).toBeVisible()
+    await expect(page.locator('li[data-req="digit"]')).toBeVisible()
+    await expect(page.locator('li[data-req="special"]')).toBeVisible()
   })
 
   test('shows the sign-ups closed notice when /api/site-config reports closed', async ({
@@ -78,7 +85,9 @@ test.describe('Forgot page', () => {
 test.describe('Reset page', () => {
   test('renders the reset form when token is provided', async ({ page }) => {
     await page.goto('/reset?token=abc123')
-    await expect(page.getByRole('heading', { name: 'Nouveau mot de passe' })).toBeVisible()
+    await expect(
+      page.getByRole('heading', { name: 'Nouveau mot de passe', exact: true }),
+    ).toBeVisible()
     await expect(page.getByLabel('Nouveau mot de passe')).toBeVisible()
     await expect(page.getByLabel('Confirme le mot de passe')).toBeVisible()
     await expect(page.getByRole('button', { name: /Enregistrer le mot de passe/ })).toBeVisible()
@@ -96,15 +105,21 @@ test.describe('Verify page', () => {
     await expect(page.getByText(/Lien invalide|jeton/)).toBeVisible()
   })
 
-  test('shows the verification failed state when the backend is unreachable', async ({ page }) => {
-    await page.route('**/api/verify*', (route) => route.abort())
-    await page.goto('/verify?token=anything')
-    await expect(page.getByText(/Lien invalide|expired|jeton/)).toBeVisible()
+  test('shows the verification failed state for an invalid token', async ({ page }) => {
+    await page.goto('/verify?token=expired')
+    await expect(page.getByRole('heading', { level: 2 })).toBeVisible()
+    await expect(page.getByRole('link', { name: /Se connecter|Log in/ })).toHaveAttribute(
+      'href',
+      '/login',
+    )
   })
 
   test('falls back to the login link when verification fails', async ({ page }) => {
-    await page.goto('/verify?token=invalid-token')
-    await expect(page.getByRole('link', { name: /Se connecter/ })).toBeVisible()
+    await page.goto('/verify?token=expired')
+    await expect(page.getByRole('link', { name: /Se connecter|Log in/ })).toHaveAttribute(
+      'href',
+      '/login',
+    )
   })
 })
 

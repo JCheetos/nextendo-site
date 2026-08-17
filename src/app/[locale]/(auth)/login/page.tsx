@@ -8,7 +8,7 @@ type SearchParams = Promise<{ next?: string }>
 
 export async function generateMetadata() {
   const t = await getTranslations('login')
-  return { title: t('metaTitle'), description: t('metaDesc') }
+  return { title: t('metaTitle'), description: t('metaDesc'), robots: { index: false } }
 }
 
 export default async function LoginPage({

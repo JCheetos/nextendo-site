@@ -124,6 +124,7 @@ export async function registerAction(input: {
   email: string
   password: string
   password2: string
+  country: string
   locale: string
   turnstile?: string
 }): Promise<{ ok: true; nex_token?: string } | ReturnType<typeof fail>> {
@@ -132,6 +133,7 @@ export async function registerAction(input: {
     email: input.email,
     password: input.password,
     password2: input.password2,
+    country: input.country,
   })
   if (!parsed.success) {
     const fieldErrors: Record<string, string> = {}

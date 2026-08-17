@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { loginAndShareCookie } from './auth'
 
 const MOCK_ACCOUNT = {
   username: 'Inkling_Pro',
@@ -48,21 +49,15 @@ test.describe('Sessions — auth guard', () => {
 })
 
 test.describe('Sessions — authenticated', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.route('**/api/me', (route) =>
-      route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ account: MOCK_ACCOUNT }),
-      }),
-    )
-    await page.route('**/api/sessions', (route) =>
-      route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify(MOCK_SESSIONS),
-      }),
-    )
+  test.beforeEach(async ({ page, context, request }) => {
+    await request.post('http://localhost:8080/__mock/reset')
+    await loginAndShareCookie(request, context)
+    await request.post('http://localhost:8080/__mock/patch', {
+      data: {
+        account: MOCK_ACCOUNT,
+        sessions: MOCK_SESSIONS.sessions,
+      },
+    })
     await page.goto('/sessions')
   })
 
@@ -103,22 +98,20 @@ test.describe('Sessions — authenticated', () => {
   })
 
   test('renders the empty state when /api/sessions returns nothing', async ({ page }) => {
-    await page.unroute('**/api/sessions')
-    await page.route('**/api/sessions', (route) =>
-      route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ sessions: [] }),
-      }),
-    )
+    await page.request.post('http://localhost:8080/__mock/patch', {
+      data: { sessions: [] },
+    })
     await page.goto('/sessions')
     await expect(page.getByText('Aucune session active.')).toBeVisible()
   })
 
   test('renders the error state when /api/sessions fails', async ({ page }) => {
-    await page.unroute('**/api/sessions')
-    await page.route('**/api/sessions', (route) => route.abort())
-    await page.goto('/sessions')
-    await expect(page.getByText('Impossible de charger les sessions.')).toBeVisible()
+    await page.route('**/api/sessions', (route) =>
+      route.fulfill({ status: 503, contentType: 'application/json', body: '{}' }),
+    )
+    await page.reload()
+    await expect(page.locator('output[role="alert"]')).toHaveText(
+      'Impossible de charger les sessions.',
+    )
   })
 })

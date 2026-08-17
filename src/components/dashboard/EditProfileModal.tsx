@@ -1,8 +1,12 @@
 'use client'
 
 import { Modal } from '@/components/dashboard/Modal'
+import type { Locale } from '@/i18n/config'
 import { putProfile } from '@/lib/api'
+import { COUNTRY_CODES, countryName } from '@/lib/countries'
+import { setCountryAction } from '@/server/account'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useId, useRef, useState, useTransition } from 'react'
 
 type Props = {
@@ -11,6 +15,8 @@ type Props = {
   username: string
   currentColor: string | null
   currentImage: string | null
+  currentCountry: string | null
+  locale: Locale
 }
 
 const SWATCH_COLORS = [
@@ -31,11 +37,20 @@ const DEF_COLOR = '#1ca9e0'
 
 type Layer = 'char' | 'bg' | 'frame'
 
-export function EditProfileModal({ open, onClose, username, currentColor, currentImage }: Props) {
+export function EditProfileModal({
+  open,
+  onClose,
+  username,
+  currentColor,
+  currentImage,
+  currentCountry,
+  locale,
+}: Props) {
   const titleId = useId()
   const t = useTranslations('ed')
   const tForm = useTranslations('form')
   const tAuth = useTranslations('auth.errors')
+  const router = useRouter()
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const [color, setColor] = useState<string>(currentColor ?? DEF_COLOR)
   const [hue, setHue] = useState(200)
@@ -55,14 +70,21 @@ export function EditProfileModal({ open, onClose, username, currentColor, curren
   const [serverErr, setServerErr] = useState<string | null>(null)
   const [_image, setImage] = useState<string | null>(currentImage)
   const [dirty, setDirty] = useState(false)
+  const [country, setCountry] = useState(currentCountry ?? '')
+  const [countryLabelsReady, setCountryLabelsReady] = useState(false)
+
+  useEffect(() => {
+    setCountryLabelsReady(true)
+  }, [])
 
   // Init image once when opening
   useEffect(() => {
     if (open && !dirty) {
       setImage(currentImage)
       setColor(currentColor ?? DEF_COLOR)
+      setCountry(currentCountry ?? '')
     }
-  }, [open, currentColor, currentImage, dirty])
+  }, [open, currentColor, currentImage, currentCountry, dirty])
 
   // Load icon manifests on mount
   useEffect(() => {
@@ -171,10 +193,18 @@ export function EditProfileModal({ open, onClose, username, currentColor, curren
     const dataUrl = canvas.toDataURL('image/jpeg', 0.9)
     const b64 = dataUrl.split(',')[1] ?? ''
     start(async () => {
+      if (country && country !== currentCountry) {
+        const countryResult = await setCountryAction({ country })
+        if (!countryResult.ok) {
+          setServerErr(tAuth(countryResult.error))
+          return
+        }
+      }
       const r = await putProfile({ name: username, color, image: b64 })
       if (r.ok) {
         setImage(b64)
         onClose()
+        router.refresh()
       } else {
         setServerErr(tAuth(r.error))
       }
@@ -222,6 +252,22 @@ export function EditProfileModal({ open, onClose, username, currentColor, curren
                 }}
               />
               <span className="fld__hint">{t('pseudoHint')}</span>
+            </div>
+            <div className="fld">
+              <label htmlFor="edit-country">{t('country')}</label>
+              <select
+                id="edit-country"
+                className="input"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              >
+                <option value="">{t('countryPlaceholder')}</option>
+                {COUNTRY_CODES.map((code) => (
+                  <option key={code} value={code}>
+                    {countryLabelsReady ? countryName(code, locale) : code}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="fld">
               <span className="lbl">{t('bgColor')}</span>

@@ -28,6 +28,7 @@ import {
   resetPassword,
   revokeAllSessions,
   revokeSession,
+  setCountry,
   setFavorite,
   setUsername,
   usernameAvailable,
@@ -130,10 +131,11 @@ describe('auth POST helpers', () => {
 
   it('registerAccount posts JSON without Turnstile when not provided', async () => {
     fetchSpy.mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({}) })
-    await registerAccount({ username: 'me', email: 'a@b.co', password: 'p4ssw0rd!' })
+    await registerAccount({ username: 'me', email: 'a@b.co', password: 'p4ssw0rd!', country: 'FR' })
     const init = fetchSpy.mock.calls[0][1]
     expect(init.headers['Content-Type']).toBe('application/json')
     expect(init.headers['Cf-Turnstile-Response']).toBeUndefined()
+    expect(JSON.parse(init.body)).toMatchObject({ country: 'FR' })
   })
 
   it('forgotPassword posts email and returns ok on 200', async () => {
@@ -235,6 +237,17 @@ describe('profile endpoints', () => {
     })
     const r = await putProfile({ name: 'x', color: 'not-a-hex' })
     expect(r).toEqual({ ok: false, error: 'invalid_color' })
+  })
+})
+
+describe('country endpoint', () => {
+  it('posts the ISO country with the request cookie', async () => {
+    fetchSpy.mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ country: 'FR' }) })
+    const result = await setCountry('FR', { cookie: 'nx_session=session-value' })
+    expect(result).toEqual({ ok: true, data: { country: 'FR' } })
+    expect(fetchSpy.mock.calls[0][0]).toContain('/api/country')
+    expect(fetchSpy.mock.calls[0][1].headers.Cookie).toBe('nx_session=session-value')
+    expect(JSON.parse(fetchSpy.mock.calls[0][1].body)).toEqual({ country: 'FR' })
   })
 })
 
@@ -460,12 +473,13 @@ describe('module surface', () => {
       fetchGameInfo,
       usernameAvailable,
       setUsername,
+      setCountry,
       changeEmail,
       deleteAccount,
       fetchSessions,
       revokeSession,
       revokeAllSessions,
     }
-    expect(Object.keys(api)).toHaveLength(28)
+    expect(Object.keys(api)).toHaveLength(29)
   })
 })

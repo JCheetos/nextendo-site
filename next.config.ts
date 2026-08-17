@@ -18,7 +18,12 @@ const nextConfig: NextConfig = {
     if (process.env.NODE_ENV === 'production') return []
     const upstream = process.env.NEXTENDO_ACCOUNT_BASE_URL
     if (!upstream) return []
-    return [{ source: '/api/:path*', destination: `${upstream}/api/:path*` }]
+    return [
+      {
+        source: '/api/:path((?!cloud-saves(?:/|$)).*)',
+        destination: `${upstream}/api/:path*`,
+      },
+    ]
   },
 }
 

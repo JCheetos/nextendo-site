@@ -1,5 +1,6 @@
 import { AccountHeader } from '@/components/dashboard/AccountHeader'
 import { CalloutPlug } from '@/components/dashboard/CalloutPlug'
+import { CloudSavesPanel } from '@/components/dashboard/CloudSavesPanel'
 import { EditProfileTrigger } from '@/components/dashboard/EditProfileTrigger'
 import { FriendsPanel } from '@/components/dashboard/FriendsPanel'
 import { HistoryPanel } from '@/components/dashboard/HistoryPanel'
@@ -9,6 +10,8 @@ import { SecurityPanel } from '@/components/dashboard/SecurityPanel'
 import { VerifyBanner } from '@/components/dashboard/VerifyBanner'
 import type { Locale } from '@/i18n/config'
 import type { Account } from '@/lib/api'
+import { fetchMe, fetchSaves, isCloudSavesEligible } from '@/lib/api'
+import { getRequestCookieHeader } from '@/server/request'
 import { getTranslations } from 'next-intl/server'
 
 type Props = {
@@ -19,6 +22,10 @@ type Props = {
 
 export async function AccountShell({ account, locale, isAdmin = false }: Props) {
   const t = await getTranslations('acc')
+  const cookie = await getRequestCookieHeader()
+  const serverAccount = await fetchMe({ cookie })
+  const canUseSaves = isCloudSavesEligible(account) && isCloudSavesEligible(serverAccount)
+  const saves = canUseSaves ? await fetchSaves({ cookie }) : null
 
   return (
     <section className="account">
@@ -27,6 +34,8 @@ export async function AccountShell({ account, locale, isAdmin = false }: Props) 
           username={(account.username as string | undefined) ?? ''}
           currentColor={(account.color as string | undefined) ?? null}
           currentImage={(account.image as string | undefined) ?? null}
+          currentCountry={account.country ?? null}
+          locale={locale}
         />
       </AccountHeader>
 
@@ -56,6 +65,9 @@ export async function AccountShell({ account, locale, isAdmin = false }: Props) 
           <i className="ph ph-clock-counter-clockwise" aria-hidden="true" />
         </div>
         <HistoryPanel />
+      </div>
+      <div style={{ marginTop: '1.5rem' }}>
+        <CloudSavesPanel data={saves} canUse={canUseSaves} />
       </div>
     </section>
   )

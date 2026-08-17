@@ -29,6 +29,7 @@
       "password": {
         "required": "请输入密码。"
       },
+      "country": { "required": "国家为必填项。", "invalid": "国家无效。" },
       "username": {
         "tooShort": "至少 3 个字符。",
         "tooLong": "最多 16 个字符。",
@@ -93,6 +94,7 @@
     "pid": "网络 ID（PID）",
     "discord": "Discord",
     "memberSince": "注册于",
+    "country": "国家",
     "friends": "好友",
     "friendsLoading": "正在加载您的好友…",
     "add": "添加",
@@ -101,6 +103,7 @@
     "historyLoading": "正在加载记录…",
     "historyEmpty": "暂无记录——您游玩后，游戏时长将显示在这里（从模拟器自动同步）。",
     "historyErr": "无法加载记录。",
+    "savesGateTitle": "云存档已锁定", "savesGate": "验证邮箱或绑定 Discord 后即可启用云存档。", "savesQuota": "已使用配额", "savesBooster": "Booster 配额已启用", "savesEmpty": "暂无云存档。", "savesErr": "无法加载云存档。", "savesDeleteErr": "无法删除此存档。", "savesPreview": "预览", "savesDownload": "下载", "savesLoading": "正在加载预览…", "savesUnsupported": "此游戏不支持预览。", "savesTitle": "云存档", "savesIdle": "选择一个存档以加载预览。", "savesPreviewErr": "无法加载此预览。", "savesDelete": "删除", "savesConfirmDelete": "确认删除", "close": "关闭",
     "copy": "复制",
     "fcCopied": "已复制 friend code",
     "copyFail": "复制失败",
@@ -116,6 +119,8 @@
     "deleteAccount": "删除我的账号"
   },
   "ed": {
+    "country": "国家",
+    "countryPlaceholder": "选择国家",
     "title": "编辑资料",
     "previewAria": "头像预览",
     "preview": "预览",
@@ -494,6 +499,8 @@
     "cardSub": "填写三项，即可上线。",
     "closedNotice": "<strong>注册暂时关闭。</strong><br>我们正在完善新版 Nextendo Network，账号创建很快就会重新开放。过几天再来看看吧！",
     "username": "昵称（显示名称）",
+    "country": "国家",
+    "countryPlaceholder": "选择国家",
     "usernamePh": "Inkling_Pro",
     "usernameHint": "3 到 16 个字符。昵称可以重复，让你与众不同的是 Friend code。",
     "emailHint": "你将使用这个邮箱登录。",
@@ -600,6 +607,9 @@
       "launch": {
         "detail": "游戏可正常启动"
       },
+      "luigi": {
+        "detail": "在线多人游戏与好友"
+      },
       "wip": {
         "detail": "正在准备中"
       }
@@ -627,8 +637,6 @@
     }
   },
   "a11y": {
-    "a11y": {
-      "skip": "跳到内容"
-    }
+    "skip": "跳到内容"
   }
 }

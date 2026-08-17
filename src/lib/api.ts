@@ -2,6 +2,13 @@
 // `/api/*` (same origin). Used only from Server Components / Route Handlers /
 // Server Actions; never import from a client component.
 import { getEnv } from '@/lib/env'
+import {
+  type SavesResponse,
+  normalizeSavesResponse,
+  saveLocaleSchema,
+  titleIdSchema,
+} from '@/lib/saves'
+import { z } from 'zod'
 
 type Counts = Record<string, number>
 
@@ -14,14 +21,40 @@ export type OnlineCounts = {
 }
 
 export type Account = {
-  id?: string
+  id?: string | number
   pid?: string
   username?: string
   email?: string
+  country?: string
   friend_code?: string
   email_verified?: boolean
   is_guest?: boolean
+  discord?: string
+  discord_linked_at?: string
   [key: string]: unknown
+}
+
+const accountSchema = z
+  .object({
+    id: z.union([z.string(), z.number()]).optional(),
+    pid: z.string().optional(),
+    username: z.string().optional(),
+    email: z.string().optional(),
+    country: z.string().optional(),
+    friend_code: z.string().optional(),
+    email_verified: z.boolean().optional(),
+    is_guest: z.boolean().optional(),
+    discord: z.string().optional(),
+    discord_linked_at: z.string().optional(),
+  })
+  .passthrough()
+
+export function isCloudSavesEligible(account: Account | null | undefined) {
+  return Boolean(
+    account &&
+      account.is_guest !== true &&
+      (account.email_verified === true || Boolean(account.discord)),
+  )
 }
 
 export type Profile = {
@@ -161,6 +194,14 @@ export type RegisterPayload = {
   username: string
   email: string
   password: string
+  country: string
+}
+
+export async function setCountry(
+  country: string,
+  options?: ApiRequestOptions,
+): Promise<AuthResult<{ country?: string }>> {
+  return postJson('/api/country', { country }, undefined, options)
 }
 
 export async function registerAccount(
@@ -218,11 +259,12 @@ export async function resendVerification(): Promise<AuthResult<null>> {
 }
 
 export async function fetchMe(options?: ApiRequestOptions): Promise<Account | null> {
-  const res = await apiFetch('/api/me', undefined, options)
+  const res = await apiFetch('/api/me', { cache: 'no-store' }, options)
   if (!res || !res.ok) return null
   try {
-    const data = (await res.json()) as { account?: Account }
-    return data.account ?? null
+    const data = (await res.json()) as unknown
+    const parsed = z.object({ account: accountSchema.optional() }).safeParse(data)
+    return parsed.success ? (parsed.data.account ?? null) : null
   } catch {
     return null
   }
@@ -415,6 +457,68 @@ export async function deleteAccount(
   options?: ApiRequestOptions,
 ): Promise<AuthResult<null>> {
   return postJson('/api/delete-account', { password }, undefined, options)
+}
+
+// Cloud saves: upstream keeps the session in the HttpOnly cookie. These
+// helpers intentionally accept a forwarded cookie only on the server.
+export async function fetchSaves(options?: ApiRequestOptions): Promise<SavesResponse | null> {
+  const res = await apiFetch('/api/saves', undefined, options)
+  if (!res || !res.ok) return null
+  try {
+    return normalizeSavesResponse(await res.json())
+  } catch {
+    return null
+  }
+}
+
+export async function fetchParsedSave(
+  titleId: string,
+  locale: string,
+  options?: ApiRequestOptions,
+) {
+  const validTitleId = titleIdSchema.safeParse(titleId)
+  const validLocale = saveLocaleSchema.safeParse(locale)
+  if (!validTitleId.success || !validLocale.success) return null
+  const res = await apiFetch(
+    `/api/save/${encodeURIComponent(validTitleId.data)}/parsed?lang=${encodeURIComponent(validLocale.data)}`,
+    undefined,
+    options,
+  )
+  if (!res || !res.ok) return null
+  try {
+    return (await res.json()) as unknown
+  } catch {
+    return null
+  }
+}
+
+export async function fetchSaveBinary(titleId: string, options?: ApiRequestOptions) {
+  const validTitleId = titleIdSchema.safeParse(titleId)
+  if (!validTitleId.success) return null
+  return apiFetch(`/api/save/${encodeURIComponent(validTitleId.data)}`, undefined, options)
+}
+
+export async function removeSave(
+  titleId: string,
+  options?: ApiRequestOptions,
+): Promise<AuthResult<unknown>> {
+  const validTitleId = titleIdSchema.safeParse(titleId)
+  if (!validTitleId.success) return { ok: false, error: 'invalid_title_id' }
+  const res = await apiFetch(
+    `/api/save/${encodeURIComponent(validTitleId.data)}`,
+    { method: 'DELETE' },
+    options,
+  )
+  if (!res) return { ok: false, error: 'network' }
+  if (res.ok) return { ok: true, data: {} }
+  let error = `http_${res.status}`
+  try {
+    const data = (await res.json()) as { error?: string }
+    error = data.error ?? error
+  } catch {
+    // Empty error bodies are valid upstream responses.
+  }
+  return { ok: false, error }
 }
 
 // -----------------------------------------------------------------------------

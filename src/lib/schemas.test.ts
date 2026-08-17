@@ -54,6 +54,7 @@ describe('registerSchema', () => {
     email: 'inkling@example.com',
     password: 'Password1!',
     password2: 'Password1!',
+    country: 'FR',
   }
 
   it('accepts valid input', () => {
@@ -92,6 +93,12 @@ describe('registerSchema', () => {
   it('rejects invalid emails', () => {
     const r = registerSchema.safeParse({ ...ok, email: 'not-an-email' })
     expect(r.success).toBe(false)
+  })
+
+  it('requires a valid ISO alpha-2 country', () => {
+    expect(registerSchema.safeParse({ ...ok, country: '' }).success).toBe(false)
+    expect(registerSchema.safeParse({ ...ok, country: 'XXX' }).success).toBe(false)
+    expect(registerSchema.safeParse({ ...ok, country: 'fr' }).data?.country).toBe('FR')
   })
 })
 

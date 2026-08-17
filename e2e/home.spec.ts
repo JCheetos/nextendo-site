@@ -1,5 +1,10 @@
 import { expect, test } from '@playwright/test'
 
+test.beforeEach(async ({ context }) => {
+  await context.clearCookies()
+  await context.addCookies([{ name: 'nx_lang', value: 'fr', url: 'http://localhost:3000/' }])
+})
+
 test.describe('Home page', () => {
   test('renders the hero with the French marketing copy (default locale)', async ({ page }) => {
     await page.goto('/')
@@ -16,7 +21,7 @@ test.describe('Home page', () => {
 
   test('renders the lang switcher with the current locale label', async ({ page }) => {
     await page.goto('/')
-    await expect(page.getByRole('button', { name: 'Language' })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Français', exact: true })).toBeVisible()
   })
 
   test('preserves the default French lang attribute', async ({ page }) => {
@@ -32,7 +37,9 @@ test.describe('Home page', () => {
     await expect(page.getByRole('heading', { level: 1 })).toContainText(
       'An independent network for your Switch.',
     )
-    await expect(page.getByRole('link', { name: 'Create my account' })).toBeVisible()
+    await expect(
+      page.getByRole('link', { name: 'Create my account', exact: true }).first(),
+    ).toBeVisible()
   })
 
   test('switches to Arabic with RTL direction', async ({ page, context }) => {
@@ -54,6 +61,15 @@ test.describe('Home page', () => {
     await expect(page.locator('#progress')).toBeVisible()
     await expect(page.locator('#faq')).toBeVisible()
     await expect(page.locator('.cta')).toBeVisible()
+  })
+
+  test('shows the latest game progression values in descending order', async ({ page }) => {
+    await page.goto('/')
+    const items = page.locator('#progress-list .progress-item')
+    await expect(items).toHaveCount(10)
+    await expect(items.first()).toContainText("Luigi's Mansion 3")
+    await expect(items.first()).toContainText('[100%]')
+    await expect(items.filter({ hasText: 'Mario Party Jamboree' })).toContainText('[45%]')
   })
 })
 
@@ -129,7 +145,7 @@ test.describe('SEO metadata', () => {
       expect(codes).toContain(code)
     }
     const canonical = await page.locator('link[rel="canonical"]').first().getAttribute('href')
-    expect(canonical).toBe('https://nextendo.network/')
+    expect(canonical).toBe('https://nextendo.network')
   })
 
   test('homepage emits Open Graph + Twitter card metadata', async ({ page }) => {

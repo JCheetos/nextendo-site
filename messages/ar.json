@@ -29,6 +29,7 @@
       "password": {
         "required": "كلمة المرور مطلوبة."
       },
+      "country": { "required": "البلد مطلوب.", "invalid": "البلد غير صالح." },
       "username": {
         "tooShort": "3 أحرف على الأقل.",
         "tooLong": "16 حرفًا كحد أقصى.",
@@ -93,6 +94,7 @@
     "pid": "معرّف الشبكة (PID)",
     "discord": "Discord",
     "memberSince": "عضو منذ",
+    "country": "البلد",
     "friends": "الأصدقاء",
     "friendsLoading": "جارٍ تحميل أصدقائك…",
     "add": "إضافة",
@@ -101,6 +103,7 @@
     "historyLoading": "جارٍ تحميل السجل…",
     "historyEmpty": "لا يوجد سجل بعد — سيظهر وقت لعبك هنا بعد أن تلعب (تتم المزامنة تلقائيًا من المحاكي).",
     "historyErr": "تعذّر تحميل السجل.",
+    "savesGateTitle": "الحفظ السحابي مقفل", "savesGate": "أكد بريدك الإلكتروني أو اربط Discord لتفعيل الحفظ السحابي.", "savesQuota": "الحصة المستخدمة", "savesBooster": "حصة Booster مفعلة", "savesEmpty": "لا توجد حفظات سحابية بعد.", "savesErr": "تعذر تحميل الحفظات السحابية.", "savesDeleteErr": "تعذر حذف هذه الحفظة.", "savesPreview": "معاينة", "savesDownload": "تنزيل", "savesLoading": "جارٍ تحميل المعاينة…", "savesUnsupported": "المعاينة غير متاحة لهذه اللعبة.", "savesTitle": "الحفظات السحابية", "savesIdle": "اختر حفظة لتحميل معاينتها.", "savesPreviewErr": "تعذر تحميل هذه المعاينة.", "savesDelete": "حذف", "savesConfirmDelete": "تأكيد الحذف", "close": "إغلاق",
     "copy": "نسخ",
     "fcCopied": "تم نسخ friend code",
     "copyFail": "فشل النسخ",
@@ -116,6 +119,8 @@
     "deleteAccount": "حذف حسابي"
   },
   "ed": {
+    "country": "البلد",
+    "countryPlaceholder": "اختر بلدك",
     "title": "تعديل الملف الشخصي",
     "previewAria": "معاينة الصورة الشخصية",
     "preview": "معاينة",
@@ -494,6 +499,8 @@
     "cardSub": "ثلاثة حقول، وتصبح متصلًا بالإنترنت.",
     "closedNotice": "<strong>التسجيل مغلق مؤقتًا.</strong><br>نضع اللمسات الأخيرة على النسخة الجديدة من Nextendo Network — سيُعاد فتح إنشاء الحسابات قريبًا جدًا. عُد بعد بضعة أيام&nbsp;!",
     "username": "الاسم المستعار (الاسم المعروض)",
+    "country": "البلد",
+    "countryPlaceholder": "اختر بلدك",
     "usernamePh": "Inkling_Pro",
     "usernameHint": "من 3 إلى 16 حرفًا. يمكن مشاركة اسمك المستعار — friend code هو ما يميّزك.",
     "emailHint": "هذا هو البريد الإلكتروني الذي ستسجّل الدخول به.",
@@ -600,6 +607,9 @@
       "launch": {
         "detail": "اللعبة تبدأ بشكل صحيح"
       },
+      "luigi": {
+        "detail": "اللعب الجماعي عبر الإنترنت والأصدقاء"
+      },
       "wip": {
         "detail": "قيد التحضير"
       }
@@ -627,8 +637,6 @@
     }
   },
   "a11y": {
-    "a11y": {
-      "skip": "تخطّي إلى المحتوى"
-    }
+    "skip": "تخطّي إلى المحتوى"
   }
 }

@@ -29,6 +29,7 @@
       "password": {
         "required": "La contraseña es obligatoria."
       },
+      "country": { "required": "El país es obligatorio.", "invalid": "País no válido." },
       "username": {
         "tooShort": "Mínimo 3 caracteres.",
         "tooLong": "Máximo 16 caracteres.",
@@ -93,6 +94,7 @@
     "pid": "ID de red (PID)",
     "discord": "Discord",
     "memberSince": "Miembro desde",
+    "country": "País",
     "friends": "Amigos",
     "friendsLoading": "Cargando tus amigos…",
     "add": "Añadir",
@@ -101,6 +103,7 @@
     "historyLoading": "Cargando historial…",
     "historyEmpty": "Aún no hay historial: tu tiempo de juego aparecerá aquí después de jugar (se sincroniza automáticamente desde el emulador).",
     "historyErr": "No se pudo cargar el historial.",
+    "savesGateTitle": "Cloud Saves está bloqueado", "savesGate": "Verifica tu correo o vincula Discord para activar las partidas en la nube.", "savesQuota": "Cuota utilizada", "savesBooster": "Cuota Booster activa", "savesEmpty": "Aún no hay partidas guardadas en la nube.", "savesErr": "No se pudieron cargar las partidas guardadas.", "savesDeleteErr": "No se pudo eliminar esta partida.", "savesPreview": "Vista previa", "savesDownload": "Descargar", "savesLoading": "Cargando vista previa…", "savesUnsupported": "La vista previa no está disponible para este juego.", "savesTitle": "Partidas guardadas en la nube", "savesIdle": "Selecciona una partida para cargar su vista previa.", "savesPreviewErr": "No se pudo cargar esta vista previa.", "savesDelete": "Eliminar", "savesConfirmDelete": "Confirmar eliminación", "close": "Cerrar",
     "copy": "copiar",
     "fcCopied": "Friend code copiado",
     "copyFail": "Error al copiar",
@@ -116,6 +119,8 @@
     "deleteAccount": "Eliminar mi cuenta"
   },
   "ed": {
+    "country": "País",
+    "countryPlaceholder": "Selecciona tu país",
     "title": "Editar perfil",
     "previewAria": "Vista previa de la foto de perfil",
     "preview": "Vista previa",
@@ -494,6 +499,8 @@
     "cardSub": "Tres campos y ya estás en línea.",
     "closedNotice": "<strong>Registro cerrado temporalmente.</strong><br>Estamos finalizando la nueva versión de Nextendo Network — la creación de cuentas reabrirá muy pronto. ¡Vuelve en unos días!",
     "username": "Apodo (nombre visible)",
+    "country": "País",
+    "countryPlaceholder": "Selecciona tu país",
     "usernamePh": "Inkling_Pro",
     "usernameHint": "De 3 a 16 caracteres. Tu apodo se puede compartir — tu friend code es lo que te distingue.",
     "emailHint": "Este es el correo con el que iniciarás sesión.",
@@ -600,6 +607,9 @@
       "launch": {
         "detail": "El juego arranca correctamente"
       },
+      "luigi": {
+        "detail": "Multijugador online y amigos"
+      },
       "wip": {
         "detail": "En preparación"
       }
@@ -627,8 +637,6 @@
     }
   },
   "a11y": {
-    "a11y": {
-      "skip": "Saltar al contenido"
-    }
+    "skip": "Saltar al contenido"
   }
 }

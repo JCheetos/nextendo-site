@@ -1,16 +1,5 @@
 import { getTranslations } from 'next-intl/server'
-
-const GAMES = [
-  { name: 'Mario Kart 8 Deluxe', pct: 91, detail: 'courses' },
-  { name: 'Splatoon 2', pct: 87, detail: 'turf' },
-  { name: 'Super Smash Bros. Ultimate', pct: 84, detail: 'arenas' },
-  { name: 'Animal Crossing: New Horizons', pct: 73, detail: 'islands' },
-  { name: 'Mario Strikers: Battle League', pct: 56, detail: 'clubs' },
-  { name: 'Minecraft', pct: 51, detail: 'servers' },
-  { name: 'Mario Party Jamboree', pct: 34, detail: 'launch' },
-  { name: 'Splatoon 3', pct: 27, detail: 'launch' },
-  { name: 'Super Mario Maker 2', pct: 16, detail: 'wip' },
-] as const
+import { GAMES } from './progress-data'
 
 export async function Progress() {
   const t = await getTranslations()

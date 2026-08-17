@@ -3853,3 +3853,25 @@ button {
 [dir="rtl"] .nx-chip__btn {
   padding: 0.32rem 0.38rem 0.32rem 0.62rem;
 }
+
+.cloud-saves-panel .panel__h { margin-bottom: 1rem; }
+.cloud-saves__quota { margin-bottom: 1rem; }
+.cloud-saves__quota > div:first-child { display: flex; justify-content: space-between; gap: 1rem; color: var(--muted); font-size: .86rem; }
+.cloud-saves__quota strong { color: var(--ink); font-family: var(--mono); font-size: .78rem; }
+.cloud-saves__bar { height: .38rem; margin-top: .55rem; overflow: hidden; border-radius: var(--r-pill); background: var(--line-soft); }
+.cloud-saves__bar span { display: block; height: 100%; border-radius: inherit; background: var(--primary); transition: width .3s var(--ease); }
+.cloud-saves__quota small { display: block; margin-top: .45rem; color: var(--signal); }
+.cloud-saves { display: grid; gap: .65rem; }
+.cloud-save { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .85rem; border: 1px solid var(--line-soft); border-radius: var(--r); background: color-mix(in oklch, var(--surface-2) 55%, transparent); }
+.cloud-save > div:first-child { display: flex; align-items: center; gap: .75rem; min-width: 0; }
+.cloud-save > div:first-child > .ph { color: var(--primary); font-size: 1.35rem; }
+.cloud-save h3 { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .95rem; }
+.cloud-save p { margin: .2rem 0 0; font-family: var(--mono); font-size: .7rem; }
+.cloud-save__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .45rem; }
+.cloud-saves__gate { padding: 1.5rem .5rem; text-align: center; }
+.cloud-saves__gate > .ph { color: var(--accent); font-size: 2rem; }
+.cloud-saves__gate h3 { margin: .6rem 0 .35rem; }
+.cloud-save__preview { max-height: 20rem; overflow: auto; }
+.cloud-save__preview pre { margin: 0; padding: .8rem; overflow: auto; border: 1px solid var(--line-soft); border-radius: var(--r); color: var(--muted); font: .72rem/1.5 var(--mono); white-space: pre-wrap; }
+.cloud-save__error { margin: 0; padding: .75rem; border: 1px solid color-mix(in oklch, var(--danger) 45%, var(--line-soft)); border-radius: var(--r); color: var(--danger); }
+@media (max-width: 600px) { .cloud-save { align-items: flex-start; flex-direction: column; } .cloud-save__actions { width: 100%; justify-content: flex-start; } }

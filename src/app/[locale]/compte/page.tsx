@@ -12,6 +12,7 @@ import { redirect } from 'next/navigation'
 // request. force-dynamic opts out of SSG and the locale variants don't matter
 // once the user is redirected.
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export async function generateMetadata() {
   const t = await getTranslations('acc')

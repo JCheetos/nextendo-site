@@ -29,6 +29,7 @@
       "password": {
         "required": "Passwort ist erforderlich."
       },
+      "country": { "required": "Land ist erforderlich.", "invalid": "Ungültiges Land." },
       "username": {
         "tooShort": "Mindestens 3 Zeichen.",
         "tooLong": "Höchstens 16 Zeichen.",
@@ -93,6 +94,7 @@
     "pid": "Netzwerk-ID (PID)",
     "discord": "Discord",
     "memberSince": "Mitglied seit",
+    "country": "Land",
     "friends": "Freunde",
     "friendsLoading": "Deine Freunde werden geladen…",
     "add": "Hinzufügen",
@@ -101,6 +103,7 @@
     "historyLoading": "Verlauf wird geladen…",
     "historyEmpty": "Noch kein Verlauf — deine Spielzeit erscheint hier, nachdem du gespielt hast (wird automatisch vom Emulator synchronisiert).",
     "historyErr": "Verlauf konnte nicht geladen werden.",
+    "savesGateTitle": "Cloud Saves ist gesperrt", "savesGate": "Bestätige deine E-Mail oder verknüpfe Discord, um Cloud-Speicher zu aktivieren.", "savesQuota": "Verwendetes Kontingent", "savesBooster": "Booster-Kontingent aktiv", "savesEmpty": "Noch keine Cloud-Speicherstände.", "savesErr": "Cloud-Speicherstände konnten nicht geladen werden.", "savesDeleteErr": "Dieser Speicherstand konnte nicht gelöscht werden.", "savesPreview": "Vorschau", "savesDownload": "Herunterladen", "savesLoading": "Vorschau wird geladen…", "savesUnsupported": "Für dieses Spiel ist keine Vorschau verfügbar.", "savesTitle": "Cloud-Speicherstände", "savesIdle": "Wähle einen Speicherstand, um die Vorschau zu laden.", "savesPreviewErr": "Diese Vorschau konnte nicht geladen werden.", "savesDelete": "Löschen", "savesConfirmDelete": "Löschen bestätigen", "close": "Schließen",
     "copy": "kopieren",
     "fcCopied": "Friend code kopiert",
     "copyFail": "Kopieren fehlgeschlagen",
@@ -116,6 +119,8 @@
     "deleteAccount": "Mein Konto löschen"
   },
   "ed": {
+    "country": "Land",
+    "countryPlaceholder": "Land auswählen",
     "title": "Profil bearbeiten",
     "previewAria": "Vorschau des Profilbilds",
     "preview": "Vorschau",
@@ -494,6 +499,8 @@
     "cardSub": "Drei Felder, und du bist online.",
     "closedNotice": "<strong>Registrierung vorübergehend geschlossen.</strong><br>Wir stellen gerade die neue Version von Nextendo Network fertig — die Konto-Erstellung ist sehr bald wieder möglich. Schau in ein paar Tagen wieder vorbei!",
     "username": "Spitzname (Anzeigename)",
+    "country": "Land",
+    "countryPlaceholder": "Land auswählen",
     "usernamePh": "Inkling_Pro",
     "usernameHint": "3 bis 16 Zeichen. Dein Spitzname kann geteilt werden — dein Friend code macht dich unverwechselbar.",
     "emailHint": "Mit dieser E-Mail meldest du dich an.",
@@ -600,6 +607,9 @@
       "launch": {
         "detail": "Das Spiel startet korrekt"
       },
+      "luigi": {
+        "detail": "Online-Mehrspieler und Freunde"
+      },
       "wip": {
         "detail": "In Vorbereitung"
       }
@@ -627,8 +637,6 @@
     }
   },
   "a11y": {
-    "a11y": {
-      "skip": "Zum Inhalt springen"
-    }
+    "skip": "Zum Inhalt springen"
   }
 }

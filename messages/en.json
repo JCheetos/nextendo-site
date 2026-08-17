@@ -29,6 +29,7 @@
       "password": {
         "required": "Password is required."
       },
+      "country": { "required": "Country is required.", "invalid": "Invalid country." },
       "username": {
         "tooShort": "At least 3 characters.",
         "tooLong": "At most 16 characters.",
@@ -93,6 +94,7 @@
     "pid": "Network ID (PID)",
     "discord": "Discord",
     "memberSince": "Member since",
+    "country": "Country",
     "friends": "Friends",
     "friendsLoading": "Loading your friends…",
     "add": "Add",
@@ -101,6 +103,23 @@
     "historyLoading": "Loading history…",
     "historyEmpty": "No history yet — your playtime will appear here after you play (synced automatically from the emulator).",
     "historyErr": "Couldn't load history.",
+    "savesGateTitle": "Cloud Saves is locked",
+    "savesGate": "Verify your email or link your Discord account to enable cloud saves.",
+    "savesQuota": "Quota used",
+    "savesBooster": "Booster quota active",
+    "savesEmpty": "No cloud saves yet.",
+    "savesErr": "Couldn't load cloud saves.",
+    "savesDeleteErr": "Couldn't delete this save.",
+    "savesPreview": "Preview",
+    "savesDownload": "Download",
+    "savesLoading": "Loading preview…",
+    "savesUnsupported": "Preview is not available for this game.",
+    "savesTitle": "Cloud saves",
+    "savesIdle": "Select a save to load its preview.",
+    "savesPreviewErr": "Couldn't load this preview.",
+    "savesDelete": "Delete",
+    "savesConfirmDelete": "Confirm deletion",
+    "close": "Close",
     "copy": "copy",
     "fcCopied": "Friend code copied",
     "copyFail": "Copy failed",
@@ -116,6 +135,8 @@
     "deleteAccount": "Delete my account"
   },
   "ed": {
+    "country": "Country",
+    "countryPlaceholder": "Select your country",
     "title": "Edit profile",
     "previewAria": "Profile picture preview",
     "preview": "Preview",
@@ -324,6 +345,8 @@
     "cardSub": "Three fields, and you're online.",
     "closedNotice": "<strong>Sign-ups temporarily closed.</strong><br>We're finalizing the new version of Nextendo Network — account creation will reopen very soon. Check back in a few days!",
     "username": "Nickname (display name)",
+    "country": "Country",
+    "countryPlaceholder": "Select your country",
     "usernamePh": "Inkling_Pro",
     "usernameHint": "3 to 16 characters. Your nickname can be shared — your friend code sets you apart.",
     "emailHint": "This is the email you'll log in with.",
@@ -429,6 +452,9 @@
       },
       "launch": {
         "detail": "The game launches correctly"
+      },
+      "luigi": {
+        "detail": "Online multiplayer and friends"
       },
       "wip": {
         "detail": "In preparation"
@@ -627,8 +653,6 @@
     }
   },
   "a11y": {
-    "a11y": {
-      "skip": "Skip to content"
-    }
+    "skip": "Skip to content"
   }
 }

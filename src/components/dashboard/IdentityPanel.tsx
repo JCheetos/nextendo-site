@@ -1,5 +1,6 @@
 import { CopyButton } from '@/components/dashboard/CopyButton'
 import type { Account } from '@/lib/api'
+import { countryFlag, countryName } from '@/lib/countries'
 import { getLocale, getTranslations } from 'next-intl/server'
 
 type Props = {
@@ -65,6 +66,13 @@ export async function IdentityPanel({ account }: Props) {
             ) : isGuest ? null : (
               <span className="email-chip no">!</span>
             )}
+          </span>
+        </Row>
+        <Row label={t('country')}>
+          <span>
+            {account.country
+              ? `${countryFlag(account.country)} ${countryName(account.country, locale) ?? account.country}`
+              : '—'}
           </span>
         </Row>
         <Row label={t('discord')}>

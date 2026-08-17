@@ -29,6 +29,7 @@
       "password": {
         "required": "Le mot de passe est requis."
       },
+      "country": { "required": "Le pays est requis.", "invalid": "Pays invalide." },
       "username": {
         "tooShort": "3 caractères minimum.",
         "tooLong": "16 caractères maximum.",
@@ -93,6 +94,7 @@
     "pid": "Identifiant réseau (PID)",
     "discord": "Discord",
     "memberSince": "Membre depuis",
+    "country": "Pays",
     "friends": "Amis",
     "friendsLoading": "Chargement de tes amis…",
     "add": "Ajouter",
@@ -101,6 +103,23 @@
     "historyLoading": "Chargement de l'historique…",
     "historyEmpty": "Aucun historique pour l'instant — ton temps de jeu apparaîtra ici après tes parties (synchronisé automatiquement depuis l'émulateur).",
     "historyErr": "Impossible de charger l'historique.",
+    "savesGateTitle": "Cloud Saves est verrouillé",
+    "savesGate": "Confirme ton e-mail ou lie ton compte Discord pour activer la sauvegarde cloud.",
+    "savesQuota": "Quota utilisé",
+    "savesBooster": "Quota Booster actif",
+    "savesEmpty": "Aucune sauvegarde cloud pour l'instant.",
+    "savesErr": "Impossible de charger les sauvegardes cloud.",
+    "savesDeleteErr": "Impossible de supprimer cette sauvegarde.",
+    "savesPreview": "Aperçu",
+    "savesDownload": "Télécharger",
+    "savesLoading": "Chargement de l'aperçu…",
+    "savesUnsupported": "L'aperçu n'est pas disponible pour ce jeu.",
+    "savesTitle": "Sauvegardes cloud",
+    "savesIdle": "Sélectionne une sauvegarde pour charger son aperçu.",
+    "savesPreviewErr": "Impossible de charger cet aperçu.",
+    "savesDelete": "Supprimer",
+    "savesConfirmDelete": "Confirmer la suppression",
+    "close": "Fermer",
     "copy": "copier",
     "fcCopied": "Friend code copié",
     "copyFail": "Copie impossible",
@@ -116,6 +135,8 @@
     "deleteAccount": "Supprimer mon compte"
   },
   "ed": {
+    "country": "Pays",
+    "countryPlaceholder": "Sélectionne ton pays",
     "title": "Éditer le profil",
     "previewAria": "Aperçu de la photo de profil",
     "preview": "Aperçu",
@@ -324,6 +345,8 @@
     "cardSub": "Trois champs, et c'est en ligne.",
     "closedNotice": "<strong>Inscriptions temporairement fermées.</strong><br>On finalise la nouvelle version de Nextendo Network — la création de compte rouvrira très bientôt. Reviens dans quelques jours&nbsp;!",
     "username": "Pseudo (nom affiché)",
+    "country": "Pays",
+    "countryPlaceholder": "Sélectionne ton pays",
     "usernamePh": "Inkling_Pro",
     "usernameHint": "3 à 16 caractères. Ton pseudo peut être partagé — ton friend code te distingue.",
     "emailHint": "C'est avec cet e-mail que tu te connecteras.",
@@ -429,6 +452,9 @@
       },
       "launch": {
         "detail": "Le jeu démarre correctement"
+      },
+      "luigi": {
+        "detail": "Multijoueur en ligne et amis"
       },
       "wip": {
         "detail": "En préparation"
@@ -627,8 +653,6 @@
     }
   },
   "a11y": {
-    "a11y": {
-      "skip": "Aller au contenu"
-    }
+    "skip": "Aller au contenu"
   }
 }

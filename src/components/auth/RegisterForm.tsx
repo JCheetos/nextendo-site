@@ -1,5 +1,6 @@
 'use client'
 
+import { COUNTRY_CODES, countryName } from '@/lib/countries'
 import { type RegisterInput, registerSchema } from '@/lib/schemas'
 import { registerAction } from '@/server/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -23,10 +24,15 @@ export function RegisterForm({ locale, initialClosed, turnstileSitekey }: Props)
   const [isPending, startTransition] = useTransition()
   const [serverError, setServerError] = useState<string | null>(null)
   const [turnstileToken] = useState<string>('')
+  const [countryLabelsReady, setCountryLabelsReady] = useState(false)
   const [pwValid, setPwValid] = useState(false)
   const [showVerifyModal, setShowVerifyModal] = useState(false)
   const [sentEmail, setSentEmail] = useState('')
   const [closed, setClosed] = useState(Boolean(initialClosed))
+
+  useEffect(() => {
+    setCountryLabelsReady(true)
+  }, [])
 
   const {
     register,
@@ -38,7 +44,7 @@ export function RegisterForm({ locale, initialClosed, turnstileSitekey }: Props)
   } = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema),
     mode: 'onChange',
-    defaultValues: { username: '', email: '', password: '', password2: '' },
+    defaultValues: { username: '', email: '', password: '', password2: '', country: '' },
   })
 
   // Preflight /api/site-config to mirror the legacy "sign-ups closed" banner.
@@ -66,6 +72,7 @@ export function RegisterForm({ locale, initialClosed, turnstileSitekey }: Props)
         email: data.email,
         password: data.password,
         password2: data.password2,
+        country: data.country,
         locale,
         turnstile: turnstileToken || undefined,
       })
@@ -80,6 +87,8 @@ export function RegisterForm({ locale, initialClosed, turnstileSitekey }: Props)
           setError('email', { type: 'server', message: result.fieldErrors.email })
         } else if (result.fieldErrors?.password) {
           setError('password', { type: 'server', message: result.fieldErrors.password })
+        } else if (result.fieldErrors?.country) {
+          setError('country', { type: 'server', message: result.fieldErrors.country })
         } else {
           setServerError(tErr(result.error))
         }
@@ -148,6 +157,23 @@ export function RegisterForm({ locale, initialClosed, turnstileSitekey }: Props)
           <span id="email-hint" className={`fld__hint ${errors.email ? 'bad' : ''}`}>
             {errors.email ? tForm(`errors.${errors.email.message ?? 'unknown'}`) : t('emailHint')}
           </span>
+        </div>
+
+        <div className="fld">
+          <label htmlFor="country">{t('country')}</label>
+          <select id="country" className="input" autoComplete="country" {...register('country')}>
+            <option value="">{t('countryPlaceholder')}</option>
+            {COUNTRY_CODES.map((code) => (
+              <option key={code} value={code}>
+                {countryLabelsReady ? countryName(code, locale) : code}
+              </option>
+            ))}
+          </select>
+          {errors.country ? (
+            <span className="fld__hint bad">
+              {tForm(`errors.${errors.country.message ?? 'unknown'}`)}
+            </span>
+          ) : null}
         </div>
 
         <div className="fld">

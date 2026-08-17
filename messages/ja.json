@@ -29,6 +29,7 @@
       "password": {
         "required": "パスワードは必須です。"
       },
+      "country": { "required": "国を選択してください。", "invalid": "国が無効です。" },
       "username": {
         "tooShort": "3文字以上。",
         "tooLong": "16文字以下。",
@@ -93,6 +94,7 @@
     "pid": "ネットワーク ID（PID）",
     "discord": "Discord",
     "memberSince": "登録日",
+    "country": "国",
     "friends": "フレンド",
     "friendsLoading": "フレンドを読み込んでいます…",
     "add": "追加",
@@ -101,6 +103,7 @@
     "historyLoading": "履歴を読み込んでいます…",
     "historyEmpty": "まだ履歴がありません — プレイ後にプレイ時間がここに表示されます（エミュレーターから自動的に同期されます）。",
     "historyErr": "履歴を読み込めませんでした。",
+    "savesGateTitle": "Cloud Saves はロックされています", "savesGate": "メールアドレスを確認するか Discord をリンクして、クラウドセーブを有効にしてください。", "savesQuota": "使用容量", "savesBooster": "Booster 容量が有効", "savesEmpty": "クラウドセーブはまだありません。", "savesErr": "クラウドセーブを読み込めませんでした。", "savesDeleteErr": "セーブを削除できませんでした。", "savesPreview": "プレビュー", "savesDownload": "ダウンロード", "savesLoading": "プレビューを読み込み中…", "savesUnsupported": "このゲームではプレビューを利用できません。", "savesTitle": "クラウドセーブ", "savesIdle": "セーブを選択するとプレビューを読み込めます。", "savesPreviewErr": "このプレビューを読み込めませんでした。", "savesDelete": "削除", "savesConfirmDelete": "削除を確認", "close": "閉じる",
     "copy": "コピー",
     "fcCopied": "friend code をコピーしました",
     "copyFail": "コピーに失敗しました",
@@ -116,6 +119,8 @@
     "deleteAccount": "アカウントを削除"
   },
   "ed": {
+    "country": "国",
+    "countryPlaceholder": "国を選択",
     "title": "プロフィールを編集",
     "previewAria": "プロフィール画像のプレビュー",
     "preview": "プレビュー",
@@ -494,6 +499,8 @@
     "cardSub": "3つの項目で、オンラインに。",
     "closedNotice": "<strong>登録は一時的に停止しています。</strong><br>Nextendo Network の新バージョンを準備中です。アカウント作成はまもなく再開します。数日後にまたご確認ください！",
     "username": "ニックネーム（表示名）",
+    "country": "国",
+    "countryPlaceholder": "国を選択",
     "usernamePh": "Inkling_Pro",
     "usernameHint": "3〜16文字。ニックネームは他の人と同じでも構いません。あなたを区別するのは friend code です。",
     "emailHint": "このメールアドレスでログインします。",
@@ -600,6 +607,9 @@
       "launch": {
         "detail": "ゲームは正しく起動します"
       },
+      "luigi": {
+        "detail": "オンラインマルチプレイとフレンド"
+      },
       "wip": {
         "detail": "準備中"
       }
@@ -627,8 +637,6 @@
     }
   },
   "a11y": {
-    "a11y": {
-      "skip": "本文へスキップ"
-    }
+    "skip": "本文へスキップ"
   }
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { EditProfileModal } from '@/components/dashboard/EditProfileModal'
+import type { Locale } from '@/i18n/config'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
@@ -8,9 +9,17 @@ type Props = {
   username: string
   currentColor: string | null
   currentImage: string | null
+  currentCountry: string | null
+  locale: Locale
 }
 
-export function EditProfileTrigger({ username, currentColor, currentImage }: Props) {
+export function EditProfileTrigger({
+  username,
+  currentColor,
+  currentImage,
+  currentCountry,
+  locale,
+}: Props) {
   const t = useTranslations('acc')
   const [open, setOpen] = useState(false)
 
@@ -30,6 +39,8 @@ export function EditProfileTrigger({ username, currentColor, currentImage }: Pro
         username={username}
         currentColor={currentColor}
         currentImage={currentImage}
+        currentCountry={currentCountry}
+        locale={locale}
       />
     </>
   )

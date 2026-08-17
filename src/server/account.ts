@@ -1,7 +1,7 @@
 'use server'
 
-import { changeEmail, deleteAccount } from '@/lib/api'
-import { changeEmailSchema, deleteAccountSchema } from '@/lib/schemas'
+import { changeEmail, deleteAccount, setCountry } from '@/lib/api'
+import { changeEmailSchema, countrySchema, deleteAccountSchema } from '@/lib/schemas'
 import { getRequestCookieHeader } from '@/server/request'
 import { redirect } from 'next/navigation'
 
@@ -63,4 +63,15 @@ export async function deleteAccountAction(input: {
   // After deletion, force the client to land on the homepage — the session
   // cookie is dead, so /compte would 401 on the next request.
   redirect(`/${input.locale}`)
+}
+
+export async function setCountryAction(input: { country: string }): Promise<
+  { ok: true } | ReturnType<typeof fail>
+> {
+  const parsed = countrySchema.safeParse(input.country)
+  if (!parsed.success)
+    return fail('unknown', { country: parsed.error.issues[0]?.message ?? 'country.invalid' })
+  const result = await setCountry(parsed.data, { cookie: await getRequestCookieHeader() })
+  if (!result.ok) return fail(normalizeError(result.error))
+  return { ok: true }
 }

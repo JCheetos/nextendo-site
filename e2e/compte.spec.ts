@@ -1,10 +1,12 @@
 import { expect, test } from '@playwright/test'
+import { loginAndShareCookie } from './auth'
 
 const MOCK_ACCOUNT = {
   username: 'Inkling_Pro',
   email: 'inkling@example.com',
   friend_code: 'SW-1234-5678-9012',
   pid: 'NX-ABCDEF',
+  country: 'FR',
   email_verified: true,
   is_guest: false,
 }
@@ -60,28 +62,29 @@ const MOCK_HISTORY = {
 
 test.describe('Compte — auth guard', () => {
   test('redirects to /login when /api/me returns nothing', async ({ page }) => {
-    await page.route('**/api/me', (route) => route.fulfill({ status: 401, body: '{}' }))
     await page.goto('/compte')
     await expect(page).toHaveURL(/\/login\?next=/)
     expect(page.url()).toContain('next=%2Fcompte')
   })
 
   test('redirects to /login when /api/me is unreachable', async ({ page }) => {
-    await page.route('**/api/me', (route) => route.abort())
     await page.goto('/compte')
     await expect(page).toHaveURL(/\/login\?next=/)
   })
 })
 
 test.describe('Compte — authenticated', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.route('**/api/me', (route) =>
-      route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ account: MOCK_ACCOUNT }),
-      }),
-    )
+  test.beforeEach(async ({ page, context, request }) => {
+    await request.post('http://localhost:8080/__mock/reset')
+    await loginAndShareCookie(request, context)
+    await request.post('http://localhost:8080/__mock/patch', {
+      data: {
+        account: MOCK_ACCOUNT,
+        friends: MOCK_FRIENDS.friends,
+        requests: MOCK_FRIENDS.requests,
+        history: MOCK_HISTORY.history,
+      },
+    })
     await page.route('**/api/friends', (route) =>
       route.fulfill({
         status: 200,
@@ -111,14 +114,9 @@ test.describe('Compte — authenticated', () => {
   })
 
   test('shows the verify banner when email is not verified', async ({ page }) => {
-    await page.unroute('**/api/me')
-    await page.route('**/api/me', (route) =>
-      route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ account: { ...MOCK_ACCOUNT, email_verified: false } }),
-      }),
-    )
+    await page.request.post('http://localhost:8080/__mock/patch', {
+      data: { account: { email_verified: false } },
+    })
     await page.goto('/compte')
     await expect(page.getByText(/Confirme ton adresse e-mail/)).toBeVisible()
   })
@@ -126,8 +124,8 @@ test.describe('Compte — authenticated', () => {
   test('renders the friends list with online + offline dots', async ({ page }) => {
     const friends = page.locator('[data-testid="friend-list"] .friend')
     await expect(friends).toHaveCount(2)
-    await expect(page.getByText('Buddy_One').first()).toBeVisible()
-    await expect(page.getByText('Buddy_Two').first()).toBeVisible()
+    await expect(page.getByText('Buddy One').first()).toBeVisible()
+    await expect(page.getByText('Buddy Two').first()).toBeVisible()
   })
 
   test('renders the friend requests with accept/decline buttons', async ({ page }) => {
@@ -149,6 +147,7 @@ test.describe('Compte — authenticated', () => {
     await page.getByRole('button', { name: /Éditer le profil/ }).click()
     await expect(page.getByRole('heading', { name: 'Éditer le profil' })).toBeVisible()
     await expect(page.locator('[data-testid="color-swatches"]')).toBeVisible()
+    await expect(page.getByLabel('Pays', { exact: true })).toHaveValue('FR')
     await page.keyboard.press('Escape')
     await expect(page.getByRole('heading', { name: 'Éditer le profil' })).toHaveCount(0)
   })
@@ -182,14 +181,20 @@ test.describe('Compte — authenticated', () => {
 })
 
 test.describe('Compte — friend modal', () => {
-  test('opens the friend modal and shows the playtime + games played stats', async ({ page }) => {
-    await page.route('**/api/me', (route) =>
-      route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ account: MOCK_ACCOUNT }),
-      }),
-    )
+  test('opens the friend modal and shows the playtime + games played stats', async ({
+    page,
+    context,
+    request,
+  }) => {
+    await request.post('http://localhost:8080/__mock/reset')
+    await loginAndShareCookie(request, context)
+    await request.post('http://localhost:8080/__mock/patch', {
+      data: {
+        account: MOCK_ACCOUNT,
+        friends: MOCK_FRIENDS.friends,
+        requests: MOCK_FRIENDS.requests,
+      },
+    })
     await page.route('**/api/friends', (route) =>
       route.fulfill({
         status: 200,
@@ -214,17 +219,16 @@ test.describe('Compte — friend modal', () => {
       }),
     )
     await page.goto('/compte')
-    await page.getByText('Buddy_One').first().click()
+    await page.getByText('Buddy One').first().click()
     await expect(page.getByRole('heading', { name: 'Buddy One' })).toBeVisible()
-    await expect(page.getByText('Temps de jeu')).toBeVisible()
-    await expect(page.getByText('Jeux joués')).toBeVisible()
+    await expect(page.getByText('Temps de jeu', { exact: true })).toBeVisible()
+    await expect(page.getByText('Jeux joués', { exact: true })).toBeVisible()
   })
 })
 
 test.describe('Compte — i18n', () => {
   test('localizes in English when the cookie is set', async ({ page, context }) => {
     await context.addCookies([{ name: 'nx_lang', value: 'en', url: 'http://localhost:3000/' }])
-    await page.route('**/api/me', (route) => route.fulfill({ status: 401, body: '{}' }))
     await page.goto('/compte')
     // We are redirected to /login. The locale should be 'en'.
     await expect(page.locator('html')).toHaveAttribute('lang', 'en')

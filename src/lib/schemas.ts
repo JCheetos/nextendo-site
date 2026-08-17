@@ -1,3 +1,4 @@
+import { isCountryCode } from '@/lib/countries'
 import { z } from 'zod'
 
 // Password rules — must stay aligned with the Go backend's
@@ -30,6 +31,13 @@ export const usernameSchema = z
   .max(16, { message: 'username.tooLong' })
   .regex(USERNAME_RE, { message: 'username.badChars' })
 
+export const countrySchema = z
+  .string()
+  .trim()
+  .length(2, { message: 'country.required' })
+  .refine(isCountryCode, { message: 'country.invalid' })
+  .transform((value) => value.toUpperCase())
+
 export const passwordSchema = z
   .string()
   .min(1, { message: 'password.required' })
@@ -48,6 +56,7 @@ export const registerSchema = z
     email: emailSchema,
     password: passwordSchema,
     password2: z.string().min(1, { message: 'password.required' }),
+    country: countrySchema,
   })
   .refine((d) => d.password === d.password2, {
     message: 'password.noMatch',

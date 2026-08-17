@@ -11,6 +11,7 @@ import { redirect } from 'next/navigation'
 // login/logout). force-dynamic opts out of SSG; the auth check at the top
 // runs on every request.
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export async function generateMetadata() {
   const t = await getTranslations('sess')
