@@ -39,9 +39,7 @@ export async function Progress() {
                 )}
                 <div className="progress-item__main">
                   <span className="progress-item__name">{g.name}</span>
-                  <span className="progress-item__detail">
-                    {t(`progress.chart.${g.detail}.detail`)}
-                  </span>
+                  <span className="progress-item__detail">{t(`progress.detail.${g.detail}`)}</span>
                 </div>
                 <span className="progress-item__pct">[{g.pct}%]</span>
               </div>

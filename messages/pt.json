@@ -585,34 +585,17 @@
   "progress": {
     "title": "Progresso",
     "lede": "O andamento de cada jogo. Vários já são jogáveis, mas ainda não estão a 100% — os casos restantes são mostrados pela porcentagem.",
-    "chart": {
-      "courses": {
-        "detail": "Corridas online mundiais, salas e amigos"
-      },
-      "turf": {
-        "detail": "Turf War a 8, amigos e Salmon Run"
-      },
-      "arenas": {
-        "detail": "Arenas online e amigos"
-      },
-      "islands": {
-        "detail": "Visitas a ilhas entre amigos"
-      },
-      "clubs": {
-        "detail": "Matchmaking online e clubes"
-      },
-      "servers": {
-        "detail": "Conexão ao servidor online"
-      },
-      "launch": {
-        "detail": "O jogo inicia corretamente"
-      },
-      "luigi": {
-        "detail": "Multijogador online e amigos"
-      },
-      "wip": {
-        "detail": "Em preparação"
-      }
+    "detail": {
+      "luigis-mansion-3": "Totalmente online, incluindo salas entre amigos",
+      "mario-kart": "Corridas online mundiais, salões e amigos",
+      "splatoon-2": "Turf War a 8, amigos e Salmon Run",
+      "smash": "Arenas online e amigos",
+      "animal-crossing": "Visitas à ilha entre amigos",
+      "mario-strikers": "Matchmaking e clubes online",
+      "minecraft": "Conexão ao servidor online",
+      "mario-party": "Sala online (individual) funcional",
+      "splatoon-3": "Guerra territorial, partidas privadas e amigos",
+      "mario-maker-2": "Em preparação"
     }
   },
   "lang": {

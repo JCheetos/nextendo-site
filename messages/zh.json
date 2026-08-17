@@ -585,34 +585,17 @@
   "progress": {
     "title": "进度",
     "lede": "每款游戏的进度。有些已经可以游玩，但尚未完全完成——其余情况以百分比显示。",
-    "chart": {
-      "courses": {
-        "detail": "全球在线锦标赛、房间与好友"
-      },
-      "turf": {
-        "detail": "8 人对战、好友与 Salmon Run"
-      },
-      "arenas": {
-        "detail": "在线竞技场与好友"
-      },
-      "islands": {
-        "detail": "好友之间的岛屿拜访"
-      },
-      "clubs": {
-        "detail": "在线匹配与俱乐部"
-      },
-      "servers": {
-        "detail": "在线服务器连接"
-      },
-      "launch": {
-        "detail": "游戏可正常启动"
-      },
-      "luigi": {
-        "detail": "在线多人游戏与好友"
-      },
-      "wip": {
-        "detail": "正在准备中"
-      }
+    "detail": {
+      "luigis-mansion-3": "完整线上功能，包含好友房间",
+      "mario-kart": "全球在线比赛、房间与好友",
+      "splatoon-2": "8人涂地对战、好友和 Salmon Run",
+      "smash": "在线竞技场与好友",
+      "animal-crossing": "好友之间的岛屿访问",
+      "mario-strikers": "在线匹配与俱乐部",
+      "minecraft": "连接到在线服务器",
+      "mario-party": "在线大厅可用（单人）",
+      "splatoon-3": "占地大战、私人对战与好友",
+      "mario-maker-2": "准备中"
     }
   },
   "lang": {

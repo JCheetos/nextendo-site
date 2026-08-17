@@ -431,34 +431,17 @@
   "progress": {
     "title": "Progress",
     "lede": "How far along each game is. Several are already playable — just not yet fully complete. The remaining cases are shown by their completion.",
-    "chart": {
-      "courses": {
-        "detail": "Worldwide online courses, lobbies and friends"
-      },
-      "turf": {
-        "detail": "8-player Turf War, friends and Salmon Run"
-      },
-      "arenas": {
-        "detail": "Online arenas and friends"
-      },
-      "islands": {
-        "detail": "Island visits between friends"
-      },
-      "clubs": {
-        "detail": "Online matchmaking and clubs"
-      },
-      "servers": {
-        "detail": "Online server connection"
-      },
-      "launch": {
-        "detail": "The game launches correctly"
-      },
-      "luigi": {
-        "detail": "Online multiplayer and friends"
-      },
-      "wip": {
-        "detail": "In preparation"
-      }
+    "detail": {
+      "luigis-mansion-3": "Fully online, including friend rooms",
+      "mario-kart": "Worldwide online races, lobbies and friends",
+      "splatoon-2": "8-player Turf War, friends and Salmon Run",
+      "smash": "Online arenas and friends",
+      "animal-crossing": "Island visits between friends",
+      "mario-strikers": "Matchmaking and online clubs",
+      "minecraft": "Connecting to the online server",
+      "mario-party": "Solo online lobby working",
+      "splatoon-3": "Turf War, private battles and friends",
+      "mario-maker-2": "In preparation"
     }
   },
   "status": {
